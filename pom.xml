@@ -16,6 +16,8 @@
         <module>module-a</module>
         <module>module-b</module>
         <module>web</module>
+        <module>common</module>
+        <module>auth</module>
     </modules>
 
 

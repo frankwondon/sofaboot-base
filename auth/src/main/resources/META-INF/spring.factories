@@ -1,0 +1,8 @@
+org.springframework.boot.autoconfigure.EnableAutoConfiguration=\
+com.duia.job.configure.ElasticjobConfig,\
+com.duia.job.configure.ElasticJobInit,\
+org.springframework.boot.autoconfigure.aop.AopAutoConfiguration,\
+com.duia.job.aspect.JobAsyncExecuteProxy,\
+com.duia.job.aspect.JobExecuteProxy
+  
+
