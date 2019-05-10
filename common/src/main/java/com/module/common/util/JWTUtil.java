@@ -16,9 +16,9 @@ import java.util.Map;
  * @date 2019/4/30
  */
 public class JWTUtil {
-    private static final String USER_AGENT_FILED="userAgent";
+    private static final String USER_AGENT_FILED="User-Agent";
     private static final String HMAC256_SECRET="JYWHSECRET2019";
-    Algorithm algorithm = Algorithm.HMAC256(HMAC256_SECRET);
+    private Algorithm algorithm = Algorithm.HMAC256(HMAC256_SECRET);
 
 
     public String ecode(String userAgent,String userId){
@@ -33,6 +33,7 @@ public class JWTUtil {
     public DecodedJWT dcode(String token) throws JWTDecodeException {
         return JWT.decode(token);
     }
+
     public void verifier(String token,String userAgent,String userId,String jwtId) throws JWTVerificationException {
         JWTVerifier verifier = JWT.require(algorithm)
                 .withClaim(USER_AGENT_FILED, userAgent)
