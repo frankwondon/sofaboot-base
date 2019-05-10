@@ -13,11 +13,10 @@
     <version>1.0.0-SNAPSHOT</version>
     <packaging>pom</packaging>
     <modules>
-        <module>module-a</module>
-        <module>module-b</module>
-        <module>web</module>
+        <module>api-admin-back</module>
         <module>common</module>
         <module>auth</module>
+        <module>module-admin-back</module>
     </modules>
     <dependencies>
         <!-- https://mvnrepository.com/artifact/org.projectlombok/lombok -->

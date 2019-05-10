@@ -8,7 +8,7 @@
         <version>1.0.0-SNAPSHOT</version>
     </parent>
     <modelVersion>4.0.0</modelVersion>
-
+    <groupId>sofaboot-module</groupId>
     <artifactId>common</artifactId>
     <packaging>jar</packaging>
     <dependencies>
