@@ -18,26 +18,24 @@ import java.util.Map;
 public class JWTUtil {
     private static final String USER_AGENT_FILED="User-Agent";
     private static final String HMAC256_SECRET="JYWHSECRET2019";
-    private Algorithm algorithm = Algorithm.HMAC256(HMAC256_SECRET);
+    private static Algorithm algorithm = Algorithm.HMAC256(HMAC256_SECRET);
 
 
-    public String ecode(String userAgent,String userId){
+    public static String ecode(String userAgent,String userId){
         return JWT.create()
-                .withIssuer(userId)
-                .withClaim(USER_AGENT_FILED,userAgent)
+                .withSubject(userId)
                 .withJWTId(UUIDWorker.uuid())
                 .sign(algorithm);
     }
 
 
-    public DecodedJWT dcode(String token) throws JWTDecodeException {
+    public static DecodedJWT dcode(String token) throws JWTDecodeException {
         return JWT.decode(token);
     }
 
-    public void verifier(String token,String userAgent,String userId,String jwtId) throws JWTVerificationException {
+    public static void verifier(String token,String userId,String jwtId) throws JWTVerificationException {
         JWTVerifier verifier = JWT.require(algorithm)
-                .withClaim(USER_AGENT_FILED, userAgent)
-                .withIssuer(userId)
+                .withSubject(userId)
                 .withJWTId(jwtId)
                 .build();
         verifier.verify(token);
