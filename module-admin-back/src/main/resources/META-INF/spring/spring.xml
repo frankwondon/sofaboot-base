@@ -6,5 +6,5 @@
             http://sofastack.io/schema/sofaboot http://sofastack.io/schema/sofaboot.xsd"
        default-autowire="byName">
 
-    <bean id="serviceAImpl" class="com.module.admin.back.service.ServiceAImpl"/>
+    <bean id="backUserService" class="com.module.admin.back.service.user.impl.BackUserServiceImpl"/>
 </beans>

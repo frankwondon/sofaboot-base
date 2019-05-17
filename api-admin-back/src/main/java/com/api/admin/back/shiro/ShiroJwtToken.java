@@ -1,4 +1,4 @@
-package com.api.admin.back.controller.shiro;
+package com.api.admin.back.shiro;
 
 import org.apache.shiro.authc.AuthenticationToken;
 
