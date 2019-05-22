@@ -1,5 +1,6 @@
 package com.module.common.util;
 
+import cn.hutool.core.util.IdUtil;
 import com.auth0.jwt.JWT;
 import com.auth0.jwt.algorithms.Algorithm;
 import com.auth0.jwt.exceptions.JWTDecodeException;
@@ -24,7 +25,7 @@ public class JWTUtil {
     public static String ecode(String userAgent,String userId){
         return JWT.create()
                 .withSubject(userId)
-                .withJWTId(UUIDWorker.uuid())
+                .withJWTId(IdUtil.fastSimpleUUID())
                 .sign(algorithm);
     }
 
