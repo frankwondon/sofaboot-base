@@ -61,23 +61,25 @@
 <!--                            </form>-->
                         </div>
                         <div class="layui-card-header">
-                            <button class="layui-btn layui-btn-danger" onclick="delAll()">
-                                <i class="layui-icon"></i>批量删除</button>
-                            <button class="layui-btn" onclick="xadmin.open('添加用户','./order-add.html',800,600)">
+                            <button class="layui-btn" onclick="xadmin.open('添加角色','/html/backadmin/role/add.html',500,400)">
                                 <i class="layui-icon"></i>添加</button></div>
                         <div class="layui-card-body ">
-                            <table id="table"></table>
+                            <table id="list" lay-filter="test">
+                            </table>
                         </div>
                     </div>
                 </div>
             </div>
         </div>
+        <script type="text/html" id="allotMenu" >
+            <a  class="layui-btn layui-btn-xs" lay-event="allotMenu" onclick="xadmin.open('分配权限','/html/backadmin/role/allotMenu.html?roleId={{d.id}}',600,600)">分配权限</a>
+        </script>
+        <script src="/resource/js/backadmin/role/index.js"></script>
     </body>
-
-
-
-
-
-    <script src="/resource/js/backadmin/role/index.js" ></script>
-
 </html>
+
+
+
+
+
+

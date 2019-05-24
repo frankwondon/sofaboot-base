@@ -15,5 +15,5 @@ public class BackAdminConstant {
     public static final int USER_TYPE_MERCHANT = 1;
 
     /*超级管理员*/
-    public static final String SUPER_USER_ROLE="superadmin";
+    public static final Integer SUPER_USER_ROLE=1;
 }

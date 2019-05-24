@@ -1,6 +1,22 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.module.admin.back.mapper.BackUserMapper">
+
+    <sql id="userSelect">
+        select
+        u.id,
+        u.username,
+        u.locked,
+        u.cell_phone_num,
+        u.user_type ,
+        r.title role,
+        r.id role_id,
+        u.merchant_id,
+        u.remark_1
+        from back_user u
+        join back_role r on r.id=u.role_id
+    </sql>
+
     <select id="selectByAccount" resultType="com.module.admin.back.entity.BackUser">
         SELECT
             *
@@ -10,5 +26,24 @@
             u.cell_phone_num = #{account}
         AND u.locked = 0
         AND u.deleted = 0
+    </select>
+    <select id="listBackUser" resultType="com.module.admin.back.BackUserResult">
+        <include refid="userSelect"></include>
+    </select>
+    <select id="findById" resultType="com.module.admin.back.BackUserResult">
+        <include refid="userSelect"></include>
+        where u.id=#{uid}
+    </select>
+
+    <update id="updateUserRole">
+        update back_user set role=#{role] where id=#{uid}
+    </update>
+
+    <select id="countUserPhone" resultType="int">
+        select count(*) FROM back_user u where u.cell_phone_num=#{phone} and u.id!=#{uid}
+    </select>
+
+    <select id="countUserName" resultType="int">
+        select count(*) FROM back_user u where u.username=#{username} and u.id!=#{uid}
     </select>
 </mapper>

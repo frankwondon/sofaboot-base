@@ -35,7 +35,7 @@ public class LoginRealm extends AuthorizingRealm {
         BackUser user = backUserService.getByAccount(username);
         CurrentUser currentUser=new CurrentUser();
         if (user!=null){
-            currentUser.setRole(user.getRole());
+            currentUser.setRoleId(user.getRoleId());
             currentUser.setId(user.getId());
             currentUser.setCellPhoneNum(user.getCellPhoneNum());
             currentUser.setUserType(user.getUserType());

@@ -10,15 +10,17 @@ layui.config({
         elem: '#list'
         ,id:'list'
         ,height: 500
-        ,url: '/backadmin/role/list' //数据接口
+        ,url: '/backadmin/user/list' //数据接口
         ,page: true //开启分页
         ,totalRow: true //开启合计行
         ,cols: [[ //表头
             {type: 'checkbox', fixed: 'left'},
              {field: 'id', title: 'ID', width:100, sort: true, fixed: 'left'}
-            ,{field: 'title', title: '角色名称', width:200}
-            ,{field: 'code', title: '角色码', width:200, sort: true}
-            ,{field: 'remark1', title: '角色描述'}
+            ,{field: 'username', title: '用户名', width:200}
+            ,{field: 'cellPhoneNum', title: '手机号', width:200, sort: true}
+            ,{field: 'role', title: '角色'}
+            ,{field: 'userType', title: '角色描述'}
+            ,{field: 'remark1', title: '描述'}
             ,{title: '操作',toolbar: '#allotMenu'}
         ]],
         response: {
@@ -38,7 +40,7 @@ layui.config({
 
     //监听工具条
     table.on('tool(test)', function(obj){
-        // console.log(obj)
+        console.log(obj)
         // if(obj.event === 'detail'){
         //     layer.msg('ID：'+ data.id + ' 的查看操作');
         // } else if(obj.event === 'del'){

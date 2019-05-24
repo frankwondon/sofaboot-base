@@ -1,8 +1,10 @@
 package com.module.admin.back;
 
+import lombok.Data;
+
 import java.io.Serializable;
 import java.time.LocalDateTime;
-
+@Data
 public class BackUserResult implements Serializable {
 
     private Long id;
@@ -10,8 +12,6 @@ public class BackUserResult implements Serializable {
      * 用户名
      */
     private String username;
-
-
 
     /**
      * 是否锁定
@@ -23,11 +23,8 @@ public class BackUserResult implements Serializable {
      */
     private String cellPhoneNum;
 
-    /**
-     * 加盐后的密码
-     */
-    private String encryptPwd;
-
+    private Integer roleId;
+    private String role;
     /**
      * 用户类型 0后台1商户
      */
@@ -38,30 +35,8 @@ public class BackUserResult implements Serializable {
      */
     private String merchantId;
 
-    /**
-     * 乐观锁
-     */
-    private Integer revision;
-
-    /**
-     * 创建人
-     */
-    private Integer createBy;
-
-    /**
-     * 创建时间
-     */
-    private LocalDateTime createTime;
-
-    /**
-     * 更新人
-     */
-    private Integer updateBy;
-
-    /**
-     * 更新时间
-     */
-    private LocalDateTime updateTime;
-
+    /**备注1*/
     private String remark1;
+
+
 }

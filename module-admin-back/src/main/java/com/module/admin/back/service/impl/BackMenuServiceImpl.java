@@ -1,20 +1,21 @@
 package com.module.admin.back.service.impl;
 
-import cn.hutool.core.util.ArrayUtil;
 import cn.hutool.core.util.StrUtil;
 import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
 import com.module.admin.back.entity.BackMenu;
 import com.module.admin.back.mapper.BackMenuMapper;
+import com.module.admin.back.result.PermissionTreeResult;
 import com.module.admin.back.service.BackMenuService;
+import com.module.common.ResponseCode;
 import com.module.common.bean.CurrentUser;
 import com.module.common.constant.BackAdminConstant;
+import com.module.common.exception.DBOperationException;
 
 import javax.annotation.Resource;
 import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
-import java.util.Optional;
 import java.util.stream.Collectors;
 
 public class BackMenuServiceImpl implements BackMenuService {
@@ -24,21 +25,35 @@ public class BackMenuServiceImpl implements BackMenuService {
     private BackMenuMapper backMenuMapper;
 
     @Override
-    public List<BackMenu> listMenu() {
-        return backMenuMapper.selectList(new QueryWrapper<>());
+    public List<PermissionTreeResult> listMenu() {
+        List<BackMenu> backMenus = backMenuMapper.selectList(new QueryWrapper<>());
+        if (backMenus != null) {
+            List<PermissionTreeResult> results = new ArrayList<>();
+            backMenus.forEach(backMenu -> {
+                PermissionTreeResult permissionTreeResult = new PermissionTreeResult();
+                permissionTreeResult.setId(backMenu.getId().toString());
+                permissionTreeResult.setTitle(backMenu.getTitle());
+                permissionTreeResult.setUrl(backMenu.getUrl());
+                permissionTreeResult.setParentId(backMenu.getPId().toString());
+                permissionTreeResult.setCheckArr("0");
+                results.add(permissionTreeResult);
+            });
+            return results;
+        }
+        return Collections.emptyList();
     }
 
     @Override
     public List<BackMenu> loadSite(CurrentUser user) {
         List<BackMenu> backMenus;
         //超管查询全部
-        if (user.getRole().equals(BackAdminConstant.SUPER_USER_ROLE)) {
+        if (user.getRoleId().equals(BackAdminConstant.SUPER_USER_ROLE)) {
             QueryWrapper queryWrapper = new QueryWrapper();
             queryWrapper.eq("deleted",0);
             queryWrapper.eq("depth",1);
             backMenus = backMenuMapper.selectList(queryWrapper);
         } else {
-            backMenus = backMenuMapper.findRoleMenus(user.getRole(),1);
+            backMenus = backMenuMapper.findRoleMenus(user.getRoleId(),1);
         }
         if (backMenus!=null) {
             return backMenus;
@@ -57,13 +72,13 @@ public class BackMenuServiceImpl implements BackMenuService {
             if (backMenuSite!=null){
                 List<BackMenu> backMenus;
                 //超管查询全部
-                if (user.getRole().equals(BackAdminConstant.SUPER_USER_ROLE)) {
+                if (user.getRoleId().equals(BackAdminConstant.SUPER_USER_ROLE)) {
                     QueryWrapper queryWrapper = new QueryWrapper();
                     queryWrapper.eq("deleted",0);
                     queryWrapper.ne("depth",1);
                     backMenus = backMenuMapper.selectList(queryWrapper);
                 } else {
-                    backMenus = backMenuMapper.findRoleMenus(user.getRole(),-1);
+                    backMenus = backMenuMapper.findRoleMenus(user.getRoleId(),-1);
                 }
                 //解析成Tree
                 if (backMenus!=null) {
@@ -102,12 +117,26 @@ public class BackMenuServiceImpl implements BackMenuService {
     @Override
     public void updateMenu(BackMenu menu) {
         menu.setUpdateTime(LocalDateTime.now());
+        if (backMenuMapper.countMenuUrl(menu.getId(),menu.getUrl())>0||backMenuMapper.countMenuName(menu.getId(),menu.getTitle())>0){
+            throw  new DBOperationException(ResponseCode.C_500001);
+        }
         backMenuMapper.updateById(menu);
     }
 
     @Override
     public void insertMenu(BackMenu menu) {
         menu.setCreateTime(LocalDateTime.now());
+        if (backMenuMapper.countMenuUrl(-1,menu.getUrl())>0||backMenuMapper.countMenuName(-1,menu.getTitle())>0){
+            throw  new DBOperationException(ResponseCode.C_500001);
+        }
         backMenuMapper.insert(menu);
+    }
+
+    @Override
+    public void delMenu(Integer id) {
+        if (backMenuMapper.countChild(id)>0){
+            throw  new DBOperationException(ResponseCode.C_500004);
+        }
+        backMenuMapper.deleteById(id);
     }
 }

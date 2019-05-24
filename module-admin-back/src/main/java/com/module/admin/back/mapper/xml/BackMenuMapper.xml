@@ -8,7 +8,7 @@
         back_role r
         JOIN back_role_menu rm ON rm.role_id = r.id
         JOIN back_menu m ON m.id = rm.menu_id
-        WHERE r.code=#{code}
+        WHERE r.id=#{roleId}
         AND m.deleted = 0
         <choose>
             <when test="depth==1">
@@ -21,5 +21,16 @@
 
     </select>
 
+    <select id="countMenuUrl" resultType="int">
+        select count(*) from back_menu m where m.url=#{url} and m.deleted=0 and m.id&lt;&gt;#{id}
+    </select>
 
+    <select id="countMenuName" resultType="int">
+        select count(*) from back_menu m where m.title=#{name} and m.deleted=0 and m.id&lt;&gt;#{id}
+    </select>
+
+
+    <select id="countChild" resultType="int">
+        select count(*) from back_menu m where m.p_id=#{id}
+    </select>
 </mapper>

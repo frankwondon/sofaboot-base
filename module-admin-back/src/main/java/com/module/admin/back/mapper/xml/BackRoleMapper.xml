@@ -1,5 +1,29 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.module.admin.back.mapper.BackRoleMapper">
+    <select id="countCodeExist" resultType="int">
+        select count(*) from back_role r where r.code=#{code} and  r.deleted=0
+    </select>
 
+    <select id="findRoleMenus" resultType="Integer">
+        SELECT
+            rm.menu_id
+        FROM
+            back_role r
+        JOIN back_role_menu rm ON rm.role_id = r.id
+        WHERE
+            r.id =#{roleId}
+    </select>
+
+    <delete id="deleteRoleMenus">
+        delete from  back_role_menu where role_id=#{roleI}
+    </delete>
+
+
+    <insert id="insertBatchRoleMenus" parameterType="java.util.List">
+        INSERT INTO back_role_menu (menu_id,role_id)     values
+         <foreach collection="list" item="item"   index="index" separator=",">
+             (#{item.menuId},#{item.roleId})
+         </foreach>
+     </insert>
 </mapper>

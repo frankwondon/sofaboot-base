@@ -17,5 +17,16 @@ import java.util.List;
  */
 @Repository
 public interface BackMenuMapper extends BaseMapper<BackMenu> {
-    List<BackMenu> findRoleMenus(@Param("roleCode") String roleCode, @Param("depth")int depth);
+    List<BackMenu> findRoleMenus(@Param("roleId") Integer roleId, @Param("depth")int depth);
+
+    int countMenuUrl(@Param("id")Integer id,@Param("url")String url);
+
+    int countMenuName(@Param("id")Integer id,@Param("name")String name);
+
+    /**
+     * 查询子集的数量
+     * @param id
+     * @return
+     */
+    int countChild(Integer id);
 }

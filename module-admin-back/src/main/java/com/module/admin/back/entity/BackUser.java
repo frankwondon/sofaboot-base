@@ -1,5 +1,6 @@
 package com.module.admin.back.entity;
 
+import com.baomidou.mybatisplus.annotation.TableField;
 import com.module.admin.back.entity.base.BaseEntity;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
@@ -60,7 +61,7 @@ private static final long serialVersionUID=1L;
     /**
      * 角色
      */
-    private String role;
+    private Integer roleId;
 
     /**
      * 商户ID随机生成
@@ -68,7 +69,7 @@ private static final long serialVersionUID=1L;
     private String merchantId;
 
 
-
+    @TableField("remark_1")
     private String remark1;
 
 

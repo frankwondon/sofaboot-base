@@ -2,6 +2,7 @@ package com.api.admin.back.controller.admin;
 
 
 import com.alipay.sofa.runtime.api.annotation.SofaReference;
+import com.module.admin.back.result.PermissionTreeResult;
 import com.module.common.bean.CurrentUser;
 import com.module.admin.back.entity.BackMenu;
 import com.module.admin.back.service.BackMenuService;
@@ -33,8 +34,8 @@ public class MenuController {
 
 
     @RequestMapping("list")
-    public Response<List<BackMenu>> list() {
-        List<BackMenu> backRoles = backMenuService.listMenu();
+    public Response<List<PermissionTreeResult>> list() {
+        List<PermissionTreeResult> backRoles = backMenuService.listMenu();
         return Response.Builder.success(backRoles);
     }
 
@@ -48,6 +49,14 @@ public class MenuController {
 
     @RequestMapping("update")
     public Response<Boolean> update(BackMenu backMenu, CurrentUser user) {
+        backMenu.setUpdateBy(user.getId());
+        backMenuService.updateMenu(backMenu);
+        return Response.Builder.success(true);
+    }
+
+
+    @RequestMapping("del")
+    public Response<Boolean> del(BackMenu backMenu, CurrentUser user) {
         backMenu.setUpdateBy(user.getId());
         backMenuService.updateMenu(backMenu);
         return Response.Builder.success(true);

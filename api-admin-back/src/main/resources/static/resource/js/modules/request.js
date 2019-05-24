@@ -8,7 +8,7 @@ layui.define(['layer', 'jquery'], function (exports) { //提示：模块也可�
                 url: url,
                 data: data,
                 success: function (data) {
-                    callback(data);
+                    successCallBack(data);
                 },
                 error: function (data) {
                     toErrorPage(data);
@@ -21,9 +21,9 @@ layui.define(['layer', 'jquery'], function (exports) { //提示：模块也可�
                 url: url,
                 data: data,
                 success: function (data) {
-                    if (data.code == 200){
+                    if (data.code == 200) {
                         successCallBack(data);
-                    }else {
+                    } else {
                         layer.msg(JSON.stringify(data));
                     }
                 },
@@ -37,9 +37,9 @@ layui.define(['layer', 'jquery'], function (exports) { //提示：模块也可�
                 type: 'GET',
                 url: url,
                 success: function (data) {
-                    if (data.code == 200){
+                    if (data.code == 200) {
                         successCallBack(data);
-                    }else {
+                    } else {
                         layer.msg(JSON.stringify(data));
                     }
                 },
@@ -54,9 +54,9 @@ layui.define(['layer', 'jquery'], function (exports) { //提示：模块也可�
                 url: '/login',
                 data: data,
                 success: function (data) {
-                    if (data.code == 200){
-                        window.location.href='/html/site.html'
-                    }else {
+                    if (data.code == 200) {
+                        window.location.href = '/html/site.html'
+                    } else {
                         layer.msg(JSON.stringify(data));
                     }
                 },
@@ -64,12 +64,37 @@ layui.define(['layer', 'jquery'], function (exports) { //提示：模块也可�
                     toErrorPage(data);
                 }
             });
+        },
+        getParam: function () {
+            var result={};
+            var params = location.search.slice(1);
+            if (params.length > 0) {
+                if (params.indexOf("&") != -1){
+                    var  ps=params.split("&");
+                    ps.forEach(function (value) {
+                        var kv=value.split("=");
+                        var k=kv[0];
+                        var v=kv[1];
+                        result[k]=v;
+                    })
+                }else {
+                    var kv=params.split("=");
+                    var k=kv[0];
+                    var v=kv[1];
+                    result[k]=v;
+                }
+            }
+            return result;
+        },
+        getRoles:function () {
+
         }
     };
-    function toErrorPage(data){
-        if (data.status == 302){
-            window.location.href='/html/login.html'
-        }else {
+
+    function toErrorPage(data) {
+        if (data.status == 302) {
+            window.location.href = '/html/login.html'
+        } else {
             layer.msg(JSON.stringify(data));
         }
     }

@@ -1,5 +1,6 @@
 package com.module.admin.back.service;
 
+import com.baomidou.mybatisplus.core.metadata.IPage;
 import com.module.admin.back.BackUserResult;
 import com.module.admin.back.entity.BackUser;
 import com.module.admin.back.query.BackUserQuery;
@@ -24,5 +25,9 @@ public interface BackUserService {
 
     void updateUser(BackUser backUser);
 
-    List<BackUserResult> listUser(BackUserQuery backUserQuery);
+    void allotUserRole(Integer uid,Integer roleId);
+
+    IPage<BackUserResult> listUser(BackUserQuery backUserQuery);
+
+    BackUserResult getUser(Integer uid);
 }
