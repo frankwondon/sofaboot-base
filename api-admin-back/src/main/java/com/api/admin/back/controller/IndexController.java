@@ -27,7 +27,7 @@ public class IndexController {
         return Response.Builder.success(true);
     }
 
-    @PostMapping("/loginOut")
+    @GetMapping("/loginOut")
     public String loginOut(){
         Subject subject = SecurityUtils.getSubject();
         subject.logout();
@@ -39,6 +39,7 @@ public class IndexController {
         List<BackMenu> backMenus = backMenuService.loadMenu(user,site);
         request.setAttribute("site",site);
         request.setAttribute("menus",backMenus);
+        request.setAttribute("username",user.getUsername());
         return "index";
     }
 

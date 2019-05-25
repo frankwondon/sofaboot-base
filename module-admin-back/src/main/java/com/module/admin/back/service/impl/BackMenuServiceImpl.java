@@ -126,9 +126,14 @@ public class BackMenuServiceImpl implements BackMenuService {
     @Override
     public void insertMenu(BackMenu menu) {
         menu.setCreateTime(LocalDateTime.now());
-        if (backMenuMapper.countMenuUrl(-1,menu.getUrl())>0||backMenuMapper.countMenuName(-1,menu.getTitle())>0){
+        BackMenu backMenu = backMenuMapper.selectById(menu.getPId());
+        String  url=backMenu.getUrl()+"/"+menu.getUrl();
+        menu.setUrl(url);
+        if (backMenuMapper.countMenuUrl(-1,url)>0||backMenuMapper.countMenuName(-1,menu.getTitle())>0){
             throw  new DBOperationException(ResponseCode.C_500001);
         }
+        menu.setDepth(backMenu.getDepth()+1);
+        menu.setDeleted(0);
         backMenuMapper.insert(menu);
     }
 

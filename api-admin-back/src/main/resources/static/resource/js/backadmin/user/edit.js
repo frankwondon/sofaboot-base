@@ -13,38 +13,38 @@ layui.config({
         })
         $('#role').append(html);
         form.render('select', 'example')
-    });
-    if (urlparam.userId){
-        request.getWithData('/backadmin/user/getUser',{uid:urlparam.userId},function (res) {
-            console.log(res)
-            //表单初始赋值
-            form.val('example', {
-                "id": res.result.id
-                ,"username":  res.result.username
-                ,"cellPhoneNum": res.result.cellPhoneNum
-                ,"roleId": res.result.roleId
-                ,"userType": res.result.userType
-                ,"remark1": res.result.remark1
+        if (urlparam.userId){
+            request.getWithData('/backadmin/user/getUser',{uid:urlparam.userId},function (res) {
+                console.log(res)
+                //表单初始赋值
+                form.val('example', {
+                    "id": res.result.id
+                    ,"username":  res.result.username
+                    ,"cellPhoneNum": res.result.cellPhoneNum
+                    ,"roleId": res.result.roleId
+                    ,"userType": res.result.userType
+                    ,"remark1": res.result.remark1
+                })
             })
-        })
-    }
+        }
+    });
+
 
     //监听提交
     form.on('submit(add)',function(data) {
-        console.log(data.field);
-        // request.post('/backadmin/user/addUser',data.field,function (data) {
-        //     if (data.code==200){
-        //         layer.alert("操作成功", {
-        //                 icon: 6
-        //             },
-        //             function() {
-        //                 //关闭当前frame
-        //                 xadmin.close();
-        //                 // 可以对父窗口进行刷新
-        //                 xadmin.father_reload();
-        //             });
-        //     }
-        // });
+        request.post('/backadmin/user/addUser',data.field,function (data) {
+            if (data.code==200){
+                layer.alert("操作成功", {
+                        icon: 6
+                    },
+                    function() {
+                        //关闭当前frame
+                        xadmin.close();
+                        // 可以对父窗口进行刷新
+                        xadmin.father_reload();
+                    });
+            }
+        });
         return false;
     });
 });

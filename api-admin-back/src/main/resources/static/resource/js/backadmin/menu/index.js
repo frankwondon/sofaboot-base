@@ -13,18 +13,7 @@ layui.config({
         message: "msg", //返回信息（必填）
         rootName: "result", //根节点名称（必填）
     };
-    var demoTree = [
-        {"id": "001", "title": "湖南省", "checkArr": "1", "parentId": "0"},
-        {"id": "002", "title": "湖北省", "checkArr": "0", "parentId": "0"},
-        {"id": "003", "title": "广东省", "checkArr": "0", "parentId": "0"},
-        {"id": "004", "title": "浙江省", "checkArr": "0", "parentId": "0"},
-        {"id": "005", "title": "福建省", "checkArr": "0", "parentId": "0"},
-        {"id": "001001", "title": "长沙市", "checkArr": "0", "parentId": "001"},
-        {"id": "001002", "title": "株洲市", "checkArr": "1", "parentId": "001"},
-        {"id": "001003", "title": "湘潭市", "checkArr": "0", "parentId": "001"},
-        {"id": "001004", "title": "衡阳市", "checkArr": "0", "parentId": "001"},
-        {"id": "001005", "title": "郴州市", "checkArr": "0", "iconClass": "dtree-icon-caidan_xunzhang", "parentId": "001"}
-    ]
+
     // 初始化树
     var tree = dtree.render({
         icon: "2",
@@ -44,16 +33,14 @@ layui.config({
         toolbarFun: {
             editTreeLoad: function(treeNode){
                 var data=JSON.parse(treeNode.recordData);
-                data['title']=treeNode.context;
-                tree.changeTreeNodeDone(data)
-            },
+                console.log(treeNode)
+                tree.changeTreeNodeDone(data);
+             },
             editTreeNode: function(treeNode, $div){
                 request.post('/backadmin/menu/update',
                 {id:treeNode.nodeId,title:treeNode.context,url:treeNode.url},
                     function (result) {
-                        if (result.code==200){
-                            tree.changeTreeNodeEdit(true);
-                        }
+                        tree.changeTreeNodeEdit(true);
                     }
                 )
 
@@ -62,35 +49,31 @@ layui.config({
                 if(param.level==3){ // 如果是叶子节点
                     buttons.addToolbar = "";  // 取消新增功能
                 }
+                if (param.level==1){
+                    buttons.delToolbar="";
+                }
                 return buttons; // 将按钮对象返回
             },
             addTreeNode: function(treeNode, $div){
-
-                // var data={pId:treeNode.parentId};
+                var data={pId:treeNode.parentId,title:treeNode.addNodeName,url:treeNode.url};
                 //
-                // request.post('/backadmin/menu/add',
-                //     {id:treeNode.nodeId,title:treeNode.context,url:data.url},
-                //     function (result) {
-                //         if (result.code==200){
-                //             tree.changeTreeNodeEdit(true);
-                //         }
-                //     }
-                // )
-                // $.ajax({
-                //     type: "post",
-                //     data: treeNode,
-                //     url: "/DTreeHelper/toolbar/insert",
-                //     success: function(result){
-                //         //DTree1.changeTreeNodeAdd(treeNode.nodeId); // 添加成功，返回ID
-                //         //DTree1.changeTreeNodeAdd(true); // 添加成功
-                //         //DTree1.changeTreeNodeAdd(result.data); // 添加成功，返回一个JSON对象
-                //         //DTree1.changeTreeNodeAdd("refresh"); // 添加成功，局部刷新树
-                //     },
-                //     error: function(){
-                //         //DTree1.changeTreeNodeAdd(false); // 添加失败
-                //     }
-                // });
+                request.post('/backadmin/menu/add',
+                    data,
+                    function (result) {
+                        console.log(1)
+                        tree.changeTreeNodeAdd(true);
+                    }
+                )
+
             },
+            delTreeNode: function(treeNode, $div){
+                request.post('/backadmin/menu/del',
+                    {id:treeNode.nodeId},
+                    function (result) {
+                        tree.changeTreeNodeDel(true);
+                    }
+                )
+            }
         },
         dataFormat: "list",
         checkbarType: "all",

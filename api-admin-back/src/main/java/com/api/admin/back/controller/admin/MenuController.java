@@ -56,9 +56,8 @@ public class MenuController {
 
 
     @RequestMapping("del")
-    public Response<Boolean> del(BackMenu backMenu, CurrentUser user) {
-        backMenu.setUpdateBy(user.getId());
-        backMenuService.updateMenu(backMenu);
+    public Response<Boolean> del(Integer id, CurrentUser user) {
+        backMenuService.delMenu(id);
         return Response.Builder.success(true);
     }
 
