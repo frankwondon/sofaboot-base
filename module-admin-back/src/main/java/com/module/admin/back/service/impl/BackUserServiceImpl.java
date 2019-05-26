@@ -94,4 +94,9 @@ public class BackUserServiceImpl implements BackUserService {
     public BackUserResult getUser(Integer uid) {
         return userMapper.findById(uid);
     }
+
+    @Override
+    public void lockedUser(Integer uid,Integer locked) {
+        userMapper.updateLockedUser(uid,locked);
+    }
 }

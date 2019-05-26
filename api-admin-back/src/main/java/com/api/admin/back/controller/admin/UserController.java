@@ -50,4 +50,10 @@ public class UserController {
         backUserService.allotUserRole(userId,roleId);
         return Response.Builder.success(true);
     }
+
+    @PostMapping("/locked")
+    public Response<Boolean> locked(Integer userId,Integer locked) {
+        backUserService.lockedUser(userId, locked);
+        return Response.Builder.success(true);
+    }
 }

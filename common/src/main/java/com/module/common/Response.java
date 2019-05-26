@@ -48,5 +48,15 @@ public class Response<T> implements Serializable {
             response.msg=code.cnMsg();
             return response;
         }
+
+        public static <T> Response fail(ResponseCode code,String msg){
+            if (code==null){
+                throw new ResponseException("response code null");
+            }
+            Response<T> response=new Response<>();
+            response.code=code.code();
+            response.msg=msg;
+            return response;
+        }
     }
 }

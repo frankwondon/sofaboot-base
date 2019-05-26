@@ -30,4 +30,6 @@ public interface BackUserService {
     IPage<BackUserResult> listUser(BackUserQuery backUserQuery);
 
     BackUserResult getUser(Integer uid);
+
+    void lockedUser(Integer uid,Integer locked);
 }

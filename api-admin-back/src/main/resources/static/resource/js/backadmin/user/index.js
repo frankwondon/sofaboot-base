@@ -53,6 +53,28 @@ layui.config({
         // }
     });
 
+    form.on('switch(locked)', function(data){
+        var locked;
+        if (data.elem.checked){
+            locked=0;
+            request.post('/backadmin/user/locked',{userId:data.value,locked:locked},function () {
+                layer.msg("操作成功")
+            });
+        }else {
+            layer.confirm('确定要锁定该用户吗？', {
+                btn: ['确定','取消'] //按钮
+            }, function(){
+                locked=1;
+                request.post('/backadmin/user/locked',{userId:data.value,locked:locked},function () {
+                    layer.msg("操作成功")
+                });
+            }, function(){
+                return;
+            });
+        }
+    });
+
+
 
     //监听提交
     form.on('submit(add)',function(data) {

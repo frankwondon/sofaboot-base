@@ -5,13 +5,11 @@ import lombok.Data;
 
 @Data
 public class DBOperationException extends RuntimeException {
-    private int code;
-    private String msg;
+    private ResponseCode responseCode;
+
 
     public DBOperationException(ResponseCode responseCode) {
-        super(responseCode.cnMsg());
-        this.code = responseCode.code();
-        this.msg = responseCode.cnMsg();
+        this.responseCode=responseCode;
     }
 
 

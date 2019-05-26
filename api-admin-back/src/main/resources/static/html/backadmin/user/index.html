@@ -72,7 +72,16 @@
     </div>
 </div>
 <script type="text/html" id="allotMenu" >
-    <a  class="layui-btn layui-btn-xs" lay-event="allotMenu" onclick="xadmin.open('修改用户','/html/backadmin/user/edit.html?userId={{d.id}}',600,600)">修改</a>
+    <form class="layui-form" action="">
+        <a  class="layui-btn layui-btn-xs" lay-event="allotMenu" onclick="xadmin.open('修改用户','/html/backadmin/user/edit.html?userId={{d.id}}',600,600)">修改</a>
+        {{#  if(d.locked===1){ }}
+            <input type="checkbox" name="locked"   value="{{d.id}}" lay-filter="locked" lay-skin="switch" lay-text="正常|锁定">
+        {{#  } }}
+        {{#  if(d.locked===0){ }}
+            <input type="checkbox" name="locked" value="{{d.id}}"  lay-filter="locked" lay-skin="switch" lay-text="正常|锁定"checked >
+        {{#  } }}
+    </form>
+
 </script>
 <script src="/resource/js/backadmin/user/index.js"></script>
 </body>

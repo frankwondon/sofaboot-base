@@ -35,6 +35,9 @@ public class LoginRealm extends AuthorizingRealm {
         BackUser user = backUserService.getByAccount(username);
         CurrentUser currentUser=new CurrentUser();
         if (user!=null){
+            if (user.getLocked()==1){
+                throw new AuthenticationException("该用户已经被锁定");
+            }
             currentUser.setRoleId(user.getRoleId());
             currentUser.setUsername(user.getUsername());
             currentUser.setId(user.getId());

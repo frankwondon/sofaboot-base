@@ -24,7 +24,6 @@
             back_user u
         WHERE
             u.cell_phone_num = #{account}
-        AND u.locked = 0
         AND u.deleted = 0
     </select>
     <select id="listBackUser" resultType="com.module.admin.back.BackUserResult">
@@ -46,4 +45,8 @@
     <select id="countUserName" resultType="int">
         select count(*) FROM back_user u where u.username=#{username} and u.id!=#{uid}
     </select>
+
+    <update id="updateLockedUser" >
+        update back_user u set u.locked=#{locked} where u.id=#{uid}
+    </update>
 </mapper>
