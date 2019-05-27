@@ -1,7 +1,7 @@
 package com.module.common.util;
 
 import cn.hutool.core.util.IdUtil;
-import com.google.common.base.Strings;
+import cn.hutool.core.util.StrUtil;
 
 import java.util.HashSet;
 import java.util.Iterator;
@@ -84,7 +84,7 @@ public class RandomUtil {
     }
 
     public static long FromNumberSystem26(String s){
-        if (Strings.isNullOrEmpty(s)) return 0;
+        if (StrUtil.isBlank(s)) return 0;
         long n = 0;
         char[] chars = s.toCharArray();
         long j = 1;

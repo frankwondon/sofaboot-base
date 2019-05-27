@@ -74,6 +74,7 @@ layui.config({
             }
         },
         dataFormat: "list",
+        method: "get",
         checkbarType: "all",
         request: urlparam,
         response: response,

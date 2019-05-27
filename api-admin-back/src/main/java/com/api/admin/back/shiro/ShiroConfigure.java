@@ -29,8 +29,15 @@ public class ShiroConfigure {
         Map<String, String> filterChainDefinitionMap = new LinkedHashMap<>();
         //开放登陆接口
         filterChainDefinitionMap.put("/login", "anon");
+        //静态文件地址
         filterChainDefinitionMap.put("/html/**", "anon");
         filterChainDefinitionMap.put("/resource/**", "anon");
+        //swagger相关
+        filterChainDefinitionMap.put("/swagger-ui.html", "anon");
+        filterChainDefinitionMap.put("/swagger-resources/**", "anon");
+        filterChainDefinitionMap.put("/webjars/**", "anon");
+        filterChainDefinitionMap.put("/v2/api-docs", "anon");
+
         //其余接口一律拦截
         //主要这行代码必须放在所有权限设置的最后，不然会导致所有 url 都被拦截
         filterChainDefinitionMap.put("/**", "authc");

@@ -3,7 +3,6 @@ package com.api.admin.back.controller.admin;
 import cn.hutool.core.util.StrUtil;
 import com.alipay.sofa.runtime.api.annotation.SofaReference;
 import com.baomidou.mybatisplus.core.metadata.IPage;
-import com.google.common.base.Strings;
 import com.module.admin.back.result.PermissionTreeResult;
 import com.module.common.bean.CurrentUser;
 import com.module.admin.back.entity.BackRole;
@@ -14,10 +13,7 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
-
-import java.util.ArrayList;
 import java.util.List;
-import java.util.stream.Collectors;
 
 @RestController
 @RequestMapping("/backadmin/role")
@@ -36,7 +32,7 @@ public class RoleController {
         return Response.Builder.success(backRoleService.listRole());
     }
 
-    @PostMapping("findRoleMenus")
+    @GetMapping("findRoleMenus")
     public Response<List<PermissionTreeResult>> findRoleMenus(Integer roleId) {
         return Response.Builder.success(backRoleService.findRoleMenu(roleId));
     }

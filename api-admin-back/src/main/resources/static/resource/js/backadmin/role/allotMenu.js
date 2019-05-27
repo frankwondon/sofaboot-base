@@ -14,27 +14,14 @@ layui.config({
         rootName: "result", //根节点名称（必填）
     };
 
-    var demoTree = [
-        {"id": "001", "title": "湖南省", "checkArr": "1", "parentId": "0"},
-        {"id": "002", "title": "湖北省", "checkArr": "0", "parentId": "0"},
-        {"id": "003", "title": "广东省", "checkArr": "0", "parentId": "0"},
-        {"id": "004", "title": "浙江省", "checkArr": "0", "parentId": "0"},
-        {"id": "005", "title": "福建省", "checkArr": "0", "parentId": "0"},
-        {"id": "001001", "title": "长沙市", "checkArr": "0", "parentId": "001"},
-        {"id": "001002", "title": "株洲市", "checkArr": "1", "parentId": "001"},
-        {"id": "001003", "title": "湘潭市", "checkArr": "0", "parentId": "001"},
-        {"id": "001004", "title": "衡阳市", "checkArr": "0", "parentId": "001"},
-        {"id": "001005", "title": "郴州市", "checkArr": "0", "iconClass": "dtree-icon-caidan_xunzhang", "parentId": "001"}
-    ]
-
     // 初始化树
     var DemoTree = dtree.render({
         icon: "2",
         dataStyle: "layuiStyle",
         elem: "#dtree",
-        // data: demoTree, // 使用data加载
         checkbar: true,
         dataFormat: "list",
+        method: "get",
         checkbarType: "all",
         request: urlparam,
         response: response,

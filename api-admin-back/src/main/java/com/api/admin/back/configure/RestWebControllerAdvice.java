@@ -1,4 +1,4 @@
-package com.api.admin.back.controller;
+package com.api.admin.back.configure;
 
 import com.module.common.Response;
 import com.module.common.ResponseCode;

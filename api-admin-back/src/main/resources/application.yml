@@ -11,8 +11,8 @@ spring:
     livereload:
       enabled: true
       additional-paths: resources/**,static/**,templates/**
+
 mybatis-plus:
   mapper-locations:  classpath*:/com/module/admin/back/mapper/**/*.xml
   check-config-location: true
-
 
