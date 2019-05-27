@@ -8,7 +8,7 @@ layui.define(['layer', 'jquery'], function (exports) { //提示：模块也可�
                 url: url,
                 data: data,
                 success: function (data) {
-                    successCallBack(data);
+                    success(data,successCallBack)
                 },
                 error: function (data) {
                     toErrorPage(data);
@@ -21,11 +21,7 @@ layui.define(['layer', 'jquery'], function (exports) { //提示：模块也可�
                 url: url,
                 data: data,
                 success: function (data) {
-                    if (data.code == 200) {
-                        successCallBack(data);
-                    } else {
-                        layer.msg(JSON.stringify(data));
-                    }
+                    success(data,successCallBack)
                 },
                 error: function (data) {
                     toErrorPage(data);
@@ -37,11 +33,7 @@ layui.define(['layer', 'jquery'], function (exports) { //提示：模块也可�
                 type: 'GET',
                 url: url,
                 success: function (data) {
-                    if (data.code == 200) {
-                        successCallBack(data);
-                    } else {
-                        layer.msg(JSON.stringify(data));
-                    }
+                    success(data,successCallBack)
                 },
                 error: function (data) {
                     toErrorPage(data);
@@ -54,10 +46,10 @@ layui.define(['layer', 'jquery'], function (exports) { //提示：模块也可�
                 url: '/login',
                 data: data,
                 success: function (data) {
-                    if (data.code == 200) {
+                    if (data.code === 200) {
                         window.location.href = '/html/site.html'
                     } else {
-                        layer.msg(JSON.stringify(data));
+                        layer.msg(data.msg);
                     }
                 },
                 error: function (data) {
@@ -92,10 +84,22 @@ layui.define(['layer', 'jquery'], function (exports) { //提示：模块也可�
     };
 
     function toErrorPage(data) {
-        if (data.status == 302) {
+        if (data.status === 302) {
             window.location.href = '/html/login.html'
         } else {
-            layer.msg(JSON.stringify(data));
+            layer.msg(data.msg);
+        }
+    }
+
+    function success(data,fun) {
+        if (data.status === 302) {
+            window.location.href = '/html/login.html'
+        } else {
+            if (data.code === 200){
+                fun(data);
+            }else{
+                layer.msg(data.msg);
+            }
         }
     }
 

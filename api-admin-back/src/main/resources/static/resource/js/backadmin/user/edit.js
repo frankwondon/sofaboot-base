@@ -15,7 +15,6 @@ layui.config({
         form.render('select', 'example')
         if (urlparam.userId){
             request.getWithData('/backadmin/user/getUser',{uid:urlparam.userId},function (res) {
-                console.log(res)
                 //表单初始赋值
                 form.val('example', {
                     "id": res.result.id
@@ -33,7 +32,7 @@ layui.config({
     //监听提交
     form.on('submit(add)',function(data) {
         request.post('/backadmin/user/addUser',data.field,function (data) {
-            if (data.code==200){
+            if (data.code===200){
                 layer.alert("操作成功", {
                         icon: 6
                     },

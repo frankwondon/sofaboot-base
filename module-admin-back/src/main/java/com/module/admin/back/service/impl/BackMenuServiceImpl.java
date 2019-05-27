@@ -124,7 +124,7 @@ public class BackMenuServiceImpl implements BackMenuService {
     }
 
     @Override
-    public void insertMenu(BackMenu menu) {
+    public Integer insertMenu(BackMenu menu) {
         menu.setCreateTime(LocalDateTime.now());
         BackMenu backMenu = backMenuMapper.selectById(menu.getPId());
         String  url=backMenu.getUrl()+"/"+menu.getUrl();
@@ -134,7 +134,7 @@ public class BackMenuServiceImpl implements BackMenuService {
         }
         menu.setDepth(backMenu.getDepth()+1);
         menu.setDeleted(0);
-        backMenuMapper.insert(menu);
+        return backMenuMapper.insert(menu);
     }
 
     @Override

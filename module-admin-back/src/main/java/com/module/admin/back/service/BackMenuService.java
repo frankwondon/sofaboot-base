@@ -16,7 +16,7 @@ public interface BackMenuService {
 
     void updateMenu(BackMenu menu);
 
-    void insertMenu(BackMenu menu);
+    Integer insertMenu(BackMenu menu);
 
     void delMenu(Integer id);
 

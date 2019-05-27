@@ -19,7 +19,7 @@ layui.config({
             ,{field: 'username', title: '用户名', width:200}
             ,{field: 'cellPhoneNum', title: '手机号', width:200, sort: true}
             ,{field: 'role', title: '角色'}
-            ,{field: 'userType', title: '角色描述'}
+            ,{field: 'userType', title: '账户类型',toolbar: '#userType'}
             ,{field: 'remark1', title: '描述'}
             ,{title: '操作',toolbar: '#allotMenu'}
         ]],

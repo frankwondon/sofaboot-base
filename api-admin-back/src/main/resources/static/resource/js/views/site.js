@@ -14,6 +14,8 @@ layui.config({
         },
         methods: {
             toIndex: function (url) {
+                //清空tab
+                layui.data('tab_list',null);
                 window.location.href='/index?site='+url;
             }
         }

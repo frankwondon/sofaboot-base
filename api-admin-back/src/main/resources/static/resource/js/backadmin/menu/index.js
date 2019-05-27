@@ -56,12 +56,10 @@ layui.config({
             },
             addTreeNode: function(treeNode, $div){
                 var data={pId:treeNode.parentId,title:treeNode.addNodeName,url:treeNode.url};
-                //
                 request.post('/backadmin/menu/add',
                     data,
                     function (result) {
-                        console.log(1)
-                        tree.changeTreeNodeAdd(true);
+                        tree.changeTreeNodeAdd(result.result);
                     }
                 )
 

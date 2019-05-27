@@ -40,10 +40,9 @@ public class MenuController {
     }
 
     @RequestMapping("add")
-    public Response<Boolean> add(BackMenu backMenu, CurrentUser user) {
+    public Response<Integer> add(BackMenu backMenu, CurrentUser user) {
         backMenu.setCreateBy(user.getId());
-        backMenuService.insertMenu(backMenu);
-        return Response.Builder.success(true);
+        return Response.Builder.success(backMenuService.insertMenu(backMenu));
     }
 
 
