@@ -117,7 +117,7 @@ public class BackMenuServiceImpl implements BackMenuService {
     @Override
     public void updateMenu(BackMenu menu) {
         menu.setUpdateTime(LocalDateTime.now());
-        if (backMenuMapper.countMenuUrl(menu.getId(),menu.getUrl())>0||backMenuMapper.countMenuName(menu.getId(),menu.getTitle())>0){
+        if (backMenuMapper.countMenuUrl(menu.getId(),menu.getUrl())>0){
             throw  new DBOperationException(ResponseCode.C_500001);
         }
         backMenuMapper.updateById(menu);
