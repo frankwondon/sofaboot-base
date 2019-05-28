@@ -1,7 +1,9 @@
+
 spring:
+  profiles:
+    active: dev
   application:
     name: api.admin.back
-
   datasource:
     driver-class-name: com.mysql.jdbc.Driver
     url: jdbc:mysql://192.168.1.117:3306/base?useUnicode=true&useSSL=false&characterEncoding=utf8
@@ -11,7 +13,6 @@ spring:
     livereload:
       enabled: true
       additional-paths: resources/**,static/**,templates/**
-
 mybatis-plus:
   mapper-locations:  classpath*:/com/module/admin/back/mapper/**/*.xml
   check-config-location: true
