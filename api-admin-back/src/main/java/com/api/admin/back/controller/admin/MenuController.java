@@ -59,7 +59,7 @@ public class MenuController {
         return Response.Builder.success(true);
     }
 
-
+    @ApiOperation("删除菜单")
     @PostMapping("del")
     public Response<Boolean> del(Integer id, CurrentUser user) {
         backMenuService.delMenu(id);

@@ -17,6 +17,7 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
+import springfox.documentation.annotations.ApiIgnore;
 
 import java.util.List;
 
@@ -41,7 +42,7 @@ public class UserController {
 
     @ApiOperation("添加用户")
     @PostMapping("/addUser")
-    public Response<Boolean> addBackUser(BackUser backUser, CurrentUser user) {
+    public Response<Boolean> addBackUser(BackUser backUser,@ApiIgnore CurrentUser user) {
         if (backUser.getId()!=null){
             backUser.setCreateBy(user.getId());
             backUserService.updateUser(backUser);
@@ -68,7 +69,7 @@ public class UserController {
 
     @ApiOperation("修改密码")
     @PostMapping("updatePwd")
-    public Response<Boolean> updatePwd(CurrentUser currentUser,String newPwd,String oldPwd){
+    public Response<Boolean> updatePwd(@ApiIgnore CurrentUser currentUser, String newPwd, String oldPwd){
         backUserService.updatePwd(currentUser.getId(),newPwd,oldPwd);
         //登出
         SecurityUtils.getSubject().logout();

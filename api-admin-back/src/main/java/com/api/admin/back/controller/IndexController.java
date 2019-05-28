@@ -4,15 +4,18 @@ import com.module.admin.back.entity.BackMenu;
 import com.module.admin.back.service.BackMenuService;
 import com.module.common.Response;
 import com.module.common.bean.CurrentUser;
+import io.swagger.annotations.Api;
 import org.apache.shiro.SecurityUtils;
 import org.apache.shiro.authc.UsernamePasswordToken;
 import org.apache.shiro.subject.Subject;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
+import springfox.documentation.annotations.ApiIgnore;
 
 import javax.servlet.http.HttpServletRequest;
 import java.util.List;
 
+@ApiIgnore
 @Controller
 public class IndexController {
     @SofaReference

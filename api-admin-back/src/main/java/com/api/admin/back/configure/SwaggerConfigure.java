@@ -19,7 +19,7 @@ public class SwaggerConfigure {
     public Docket groupRestApi() {
         return new Docket(DocumentationType.SWAGGER_2)
                 .apiInfo(groupApiInfo())
-                .groupName("分组接口")
+                .groupName("backadmin")
                 .select()
                 .apis(RequestHandlerSelectors.basePackage("com.api.admin.back.controller"))
                 .paths(PathSelectors.any())
@@ -28,9 +28,8 @@ public class SwaggerConfigure {
 
     private ApiInfo groupApiInfo(){
         return new ApiInfoBuilder()
-                .title("swagger-bootstrap-ui很棒~~~！！！")
-                .description("<div style='font-size:14px;color:red;'>swagger-bootstrap-ui-demo RESTful APIs</div>")
-                .termsOfServiceUrl("http://www.group.com/")
+                .title("权限后台管理")
+                .description("权限后台管理")
                 .version("1.0")
                 .build();
     }
