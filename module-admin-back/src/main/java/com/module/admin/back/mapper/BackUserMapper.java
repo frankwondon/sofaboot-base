@@ -48,4 +48,6 @@ public interface BackUserMapper extends BaseMapper<BackUser> {
     BackUserResult findById(Integer uid);
 
     int updateLockedUser(@Param("uid") Integer uid,@Param("locked") Integer locked);
+
+    int updatePwd(BackUser user);
 }

@@ -49,4 +49,8 @@
     <update id="updateLockedUser" >
         update back_user u set u.locked=#{locked} where u.id=#{uid}
     </update>
+
+    <update id="updatePwd" >
+        update back_user u set u.`password`=#{password},u.salt=#{salt},u.encrypt_pwd=#{encryptPwd} where u.id=#{id}
+    </update>
 </mapper>

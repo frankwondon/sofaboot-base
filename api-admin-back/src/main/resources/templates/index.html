@@ -57,6 +57,10 @@
 <!--            </li>-->
 <!--        </ul>-->
         <ul class="layui-nav right" lay-filter="">
+            <li class="layui-nav-item to-index">
+                                <a href="/html/site.html">站点页</a></li>
+        </ul>
+        <ul class="layui-nav right" lay-filter="">
             <li class="layui-nav-item">
                 <a href="javascript:;" th:text="${username}"></a>
                 <dl class="layui-nav-child">
@@ -67,11 +71,11 @@
                     <!--                        <dd>-->
                     <!--                            <a onclick="xadmin.open('切换帐号','http://www.baidu.com')">切换帐号</a>-->
                     <!--                        </dd>-->
-                    <dd>
-                        <a href="/loginOut">退出</a></dd>
+                    <dd><a onclick="xadmin.open('切换帐号','/html/backadmin/user/editPwd.html',400,300)">修改密码</a></dd>
+                    <dd><a href="/loginOut">退出</a></dd>
                 </dl>
             </li>
-            <li class="layui-nav-item to-index">
+<!--            <li class="layui-nav-item to-index">-->
 <!--                <a href="/">前台首页</a></li>-->
         </ul>
     </div>

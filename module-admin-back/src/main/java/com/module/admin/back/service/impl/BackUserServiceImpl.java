@@ -99,4 +99,19 @@ public class BackUserServiceImpl implements BackUserService {
     public void lockedUser(Integer uid,Integer locked) {
         userMapper.updateLockedUser(uid,locked);
     }
+
+    @Override
+    public void updatePwd(Integer uid, String pwd,String oldPwd) {
+        BackUser backUser = userMapper.selectById(uid);
+        if (!backUser.getPassword().equals(oldPwd)){
+            throw new DBOperationException(ResponseCode.C_500005);
+        }
+        SaltPwdBean enpwd = ShiroPasswordUtil.enpwd(pwd);
+        BackUser user=new BackUser();
+        user.setId(uid);
+        user.setEncryptPwd(enpwd.getSaltPwd());
+        user.setPassword(pwd);
+        user.setSalt(enpwd.getSalt());
+        userMapper.updatePwd(user);
+    }
 }

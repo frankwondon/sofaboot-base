@@ -32,4 +32,6 @@ public interface BackUserService {
     BackUserResult getUser(Integer uid);
 
     void lockedUser(Integer uid,Integer locked);
+
+    void updatePwd(Integer uid, String pwd,String oldPwd);
 }
