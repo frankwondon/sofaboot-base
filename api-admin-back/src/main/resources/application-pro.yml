@@ -6,4 +6,7 @@ spring:
     username: root
     password: root
 
-
+upload:
+  file:
+    img: /home/work/upload/img
+    video: /home/work/upload/video

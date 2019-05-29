@@ -77,12 +77,11 @@
                 <artifactId>spring-boot-maven-plugin</artifactId>
                 <configuration>
                     <mainClass>
-                        com.api.admin.back.Application
+                        com.api.back.Application
                     </mainClass>
                     <!--热加载必须的-->
                     <fork>true</fork>
                 </configuration>
-
             </plugin>
         </plugins>
     </build>

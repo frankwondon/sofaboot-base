@@ -35,6 +35,8 @@ public class BackUserServiceImpl implements BackUserService {
     @Resource
     private BackRoleMapper roleMapper;
 
+    private static final String defaultPwd="123456";
+
     @Override
     public BackUser getByAccount(String account) {
         if (StrUtil.isNotBlank(account)) {
@@ -56,11 +58,9 @@ public class BackUserServiceImpl implements BackUserService {
             backUser.setMerchantId(BackAdminConstant.NORMAL_ID);
         }
         backUser.setCreateTime(LocalDateTime.now());
-        //自动创建密码
-        String pwd="123465";
-        SaltPwdBean enpwd = ShiroPasswordUtil.enpwd(pwd);
+        SaltPwdBean enpwd = ShiroPasswordUtil.enpwd(defaultPwd);
         backUser.setEncryptPwd(enpwd.getSaltPwd());
-        backUser.setPassword(pwd);
+        backUser.setPassword(defaultPwd);
         backUser.setSalt(enpwd.getSalt());
         userMapper.insert(backUser);
     }
@@ -106,6 +106,16 @@ public class BackUserServiceImpl implements BackUserService {
         if (!backUser.getPassword().equals(oldPwd)){
             throw new DBOperationException(ResponseCode.C_500005);
         }
+        updatePwd(uid,pwd);
+    }
+
+    @Override
+    public void resetPwd(Integer uid) {
+        updatePwd(uid,defaultPwd);
+    }
+
+    //需要更新密码
+    private void updatePwd(Integer uid,String pwd){
         SaltPwdBean enpwd = ShiroPasswordUtil.enpwd(pwd);
         BackUser user=new BackUser();
         user.setId(uid);

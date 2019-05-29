@@ -17,6 +17,7 @@
         <module>common</module>
         <module>generator</module>
         <module>module-admin-back</module>
+        <module>module-admin-cms</module>
     </modules>
     <dependencies>
 

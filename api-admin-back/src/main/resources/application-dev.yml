@@ -7,3 +7,9 @@ spring:
     password: root
 
 
+
+
+upload:
+  file:
+    img: D:/upload/img
+    video: D:/upload/video

@@ -1,4 +1,3 @@
-
 spring:
   profiles:
     active: dev
@@ -13,6 +12,9 @@ spring:
     livereload:
       enabled: true
       additional-paths: resources/**,static/**,templates/**
+  servlet:
+    multipart:
+      max-file-size: 20MB
 mybatis-plus:
   mapper-locations:  classpath*:/com/module/admin/back/mapper/**/*.xml
   check-config-location: true
