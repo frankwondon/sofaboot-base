@@ -61,8 +61,8 @@ public class CmsProductTypeController {
             @ApiImplicitParam(name = "id",required = true,value ="产品ID" ),
             @ApiImplicitParam(name = "disable",required = true,value ="0启用 1禁用" ),
     })
-    public Response disable(Integer id,Integer disable, @ApiIgnore CurrentUser currentUser){
-        productTypeService.disable(id,currentUser);
+    public Response disable(Integer id,Boolean disable, @ApiIgnore CurrentUser currentUser){
+        productTypeService.disable(id,disable,currentUser);
         return Response.success(true);
     }
 

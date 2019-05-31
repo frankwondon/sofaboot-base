@@ -7,11 +7,23 @@
         FROM
             cms_product_type t
         JOIN cms_product p ON p.type_id = t.id
+        WHERE p.show_type &lt;&gt;1
         ORDER BY
-            t.sort
+            p.sort
     </select>
 
+    <select id="listHotPage" resultType="com.module.admin.cms.result.CmsProductResult">
+        SELECT
+            p.*
+        FROM
+            cms_product p
+        WHERE p.show_type=1
+        ORDER BY
+            p.sort
+    </select>
+
+
     <update id="disable">
-        update cms_product set locked=1 where id=#{id}
+        update cms_product set locked=#{disable} where id=#{id}
     </update>
 </mapper>

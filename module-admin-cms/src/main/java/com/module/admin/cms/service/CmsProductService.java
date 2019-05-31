@@ -18,6 +18,11 @@ public interface CmsProductService {
      * */
     IPage<CmsProduct> list(PageQuery pageQuery);
 
+    /**
+     * 分页查询热门产品
+     * */
+    IPage<CmsProduct> listHot(PageQuery pageQuery);
+
     void addOrUpdate(CmsProduct product, CurrentUser user);
 
     void del(Integer id);
@@ -26,5 +31,5 @@ public interface CmsProductService {
      * 禁用Banner
      * @param id
      */
-    void disable(Integer id, CurrentUser user);
+    void disable(Integer id,Boolean disable, CurrentUser user);
 }

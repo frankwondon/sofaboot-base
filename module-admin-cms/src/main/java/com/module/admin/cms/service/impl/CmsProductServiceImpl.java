@@ -23,6 +23,12 @@ public class CmsProductServiceImpl implements CmsProductService {
     }
 
     @Override
+    public IPage<CmsProduct> listHot(PageQuery pageQuery) {
+        Page page=new Page(pageQuery.getPage(),pageQuery.getLimit());
+        return productMapper.listHotPage(page);
+    }
+
+    @Override
     public void addOrUpdate(CmsProduct product, CurrentUser user) {
         if (product.getId()!=null){
             product.setUpdateBy(user.getId());
@@ -41,7 +47,12 @@ public class CmsProductServiceImpl implements CmsProductService {
     }
 
     @Override
-    public void disable(Integer id, CurrentUser user) {
-        productMapper.disable(id);
+    public void disable(Integer id,Boolean disable, CurrentUser user) {
+        if (disable){
+            productMapper.disable(id,0);
+        }else {
+            productMapper.disable(id,1);
+        }
+
     }
 }

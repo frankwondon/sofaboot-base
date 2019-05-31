@@ -4,6 +4,7 @@ import com.baomidou.mybatisplus.core.metadata.IPage;
 import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
 import com.module.admin.cms.entity.CmsBanner;
 import com.baomidou.mybatisplus.core.mapper.BaseMapper;
+import org.apache.ibatis.annotations.Param;
 import org.springframework.stereotype.Repository;
 
 /**
@@ -16,6 +17,6 @@ import org.springframework.stereotype.Repository;
  */
 @Repository
 public interface CmsBannerMapper extends BaseMapper<CmsBanner> {
-        int disable(Integer id);
+        int disable(@Param("id") Integer id,@Param("disable") Integer disable);
         IPage<CmsBanner> listPage(Page page);
 }

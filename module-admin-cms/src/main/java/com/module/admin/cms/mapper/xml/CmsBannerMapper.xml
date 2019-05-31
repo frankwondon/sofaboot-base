@@ -5,6 +5,6 @@
             select * from cms_banner b  ORDER BY b.sort
     </select>
     <update id="disable">
-         update cms_banner b set b.locked=1 where id=#{id}
+         update cms_banner b set locked=#{disable} where id=#{id}
     </update>
 </mapper>

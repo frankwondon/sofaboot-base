@@ -3,7 +3,6 @@ package com.module.admin.cms.service.impl;
 import com.baomidou.mybatisplus.core.metadata.IPage;
 import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
 import com.module.admin.cms.entity.CmsNews;
-import com.module.admin.cms.entity.CmsProductType;
 import com.module.admin.cms.mapper.CmsNewsMapper;
 import com.module.admin.cms.service.CmsNewsService;
 import com.module.common.bean.CurrentUser;
@@ -19,17 +18,17 @@ public class CmsNewsServiceImpl implements CmsNewsService {
 
     @Override
     public IPage<CmsNews> list(PageQuery pageQuery) {
-        Page page=new Page(pageQuery.getPage(),pageQuery.getLimit());
+        Page page = new Page(pageQuery.getPage(), pageQuery.getLimit());
         return newsMapper.listPage(page);
     }
 
     @Override
     public void addOrUpdate(CmsNews news, CurrentUser user) {
-        if (news.getId()!=null){
+        if (news.getId() != null) {
             news.setUpdateBy(user.getId());
             news.setUpdateTime(LocalDateTime.now());
             newsMapper.updateById(news);
-        }else {
+        } else {
             news.setCreateBy(user.getId());
             news.setCreateTime(LocalDateTime.now());
             newsMapper.insert(news);
@@ -42,7 +41,12 @@ public class CmsNewsServiceImpl implements CmsNewsService {
     }
 
     @Override
-    public void disable(Integer id, CurrentUser user) {
-        newsMapper.disable(id);
+    public void disable(Integer id, Boolean disable, CurrentUser user) {
+        if (disable) {
+            newsMapper.disable(id,0);
+        } else {
+            newsMapper.disable(id,1);
+        }
+
     }
 }

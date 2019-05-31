@@ -4,6 +4,7 @@ import com.baomidou.mybatisplus.core.metadata.IPage;
 import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
 import com.module.admin.cms.entity.CmsNews;
 import com.baomidou.mybatisplus.core.mapper.BaseMapper;
+import org.apache.ibatis.annotations.Param;
 
 /**
  * <p>
@@ -18,5 +19,5 @@ public interface CmsNewsMapper extends BaseMapper<CmsNews> {
 
         int del(Integer id);
 
-        int disable(Integer id);
+        int disable(@Param("id") Integer id, @Param("disable") Integer disable);
 }

@@ -4,6 +4,7 @@ import com.baomidou.mybatisplus.core.metadata.IPage;
 import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
 import com.module.admin.cms.entity.CmsProduct;
 import com.baomidou.mybatisplus.core.mapper.BaseMapper;
+import org.apache.ibatis.annotations.Param;
 
 /**
  * <p>
@@ -16,5 +17,7 @@ import com.baomidou.mybatisplus.core.mapper.BaseMapper;
 public interface CmsProductMapper extends BaseMapper<CmsProduct> {
         IPage<CmsProduct> listPage(Page page);
 
-        void disable(Integer id);
+        IPage<CmsProduct> listHotPage(Page page);
+
+        void disable(@Param("id") Integer id,@Param("disable") Integer disable);
 }

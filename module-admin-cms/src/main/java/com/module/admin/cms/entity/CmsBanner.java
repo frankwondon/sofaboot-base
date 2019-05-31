@@ -37,7 +37,7 @@ private static final long serialVersionUID=1L;
     /**
      * 分组
      */
-    private Integer group;
+    private Integer belong;
 
     /**
      * 描述标题
@@ -48,6 +48,8 @@ private static final long serialVersionUID=1L;
      * 描述内容
      */
     private String descText;
+
+    private Integer sort;
 
     /**
      * 0正常1锁定

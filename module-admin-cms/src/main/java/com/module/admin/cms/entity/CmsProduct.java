@@ -33,7 +33,7 @@ private static final long serialVersionUID=1L;
     private Integer typeId;
 
     /**
-     * 0普通产品 1热门产品
+     * 0普通产品 1热门产品 2推荐产品
      */
     private Integer showType;
 
@@ -44,6 +44,10 @@ private static final long serialVersionUID=1L;
      */
     private String descTitle;
 
+    /**
+     * 简单描述
+     */
+    private String descDesc;
     /**
      * 描述内容
      */

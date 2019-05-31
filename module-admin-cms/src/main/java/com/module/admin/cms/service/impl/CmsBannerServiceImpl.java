@@ -1,6 +1,5 @@
 package com.module.admin.cms.service.impl;
 
-import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
 import com.baomidou.mybatisplus.core.metadata.IPage;
 import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
 import com.module.admin.cms.entity.CmsBanner;
@@ -42,8 +41,12 @@ public class CmsBannerServiceImpl implements CmsBannerService {
     }
 
     @Override
-    public void disable(Integer id, CurrentUser user) {
-        bannerMapper.disable(id);
+    public void disable(Integer id, Boolean disable,CurrentUser user) {
+        if (disable){
+            bannerMapper.disable(id,0);
+        }else {
+            bannerMapper.disable(id,1);
+        }
     }
 
 

@@ -25,5 +25,5 @@ public interface CmsBannerService {
      * 禁用Banner
      * @param id
      */
-    void disable(Integer id,CurrentUser user);
+    void disable(Integer id,Boolean disable,CurrentUser user);
 }

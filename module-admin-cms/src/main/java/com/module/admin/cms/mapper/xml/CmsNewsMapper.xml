@@ -10,6 +10,6 @@
     </update>
 
     <update id="disable">
-        update cms_news set locked=1 where id=#{id}
+        update cms_news set locked=#{disable} where id=#{id}
     </update>
 </mapper>

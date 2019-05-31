@@ -16,26 +16,27 @@ import java.util.List;
 public class CmsProductTypeServiceImpl implements CmsProductTypeService {
     @Resource
     private CmsProductTypeMapper productTypeMapper;
+
     @Override
     public IPage<CmsProductType> list(PageQuery pageQuery) {
-        Page page=new Page(pageQuery.getPage(),pageQuery.getLimit());
+        Page page = new Page(pageQuery.getPage(), pageQuery.getLimit());
         return productTypeMapper.listPage(page);
     }
 
     @Override
     public List<CmsProductType> listSelect() {
-        QueryWrapper wrapper=new QueryWrapper();
-        wrapper.eq("deleted",0);
+        QueryWrapper wrapper = new QueryWrapper();
+        wrapper.eq("deleted", 0);
         return productTypeMapper.selectList(wrapper);
     }
 
     @Override
     public void addOrUpdate(CmsProductType product, CurrentUser user) {
-        if (product.getId()!=null){
+        if (product.getId() != null) {
             product.setUpdateBy(user.getId());
             product.setUpdateTime(LocalDateTime.now());
             productTypeMapper.updateById(product);
-        }else {
+        } else {
             product.setCreateBy(user.getId());
             product.setCreateTime(LocalDateTime.now());
             productTypeMapper.insert(product);
@@ -48,7 +49,12 @@ public class CmsProductTypeServiceImpl implements CmsProductTypeService {
     }
 
     @Override
-    public void disable(Integer id, CurrentUser user) {
-        productTypeMapper.disable(id);
+    public void disable(Integer id, Boolean disable, CurrentUser user) {
+        if (disable) {
+            productTypeMapper.disable(id,0);
+        } else {
+            productTypeMapper.disable(id,1);
+        }
+
     }
 }
