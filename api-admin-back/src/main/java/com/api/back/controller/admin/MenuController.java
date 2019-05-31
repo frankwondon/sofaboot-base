@@ -16,7 +16,7 @@ import org.springframework.web.bind.annotation.RestController;
 import springfox.documentation.annotations.ApiIgnore;
 
 import java.util.List;
-@Api(description = "权限管理")
+@Api(tags = "权限管理")
 @RestController
 @RequestMapping("/backadmin/menu")
 public class MenuController {

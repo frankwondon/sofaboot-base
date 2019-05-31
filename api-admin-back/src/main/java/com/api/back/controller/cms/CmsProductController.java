@@ -21,7 +21,7 @@ import springfox.documentation.annotations.ApiIgnore;
 
 import java.util.List;
 
-@Api(description = "产品管理")
+@Api(tags = "产品管理")
 @RestController
 @RequestMapping("/cmsadmin/product")
 public class CmsProductController {

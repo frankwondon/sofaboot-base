@@ -17,7 +17,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 import springfox.documentation.annotations.ApiIgnore;
 
-@Api(description = "资讯管理")
+@Api(tags = "资讯管理")
 @RestController
 @RequestMapping("/cmsadmin/news")
 public class CmsNewsController {

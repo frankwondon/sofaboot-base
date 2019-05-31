@@ -17,7 +17,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 import springfox.documentation.annotations.ApiIgnore;
 
-@Api(description = "Banner管理")
+@Api(tags = "Banner管理")
 @RestController
 @RequestMapping("/cmsadmin/banner")
 public class CmsBannerController {

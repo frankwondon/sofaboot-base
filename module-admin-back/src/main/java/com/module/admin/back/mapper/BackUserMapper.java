@@ -27,6 +27,11 @@ public interface BackUserMapper extends BaseMapper<BackUser> {
     IPage<BackUserResult> listBackUser(Page page, BackUserQuery query);
 
     /**
+     * 查询用户列表
+     */
+    IPage<BackUserResult> listMerchantUser(Page page, BackUserQuery query);
+
+    /**
      * 根据手机号查询用户
      */
     BackUser selectByAccount(String account);

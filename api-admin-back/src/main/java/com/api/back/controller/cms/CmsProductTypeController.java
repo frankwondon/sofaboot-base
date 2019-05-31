@@ -19,7 +19,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 import springfox.documentation.annotations.ApiIgnore;
 
-@Api(description = "产品类型管理")
+@Api(tags = "产品类型管理")
 @RestController
 @RequestMapping("/cmsadmin/productType")
 public class CmsProductTypeController {
@@ -38,12 +38,12 @@ public class CmsProductTypeController {
 
     @ApiOperation(value = "新增或修改产品类型",notes = "有ID就是修改,新增默认为禁用")
     @ApiImplicitParams({
-            @ApiImplicitParam(name = "id" ,required = true,value = "id主键"),
-            @ApiImplicitParam(name = "name" ,required = true,value = "名称"),
-            @ApiImplicitParam(name = "sort" ,required = true,value = "排序:数字顺序")
+            @ApiImplicitParam(name = "id",type = "query",required = true,value = "id主键"),
+            @ApiImplicitParam(name = "name",type = "query" ,required = true,value = "名称"),
+            @ApiImplicitParam(name = "sort" ,type = "query",required = true,value = "排序:数字顺序")
     })
     @PostMapping("addOrUpdate")
-    public Response addOrUpdate(CmsProductType productType,@ApiIgnore CurrentUser currentUser){
+    public Response addOrUpdate(@ApiIgnore  CmsProductType productType,@ApiIgnore CurrentUser currentUser){
         productTypeService.addOrUpdate(productType,currentUser);
         return Response.success(true);
     }

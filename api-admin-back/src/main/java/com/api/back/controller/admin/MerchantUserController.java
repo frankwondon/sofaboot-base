@@ -2,12 +2,12 @@ package com.api.back.controller.admin;
 
 import com.alipay.sofa.runtime.api.annotation.SofaReference;
 import com.baomidou.mybatisplus.core.metadata.IPage;
-import com.module.admin.back.result.BackUserResult;
-import com.module.admin.back.query.BackUserQuery;
-import com.module.common.bean.CurrentUser;
 import com.module.admin.back.entity.BackUser;
+import com.module.admin.back.query.BackUserQuery;
+import com.module.admin.back.result.BackUserResult;
 import com.module.admin.back.service.BackUserService;
 import com.module.common.Response;
+import com.module.common.bean.CurrentUser;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
 import org.apache.shiro.SecurityUtils;
@@ -17,10 +17,10 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 import springfox.documentation.annotations.ApiIgnore;
 
-@Api(tags = "用户管理")
+@Api(tags = "商户管理")
 @RestController
-@RequestMapping("/backadmin/user")
-public class UserController {
+@RequestMapping("/backadmin/merchantUser")
+public class MerchantUserController {
     @SofaReference
     private BackUserService backUserService;
 
@@ -43,8 +43,8 @@ public class UserController {
             backUser.setCreateBy(user.getId());
             backUserService.updateUser(backUser);
         }else{
-            //后台用户
-            backUser.setUserType(0);
+            //商户
+            backUser.setUserType(1);
             backUser.setCreateBy(user.getId());
             backUserService.insertUser(backUser);
         }

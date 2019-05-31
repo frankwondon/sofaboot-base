@@ -18,7 +18,7 @@ import java.io.File;
 import java.io.IOException;
 import java.time.LocalDate;
 
-@Api("上传接口")
+@Api(tags = "上传接口")
 @RestController
 @RequestMapping("/upload")
 public class UploadController {

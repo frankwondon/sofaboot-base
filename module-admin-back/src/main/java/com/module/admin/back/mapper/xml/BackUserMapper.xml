@@ -28,6 +28,12 @@
     </select>
     <select id="listBackUser" resultType="com.module.admin.back.result.BackUserResult">
         <include refid="userSelect"></include>
+        where u.user_type=0
+    </select>
+
+    <select id="listMerchantUser" resultType="com.module.admin.back.result.BackUserResult">
+        <include refid="userSelect"></include>
+        where u.user_type=1
     </select>
     <select id="findById" resultType="com.module.admin.back.result.BackUserResult">
         <include refid="userSelect"></include>

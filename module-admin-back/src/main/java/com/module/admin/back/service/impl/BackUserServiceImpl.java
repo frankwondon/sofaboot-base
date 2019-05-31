@@ -89,6 +89,12 @@ public class BackUserServiceImpl implements BackUserService {
     }
 
     @Override
+    public IPage<BackUserResult> listMerchantUser(BackUserQuery backUserQuery) {
+        Page page = new Page(backUserQuery.getPage(), backUserQuery.getLimit());
+        return userMapper.listMerchantUser(page, backUserQuery);
+    }
+
+    @Override
     public BackUserResult getUser(Integer uid) {
         return userMapper.findById(uid);
     }
