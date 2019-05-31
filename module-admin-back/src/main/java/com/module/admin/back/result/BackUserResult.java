@@ -1,4 +1,4 @@
-package com.module.admin.back;
+package com.module.admin.back.result;
 
 import lombok.Data;
 

@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.module.admin.cms.mapper.CmsNewsMapper">
+    <select id="listPage" resultType="com.module.admin.cms.entity.CmsNews">
+        select* from cms_news n ORDER BY n.sort
+    </select>
+
+    <update id="del">
+        update cms_news set deleted=1 where id=#{id}
+    </update>
+
+    <update id="disable">
+        update cms_news set locked=1 where id=#{id}
+    </update>
+</mapper>

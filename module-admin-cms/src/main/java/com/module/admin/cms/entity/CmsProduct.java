@@ -1,10 +1,9 @@
 package com.module.admin.cms.entity;
 
+import java.time.LocalDateTime;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
 import lombok.experimental.Accessors;
-
-import java.time.LocalDateTime;
 
 /**
  * <p>
@@ -12,7 +11,7 @@ import java.time.LocalDateTime;
  * </p>
  *
  * @author wangdong
- * @since 2019-05-29
+ * @since 2019-05-30
  */
 @Data
 @EqualsAndHashCode(callSuper = true)
@@ -29,9 +28,14 @@ private static final long serialVersionUID=1L;
     private String imgUrl;
 
     /**
+     * 所属分类ID
+     */
+    private Integer typeId;
+
+    /**
      * 0普通产品 1热门产品
      */
-    private Integer type;
+    private Integer showType;
 
     private String videoUrl;
 
@@ -45,14 +49,14 @@ private static final long serialVersionUID=1L;
      */
     private String descText;
 
+    /**
+     * 排序
+     */
+    private Integer sort;
+
     private Integer locked;
 
     private Integer deleted;
-
-    /**
-     * 乐观锁
-     */
-    private Integer version;
 
 
 }

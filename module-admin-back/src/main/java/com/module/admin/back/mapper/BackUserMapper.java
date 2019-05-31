@@ -3,13 +3,11 @@ package com.module.admin.back.mapper;
 import com.baomidou.mybatisplus.core.mapper.BaseMapper;
 import com.baomidou.mybatisplus.core.metadata.IPage;
 import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
-import com.module.admin.back.BackUserResult;
+import com.module.admin.back.result.BackUserResult;
 import com.module.admin.back.entity.BackUser;
 import com.module.admin.back.query.BackUserQuery;
 import org.apache.ibatis.annotations.Param;
 import org.springframework.stereotype.Repository;
-
-import java.util.List;
 
 /**
  * <p>

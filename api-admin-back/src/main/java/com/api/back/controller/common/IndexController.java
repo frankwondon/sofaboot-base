@@ -1,4 +1,4 @@
-package com.api.back.controller;
+package com.api.back.controller.common;
 import com.alipay.sofa.runtime.api.annotation.SofaReference;
 import com.module.admin.back.entity.BackMenu;
 import com.module.admin.back.service.BackMenuService;

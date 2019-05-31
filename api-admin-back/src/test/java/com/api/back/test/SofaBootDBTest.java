@@ -2,6 +2,7 @@ package com.api.back.test;
 
 import com.alipay.sofa.runtime.api.annotation.SofaReference;
 import com.module.admin.back.entity.BackUser;
+import com.module.admin.back.query.BackUserQuery;
 import com.module.admin.back.service.BackUserService;
 import com.module.common.constant.BackAdminConstant;
 import org.junit.Test;
@@ -16,11 +17,8 @@ public class SofaBootDBTest {
     @SofaReference
     BackUserService backUserService;
     @Test
-    public void sayHello(){
-        BackUser backUser=new BackUser();
-        backUser.setCellPhoneNum("15001200836");
-        backUser.setPassword("123456");
-        backUserService.insertUser(backUser);
+    public void list(){
+        backUserService.listUser(new BackUserQuery());
     }
 
 

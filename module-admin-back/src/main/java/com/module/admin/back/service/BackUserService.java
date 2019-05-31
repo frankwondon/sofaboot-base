@@ -1,11 +1,9 @@
 package com.module.admin.back.service;
 
 import com.baomidou.mybatisplus.core.metadata.IPage;
-import com.module.admin.back.BackUserResult;
+import com.module.admin.back.result.BackUserResult;
 import com.module.admin.back.entity.BackUser;
 import com.module.admin.back.query.BackUserQuery;
-
-import java.util.List;
 
 /**
  * @author wangdong

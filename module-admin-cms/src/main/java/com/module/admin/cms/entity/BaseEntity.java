@@ -13,10 +13,6 @@ import java.time.LocalDateTime;
 public class BaseEntity implements Serializable {
     @TableId(type = IdType.AUTO)
     private Integer id;
-    /**
-     * 乐观锁
-     */
-    private Integer version;
 
     /**
      * 创建人

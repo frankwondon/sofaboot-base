@@ -2,7 +2,7 @@ package com.module.admin.cms.mapper;
 
 import com.baomidou.mybatisplus.core.metadata.IPage;
 import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
-import com.module.admin.cms.entity.CmsProduct;
+import com.module.admin.cms.entity.CmsProductType;
 import com.baomidou.mybatisplus.core.mapper.BaseMapper;
 
 /**
@@ -11,10 +11,13 @@ import com.baomidou.mybatisplus.core.mapper.BaseMapper;
  * </p>
  *
  * @author wangdong
- * @since 2019-05-29
+ * @since 2019-05-30
  */
-public interface CmsProductMapper extends BaseMapper<CmsProduct> {
-        IPage<CmsProduct> listPage(Page page);
+public interface CmsProductTypeMapper extends BaseMapper<CmsProductType> {
+
+        IPage<CmsProductType> listPage(Page page);
+
+        void del(Integer id);
 
         void disable(Integer id);
 }

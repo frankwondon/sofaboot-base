@@ -26,10 +26,10 @@
             u.cell_phone_num = #{account}
         AND u.deleted = 0
     </select>
-    <select id="listBackUser" resultType="com.module.admin.back.BackUserResult">
+    <select id="listBackUser" resultType="com.module.admin.back.result.BackUserResult">
         <include refid="userSelect"></include>
     </select>
-    <select id="findById" resultType="com.module.admin.back.BackUserResult">
+    <select id="findById" resultType="com.module.admin.back.result.BackUserResult">
         <include refid="userSelect"></include>
         where u.id=#{uid}
     </select>

@@ -121,6 +121,7 @@
     <orderEntry type="library" name="Maven: com.github.jsqlparser:jsqlparser:1.2" level="project" />
     <orderEntry type="library" name="Maven: org.mybatis:mybatis:3.5.1" level="project" />
     <orderEntry type="library" name="Maven: org.mybatis:mybatis-spring:2.0.1" level="project" />
+    <orderEntry type="module" module-name="module-admin-cms" />
     <orderEntry type="library" name="Maven: org.apache.shiro:shiro-spring:1.4.1" level="project" />
     <orderEntry type="library" name="Maven: org.apache.shiro:shiro-core:1.4.1" level="project" />
     <orderEntry type="library" name="Maven: org.apache.shiro:shiro-lang:1.4.1" level="project" />

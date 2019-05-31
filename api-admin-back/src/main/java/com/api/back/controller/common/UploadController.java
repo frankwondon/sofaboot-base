@@ -1,4 +1,4 @@
-package com.api.back.controller;
+package com.api.back.controller.common;
 
 import cn.hutool.core.util.IdUtil;
 import cn.hutool.core.util.ReUtil;
@@ -59,12 +59,13 @@ public class UploadController {
             if (!localFile.exists()) {
                 localFile.mkdirs();
             }
-            localFile=new File(dir+ IdUtil.fastSimpleUUID()+"."+sub);
+            String filePath=dir+ IdUtil.fastSimpleUUID()+"."+sub;
+            localFile=new File(filePath);
             if (!localFile.exists()){
                 boolean newFile = localFile.createNewFile();
                 if (newFile){
                     file.transferTo(localFile);
-                    return Response.success(true);
+                    return Response.success(filePath);
                 }
             }
         } catch (IOException e) {

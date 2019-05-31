@@ -2,10 +2,9 @@ package com.module.admin.back.service.impl;
 
 import cn.hutool.core.util.IdUtil;
 import cn.hutool.core.util.StrUtil;
-import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
 import com.baomidou.mybatisplus.core.metadata.IPage;
 import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
-import com.module.admin.back.BackUserResult;
+import com.module.admin.back.result.BackUserResult;
 import com.module.admin.back.entity.BackRole;
 import com.module.admin.back.entity.BackUser;
 import com.module.admin.back.mapper.BackRoleMapper;
@@ -21,7 +20,6 @@ import org.springframework.transaction.annotation.Transactional;
 
 import javax.annotation.Resource;
 import java.time.LocalDateTime;
-import java.util.List;
 
 
 /**

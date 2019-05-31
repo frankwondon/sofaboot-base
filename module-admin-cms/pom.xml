@@ -8,6 +8,7 @@
         <version>1.0.0-SNAPSHOT</version>
     </parent>
     <modelVersion>4.0.0</modelVersion>
+    <version>1.0.0-SNAPSHOT</version>
     <packaging>jar</packaging>
     <artifactId>module-admin-cms</artifactId>
     <dependencies>
@@ -42,6 +43,15 @@
         </dependency>
     </dependencies>
     <build>
+        <resources>
+            <resource>
+                <directory>src/main/java</directory>
+                <includes>
+                    <include>**/*.xml</include>
+                </includes>
+                <filtering>true</filtering>
+            </resource>
+        </resources>
         <plugins>
             <plugin>
                 <artifactId>maven-source-plugin</artifactId>

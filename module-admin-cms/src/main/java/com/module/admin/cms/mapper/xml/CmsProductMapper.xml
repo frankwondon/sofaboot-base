@@ -1,5 +1,17 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.module.admin.cms.mapper.CmsProductMapper">
+    <select id="listPage" resultType="com.module.admin.cms.result.CmsProductResult">
+        SELECT
+            p.*, t.`name` AS type_name
+        FROM
+            cms_product_type t
+        JOIN cms_product p ON p.type_id = t.id
+        ORDER BY
+            t.sort
+    </select>
 
+    <update id="disable">
+        update cms_product set locked=1 where id=#{id}
+    </update>
 </mapper>
