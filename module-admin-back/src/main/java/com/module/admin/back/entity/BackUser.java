@@ -28,10 +28,6 @@ private static final long serialVersionUID=1L;
      */
     private String username;
 
-    /**
-     * 密码
-     */
-    private String password;
 
     /**
      * 盐值 新建或修改时的随机字符串

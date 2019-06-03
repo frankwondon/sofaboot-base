@@ -8,6 +8,7 @@ import org.apache.shiro.authz.AuthorizationInfo;
 import org.apache.shiro.authz.SimpleAuthorizationInfo;
 import org.apache.shiro.realm.AuthorizingRealm;
 import org.apache.shiro.subject.PrincipalCollection;
+import org.apache.shiro.util.ByteSource;
 
 public class LoginRealm extends AuthorizingRealm {
 
@@ -19,12 +20,8 @@ public class LoginRealm extends AuthorizingRealm {
 
     @Override
     protected AuthorizationInfo doGetAuthorizationInfo(PrincipalCollection principalCollection) {
-        BackUser user = (BackUser) principalCollection.getPrimaryPrincipal();
         SimpleAuthorizationInfo simpleAuthorizationInfo = new SimpleAuthorizationInfo();
-        simpleAuthorizationInfo.addRole("admin");
-        simpleAuthorizationInfo.addRole("root");
-        simpleAuthorizationInfo.addStringPermission("1:2:3");
-        simpleAuthorizationInfo.addStringPermission("1:2:4");
+        //todo 实现权限控制  在这里添加权限  在拦截器中实现验证功能
         return simpleAuthorizationInfo;
     }
 
@@ -46,7 +43,7 @@ public class LoginRealm extends AuthorizingRealm {
         }else{
             throw new AuthenticationException("用户不存在");
         }
-//        return new SimpleAuthenticationInfo(admin, admin.getEncryptPwd(), ByteSource.Util.bytes(admin.getSalt()), this.getName());
-        return new SimpleAuthenticationInfo(currentUser, user.getPassword(), this.getName());
+        //进行认证
+        return new SimpleAuthenticationInfo(currentUser, user.getEncryptPwd(), ByteSource.Util.bytes(user.getSalt()), this.getName());
     }
 }

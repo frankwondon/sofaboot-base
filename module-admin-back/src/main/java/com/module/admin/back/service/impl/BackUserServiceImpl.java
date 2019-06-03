@@ -56,9 +56,8 @@ public class BackUserServiceImpl implements BackUserService {
             backUser.setMerchantId(BackAdminConstant.NORMAL_ID);
         }
         backUser.setCreateTime(LocalDateTime.now());
-        SaltPwdBean enpwd = ShiroPasswordUtil.enpwd(defaultPwd);
+        SaltPwdBean enpwd = ShiroPasswordUtil.encpwd(defaultPwd);
         backUser.setEncryptPwd(enpwd.getSaltPwd());
-        backUser.setPassword(defaultPwd);
         backUser.setSalt(enpwd.getSalt());
         userMapper.insert(backUser);
     }
@@ -107,7 +106,8 @@ public class BackUserServiceImpl implements BackUserService {
     @Override
     public void updatePwd(Integer uid, String pwd,String oldPwd) {
         BackUser backUser = userMapper.selectById(uid);
-        if (!backUser.getPassword().equals(oldPwd)){
+        ShiroPasswordUtil.encpwd(oldPwd,backUser.getSalt());
+        if (!backUser.getEncryptPwd().equals(ShiroPasswordUtil.encpwd(oldPwd,backUser.getSalt()))){
             throw new DBOperationException(ResponseCode.C_500005);
         }
         updatePwd(uid,pwd);
@@ -120,11 +120,10 @@ public class BackUserServiceImpl implements BackUserService {
 
     //需要更新密码
     private void updatePwd(Integer uid,String pwd){
-        SaltPwdBean enpwd = ShiroPasswordUtil.enpwd(pwd);
+        SaltPwdBean enpwd = ShiroPasswordUtil.encpwd(pwd);
         BackUser user=new BackUser();
         user.setId(uid);
         user.setEncryptPwd(enpwd.getSaltPwd());
-        user.setPassword(pwd);
         user.setSalt(enpwd.getSalt());
         userMapper.updatePwd(user);
     }

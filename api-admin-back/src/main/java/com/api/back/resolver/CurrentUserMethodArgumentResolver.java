@@ -23,7 +23,6 @@ public class CurrentUserMethodArgumentResolver implements HandlerMethodArgumentR
 
     @Override
     public Object resolveArgument(MethodParameter methodParameter, ModelAndViewContainer modelAndViewContainer, NativeWebRequest nativeWebRequest, WebDataBinderFactory webDataBinderFactory) throws Exception {
-        Object principal = SecurityUtils.getSubject().getPrincipal();
         return  SecurityUtils.getSubject().getPrincipal();
     }
 }

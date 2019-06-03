@@ -9,7 +9,7 @@
         <artifactId>sofaboot-base</artifactId>
         <version>1.0.0-SNAPSHOT</version>
     </parent>
-    <artifactId>api-admin-back</artifactId>
+    <artifactId>api-cms</artifactId>
     <version>1.0.0-SNAPSHOT</version>
     <properties>
         <version.swagger>2.9.2</version.swagger>
@@ -19,18 +19,17 @@
             <groupId>com.alipay.sofa</groupId>
             <artifactId>healthcheck-sofa-boot-starter</artifactId>
         </dependency>
+
         <dependency>
             <groupId>org.springframework.boot</groupId>
             <artifactId>spring-boot-starter-web</artifactId>
         </dependency>
+
         <dependency>
             <groupId>com.alipay.sofa</groupId>
             <artifactId>test-sofa-boot-starter</artifactId>
         </dependency>
-        <dependency>
-            <groupId>org.springframework.boot</groupId>
-            <artifactId>spring-boot-starter-thymeleaf</artifactId>
-        </dependency>
+
         <dependency>
             <groupId>org.springframework.boot</groupId>
             <artifactId>spring-boot-devtools</artifactId>
@@ -46,23 +45,19 @@
                 </exclusion>
             </exclusions>
         </dependency>
+
         <dependency>
             <groupId>sofaboot-module</groupId>
             <artifactId>module-admin-back</artifactId>
             <version>1.0.0-SNAPSHOT</version>
         </dependency>
+
         <dependency>
             <groupId>sofaboot-module</groupId>
             <artifactId>module-admin-cms</artifactId>
             <version>1.0.0-SNAPSHOT</version>
         </dependency>
 
-        <!-- shiro config -->
-        <dependency>
-            <groupId>org.apache.shiro</groupId>
-            <artifactId>shiro-spring</artifactId>
-            <version>1.4.1</version>
-        </dependency>
         <dependency>
             <groupId>com.google.guava</groupId>
             <artifactId>guava</artifactId>
@@ -86,7 +81,7 @@
                 <artifactId>spring-boot-maven-plugin</artifactId>
                 <configuration>
                     <mainClass>
-                        com.api.back.Application
+                        com.api.cms.Application
                     </mainClass>
                     <!--热加载必须的-->
                     <fork>true</fork>

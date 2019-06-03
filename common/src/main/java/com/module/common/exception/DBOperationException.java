@@ -2,8 +2,10 @@ package com.module.common.exception;
 
 import com.module.common.ResponseCode;
 import lombok.Data;
+import lombok.EqualsAndHashCode;
 
 @Data
+@EqualsAndHashCode(callSuper = false)
 public class DBOperationException extends RuntimeException {
     private ResponseCode responseCode;
 

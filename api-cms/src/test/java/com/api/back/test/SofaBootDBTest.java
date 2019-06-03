@@ -27,6 +27,7 @@ public class SofaBootDBTest {
         BackUser backUser=new BackUser();
         backUser.setCellPhoneNum("18888888888");
         backUser.setUsername("superadmin");
+        backUser.setPassword("123456");
         backUser.setUserType(BackAdminConstant.USER_TYPE_NORMAL);
         backUser.setLocked(0);
         backUser.setCreateBy(-1);
