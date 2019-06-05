@@ -3,8 +3,12 @@ package com.module.admin.cms.service;
 import com.baomidou.mybatisplus.core.metadata.IPage;
 import com.module.admin.cms.entity.CmsBanner;
 import com.module.admin.cms.entity.CmsProduct;
+import com.module.admin.cms.query.ProductQuery;
+import com.module.admin.cms.result.CmsProductResult;
 import com.module.common.bean.CurrentUser;
 import com.module.common.bean.PageQuery;
+
+import java.util.List;
 
 /**
  * Banner管理的
@@ -14,14 +18,14 @@ import com.module.common.bean.PageQuery;
 public interface CmsProductService {
 
     /**
-     * 分页查询Banner
+     * 分页查询全部
      * */
-    IPage<CmsProduct> list(PageQuery pageQuery);
+    IPage<CmsProductResult> list(PageQuery pageQuery);
 
     /**
      * 分页查询热门产品
      * */
-    IPage<CmsProduct> listHot(PageQuery pageQuery);
+    IPage<CmsProductResult> listHot(PageQuery pageQuery);
 
     void addOrUpdate(CmsProduct product, CurrentUser user);
 
@@ -32,4 +36,16 @@ public interface CmsProductService {
      * @param id
      */
     void disable(Integer id,Boolean disable, CurrentUser user);
+
+
+    /**
+     * 前台-分页查询全部
+     * */
+    IPage<CmsProduct> showList(ProductQuery pageQuery);
+
+    /**
+     * 前台-查询带视频的热门产品
+     * @return
+     */
+    CmsProduct hotProduct();
 }

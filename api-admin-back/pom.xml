@@ -13,6 +13,7 @@
     <version>1.0.0-SNAPSHOT</version>
     <properties>
         <version.swagger>2.9.2</version.swagger>
+        <docker.image.prefix>mistra</docker.image.prefix>
     </properties>
     <dependencies>
         <dependency>
@@ -92,6 +93,20 @@
                     <fork>true</fork>
                 </configuration>
             </plugin>
+
+            <plugin>
+                <groupId>com.spotify</groupId>
+                <artifactId>dockerfile-maven-plugin</artifactId>
+                <version>1.4.0</version>
+                <configuration>
+                    <repository>${docker.image.prefix}/${project.artifactId}</repository>
+                        <buildArgs>
+                            <JAR_FILE>target/${project.build.finalName}.jar</JAR_FILE>
+                        </buildArgs>
+                </configuration>
+            </plugin>
+
+
         </plugins>
     </build>
 </project>

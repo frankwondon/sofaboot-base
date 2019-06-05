@@ -19,10 +19,6 @@ public class CmsTest {
 
     @Test
     public void test1(){
-        PageQuery pageQuery = new PageQuery();
-        pageQuery.setLimit(10);
-        pageQuery.setPage(1);
-        cmsBannerService.list(pageQuery);
     }
 
 

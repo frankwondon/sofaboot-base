@@ -9,6 +9,10 @@ import com.module.common.Response;
 import com.module.common.ResponseCode;
 import com.module.common.bean.CurrentUser;
 import com.module.common.util.ShiroPasswordUtil;
+import io.swagger.annotations.Api;
+import io.swagger.annotations.ApiImplicitParam;
+import io.swagger.annotations.ApiImplicitParams;
+import io.swagger.annotations.ApiOperation;
 import org.apache.shiro.SecurityUtils;
 import org.apache.shiro.authc.AuthenticationException;
 import org.apache.shiro.authc.UsernamePasswordToken;
@@ -23,7 +27,7 @@ import springfox.documentation.annotations.ApiIgnore;
 import javax.servlet.http.HttpServletRequest;
 import java.util.List;
 
-@ApiIgnore
+@Api(tags = "三大后台公共接口")
 @Controller
 public class IndexController {
     @SofaReference
@@ -33,6 +37,11 @@ public class IndexController {
 
     @PostMapping("/login")
     @ResponseBody
+    @ApiOperation("登陆接口")
+    @ApiImplicitParams({
+            @ApiImplicitParam(name = "account",paramType = "query" ,required = true,value = "账号"),
+            @ApiImplicitParam(name = "password",paramType = "query" ,required = true,value = "密码")
+    })
     public Response<Boolean> dologin(@RequestParam String account, @RequestParam String password) {
         Subject subject = SecurityUtils.getSubject();
         BackUser byAccount = backUserService.getByAccount(account);

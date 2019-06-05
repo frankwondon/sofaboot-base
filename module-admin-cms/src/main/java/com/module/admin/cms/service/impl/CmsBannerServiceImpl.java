@@ -1,8 +1,10 @@
 package com.module.admin.cms.service.impl;
 
+import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
 import com.baomidou.mybatisplus.core.metadata.IPage;
 import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
 import com.module.admin.cms.entity.CmsBanner;
+import com.module.admin.cms.entity.CmsProduct;
 import com.module.admin.cms.mapper.CmsBannerMapper;
 import com.module.admin.cms.service.CmsBannerService;
 import com.module.common.bean.CurrentUser;
@@ -10,6 +12,7 @@ import com.module.common.bean.PageQuery;
 
 import javax.annotation.Resource;
 import java.time.LocalDateTime;
+import java.util.List;
 
 public class CmsBannerServiceImpl implements CmsBannerService {
 
@@ -21,6 +24,18 @@ public class CmsBannerServiceImpl implements CmsBannerService {
         Page page = new Page(pageQuery.getPage(), pageQuery.getLimit());
         return bannerMapper.listPage(page);
     }
+
+    @Override
+    public IPage<CmsBanner> showList(PageQuery pageQuery) {
+        QueryWrapper queryWrapper=new QueryWrapper();
+        queryWrapper.eq("deleted",0);
+        queryWrapper.eq("locked",0);
+        queryWrapper.orderByAsc("sort");
+        Page<CmsBanner> page=new Page(pageQuery.getPage(),pageQuery.getLimit());
+        return bannerMapper.selectPage(page,queryWrapper);
+    }
+
+
 
     @Override
     public void addOrUpdate(CmsBanner banner, CurrentUser user) {
@@ -48,7 +63,6 @@ public class CmsBannerServiceImpl implements CmsBannerService {
             bannerMapper.disable(id,1);
         }
     }
-
 
 
 }

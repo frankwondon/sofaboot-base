@@ -19,7 +19,7 @@ import springfox.documentation.annotations.ApiIgnore;
 
 @Api(tags = "资讯管理")
 @RestController
-@RequestMapping("/cmsadmin/news")
+@RequestMapping("/cmsadmin/news/index")
 public class CmsNewsController {
     @SofaReference
     private CmsNewsService cmsNewsService;

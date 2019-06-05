@@ -3,6 +3,8 @@ package com.module.admin.cms.service;
 import com.baomidou.mybatisplus.core.metadata.IPage;
 import com.module.admin.cms.entity.CmsProduct;
 import com.module.admin.cms.entity.CmsProductType;
+import com.module.admin.cms.query.ProductQuery;
+import com.module.admin.cms.result.CmsProductTypeResult;
 import com.module.common.bean.CurrentUser;
 import com.module.common.bean.PageQuery;
 
@@ -35,4 +37,11 @@ public interface CmsProductTypeService {
      * @param id
      */
     void disable(Integer id, Boolean disable, CurrentUser user);
+
+    /**
+     * 前台-列表
+     * @param query 返回tab1的结果集
+     * @return
+     */
+    List<CmsProductTypeResult> showList(ProductQuery query);
 }

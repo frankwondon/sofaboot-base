@@ -30,4 +30,10 @@ public interface CmsNewsService {
      * @param id
      */
     void disable(Integer id, Boolean disable, CurrentUser user);
+
+
+    /**
+     * 前台展示新闻列表
+     * */
+    IPage<CmsNews> showList(PageQuery pageQuery);
 }

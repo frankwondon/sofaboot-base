@@ -26,4 +26,12 @@
     <update id="disable">
         update cms_product set locked=#{disable} where id=#{id}
     </update>
+
+    <select id="hotProduct" resultType="com.module.admin.cms.entity.CmsProduct">
+        select * from cms_product p
+        where p.deleted=0
+        and p.locked=0
+        and show_type=1
+        ORDER BY p.sort LIMIT 1
+    </select>
 </mapper>

@@ -4,7 +4,10 @@ import com.baomidou.mybatisplus.core.metadata.IPage;
 import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
 import com.module.admin.cms.entity.CmsProductType;
 import com.baomidou.mybatisplus.core.mapper.BaseMapper;
+import com.module.admin.cms.result.CmsProductTypeResult;
 import org.apache.ibatis.annotations.Param;
+
+import java.util.List;
 
 /**
  * <p>
@@ -21,4 +24,6 @@ public interface CmsProductTypeMapper extends BaseMapper<CmsProductType> {
         void del(Integer id);
 
         void disable(@Param("id") Integer id, @Param("disable") Integer disable);
+
+        List<CmsProductTypeResult> showList();
 }

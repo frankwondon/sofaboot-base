@@ -8,6 +8,8 @@ import com.module.admin.back.entity.BackMenu;
 import com.module.admin.back.service.BackMenuService;
 import com.module.common.Response;
 import io.swagger.annotations.Api;
+import io.swagger.annotations.ApiImplicitParam;
+import io.swagger.annotations.ApiImplicitParams;
 import io.swagger.annotations.ApiOperation;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -25,12 +27,15 @@ public class MenuController {
     private BackMenuService backMenuService;
 
     @ApiOperation(value="获取站点下的菜单")
+    @ApiImplicitParams({
+            @ApiImplicitParam(name = "site",paramType = "query" ,required = true,value = "站点码"),
+    })
     @GetMapping("loadMenu")
-    public Response<List<BackMenu>> loadMenu(CurrentUser user,String site) {
+    public Response<List<BackMenu>> loadMenu(@ApiIgnore CurrentUser user,String site) {
         List<BackMenu> backRoles = backMenuService.loadMenu(user,site);
         return Response.success(backRoles);
     }
-    @ApiOperation(value="获取站点")
+    @ApiOperation(value="获取拥有站点")
     @GetMapping("loadSite")
     public Response<List<BackMenu>> loadSite(CurrentUser user) {
         List<BackMenu> backRoles = backMenuService.loadSite(user);

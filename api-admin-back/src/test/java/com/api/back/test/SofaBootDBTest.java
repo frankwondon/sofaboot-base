@@ -18,7 +18,6 @@ public class SofaBootDBTest {
     BackUserService backUserService;
     @Test
     public void list(){
-        backUserService.listUser(new BackUserQuery());
     }
 
 

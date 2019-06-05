@@ -11,5 +11,6 @@ spring:
 
 upload:
   file:
-    img: D:/upload/img
-    video: D:/upload/video
+    base: D:/upload
+    img: /img
+    video: /video

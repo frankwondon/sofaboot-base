@@ -24,3 +24,6 @@ mybatis-plus:
 
 logging:
   config: classpath:config/logback.xml
+
+server:
+  port: 8090

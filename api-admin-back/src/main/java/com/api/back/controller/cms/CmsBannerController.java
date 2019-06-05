@@ -19,7 +19,7 @@ import springfox.documentation.annotations.ApiIgnore;
 
 @Api(tags = "Banner管理")
 @RestController
-@RequestMapping("/cmsadmin/banner")
+@RequestMapping("/cmsadmin/main/banner")
 public class CmsBannerController {
     @SofaReference
     private CmsBannerService cmsBannerService;

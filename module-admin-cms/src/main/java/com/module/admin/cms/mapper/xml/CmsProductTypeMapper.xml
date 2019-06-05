@@ -12,4 +12,8 @@
     <update id="disable">
         update cms_product_type t  set locked=#{disable} and t.id=#{id}
     </update>
+
+    <select id="showList" resultType="com.module.admin.cms.result.CmsProductTypeResult">
+        SELECT * from cms_product_type t where t.deleted=0 ORDER BY t.sort
+    </select>
 </mapper>

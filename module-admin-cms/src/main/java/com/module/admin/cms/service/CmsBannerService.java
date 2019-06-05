@@ -5,6 +5,8 @@ import com.module.admin.cms.entity.CmsBanner;
 import com.module.common.bean.CurrentUser;
 import com.module.common.bean.PageQuery;
 
+import java.util.List;
+
 /**
  * Banner管理的
  *@author wangdong
@@ -17,6 +19,13 @@ public interface CmsBannerService {
      * */
     IPage<CmsBanner> list(PageQuery pageQuery);
 
+
+    /**
+     * 前台-获取可用的banner列表
+     * @return
+     */
+    IPage<CmsBanner> showList(PageQuery pageQuery);
+
     void addOrUpdate(CmsBanner banner, CurrentUser user);
 
     void del(Integer id);
@@ -26,4 +35,6 @@ public interface CmsBannerService {
      * @param id
      */
     void disable(Integer id,Boolean disable,CurrentUser user);
+
+
 }

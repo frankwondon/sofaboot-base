@@ -9,4 +9,7 @@ import java.io.Serializable;
  *@date 2019/5/20
  */
 public class BackUserQuery extends PageQuery implements Serializable {
+    public BackUserQuery(int page, int limit) {
+        super(page, limit);
+    }
 }

@@ -4,6 +4,7 @@ import com.alipay.sofa.runtime.api.annotation.SofaReference;
 import com.baomidou.mybatisplus.core.metadata.IPage;
 import com.module.admin.cms.entity.CmsProduct;
 import com.module.admin.cms.entity.CmsProductType;
+import com.module.admin.cms.result.CmsProductResult;
 import com.module.admin.cms.service.CmsProductService;
 import com.module.admin.cms.service.CmsProductTypeService;
 import com.module.common.Response;
@@ -23,7 +24,7 @@ import java.util.List;
 
 @Api(tags = "重点产品管理")
 @RestController
-@RequestMapping("/cmsadmin/hotProduct")
+@RequestMapping("/cmsadmin/main/hotProduct")
 public class CmsHotProductController {
 
     @SofaReference
@@ -38,7 +39,7 @@ public class CmsHotProductController {
             @ApiImplicitParam(name = "page" ,paramType = "query",required = true,value = "当前页"),
     })
     @GetMapping("/list")
-    public Response<IPage<CmsProduct>> list(PageQuery pageQuery){
+    public Response<IPage<CmsProductResult>> list(PageQuery pageQuery){
         return Response.success(productService.listHot(pageQuery));
     }
 

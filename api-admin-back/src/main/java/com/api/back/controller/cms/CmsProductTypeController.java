@@ -21,7 +21,7 @@ import springfox.documentation.annotations.ApiIgnore;
 
 @Api(tags = "产品类型管理")
 @RestController
-@RequestMapping("/cmsadmin/productType")
+@RequestMapping("/cmsadmin/product/productType")
 public class CmsProductTypeController {
     @SofaReference
     private CmsProductTypeService productTypeService;

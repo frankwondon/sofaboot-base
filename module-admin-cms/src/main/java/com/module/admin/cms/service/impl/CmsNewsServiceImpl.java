@@ -1,8 +1,10 @@
 package com.module.admin.cms.service.impl;
 
+import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
 import com.baomidou.mybatisplus.core.metadata.IPage;
 import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
 import com.module.admin.cms.entity.CmsNews;
+import com.module.admin.cms.entity.CmsProduct;
 import com.module.admin.cms.mapper.CmsNewsMapper;
 import com.module.admin.cms.service.CmsNewsService;
 import com.module.common.bean.CurrentUser;
@@ -48,5 +50,15 @@ public class CmsNewsServiceImpl implements CmsNewsService {
             newsMapper.disable(id,1);
         }
 
+    }
+
+    @Override
+    public IPage<CmsNews> showList(PageQuery pageQuery) {
+        QueryWrapper queryWrapper=new QueryWrapper();
+        queryWrapper.eq("deleted",0);
+        queryWrapper.eq("locked",0);
+        queryWrapper.orderByAsc("sort");
+        Page<CmsNews> page=new Page(pageQuery.getPage(),pageQuery.getLimit());
+        return newsMapper.selectPage(page,queryWrapper);
     }
 }

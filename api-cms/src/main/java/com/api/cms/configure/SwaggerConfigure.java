@@ -16,36 +16,22 @@ import springfox.documentation.swagger2.annotations.EnableSwagger2;
 @EnableSwagger2
 @Profile("dev")
 public class SwaggerConfigure {
-    @Bean(value = "backAdmin")
+    @Bean(value = "cms")
     public Docket backAdmin() {
         return new Docket(DocumentationType.SWAGGER_2)
                 .apiInfo(new ApiInfoBuilder()
-                        .title("后台管理")
-                        .description("后台管理")
+                        .title("网站")
+                        .description("网站接口")
                         .version("1.0")
                         .build())
-                .groupName("后台管理")
+                .groupName("网站")
                 .select()
-                .apis(RequestHandlerSelectors.basePackage("com.api.back.controller.admin"))
+                .apis(RequestHandlerSelectors.basePackage("com.api.cms.controller"))
                 .paths(PathSelectors.any())
                 .build();
     }
 
-    @Bean(value = "cmsAdmin")
-    @Order(value = 1)
-    public Docket cmsAdmin() {
-        return new Docket(DocumentationType.SWAGGER_2)
-                .apiInfo( new ApiInfoBuilder()
-                        .title("网站管理")
-                        .description("网站管理")
-                        .version("1.0")
-                        .build())
-                .groupName("网站管理")
-                .select()
-                .apis(RequestHandlerSelectors.basePackage("com.api.back.controller.cms"))
-                .paths(PathSelectors.any())
-                .build();
-    }
+
 
 
 

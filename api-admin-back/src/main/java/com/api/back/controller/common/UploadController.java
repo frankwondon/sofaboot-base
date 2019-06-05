@@ -22,6 +22,8 @@ import java.time.LocalDate;
 @RestController
 @RequestMapping("/upload")
 public class UploadController {
+    @Value("${upload.file.base}")
+    private String base;
     @Value("${upload.file.img}")
     private String uploadImgFile;
     @Value("${upload.file.video}")
@@ -52,20 +54,25 @@ public class UploadController {
     }
 
     private Response getResponse(MultipartFile file, String sub,String path) {
-        String s = StrUtil.removeAll(LocalDate.now().toString(), "-");
-        String dir=path + File.separator +s+File.separator;
+        //按时间生成目录
+        String date = StrUtil.removeAll(LocalDate.now().toString(), "-");
+        String dir=base+path + File.separator +date+File.separator;
         File localFile = new File(dir);
         try {
             if (!localFile.exists()) {
                 localFile.mkdirs();
             }
-            String filePath=dir+ IdUtil.fastSimpleUUID()+"."+sub;
+            //重新生成文件名
+            String fileName= IdUtil.fastSimpleUUID()+"."+sub;
+            //访问网站的路径
+            String returnPath=path+"/"+date+"/"+fileName;
+            String filePath=dir+ fileName;
             localFile=new File(filePath);
             if (!localFile.exists()){
                 boolean newFile = localFile.createNewFile();
                 if (newFile){
                     file.transferTo(localFile);
-                    return Response.success(filePath);
+                    return Response.success(returnPath);
                 }
             }
         } catch (IOException e) {

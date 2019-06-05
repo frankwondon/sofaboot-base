@@ -1,6 +1,5 @@
 package com.api.back.configure;
 
-import org.springframework.boot.autoconfigure.condition.ConditionalOnProperty;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.context.annotation.Profile;
@@ -43,6 +42,23 @@ public class SwaggerConfigure {
                 .groupName("网站管理")
                 .select()
                 .apis(RequestHandlerSelectors.basePackage("com.api.back.controller.cms"))
+                .paths(PathSelectors.any())
+                .build();
+    }
+
+
+    @Bean(value = "common")
+    @Order(value = 1)
+    public Docket common() {
+        return new Docket(DocumentationType.SWAGGER_2)
+                .apiInfo( new ApiInfoBuilder()
+                        .title("公共接口")
+                        .description("公共接口")
+                        .version("1.0")
+                        .build())
+                .groupName("公共接口")
+                .select()
+                .apis(RequestHandlerSelectors.basePackage("com.api.back.controller.common"))
                 .paths(PathSelectors.any())
                 .build();
     }
