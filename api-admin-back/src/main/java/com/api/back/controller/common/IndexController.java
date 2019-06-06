@@ -1,9 +1,12 @@
 package com.api.back.controller.common;
 
+import com.alibaba.fastjson.JSONObject;
 import com.alipay.sofa.runtime.api.annotation.SofaReference;
 import com.module.admin.back.entity.BackMenu;
 import com.module.admin.back.entity.BackUser;
+import com.module.admin.back.result.BackUserResult;
 import com.module.admin.back.service.BackMenuService;
+import com.module.admin.back.service.BackRoleService;
 import com.module.admin.back.service.BackUserService;
 import com.module.common.Response;
 import com.module.common.ResponseCode;
@@ -34,6 +37,9 @@ public class IndexController {
     private BackMenuService backMenuService;
     @SofaReference
     private BackUserService backUserService;
+    @SofaReference
+    private BackRoleService backRoleService;
+
 
     @PostMapping("/login")
     @ResponseBody
@@ -44,13 +50,20 @@ public class IndexController {
     })
     public Response<Boolean> dologin(@RequestParam String account, @RequestParam String password) {
         Subject subject = SecurityUtils.getSubject();
-        BackUser byAccount = backUserService.getByAccount(account);
-        if (byAccount == null) {
+        BackUserResult userResult = backUserService.getByAccount(account);
+        if (userResult == null) {
             return Response.fail(ResponseCode.C_302);
         }
-        UsernamePasswordToken token = new UsernamePasswordToken(account, ShiroPasswordUtil.encpwd(password,byAccount.getSalt()));
+        UsernamePasswordToken token = new UsernamePasswordToken(account, ShiroPasswordUtil.encpwd(password,userResult.getSalt()));
         subject.login(token);
-        return Response.success(true);
+        return Response.success(buildUserInfo(userResult));
+    }
+
+    private JSONObject buildUserInfo(BackUserResult byAccount){
+        JSONObject jsonObject=new JSONObject();
+        jsonObject.put("",byAccount.getUsername());
+        jsonObject.put("",byAccount.getRoleName());
+        return jsonObject;
     }
 
     @GetMapping("/loginOut")

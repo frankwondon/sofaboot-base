@@ -36,9 +36,9 @@ public class BackUserServiceImpl implements BackUserService {
     private static final String defaultPwd="123456";
 
     @Override
-    public BackUser getByAccount(String account) {
+    public BackUserResult getByAccount(String account) {
         if (StrUtil.isNotBlank(account)) {
-            BackUser backUser = userMapper.selectByAccount(account);
+            BackUserResult backUser = userMapper.selectByAccount(account);
             return backUser;
         }
         return null;

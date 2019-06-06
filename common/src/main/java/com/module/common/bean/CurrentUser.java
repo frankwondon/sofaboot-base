@@ -29,6 +29,8 @@ public class CurrentUser implements Serializable {
     /*用户角色*/
     private Integer roleId;
 
+    private String  roleName;
+
 
 
 

@@ -17,7 +17,7 @@ public interface BackUserService {
      * @param account 账号
      * @return
      */
-    BackUser getByAccount(String account);
+    BackUserResult getByAccount(String account);
 
     /**
      * 新增用户

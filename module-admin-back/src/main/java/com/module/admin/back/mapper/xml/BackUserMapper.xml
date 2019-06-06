@@ -11,17 +11,31 @@
         u.user_type ,
         r.title role,
         r.id role_id,
+        r.title role_name,
         u.merchant_id,
         u.remark_1
         from back_user u
         join back_role r on r.id=u.role_id
     </sql>
-
-    <select id="selectByAccount" resultType="com.module.admin.back.entity.BackUser">
-        SELECT
-            *
-        FROM
-            back_user u
+    <sql id="userSelectAll">
+        select
+        u.id,
+        u.username,
+        u.locked,
+        u.cell_phone_num,
+        u.user_type ,
+        u.encrypt_pwd,
+        u.salt,
+        r.title role,
+        r.id role_id,
+        r.title role_name,
+        u.merchant_id,
+        u.remark_1
+        from back_user u
+        join back_role r on r.id=u.role_id
+    </sql>
+    <select id="selectByAccount" resultType="com.module.admin.back.result.BackUserResult">
+        <include refid="userSelectAll"></include>
         WHERE
             u.cell_phone_num = #{account}
         AND u.deleted = 0

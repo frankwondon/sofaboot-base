@@ -1,6 +1,7 @@
 package com.api.back.shiro;
 
 import com.module.admin.back.entity.BackUser;
+import com.module.admin.back.result.BackUserResult;
 import com.module.admin.back.service.BackUserService;
 import com.module.common.bean.CurrentUser;
 import org.apache.shiro.authc.*;
@@ -29,7 +30,7 @@ public class LoginRealm extends AuthorizingRealm {
     protected AuthenticationInfo doGetAuthenticationInfo(AuthenticationToken authenticationToken) throws AuthenticationException {
         UsernamePasswordToken token= (UsernamePasswordToken) authenticationToken;
         String username = token.getUsername();
-        BackUser user = backUserService.getByAccount(username);
+        BackUserResult user = backUserService.getByAccount(username);
         CurrentUser currentUser=new CurrentUser();
         if (user!=null){
             if (user.getLocked()==1){
@@ -40,6 +41,7 @@ public class LoginRealm extends AuthorizingRealm {
             currentUser.setId(user.getId());
             currentUser.setCellPhoneNum(user.getCellPhoneNum());
             currentUser.setUserType(user.getUserType());
+            currentUser.setRoleName(user.getRoleName());
         }else{
             throw new AuthenticationException("用户不存在");
         }

@@ -34,7 +34,7 @@ public interface BackUserMapper extends BaseMapper<BackUser> {
     /**
      * 根据手机号查询用户
      */
-    BackUser selectByAccount(String account);
+    BackUserResult selectByAccount(String account);
 
     /**
      * 分配用户角色
