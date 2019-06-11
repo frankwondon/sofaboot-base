@@ -28,28 +28,19 @@ public class MenuController {
 
     @ApiOperation(value="获取站点下的菜单")
     @ApiImplicitParams({
-            @ApiImplicitParam(name = "site",paramType = "query" ,required = true,value = "站点码"),
+            @ApiImplicitParam(name = "site",paramType = "query" ,required = true,value = "站点码/cmsadmin类似这种格式"),
     })
     @GetMapping("loadMenu")
     public Response<List<BackMenu>> loadMenu(@ApiIgnore CurrentUser user,String site) {
         List<BackMenu> backRoles = backMenuService.loadMenu(user,site);
         return Response.success(backRoles);
     }
-    @ApiOperation(value="获取用户拥有的站点")
 
+    @ApiOperation(value="获取用户拥有的站点")
     @GetMapping("loadSite")
     public Response<List<BackMenu>> loadSite(CurrentUser user) {
         List<BackMenu> backRoles = backMenuService.loadSite(user);
         return Response.success(backRoles);
-    }
-
-    @ApiOperation(value="获取用户拥有的菜单")
-    @ApiImplicitParams({
-            @ApiImplicitParam(name = "site",paramType = "query" ,required = true,value = "站点码 /cmsadmin类似这种格式"),
-    })
-    @GetMapping("listUserMenu")
-    public Response<List<BackMenu>> listUserMenu(@ApiIgnore CurrentUser user,String site) {
-        return Response.success(backMenuService.loadMenu(user, site));
     }
 
 
