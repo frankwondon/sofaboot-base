@@ -36,7 +36,6 @@ public class CmsNewsController {
             @ApiImplicitParam(name = "id" ,paramType = "query",value = "有ID就是修改"),
             @ApiImplicitParam(name = "name",paramType = "query" ,required = true,value = "产品名称"),
             @ApiImplicitParam(name = "imgUrl" ,paramType = "query",required = true,value = "图片地址"),
-            @ApiImplicitParam(name = "descTitle",paramType = "query" ,required = true,value = "标题"),
             @ApiImplicitParam(name = "descText",paramType = "query" ,required = true,value = "详细描述"),
             @ApiImplicitParam(name = "sort" ,paramType = "query",required = true,value = "顺序"),
             @ApiImplicitParam(name = "locked",paramType = "query" ,value = "0启用,1禁用 默认禁用"),

@@ -2,7 +2,7 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.module.admin.cms.mapper.CmsProductTypeMapper">
     <select id="listPage" resultType="com.module.admin.cms.entity.CmsProductType">
-        select * from cms_product_type t where  t.deleted=0 ORDER BY t.sort
+        select * from cms_product_type t where  t.deleted=0  and t.name like CONCAT('%',#{keyWord},'%') ORDER BY t.sort
     </select>
 
     <update id="del">

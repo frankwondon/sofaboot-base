@@ -16,9 +16,9 @@ import org.apache.ibatis.annotations.Param;
  * @since 2019-05-29
  */
 public interface CmsProductMapper extends BaseMapper<CmsProduct> {
-        IPage<CmsProductResult> listPage(Page page);
+        IPage<CmsProductResult> listPage(Page page,@Param("keyWord") String keyWord);
 
-        IPage<CmsProductResult> listHotPage(Page page);
+        IPage<CmsProductResult> listHotPage(Page page,@Param("keyWord") String keyWord);
 
         void disable(@Param("id") Integer id,@Param("disable") Integer disable);
 

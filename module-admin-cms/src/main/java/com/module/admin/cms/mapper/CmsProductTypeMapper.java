@@ -19,7 +19,7 @@ import java.util.List;
  */
 public interface CmsProductTypeMapper extends BaseMapper<CmsProductType> {
 
-        IPage<CmsProductType> listPage(Page page);
+        IPage<CmsProductType> listPage(Page page,@Param("keyWord") String keyWord);
 
         void del(Integer id);
 

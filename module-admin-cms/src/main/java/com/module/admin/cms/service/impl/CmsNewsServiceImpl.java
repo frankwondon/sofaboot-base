@@ -21,7 +21,7 @@ public class CmsNewsServiceImpl implements CmsNewsService {
     @Override
     public IPage<CmsNews> list(PageQuery pageQuery) {
         Page page = new Page(pageQuery.getPage(), pageQuery.getLimit());
-        return newsMapper.listPage(page);
+        return newsMapper.listPage(page,pageQuery.getKeyWord());
     }
 
     @Override
@@ -31,6 +31,8 @@ public class CmsNewsServiceImpl implements CmsNewsService {
             news.setUpdateTime(LocalDateTime.now());
             newsMapper.updateById(news);
         } else {
+            //默认正常
+            news.setDeleted(0);
             news.setCreateBy(user.getId());
             news.setCreateTime(LocalDateTime.now());
             newsMapper.insert(news);

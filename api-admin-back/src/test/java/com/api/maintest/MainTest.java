@@ -7,9 +7,13 @@ import springfox.documentation.swagger.schema.ApiModelTypeNameProvider;
 
 import java.io.File;
 import java.time.LocalDate;
+import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
+import java.time.temporal.TemporalAccessor;
 
 public class MainTest {
     public static void main(String[] args) {
-        System.out.println("D://ABCD"+File.separator+"FFFF");
+        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss");
+        System.out.println(LocalDateTime.now().format(formatter));
     }
 }

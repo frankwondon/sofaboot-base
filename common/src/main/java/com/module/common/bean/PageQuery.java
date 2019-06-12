@@ -7,6 +7,7 @@ import lombok.Data;
 public class PageQuery {
     private Integer limit = 10;
     private Integer page = 1;
+    private String keyWord;
 
     public PageQuery(int page, int limit) {
         this.limit = limit;

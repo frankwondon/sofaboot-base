@@ -64,10 +64,11 @@ public class IndexController {
     }
 
     @GetMapping("/loginOut")
-    public String loginOut() {
+    @ResponseBody
+    public  Response<Boolean> loginOut() {
         Subject subject = SecurityUtils.getSubject();
         subject.logout();
-        return "redirect:/html/login.html";
+        return Response.success(true);
     }
 
     @GetMapping("/index")

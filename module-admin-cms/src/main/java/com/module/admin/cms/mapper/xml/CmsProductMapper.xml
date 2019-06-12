@@ -8,6 +8,7 @@
             cms_product_type t
         JOIN cms_product p ON p.type_id = t.id
         WHERE p.show_type &lt;&gt;1
+        and p.name like CONCAT('%',#{keyWord},'%')
         ORDER BY
             p.sort
     </select>
@@ -18,6 +19,7 @@
         FROM
             cms_product p
         WHERE p.show_type=1
+        and p.name like CONCAT('%',#{keyWord},'%')
         ORDER BY
             p.sort
     </select>

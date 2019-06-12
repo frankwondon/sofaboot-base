@@ -18,5 +18,5 @@ import org.springframework.stereotype.Repository;
 @Repository
 public interface CmsBannerMapper extends BaseMapper<CmsBanner> {
         int disable(@Param("id") Integer id,@Param("disable") Integer disable);
-        IPage<CmsBanner> listPage(Page page);
+        IPage<CmsBanner> listPage(Page page,@Param("keyWord") String keyWord);
 }

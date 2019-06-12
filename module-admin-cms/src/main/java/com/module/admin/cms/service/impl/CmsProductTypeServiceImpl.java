@@ -26,7 +26,7 @@ public class CmsProductTypeServiceImpl implements CmsProductTypeService {
     @Override
     public IPage<CmsProductType> list(PageQuery pageQuery) {
         Page page = new Page(pageQuery.getPage(), pageQuery.getLimit());
-        return productTypeMapper.listPage(page);
+        return productTypeMapper.listPage(page,pageQuery.getKeyWord());
     }
 
     @Override

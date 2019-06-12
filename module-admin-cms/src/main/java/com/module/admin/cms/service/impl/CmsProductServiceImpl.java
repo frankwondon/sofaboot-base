@@ -22,13 +22,13 @@ public class CmsProductServiceImpl implements CmsProductService {
     @Override
     public IPage<CmsProductResult> list(PageQuery pageQuery) {
         Page page=new Page(pageQuery.getPage(),pageQuery.getLimit());
-        return productMapper.listPage(page);
+        return productMapper.listPage(page,pageQuery.getKeyWord());
     }
 
     @Override
     public IPage<CmsProductResult> listHot(PageQuery pageQuery) {
         Page page=new Page(pageQuery.getPage(),pageQuery.getLimit());
-        return productMapper.listHotPage(page);
+        return productMapper.listHotPage(page,pageQuery.getKeyWord());
     }
 
     @Override

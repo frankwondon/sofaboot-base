@@ -2,7 +2,7 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.module.admin.cms.mapper.CmsNewsMapper">
     <select id="listPage" resultType="com.module.admin.cms.entity.CmsNews">
-        select* from cms_news n ORDER BY n.sort
+        select * from cms_news n  where n.deleted=0 and n.name like CONCAT('%',#{keyWord},'%') ORDER BY n.sort
     </select>
 
     <update id="del">

@@ -22,7 +22,7 @@ public class CmsBannerServiceImpl implements CmsBannerService {
     @Override
     public IPage<CmsBanner> list(PageQuery pageQuery) {
         Page page = new Page(pageQuery.getPage(), pageQuery.getLimit());
-        return bannerMapper.listPage(page);
+        return bannerMapper.listPage(page,pageQuery.getKeyWord());
     }
 
     @Override

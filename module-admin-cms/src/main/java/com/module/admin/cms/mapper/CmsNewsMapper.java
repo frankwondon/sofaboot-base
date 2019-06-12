@@ -15,7 +15,7 @@ import org.apache.ibatis.annotations.Param;
  * @since 2019-05-30
  */
 public interface CmsNewsMapper extends BaseMapper<CmsNews> {
-        IPage<CmsNews> listPage(Page page);
+        IPage<CmsNews> listPage(Page page,@Param("keyWord") String keyWord);
 
         int del(Integer id);
 
