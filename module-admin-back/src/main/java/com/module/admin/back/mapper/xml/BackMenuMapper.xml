@@ -22,7 +22,7 @@
     </select>
 
     <select id="countMenuUrl" resultType="int">
-        select count(*) from back_menu m where m.url=#{url} and m.deleted=0 and m.id&lt;&gt;#{id}
+        select count(*) from back_menu m where m.url=#{url} and m.deleted=0 and m.p_id=#{pid} and m.id&lt;&gt;#{id}
     </select>
 
     <select id="countMenuName" resultType="int">

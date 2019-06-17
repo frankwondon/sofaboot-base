@@ -1,2 +1,2 @@
 org.springframework.boot.autoconfigure.EnableAutoConfiguration=\
-com.module.admin.back.configure.BeanConfigure
+com.module.admin.app.configure.BeanConfigure

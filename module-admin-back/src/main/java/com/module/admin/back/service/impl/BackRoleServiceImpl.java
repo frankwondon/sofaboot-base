@@ -59,27 +59,13 @@ public class BackRoleServiceImpl implements BackRoleService {
     }
 
     @Override
-    public List<PermissionTreeResult> findRoleMenu(Integer roleId) {
-        List<BackMenu> backMenus = backMenuMapper.selectList(null);
+    public List<Integer> findRoleMenu(Integer roleId) {
         List<Integer> ownerMenus = backRoleMapper.findRoleMenus(roleId);
-        if (backMenus != null) {
-            List<PermissionTreeResult> results = new ArrayList<>();
-            backMenus.forEach(backMenu -> {
-                PermissionTreeResult permissionTreeResult = new PermissionTreeResult();
-                permissionTreeResult.setId(backMenu.getId().toString());
-                permissionTreeResult.setTitle(backMenu.getTitle());
-                permissionTreeResult.setParentId(backMenu.getPId().toString());
-                permissionTreeResult.setCheckArr("0");
-                ownerMenus.forEach(mid -> {
-                    if (mid.equals(backMenu.getId())) {
-                        permissionTreeResult.setCheckArr("1");
-                    }
-                });
-                results.add(permissionTreeResult);
-            });
-            return results;
+        if (ownerMenus==null){
+            return Collections.emptyList();
+        }else {
+            return ownerMenus;
         }
-        return Collections.emptyList();
     }
 
 
@@ -102,5 +88,10 @@ public class BackRoleServiceImpl implements BackRoleService {
     @Override
     public List<BackRole> listRole() {
         return backRoleMapper.selectList(null);
+    }
+
+    @Override
+    public void locked(Integer locked, Integer id) {
+        backRoleMapper.locked(locked,id);
     }
 }

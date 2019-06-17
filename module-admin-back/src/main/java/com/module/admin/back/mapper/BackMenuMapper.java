@@ -19,7 +19,7 @@ import java.util.List;
 public interface BackMenuMapper extends BaseMapper<BackMenu> {
     List<BackMenu> findRoleMenus(@Param("roleId") Integer roleId, @Param("depth")int depth);
 
-    int countMenuUrl(@Param("id")Integer id,@Param("url")String url);
+    int countMenuUrl(@Param("id")Integer id,@Param("url")String url,@Param("pid")Integer pid);
 
     int countMenuName(@Param("id")Integer id,@Param("name")String name);
 

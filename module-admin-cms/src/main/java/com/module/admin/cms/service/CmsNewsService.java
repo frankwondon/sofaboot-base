@@ -36,4 +36,6 @@ public interface CmsNewsService {
      * 前台展示新闻列表
      * */
     IPage<CmsNews> showList(PageQuery pageQuery);
+
+    CmsNews findById(Integer id);
 }

@@ -48,4 +48,6 @@ public interface CmsProductService {
      * @return
      */
     CmsProduct hotProduct();
+
+    CmsProduct findById(Integer id);
 }

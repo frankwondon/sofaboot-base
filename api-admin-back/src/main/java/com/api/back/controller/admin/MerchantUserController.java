@@ -19,7 +19,7 @@ import springfox.documentation.annotations.ApiIgnore;
 
 @Api(tags = "商户管理")
 @RestController
-@RequestMapping("/backadmin/merchantUser")
+@RequestMapping("/backadmin/merchantUser/user")
 public class MerchantUserController {
     @SofaReference
     private BackUserService backUserService;
@@ -27,7 +27,7 @@ public class MerchantUserController {
     @ApiOperation("获取用户列表")
     @GetMapping("/list")
     public Response<IPage<BackUserResult>> list(BackUserQuery query) {
-        return Response.success(backUserService.listUser(query));
+        return Response.success(backUserService.listMerchantUser(query));
     }
 
     @ApiOperation("获取单个用户")
@@ -59,8 +59,8 @@ public class MerchantUserController {
     }
     @ApiOperation("锁定用户")
     @PostMapping("/locked")
-    public Response<Boolean> locked(Integer userId,Integer locked) {
-        backUserService.lockedUser(userId, locked);
+    public Response<Boolean> locked(Integer userId,Boolean disable) {
+        backUserService.lockedUser(userId, disable?0:1);
         return Response.success(true);
     }
 

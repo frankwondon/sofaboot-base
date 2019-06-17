@@ -56,6 +56,7 @@ public class CmsProductController {
             @ApiImplicitParam(name = "id" ,paramType = "query",value = "有ID就是修改"),
             @ApiImplicitParam(name = "name" ,paramType = "query",required = true,value = "产品名称"),
             @ApiImplicitParam(name = "imgUrl" ,paramType = "query",required = true,value = "图片地址"),
+            @ApiImplicitParam(name = "mainImgUrl" ,paramType = "query",required = true,value = "首页图片地址"),
             @ApiImplicitParam(name = "typeId" ,paramType = "query",required = true,value = "产品类型ID"),
             @ApiImplicitParam(name = "showType",paramType = "query" ,required = true,value = "0普通产品 2推荐产品"),
             @ApiImplicitParam(name = "descDesc",paramType = "query" ,required = true,value = "描述"),

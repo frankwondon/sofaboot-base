@@ -6,11 +6,11 @@
     </select>
 
     <update id="del">
-        update cms_product_type t set t.deleted=1 and t.id=#{id}
+        update cms_product_type t set t.deleted=1 where t.id=#{id}
     </update>
 
     <update id="disable">
-        update cms_product_type t  set locked=#{disable} and t.id=#{id}
+        update cms_product_type t  set locked=#{disable} where t.id=#{id}
     </update>
 
     <select id="showList" resultType="com.module.admin.cms.result.CmsProductTypeResult">

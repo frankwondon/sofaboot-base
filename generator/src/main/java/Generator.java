@@ -56,7 +56,7 @@ public class Generator {
         // 包配置
         PackageConfig pc = new PackageConfig();
 //        pc.setModuleName(scanner("模块名"));
-        pc.setParent("com.module.admin.cms");
+        pc.setParent("com.module.admin.app");
         mpg.setPackageInfo(pc);
 
         // 自定义配置
@@ -112,12 +112,12 @@ public class Generator {
         StrategyConfig strategy = new StrategyConfig();
         strategy.setNaming(NamingStrategy.underline_to_camel);
         strategy.setColumnNaming(NamingStrategy.underline_to_camel);
-        strategy.setSuperEntityClass("com.module.admin.back.entity.BaseEntity");
+        strategy.setSuperEntityClass("com.module.admin.app.entity.BaseEntity");
         strategy.setSuperEntityColumns("id");
         strategy.setEntityLombokModel(true);
 //        strategy.setRestControllerStyle(true);
 //        strategy.setSuperControllerClass("com.baomidou.ant.common.BaseController");
-        strategy.setInclude(scanner("表名，多个英文逗号分割").split(","));
+//        strategy.setInclude(scanner("表名，多个英文逗号分割").split(","));
 //        strategy.setControllerMappingHyphenStyle(true);
         strategy.setTablePrefix(pc.getModuleName() + "_");
         mpg.setStrategy(strategy);

@@ -8,7 +8,7 @@ import java.util.List;
 
 public interface BackMenuService {
 
-    List<PermissionTreeResult> listMenu();
+    List<BackMenu> listMenu();
 
     List<BackMenu> loadSite(CurrentUser user);
 

@@ -33,6 +33,7 @@ private static final long serialVersionUID=1L;
      * 是否删除 默认0 锁定1
      */
     private Integer deleted;
+    private Integer locked;
 
 
 }

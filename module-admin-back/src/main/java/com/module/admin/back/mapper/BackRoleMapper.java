@@ -39,4 +39,7 @@ public interface BackRoleMapper extends BaseMapper<BackRole> {
 
     void insertBatchRoleMenus(List<BackRoleMenu> list);
 
+
+    void locked(@Param("locked") Integer locked,@Param("id") Integer id);
+
 }

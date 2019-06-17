@@ -20,7 +20,7 @@ import springfox.documentation.annotations.ApiIgnore;
 import java.util.List;
 @Api(tags = "权限管理")
 @RestController
-@RequestMapping("/backadmin/menu")
+@RequestMapping("/backadmin/menu/menu")
 public class MenuController {
 
     @SofaReference
@@ -46,8 +46,8 @@ public class MenuController {
 
     @ApiOperation(value="获取Tree结构的菜单")
     @GetMapping("list")
-    public Response<List<PermissionTreeResult>> list() {
-        List<PermissionTreeResult> backRoles = backMenuService.listMenu();
+    public Response<List<BackMenu>> list() {
+        List<BackMenu> backRoles = backMenuService.listMenu();
         return Response.success(backRoles);
     }
     @ApiOperation(value="添加菜单")

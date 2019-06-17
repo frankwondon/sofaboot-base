@@ -19,7 +19,7 @@ import springfox.documentation.annotations.ApiIgnore;
 
 @Api(tags = "用户管理")
 @RestController
-@RequestMapping("/backadmin/user")
+@RequestMapping("/backadmin/user/user")
 public class UserController {
     @SofaReference
     private BackUserService backUserService;
@@ -59,8 +59,8 @@ public class UserController {
     }
     @ApiOperation("锁定用户")
     @PostMapping("/locked")
-    public Response<Boolean> locked(Integer userId,Integer locked) {
-        backUserService.lockedUser(userId, locked);
+    public Response<Boolean> locked(Integer userId,Boolean disable) {
+        backUserService.lockedUser(userId, disable?0:1);
         return Response.success(true);
     }
 

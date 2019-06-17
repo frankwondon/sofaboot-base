@@ -4,6 +4,7 @@ import com.baomidou.mybatisplus.core.metadata.IPage;
 import com.module.admin.back.entity.BackRole;
 import com.module.admin.back.result.PermissionTreeResult;
 import com.module.common.bean.PageQuery;
+import org.apache.ibatis.annotations.Param;
 
 import java.util.List;
 
@@ -21,7 +22,9 @@ public interface BackRoleService {
 
     List<BackRole> listRole();
 
-    List<PermissionTreeResult> findRoleMenu(Integer roleId);
+    List<Integer> findRoleMenu(Integer roleId);
 
     void allotMenus(Integer roleId,List<String> MenuIds);
+
+    void locked(@Param("locked")Integer locked,@Param("id") Integer id);
 }

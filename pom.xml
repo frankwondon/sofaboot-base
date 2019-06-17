@@ -19,6 +19,7 @@
         <module>module-admin-back</module>
         <module>module-admin-cms</module>
         <module>api-cms</module>
+        <module>api-app</module>
         <module>module-admin-app</module>
     </modules>
     <dependencies>

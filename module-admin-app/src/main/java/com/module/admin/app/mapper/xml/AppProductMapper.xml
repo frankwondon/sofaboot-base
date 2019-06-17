@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.module.admin.app.mapper.AppProductMapper">
+    <select id="list" resultType="com.module.admin.app.entity.AppProduct">
+        SELECT
+            p.*
+        FROM
+            app_product p
+        WHERE
+            p.`status` = #{status}
+        AND p.`name` CONCAT('%',#{keyWord],'%')
+    </select>
+</mapper>

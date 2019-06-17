@@ -25,22 +25,26 @@ public class BackMenuServiceImpl implements BackMenuService {
     private BackMenuMapper backMenuMapper;
 
     @Override
-    public List<PermissionTreeResult> listMenu() {
+    public List<BackMenu> listMenu() {
+        QueryWrapper<Object> queryWrapper = new QueryWrapper<>();
+        queryWrapper.eq("deleted",0);
         List<BackMenu> backMenus = backMenuMapper.selectList(new QueryWrapper<>());
-        if (backMenus != null) {
-            List<PermissionTreeResult> results = new ArrayList<>();
-            backMenus.forEach(backMenu -> {
-                PermissionTreeResult permissionTreeResult = new PermissionTreeResult();
-                permissionTreeResult.setId(backMenu.getId().toString());
-                permissionTreeResult.setTitle(backMenu.getTitle());
-                permissionTreeResult.setUrl(backMenu.getUrl());
-                permissionTreeResult.setParentId(backMenu.getPId().toString());
-                permissionTreeResult.setCheckArr("0");
-                results.add(permissionTreeResult);
+        List<BackMenu> first = backMenus.stream().filter(backMenu -> 1 == backMenu.getDepth()).collect(Collectors.toList());
+        List<BackMenu> second = backMenus.stream().filter(backMenu -> 2 == backMenu.getDepth()).collect(Collectors.toList());
+        List<BackMenu> three = backMenus.stream().filter(backMenu -> 3 == backMenu.getDepth()).collect(Collectors.toList());
+        //构造二级
+        second.forEach(parent -> {
+            three.forEach(child -> {
+                createTree(parent,child);
             });
-            return results;
-        }
-        return Collections.emptyList();
+        });
+        //构造一级
+        first.forEach(parent -> {
+            second.forEach(child -> {
+                createTree(parent,child);
+            });
+        });
+        return first;
     }
 
     @Override
@@ -117,7 +121,7 @@ public class BackMenuServiceImpl implements BackMenuService {
     @Override
     public void updateMenu(BackMenu menu) {
         menu.setUpdateTime(LocalDateTime.now());
-        if (backMenuMapper.countMenuUrl(menu.getId(),menu.getUrl())>0){
+        if (backMenuMapper.countMenuUrl(menu.getId(),menu.getUrl(),menu.getPId())>0){
             throw  new DBOperationException(ResponseCode.C_500001);
         }
         backMenuMapper.updateById(menu);
@@ -127,13 +131,12 @@ public class BackMenuServiceImpl implements BackMenuService {
     public Integer insertMenu(BackMenu menu) {
         menu.setCreateTime(LocalDateTime.now());
         BackMenu backMenu = backMenuMapper.selectById(menu.getPId());
-        String  url=backMenu.getUrl()+"/"+menu.getUrl();
-        menu.setUrl(url);
-        if (backMenuMapper.countMenuUrl(-1,url)>0){
+        if (backMenuMapper.countMenuUrl(-1,menu.getUrl(),menu.getPId())>0){
             throw  new DBOperationException(ResponseCode.C_500001);
         }
         menu.setDepth(backMenu.getDepth()+1);
         menu.setDeleted(0);
+        //先对要插入的菜单进行验证，防止出现错乱
         backMenuMapper.insert(menu);
         return menu.getId();
     }

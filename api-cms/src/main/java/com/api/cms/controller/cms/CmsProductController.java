@@ -27,6 +27,15 @@ public class CmsProductController {
     @SofaReference
     private CmsProductService productService;
 
+    @ApiOperation(value = "获取产品详情")
+    @ApiImplicitParams({
+            @ApiImplicitParam(name = "id",paramType = "query" ,required = true,value = "产品ID"),
+    })
+    @GetMapping("/productDetail")
+    public Response<CmsProduct> list(Integer id) {
+        return Response.success( productService.findById(id));
+    }
+
     @ApiOperation(value = "商品列表")
     @ApiImplicitParams({
             @ApiImplicitParam(name = "productId",paramType = "query" ,required = true,value = "产品ID"),

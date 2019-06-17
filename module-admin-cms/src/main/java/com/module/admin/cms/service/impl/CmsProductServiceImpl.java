@@ -66,6 +66,7 @@ public class CmsProductServiceImpl implements CmsProductService {
             queryWrapper.eq("type_id",pageQuery.getProductId());
         }
         queryWrapper.eq("deleted",0);
+        queryWrapper.ne("show_type",1);
         queryWrapper.eq("locked",0);
         queryWrapper.orderByAsc("sort");
         Page<CmsProduct> page=new Page(pageQuery.getPage(),pageQuery.getLimit());
@@ -76,5 +77,14 @@ public class CmsProductServiceImpl implements CmsProductService {
     @Override
     public CmsProduct hotProduct() {
         return productMapper.hotProduct();
+    }
+
+    @Override
+    public CmsProduct findById(Integer id) {
+        QueryWrapper queryWrapper=new QueryWrapper();
+        queryWrapper.eq("id",id);
+        queryWrapper.eq("deleted",0);
+        queryWrapper.eq("locked",0);
+        return productMapper.selectOne(queryWrapper);
     }
 }
