@@ -19,7 +19,11 @@ public interface AppProductService {
      */
      IPage<AppProduct> list(AppProductQuery pageQuery);
 
-
+    /**
+     * 商品编号
+     * @return
+     */
+    String productNum();
     /**
      * 生成商品
      * 步骤:
@@ -30,4 +34,19 @@ public interface AppProductService {
      */
     void create(AppProductDto productDto);
 
+
+    /**
+     * 获取更新时的回显数据
+     * @param productId
+     * @return
+     */
+    AppProductDto findUpdateDetail(Integer productId);
+
+    void update(AppProductDto productDto);
+    /**
+     * 上下架
+     * @param productId
+     * @param status 0上架1下架
+     */
+    void shelfAndObtained(Integer productId,Integer status);
 }

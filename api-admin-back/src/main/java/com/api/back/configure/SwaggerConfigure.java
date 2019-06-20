@@ -64,7 +64,21 @@ public class SwaggerConfigure {
     }
 
 
-
+    @Bean(value = "app")
+    @Order(value = 1)
+    public Docket app() {
+        return new Docket(DocumentationType.SWAGGER_2)
+                .apiInfo( new ApiInfoBuilder()
+                        .title("APP接口")
+                        .description("APP接口")
+                        .version("1.0")
+                        .build())
+                .groupName("APP接口")
+                .select()
+                .apis(RequestHandlerSelectors.basePackage("com.api.back.controller.app"))
+                .paths(PathSelectors.any())
+                .build();
+    }
 
 
 }

@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.module.admin.app.mapper.AppExpressTemplateAreaMapper">
+    <insert id="insertList">
+        INSERT INTO app_express_template_area (
+            temp_id,
+            NAME,
+            area,
+            first_price,
+            continue_num,
+            continue_price
+        )
+        VALUES
+        <foreach collection="list" item="item"   index="index" separator=",">
+            (
+            #{tempId},
+            #{item.name},
+            #{item.area},
+            #{item.firstPrice},
+            #{item.continueNum},
+            #{item.continuePrice}
+            )
+        </foreach>
+
+    </insert>
+    <select id="listIdsOfProduct" resultType="int">
+        select a.id from app_express_template_area a where a.temp_id=#{tempId}
+    </select>
+</mapper>

@@ -49,6 +49,8 @@ private static final long serialVersionUID=1L;
      */
     private Integer reserve;
 
+    private Integer locked;
+
     /**
      * 乐观锁
      */

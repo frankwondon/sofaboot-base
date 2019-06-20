@@ -1,8 +1,11 @@
 package com.module.admin.app.dto;
 
 import com.module.admin.app.entity.AppProduct;
+import com.module.admin.app.entity.AppProductSku;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
+
+import java.util.List;
 
 
 /**
@@ -12,6 +15,5 @@ import lombok.EqualsAndHashCode;
 @EqualsAndHashCode(callSuper = true)
 @Data
 public class AppProductDto extends AppProduct {
-    /**前端生成的SKU*/
-    private String finalSku;
+    private List<AppProductSku> productSkus;
 }

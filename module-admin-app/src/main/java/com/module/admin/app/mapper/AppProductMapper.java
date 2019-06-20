@@ -23,4 +23,17 @@ public interface AppProductMapper extends BaseMapper<AppProduct> {
      * @return
      */
     IPage<AppProduct> list(Page page, @Param("status")Integer status,@Param("keyWord")String keyWord);
+
+    /**
+     * 调用商品编号生成存储过程
+     * @param id 模板的ID 1是商品的
+     * @return
+     */
+    String callProductNum(Integer id);
+
+    /**
+     * 上下架
+     * @return
+     */
+    int updateShelfAndObtained(@Param("productId") Integer productId,@Param("status") Integer status);
 }

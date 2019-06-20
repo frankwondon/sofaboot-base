@@ -45,7 +45,7 @@ public class IndexController {
             @ApiImplicitParam(name = "account",paramType = "query" ,required = true,value = "账号"),
             @ApiImplicitParam(name = "password",paramType = "query" ,required = true,value = "密码")
     })
-    public Response<Boolean> dologin(@RequestParam String account, @RequestParam String password) {
+    public Response<JSONObject> dologin(@RequestParam String account, @RequestParam String password) {
         Subject subject = SecurityUtils.getSubject();
         BackUserResult userResult = backUserService.getByAccount(account);
         if (userResult == null) {
@@ -60,6 +60,7 @@ public class IndexController {
         JSONObject jsonObject=new JSONObject();
         jsonObject.put("userName",byAccount.getUsername());
         jsonObject.put("roleName",byAccount.getRoleName());
+        jsonObject.put("userType",byAccount.getUserType());
         return jsonObject;
     }
 

@@ -11,3 +11,7 @@ upload:
     base: /resource
     img: /upload/img
     video: /upload/video
+
+logging:
+  level:
+    root: info

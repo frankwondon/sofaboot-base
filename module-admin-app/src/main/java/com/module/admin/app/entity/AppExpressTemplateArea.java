@@ -1,5 +1,6 @@
 package com.module.admin.app.entity;
 
+import java.math.BigDecimal;
 import com.baomidou.mybatisplus.annotation.IdType;
 import com.module.admin.app.entity.base.BaseEntity;
 import java.time.LocalDateTime;
@@ -10,56 +11,52 @@ import lombok.experimental.Accessors;
 
 /**
  * <p>
- * 商品分类
+ * 物流模板 
  * </p>
  *
  * @author wangdong
- * @since 2019-06-14
+ * @since 2019-06-19
  */
 @Data
 @EqualsAndHashCode(callSuper = true)
 @Accessors(chain = true)
-public class AppProductType extends BaseEntity {
+public class AppExpressTemplateArea extends BaseEntity {
 
 private static final long serialVersionUID=1L;
 
+    /**
+     * 模板的ID
+     */
+    private Integer tempId;
+
+    /**
+     * 大区
+     */
     private String name;
 
-    private String productDesc;
-
-    private Integer sort;
+    /**
+     * 区域JSON格式[{c:20001,n:'陕西'}]
+     */
+    private String area;
 
     /**
-     * 0正常1锁定
+     * 首价
      */
-    private Integer locked;
-
-    private Integer deleted;
+    private BigDecimal firstPrice;
 
     /**
-     * 乐观锁
+     * 续基数
      */
-    private Integer version;
+    private Integer continueNum;
 
     /**
-     * 创建人
+     * 续件价格
      */
-    private Integer createBy;
+    private BigDecimal continuePrice;
 
     /**
-     * 创建时间
+     * 是否是基础运费
      */
-    private LocalDateTime createTime;
-
-    /**
-     * 更新人
-     */
-    private Integer updateBy;
-
-    /**
-     * 更新时间
-     */
-    private LocalDateTime updateTime;
-
+    private Integer defaultTemp;
 
 }

@@ -10,56 +10,38 @@ import lombok.experimental.Accessors;
 
 /**
  * <p>
- * 商品分类
+ * 物流模板 
  * </p>
  *
  * @author wangdong
- * @since 2019-06-14
+ * @since 2019-06-19
  */
 @Data
 @EqualsAndHashCode(callSuper = true)
 @Accessors(chain = true)
-public class AppProductType extends BaseEntity {
+public class AppExpressTemplate extends BaseEntity {
 
 private static final long serialVersionUID=1L;
 
+    /**
+     * 模板名字
+     */
     private String name;
 
-    private String productDesc;
-
-    private Integer sort;
+    /**
+     * 0按件计费1按KG计费
+     */
+    private Integer priceRule;
 
     /**
-     * 0正常1锁定
+     * 0卖家承担运费1买家承担运费
      */
-    private Integer locked;
-
-    private Integer deleted;
+    private Integer type;
 
     /**
-     * 乐观锁
+     * 0采用非默认运费，1采用默认运费
      */
-    private Integer version;
-
-    /**
-     * 创建人
-     */
-    private Integer createBy;
-
-    /**
-     * 创建时间
-     */
-    private LocalDateTime createTime;
-
-    /**
-     * 更新人
-     */
-    private Integer updateBy;
-
-    /**
-     * 更新时间
-     */
-    private LocalDateTime updateTime;
+    private Integer defaultArea;
 
 
 }

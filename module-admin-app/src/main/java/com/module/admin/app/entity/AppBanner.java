@@ -1,32 +1,70 @@
 package com.module.admin.app.entity;
 
-import com.baomidou.mybatisplus.annotation.IdType;
 import com.module.admin.app.entity.base.BaseEntity;
-import java.time.LocalDateTime;
-import com.baomidou.mybatisplus.annotation.TableId;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
 import lombok.experimental.Accessors;
 
+import java.time.LocalDateTime;
+
 /**
  * <p>
- * 商品分类
+ * 
  * </p>
  *
  * @author wangdong
- * @since 2019-06-14
+ * @since 2019-06-19
  */
 @Data
 @EqualsAndHashCode(callSuper = true)
 @Accessors(chain = true)
-public class AppProductType extends BaseEntity {
+public class AppBanner extends BaseEntity {
 
 private static final long serialVersionUID=1L;
 
+    /**
+     * 名称
+     */
     private String name;
 
-    private String productDesc;
+    /**
+     * 跳转链接
+     */
+    private String link;
 
+    /**
+     * 图片路径
+     */
+    private String imgUrl;
+
+    /**
+     * 0首页 1商城
+     */
+    private Integer belong;
+
+    /**
+     * 描述标题
+     */
+    private String descTitle;
+
+    /**
+     * 描述内容
+     */
+    private String descText;
+
+    /**
+     * 关联的商品Id
+     */
+    private Integer productId;
+
+    /**
+     * 0商品banner1其他普通直接跳转H5
+     */
+    private Integer type;
+
+    /**
+     * 排序
+     */
     private Integer sort;
 
     /**
@@ -34,6 +72,9 @@ private static final long serialVersionUID=1L;
      */
     private Integer locked;
 
+    /**
+     * 软删除
+     */
     private Integer deleted;
 
     /**

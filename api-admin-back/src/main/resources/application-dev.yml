@@ -4,8 +4,12 @@ spring:
     url: jdbc:mysql://192.168.1.117:3306/base?useUnicode=true&useSSL=false&characterEncoding=utf8
     username: root
     password: root
+
 upload:
   file:
     base: D:/upload
     img: /img
     video: /video
+logging:
+  level:
+    root: debug

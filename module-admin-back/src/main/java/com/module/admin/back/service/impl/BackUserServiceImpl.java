@@ -65,7 +65,7 @@ public class BackUserServiceImpl implements BackUserService {
     @Override
     public void updateUser(BackUser backUser) {
         if (userMapper.countUserName(backUser.getId(),backUser.getUsername()) > 0 || userMapper.countUserPhone(backUser.getId(),backUser.getCellPhoneNum()) > 0) {
-            throw new DBOperationException(ResponseCode.C_500001);
+            throw new DBOperationException(ResponseCode.C_500006);
         }
         backUser.setUpdateTime(LocalDateTime.now());
         userMapper.updateById(backUser);
@@ -127,4 +127,6 @@ public class BackUserServiceImpl implements BackUserService {
         user.setSalt(enpwd.getSalt());
         userMapper.updatePwd(user);
     }
+
+
 }

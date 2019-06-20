@@ -10,4 +10,12 @@
             p.`status` = #{status}
         AND p.`name` CONCAT('%',#{keyWord],'%')
     </select>
+
+    <select id="callProductNum" statementType="CALLABLE" resultType="String">
+        {call generator(#{id,mode=IN})}
+    </select>
+
+    <update id="updateShelfAndObtained">
+        update app_product p set p.`status`=#{status} where p.id=#{productId}
+    </update>
 </mapper>

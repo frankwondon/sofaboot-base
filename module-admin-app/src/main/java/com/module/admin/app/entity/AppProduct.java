@@ -32,9 +32,14 @@ private static final long serialVersionUID=1L;
     private String num;
 
     /**
-     * 0上架中1下架2售完
+     * 0上架中1下架
      */
     private Integer status;
+
+    /**
+     * 产品重量
+     */
+    private Integer productGram;
 
     /**
      * 首页展示图片
@@ -75,6 +80,9 @@ private static final long serialVersionUID=1L;
      * 定义的skus格式类似{name:克重,values:[0.5,1,1]}
      */
     private String skus;
+
+    /**前端生成的SKU*/
+    private String finalSkus;
 
     /**
      * 乐观锁

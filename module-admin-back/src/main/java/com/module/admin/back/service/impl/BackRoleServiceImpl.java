@@ -55,6 +55,8 @@ public class BackRoleServiceImpl implements BackRoleService {
         Page page = new Page(pageQuery.getPage(), pageQuery.getLimit());
         QueryWrapper queryWrapper = new QueryWrapper();
         queryWrapper.eq("deleted", 0);
+        //排除超管
+        queryWrapper.ne("id", 1);
         return backRoleMapper.selectPage(page, queryWrapper);
     }
 
@@ -92,6 +94,10 @@ public class BackRoleServiceImpl implements BackRoleService {
 
     @Override
     public void locked(Integer locked, Integer id) {
-        backRoleMapper.locked(locked,id);
+        //超管不允许禁用
+        if (id!=null&&id!=1){
+            backRoleMapper.locked(locked,id);
+        }
+
     }
 }
