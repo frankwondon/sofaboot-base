@@ -1,5 +1,7 @@
 package com.module.base.common.service;
 
+import com.module.base.common.dto.SmsBaseDto;
+
 /**
  * 发短信的service
  * @author wangdong
@@ -9,7 +11,7 @@ public interface SMSSendService {
 
     /**
      * 发送手机号登陆验证码
-     * @param phone 手机号
+     * @param sendDto 要发送的实体类
      */
-    void sendLoginVerifyCode(String phone);
+   <T extends SmsBaseDto> void sendLoginVerifyCode(T sendDto);
 }
