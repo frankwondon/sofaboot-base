@@ -10,7 +10,6 @@ spring:
   devtools:
     livereload:
       enabled: true
-      additional-paths: resources/**,static/**,templates/**
   jackson:
     date-format: yyyy-MM-dd HH:mm:ss
     time-zone: GMT+8

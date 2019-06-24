@@ -19,4 +19,9 @@ public class AppProductResult extends AppProduct implements Serializable {
      * 商品中最低价格的SKU
      */
     private BigDecimal productPrice;
+
+    /**
+     * 商品中sku库存为0的数量
+     */
+    private Integer skuZeroReserve;
 }

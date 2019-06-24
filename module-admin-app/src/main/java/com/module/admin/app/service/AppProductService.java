@@ -34,8 +34,10 @@ public interface AppProductService {
      * 2验证SKU组合正确性
      * 3保存SKU
      * 4保存商品
+     * @param productDto
+     * @param createUser
      */
-    void create(AppProductDto productDto);
+    void createProduct(AppProductDto productDto, Integer createUser);
 
 
     /**

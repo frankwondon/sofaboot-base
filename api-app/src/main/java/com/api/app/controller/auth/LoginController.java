@@ -16,4 +16,9 @@ public class LoginController {
     public Response login(LoginQuery login){
         return null;
     }
+
+
+    public Response getLoginVerifyCode(String mobile){
+        return null;
+    }
 }

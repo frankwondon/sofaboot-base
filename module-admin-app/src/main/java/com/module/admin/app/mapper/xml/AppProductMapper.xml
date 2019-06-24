@@ -6,7 +6,7 @@
             p.*,
             (
                 SELECT
-                    MIN(sku.reserve)
+                    MIN(sku.fixed_price)
                 FROM
                     app_product_sku sku
                 WHERE
@@ -14,6 +14,18 @@
                 and sku.deleted=0
                 and sku.locked=0
             ) as productPrice
+            ,
+            (
+                SELECT
+                        count(1)
+                FROM
+                        app_product_sku sku
+                WHERE
+                        sku.product_id = p.id
+                and sku.reserve=0
+                and sku.deleted=0
+                and sku.locked=0
+            ) as skuZeroReserve
         FROM
             app_product p
         WHERE
@@ -33,7 +45,18 @@
                     sku.product_id = p.id
                 and sku.deleted=0
                 and sku.locked=0
-            ) as productPrice
+            ) as productPrice,
+            (
+                SELECT
+                        count(1)
+                FROM
+                        app_product_sku sku
+                WHERE
+                        sku.product_id = p.id
+                and sku.reserve=0
+                and sku.deleted=0
+                and sku.locked=0
+            ) as skuZeroReserve
         FROM
             app_product p
         WHERE
@@ -49,8 +72,20 @@
             )
     </select>
 
-    <select id="countOfBuyStatus">
-        select count(1) FROM app_product_sku sku where sku.reserve&lt;#{reserve} GROUP BY sku.product_id
+    <select id="countOfBuyStatus" resultType="int">
+        SELECT
+        COUNT(1) AS result
+        FROM
+        (
+        SELECT
+        1 AS num
+        FROM
+        app_product_sku sku
+        WHERE
+        sku.reserve &lt;#{reserve}
+        GROUP BY
+        sku.product_id
+        ) AS skuCount
     </select>
 
     <select id="callProductNum" statementType="CALLABLE" resultType="String">
@@ -62,7 +97,19 @@
     </update>
 
     <select id="likeSearchProduct" resultType="com.module.admin.app.entity.AppProduct">
-        select * from app_product p where p.`name` like CONCAT(#{keyWord},'%') or   p.num like CONCAT(#{keyWord},'%') limit 5
+       SELECT
+            *
+        FROM
+            app_product p
+        WHERE
+        1=1
+        <if test="userName != null and userName != ''">
+           AND(
+             p.`name` LIKE CONCAT({ keyWord }, '%')
+            OR p.num LIKE CONCAT({ keyWord }, '%')
+            )
+        </if>
+        LIMIT 5
     </select>
 
     <insert id="insertAppProductAdditionOne" parameterType="com.module.admin.app.entity.AppProductAdditionOne">

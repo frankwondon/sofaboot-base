@@ -9,7 +9,7 @@ public class ProductEnum {
     public  enum ShelfType {
         ATONCE(0,"立即上架"),
         PAUSE(1,"暂时不上架"),
-        SCHEDULE(2,"立即上架");
+        SCHEDULE(2,"定时上架");
         private int key;
         private String desc;
         ShelfType(int key, String desc){

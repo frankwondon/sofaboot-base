@@ -34,6 +34,13 @@ public interface AppProductMapper extends BaseMapper<AppProduct> {
     IPage<AppProductResult> listOfShelf(Page page, @Param("status") Integer status, @Param("keyWord") String keyWord);
 
 
+    /**
+     * 查询库存小于N的商品
+     * @param page
+     * @param keyWord
+     * @param reserve
+     * @return
+     */
     IPage<AppProductResult> listOfBuyStatus(Page page, @Param("keyWord") String keyWord, @Param("reserve") Integer reserve);
 
     /**
@@ -41,7 +48,7 @@ public interface AppProductMapper extends BaseMapper<AppProduct> {
      * @param reserve
      * @return
      */
-    Integer countOfBuyStatus(@Param("reserve") Integer reserve);
+    int countOfBuyStatus(@Param("reserve") Integer reserve);
 
     /**
      * 调用商品编号生成存储过程

@@ -12,7 +12,9 @@ import lombok.Data;
 @Data
 public class LoginQuery {
     @ApiModelProperty("手机号")
-    private String phone;
+    private String mobile;
     @ApiModelProperty("验证码")
     private String verifyCode;
+    @ApiModelProperty("设备ID")
+    private String deviceId;
 }

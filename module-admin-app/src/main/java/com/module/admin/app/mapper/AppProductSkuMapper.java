@@ -14,6 +14,16 @@ import java.util.List;
  * @since 2019-06-14
  */
 public interface AppProductSkuMapper extends BaseMapper<AppProductSku> {
+        /**
+         * 查询商品下的SKU
+         * @param productId
+         * @return
+         */
         List<AppProductSku> listProductSku(Integer productId);
+
+        /**
+         * 删除商品下的SKU
+         * @param productId
+         */
         void delProductSku(Integer productId);
 }

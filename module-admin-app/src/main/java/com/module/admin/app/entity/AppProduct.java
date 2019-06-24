@@ -86,8 +86,8 @@ private static final long serialVersionUID=1L;
      */
     private String skus;
 
-    /**前端生成的SKU*/
-    private String finalSkus;
+    /**前端生成的SKUMD5*/
+    private String skuMd5;
 
     /**
      * 乐观锁

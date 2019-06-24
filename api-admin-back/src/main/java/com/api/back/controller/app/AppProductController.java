@@ -3,11 +3,11 @@ package com.api.back.controller.app;
 import com.alipay.sofa.runtime.api.annotation.SofaReference;
 import com.baomidou.mybatisplus.core.metadata.IPage;
 import com.module.admin.app.dto.AppProductDto;
-import com.module.admin.app.entity.AppProduct;
 import com.module.admin.app.query.AppProductQuery;
 import com.module.admin.app.result.AppProductResult;
 import com.module.admin.app.service.AppProductService;
 import com.module.common.Response;
+import com.module.common.bean.CurrentUser;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiImplicitParam;
 import io.swagger.annotations.ApiImplicitParams;
@@ -16,6 +16,8 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
+import springfox.documentation.annotations.ApiIgnore;
+
 @Api(tags = "产品管理")
 @RestController
 @RequestMapping("/appadmin/product/index")
@@ -57,8 +59,8 @@ public class AppProductController {
             @ApiImplicitParam(name = "payType" ,paramType = "query" ,required = true,value = "支付方式0在线支付"),
             @ApiImplicitParam(name = "skus" ,paramType = "query" ,required = true,value = "定义的skus格式[{name:'克重',values:[{key:'0.5g',check:true}]}]"),
     })
-    public Response<Boolean> createProduct(AppProductDto dto){
-        appProductService.create(dto);
+    public Response<Boolean> createProduct(AppProductDto dto, @ApiIgnore CurrentUser user){
+        appProductService.createProduct(dto,user.getId());
         return Response.success(true);
     }
 
@@ -85,8 +87,8 @@ public class AppProductController {
             @ApiImplicitParam(name = "skus" ,paramType = "query" ,required = true,value = "定义的skus格式[{name:'克重',values:[{key:'0.5g',check:true}]}]"),
             @ApiImplicitParam(name = "finalSkus" ,paramType = "query" ,required = true,value = "生成的格式类似[sku的结果]")
      })
-    public Response<Boolean> updateProduct(AppProductDto dto){
-        appProductService.create(dto);
+    public Response<Boolean> updateProduct(AppProductDto dto,@ApiIgnore CurrentUser user){
+        appProductService.update(dto);
         return Response.success(true);
     }
 

@@ -22,6 +22,7 @@
         <module>api-app</module>
         <module>module-admin-app</module>
         <module>module-api-app</module>
+        <module>module-common</module>
     </modules>
     <dependencies>
 
