@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.module.admin.app.mapper.AppRecommendMapper">
+    <update id="disable">
+        update app_recommend r set r.locked=#{locked} and r.id=#{id}
+    </update>
+    <update id="del">
+        update app_recommend r set r.deleted=1 and r.id=#{id}
+    </update>
+</mapper>

@@ -72,9 +72,14 @@ private static final long serialVersionUID=1L;
     private Integer payType;
 
     /**
-     * 上架类型0立即上架1下架状态3自动上架
+     * 上架类型0立即上架1下架状态2自动上架
      */
     private Integer shelfType;
+
+    /**
+     * 自动上架时间
+     */
+    private LocalDateTime autoShelfTime;
 
     /**
      * 定义的skus格式类似{name:克重,values:[0.5,1,1]}
@@ -88,26 +93,6 @@ private static final long serialVersionUID=1L;
      * 乐观锁
      */
     private Integer version;
-
-    /**
-     * 创建人
-     */
-    private Integer createBy;
-
-    /**
-     * 创建时间
-     */
-    private LocalDateTime createTime;
-
-    /**
-     * 更新人
-     */
-    private Integer updateBy;
-
-    /**
-     * 更新时间
-     */
-    private LocalDateTime updateTime;
 
 
 }

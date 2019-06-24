@@ -5,6 +5,8 @@ import com.module.admin.app.dto.AppProductDto;
 import com.module.admin.app.entity.AppProduct;
 import com.module.admin.app.query.AppProductQuery;
 
+import java.util.List;
+
 /**
  *
  *
@@ -42,6 +44,10 @@ public interface AppProductService {
      */
     AppProductDto findUpdateDetail(Integer productId);
 
+    /**
+     * 修改商品
+     * @param productDto
+     */
     void update(AppProductDto productDto);
     /**
      * 上下架
@@ -49,4 +55,11 @@ public interface AppProductService {
      * @param status 0上架1下架
      */
     void shelfAndObtained(Integer productId,Integer status);
+
+    /**
+     * 模糊查询商品
+     * @param keyWord
+     * @return
+     */
+    List<AppProduct> likeSearchProduct(String keyWord);
 }

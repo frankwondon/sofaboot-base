@@ -29,15 +29,16 @@ private static final long serialVersionUID=1L;
      */
     private Integer tempId;
 
-    /**
-     * 大区
-     */
-    private String name;
 
     /**
      * 区域JSON格式[{c:20001,n:'陕西'}]
      */
     private String area;
+
+    /**
+     * 首基数
+     */
+    private Integer firstNum;
 
     /**
      * 首价

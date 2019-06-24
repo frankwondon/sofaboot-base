@@ -4,8 +4,8 @@
     <insert id="insertList">
         INSERT INTO app_express_template_area (
             temp_id,
-            NAME,
             area,
+            first_num,
             first_price,
             continue_num,
             continue_price
@@ -14,8 +14,8 @@
         <foreach collection="list" item="item"   index="index" separator=",">
             (
             #{tempId},
-            #{item.name},
             #{item.area},
+            #{item.firstNum},
             #{item.firstPrice},
             #{item.continueNum},
             #{item.continuePrice}

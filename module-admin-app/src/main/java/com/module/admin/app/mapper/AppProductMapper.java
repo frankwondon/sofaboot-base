@@ -4,7 +4,10 @@ import com.baomidou.mybatisplus.core.metadata.IPage;
 import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
 import com.module.admin.app.entity.AppProduct;
 import com.baomidou.mybatisplus.core.mapper.BaseMapper;
+import com.module.admin.app.entity.AppProductAdditionOne;
 import org.apache.ibatis.annotations.Param;
+
+import java.util.List;
 
 /**
  * <p>
@@ -15,6 +18,11 @@ import org.apache.ibatis.annotations.Param;
  * @since 2019-06-14
  */
 public interface AppProductMapper extends BaseMapper<AppProduct> {
+    /**
+     * 插入扩展表
+     * @param additionOne
+     */
+    void  insertAppProductAdditionOne(AppProductAdditionOne additionOne);
     /**
      * 商品列表
      * @param page
@@ -33,7 +41,18 @@ public interface AppProductMapper extends BaseMapper<AppProduct> {
 
     /**
      * 上下架
+     * @param productId
+     * @param status
      * @return
      */
     int updateShelfAndObtained(@Param("productId") Integer productId,@Param("status") Integer status);
+
+    /**
+     * 根据商品编号和商品名称模糊查询5条商品信息
+     * @param keyWord
+     * @return
+     */
+    List<AppProduct> likeSearchProduct(String keyWord);
+
+
 }

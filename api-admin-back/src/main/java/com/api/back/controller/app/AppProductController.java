@@ -46,7 +46,8 @@ public class AppProductController {
     @ApiImplicitParams({
             @ApiImplicitParam(name = "name"  ,paramType = "query",required = true,value = "商品名称"),
             @ApiImplicitParam(name = "num"  ,paramType = "query",required = true,value = "商品编号自动生成"),
-            @ApiImplicitParam(name = "shelfType" ,paramType = "query" ,required = true,value = "0立即上架1下架"),
+            @ApiImplicitParam(name = "shelfType" ,paramType = "query" ,required = true,value = "上架类型0立即上架1下架状态2自动上架"),
+            @ApiImplicitParam(name = "autoShelfTime" ,paramType = "query" ,required = true,value = "上架类型0立即上架1下架状态2自动上架"),
             @ApiImplicitParam(name = "mainImg" ,paramType = "query" ,required = true,value = "首页展示图片"),
             @ApiImplicitParam(name = "productType" ,paramType = "query" ,required = true,value = "商品类型ID"),
             @ApiImplicitParam(name = "descImg" ,paramType = "query" ,required = true,value = "产品详情图"),
@@ -54,7 +55,6 @@ public class AppProductController {
             @ApiImplicitParam(name = "shipType" ,paramType = "query" ,required = true,value = "发货方式0物流1无需物流"),
             @ApiImplicitParam(name = "payType" ,paramType = "query" ,required = true,value = "支付方式0在线支付"),
             @ApiImplicitParam(name = "skus" ,paramType = "query" ,required = true,value = "定义的skus格式[{name:'克重',values:[{key:'0.5g',check:true}]}]"),
-            @ApiImplicitParam(name = "finalSkus" ,paramType = "query" ,required = true,value = "生成的格式类似[sku的结果]")
     })
     public Response<Boolean> createProduct(AppProductDto dto){
         appProductService.create(dto);

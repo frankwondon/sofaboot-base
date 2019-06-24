@@ -11,6 +11,7 @@ import com.module.common.bean.PageQuery;
 import org.springframework.beans.BeanUtils;
 
 import javax.annotation.Resource;
+import java.util.List;
 
 /**
  * @author wangdong
@@ -42,6 +43,14 @@ public class AppProductTypeServiceImpl implements AppProductTypeService {
     @Override
     public void disable(Integer productId, Integer locked){
         productTypeMapper.disable(productId,locked);
+    }
+
+    @Override
+    public List<AppProductType> listUse() {
+        QueryWrapper queryWrapper=new QueryWrapper();
+        queryWrapper.like("deleted",0);
+        queryWrapper.like("locked",0);
+        return productTypeMapper.selectList( queryWrapper);
     }
 
 }

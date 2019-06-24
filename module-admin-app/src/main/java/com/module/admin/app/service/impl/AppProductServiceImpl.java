@@ -8,6 +8,7 @@ import com.module.admin.app.constant.ProductConstant;
 import com.module.admin.app.dto.AppProductDto;
 import com.module.admin.app.dto.AppProductSkuDto;
 import com.module.admin.app.entity.AppProduct;
+import com.module.admin.app.entity.AppProductAdditionOne;
 import com.module.admin.app.entity.AppProductSku;
 import com.module.admin.app.mapper.AppProductMapper;
 import com.module.admin.app.mapper.AppProductSkuMapper;
@@ -64,8 +65,14 @@ public class AppProductServiceImpl implements AppProductService {
                 productDto.setStatus(1);
             }
             if (finalSkuCheck(productDto.getSkus(),productDto.getFinalSkus())){
+                //插入主表
                 productMapper.insert(productDto);
-                saveSku(productDto.getFinalSkus(),productDto.getId());
+                AppProductAdditionOne one=new AppProductAdditionOne();
+                one.setProductId(productDto.getId());
+                one.setPv(0);
+                //插入附加表
+                productMapper.insertAppProductAdditionOne(one);
+                saveSku(productDto.getProductSkus(),productDto.getId());
             }
         }finally {
             ProductConstant.PRODUCT_CREATE_NUM.remove(num);
@@ -83,15 +90,12 @@ public class AppProductServiceImpl implements AppProductService {
 
     /**
      * 保存SKU数据
-     * @param finalSku
+     * @param productSkus
      */
-    private void saveSku(String finalSku,Integer productId){
-        JSONArray skus=JSONArray.parseArray(finalSku);
-        skus.forEach(o -> {
-            JSONObject object= (JSONObject) o;
-            AppProductSkuDto appProductSkuDto = object.toJavaObject(AppProductSkuDto.class);
-            appProductSkuDto.setProductId(productId);
-            productSkuMapper.insert(appProductSkuDto);
+    private void saveSku(List<AppProductSku> productSkus,Integer productId){
+        productSkus.forEach(o -> {
+            o.setProductId(productId);
+            productSkuMapper.insert(o);
         });
     }
 
@@ -123,7 +127,7 @@ public class AppProductServiceImpl implements AppProductService {
             //删除之前的sku
             productSkuMapper.delProductSku(productDto.getId());
             productMapper.updateById(productDto);
-            saveSku(productDto.getFinalSkus(),productDto.getId());
+            saveSku(productDto.getProductSkus(),productDto.getId());
         }
     }
 
@@ -135,5 +139,10 @@ public class AppProductServiceImpl implements AppProductService {
         }else {
             throw new DBOperationException(ResponseCode.C_500003);
         }
+    }
+
+    @Override
+    public List<AppProduct> likeSearchProduct(String keyWord) {
+        return null;
     }
 }

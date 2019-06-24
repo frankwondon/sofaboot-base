@@ -9,6 +9,7 @@ import com.module.admin.app.mapper.AppExpressTemplateMapper;
 import com.module.admin.app.service.AppExpressTemplateService;
 import com.module.common.ResponseCode;
 import com.module.common.exception.DBOperationException;
+import org.springframework.beans.BeanUtils;
 import org.springframework.transaction.annotation.Transactional;
 
 import javax.annotation.Resource;
@@ -34,7 +35,8 @@ public class AppExpressTemplateServiceImpl implements AppExpressTemplateService 
         if (appExpressTemplates != null) {
             List<ExpressTemplateDto> result = new ArrayList<>();
             appExpressTemplates.forEach(t -> {
-                ExpressTemplateDto dto = (ExpressTemplateDto) t;
+                ExpressTemplateDto dto = new ExpressTemplateDto();
+                BeanUtils.copyProperties(t,dto);
                 QueryWrapper queryWrapper = new QueryWrapper();
                 queryWrapper.eq("temp_id", t.getId());
                 List<AppExpressTemplateArea> list = expressTemplateAreaMapper.selectList(queryWrapper);

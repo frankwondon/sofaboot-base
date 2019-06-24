@@ -4,6 +4,8 @@ import com.baomidou.mybatisplus.core.metadata.IPage;
 import com.module.admin.app.entity.AppProductType;
 import com.module.common.bean.PageQuery;
 
+import java.util.List;
+
 /**
  *
  *@author wangdong
@@ -25,4 +27,10 @@ public interface AppProductTypeService {
      * @param locked
      */
     void disable(Integer id,Integer locked);
+
+    /**
+     * 查询所有可用商品类型
+     * @return
+     */
+    List<AppProductType> listUse();
 }

@@ -8,7 +8,7 @@
             app_product p
         WHERE
             p.`status` = #{status}
-        AND p.`name` CONCAT('%',#{keyWord],'%')
+        AND p.`name` like CONCAT(#{keyWord},'%')
     </select>
 
     <select id="callProductNum" statementType="CALLABLE" resultType="String">
@@ -18,4 +18,12 @@
     <update id="updateShelfAndObtained">
         update app_product p set p.`status`=#{status} where p.id=#{productId}
     </update>
+
+    <select id="likeSearchProduct" resultType="com.module.admin.app.entity.AppProduct">
+        select * from app_product p where p.`name` like CONCAT(#{keyWord},'%') or   p.num like CONCAT(#{keyWord},'%') limit 5
+    </select>
+
+    <insert id="insertAppProductAdditionOne" parameterType="com.module.admin.app.entity.AppProductAdditionOne">
+        insert into app_product_addition_one VALUES (#{productId},#{pv},1)
+    </insert>
 </mapper>

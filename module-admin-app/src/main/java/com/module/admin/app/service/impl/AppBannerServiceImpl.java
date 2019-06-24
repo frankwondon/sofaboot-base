@@ -19,9 +19,33 @@ public class AppBannerServiceImpl implements AppBannerService {
     private AppBannerMapper appBannerMapper;
 
 
+    @Override
     public IPage<AppBanner> list(PageQuery pageQuery){
         Page page=new Page<>(pageQuery.getPage(),pageQuery.getLimit());
-        IPage<AppBanner> iPage = appBannerMapper.selectPage(page, new QueryWrapper<>());
+        QueryWrapper<AppBanner> queryWrapper = new QueryWrapper<>();
+        queryWrapper.eq("deleted",0);
+        queryWrapper.like("name",pageQuery.getKeyWord());
+        IPage<AppBanner> iPage = appBannerMapper.selectPage(page, queryWrapper);
         return iPage;
+    }
+
+    @Override
+    public void add(AppBanner appBanner){
+        appBannerMapper.insert(appBanner);
+    }
+
+    @Override
+    public void update(AppBanner appBanner){
+        appBannerMapper.updateById(appBanner);
+    }
+
+    @Override
+    public void del(Integer id){
+        appBannerMapper.deleteById(id);
+    }
+
+    @Override
+    public void disable(Integer id , Integer locked){
+        appBannerMapper.disable(id,locked);
     }
 }

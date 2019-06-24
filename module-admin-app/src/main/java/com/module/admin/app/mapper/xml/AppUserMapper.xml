@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.module.admin.app.mapper.AppUserMapper">
+    <select id="listOfUser" resultType="com.module.admin.app.result.UserManagerResult">
+        SELECT
+        u.username as userName,
+        u.sex as sex,
+        u.cell_phone_num as phone,
+        u.id_card as idCard,
+        u.bank_confirm as bankConfirm,
+        u.locked as locked
+        FROM
+            app_user u
+        WHERE
+            u.username LIKE CONCAT(#{keyWord},'%')
+        OR u.cell_phone_num LIKE CONCAT(#{keyWord},'%')
+    </select>
+
+    <update id="disable">
+        update  app_user u set u.locked=1 where u.id=#{id}
+    </update>
+</mapper>
