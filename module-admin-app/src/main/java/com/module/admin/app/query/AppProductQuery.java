@@ -15,6 +15,6 @@ public class AppProductQuery  extends PageQuery {
         super(page, limit);
     }
 
-    /**0上架1下架2售完3即将卖完*/
+    /**0上架1下架2售完/即将卖完*/
     private Integer status;
 }

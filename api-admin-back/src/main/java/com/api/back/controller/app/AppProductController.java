@@ -5,6 +5,7 @@ import com.baomidou.mybatisplus.core.metadata.IPage;
 import com.module.admin.app.dto.AppProductDto;
 import com.module.admin.app.entity.AppProduct;
 import com.module.admin.app.query.AppProductQuery;
+import com.module.admin.app.result.AppProductResult;
 import com.module.admin.app.service.AppProductService;
 import com.module.common.Response;
 import io.swagger.annotations.Api;
@@ -31,7 +32,7 @@ public class AppProductController {
             @ApiImplicitParam(name = "limit" ,paramType = "query" ,required = true,value = "每页条数"),
             @ApiImplicitParam(name = "keyWord" ,paramType = "query" ,required = true,value = "模糊查询条件"),
     })
-    public Response<IPage<AppProduct>> productList(AppProductQuery query){
+    public Response<IPage<AppProductResult>> productList(AppProductQuery query){
         return Response.success(appProductService.list(query));
     }
 
@@ -46,8 +47,8 @@ public class AppProductController {
     @ApiImplicitParams({
             @ApiImplicitParam(name = "name"  ,paramType = "query",required = true,value = "商品名称"),
             @ApiImplicitParam(name = "num"  ,paramType = "query",required = true,value = "商品编号自动生成"),
-            @ApiImplicitParam(name = "shelfType" ,paramType = "query" ,required = true,value = "上架类型0立即上架1下架状态2自动上架"),
-            @ApiImplicitParam(name = "autoShelfTime" ,paramType = "query" ,required = true,value = "上架类型0立即上架1下架状态2自动上架"),
+            @ApiImplicitParam(name = "ShelfType" ,paramType = "query" ,required = true,value = "上架类型0立即上架1下架状态2自动上架"),
+            @ApiImplicitParam(name = "autoShelfTimeStr" ,paramType = "query" ,required = true,value = "自动上架时间"),
             @ApiImplicitParam(name = "mainImg" ,paramType = "query" ,required = true,value = "首页展示图片"),
             @ApiImplicitParam(name = "productType" ,paramType = "query" ,required = true,value = "商品类型ID"),
             @ApiImplicitParam(name = "descImg" ,paramType = "query" ,required = true,value = "产品详情图"),
@@ -73,7 +74,7 @@ public class AppProductController {
     @ApiImplicitParams({
             @ApiImplicitParam(name = "name"  ,paramType = "query",required = true,value = "商品名称"),
             @ApiImplicitParam(name = "num"  ,paramType = "query",required = true,value = "商品编号自动生成"),
-            @ApiImplicitParam(name = "shelfType" ,paramType = "query" ,required = true,value = "0立即上架1下架"),
+            @ApiImplicitParam(name = "ShelfType" ,paramType = "query" ,required = true,value = "0立即上架1下架"),
             @ApiImplicitParam(name = "productGram" ,paramType = "query" ,required = true,value = "产品净重"),
             @ApiImplicitParam(name = "mainImg" ,paramType = "query" ,required = true,value = "首页展示图片多张,隔开"),
             @ApiImplicitParam(name = "productType" ,paramType = "query" ,required = true,value = "商品类型ID"),
@@ -99,5 +100,11 @@ public class AppProductController {
     public Response<Boolean> ShelfAndObtained(Integer productId,Integer status){
         appProductService.shelfAndObtained(productId,status);
         return Response.success(true);
+    }
+
+    @GetMapping("productCountDown")
+    @ApiOperation(value = "售卖完/即将售卖完的接口")
+    public Response<Integer> productCountDown(){
+        return Response.success(appProductService.productCountDown());
     }
 }

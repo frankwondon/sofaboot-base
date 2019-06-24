@@ -1,0 +1,51 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.module.api.app.mapper.AppProductMapper">
+    <select id="listOfShelf" resultType="com.module.api.app.entity.AppProduct">
+        SELECT
+            p.*
+        FROM
+            app_product p
+        WHERE
+            p.`status` = #{status}
+        AND p.`name` like CONCAT(#{keyWord},'%')
+    </select>
+
+    <select id="listOfBuyStatus" resultType="com.module.api.app.entity.AppProduct">
+        SELECT
+            p.*
+        FROM
+            app_product p
+        WHERE
+            #{reserve} > (
+                SELECT
+                    MIN(sku.reserve)
+                FROM
+                    app_product_sku sku
+                WHERE
+                    sku.product_id = p.id
+                and sku.deleted=0
+                and sku.locked=0
+            )
+    </select>
+
+    <select id="countOfBuyStatus">
+        select count(1) FROM app_product_sku sku where sku.reserve&lt;#{reserve} GROUP BY sku.product_id
+    </select>
+
+    <select id="callProductNum" statementType="CALLABLE" resultType="String">
+        {call generator(#{id,mode=IN})}
+    </select>
+
+    <update id="updateShelfAndObtained">
+        update app_product p set p.`status`=#{status} where p.id=#{productId}
+    </update>
+
+    <select id="likeSearchProduct" resultType="com.module.api.app.entity.AppProduct">
+        select * from app_product p where p.`name` like CONCAT(#{keyWord},'%') or   p.num like CONCAT(#{keyWord},'%') limit 5
+    </select>
+
+    <insert id="insertAppProductAdditionOne" parameterType="com.module.api.app.entity.AppProductAdditionOne">
+        insert into app_product_addition_one VALUES (#{productId},#{pv},1)
+    </insert>
+</mapper>

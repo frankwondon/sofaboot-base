@@ -31,5 +31,5 @@ public interface AppUserMapper extends BaseMapper<AppUser> {
      * @param id
      * @return
      */
-    int disable(Integer id);
+    int disable(@Param("id") Integer id, @Param("locked") Integer locked);
 }

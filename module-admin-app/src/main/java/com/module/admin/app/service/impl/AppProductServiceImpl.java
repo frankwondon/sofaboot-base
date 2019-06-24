@@ -1,22 +1,23 @@
 package com.module.admin.app.service.impl;
 
-import com.alibaba.fastjson.JSONArray;
-import com.alibaba.fastjson.JSONObject;
 import com.baomidou.mybatisplus.core.metadata.IPage;
 import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
 import com.module.admin.app.constant.ProductConstant;
 import com.module.admin.app.dto.AppProductDto;
-import com.module.admin.app.dto.AppProductSkuDto;
 import com.module.admin.app.entity.AppProduct;
 import com.module.admin.app.entity.AppProductAdditionOne;
 import com.module.admin.app.entity.AppProductSku;
 import com.module.admin.app.mapper.AppProductMapper;
 import com.module.admin.app.mapper.AppProductSkuMapper;
 import com.module.admin.app.query.AppProductQuery;
+import com.module.admin.app.result.AppProductResult;
 import com.module.admin.app.service.AppProductService;
 import com.module.common.ResponseCode;
+import com.module.common.constant.BackAdminConstant;
+import com.module.common.constant.DateFormatConstant;
 import com.module.common.constant.ProductEnum;
 import com.module.common.exception.DBOperationException;
+import com.module.common.util.JDK8DateTimeUtil;
 import org.springframework.beans.BeanUtils;
 import org.springframework.transaction.annotation.Transactional;
 import javax.annotation.Resource;
@@ -37,9 +38,13 @@ public class AppProductServiceImpl implements AppProductService {
 
 
     @Override
-    public IPage<AppProduct> list(AppProductQuery pageQuery){
+    public IPage<AppProductResult> list(AppProductQuery pageQuery){
         Page page=new Page<>(pageQuery.getPage(),pageQuery.getLimit());
-        return productMapper.list(page,pageQuery.getStatus(),pageQuery.getKeyWord());
+        if(pageQuery.getStatus()== ProductEnum.SearchShelfStatus.COUNTDOWN.key()){
+            return productMapper.listOfBuyStatus(page,pageQuery.getKeyWord(),BackAdminConstant.PRODUCT_COUNT_DOWN);
+        }else {
+            return productMapper.listOfShelf(page,pageQuery.getStatus(),pageQuery.getKeyWord());
+        }
     }
 
     @Override
@@ -59,11 +64,12 @@ public class AppProductServiceImpl implements AppProductService {
         }
         try {
             //立即上架的商品前台直接可以查询到
-            if (ProductEnum.shelfType.ATONCE.key()==productDto.getShelfType()){
+            if (ProductEnum.ShelfType.ATONCE.key()==productDto.getShelfType()){
                 productDto.setStatus(0);
             }else {
                 productDto.setStatus(1);
             }
+            productDto.setAutoShelfTime(JDK8DateTimeUtil.parseOfStr(productDto.getAutoShelfTimeStr(),DateFormatConstant.DATE_TIME));
             if (finalSkuCheck(productDto.getSkus(),productDto.getFinalSkus())){
                 //插入主表
                 productMapper.insert(productDto);
@@ -113,7 +119,7 @@ public class AppProductServiceImpl implements AppProductService {
     @Transactional(rollbackFor = Exception.class)
     public void update(AppProductDto productDto){
         //立即上架的商品前台直接可以查询到
-        if (ProductEnum.shelfType.ATONCE.key()==productDto.getShelfType()){
+        if (ProductEnum.ShelfType.ATONCE.key()==productDto.getShelfType()){
             productDto.setStatus(0);
         }else {
             productDto.setStatus(1);
@@ -134,7 +140,7 @@ public class AppProductServiceImpl implements AppProductService {
 
     @Override
     public void shelfAndObtained(Integer productId, Integer status){
-        if (ProductEnum.shelfStatus.SHELF.key()==status||ProductEnum.shelfStatus.OBTAINED.key()==status){
+        if (ProductEnum.ShelfStatus.SHELF.key()==status|| ProductEnum.ShelfStatus.OBTAINED.key()==status){
             productMapper.updateShelfAndObtained(productId,status);
         }else {
             throw new DBOperationException(ResponseCode.C_500003);
@@ -144,5 +150,10 @@ public class AppProductServiceImpl implements AppProductService {
     @Override
     public List<AppProduct> likeSearchProduct(String keyWord) {
         return null;
+    }
+
+    @Override
+    public Integer productCountDown() {
+        return productMapper.countOfBuyStatus(BackAdminConstant.PRODUCT_COUNT_DOWN);
     }
 }

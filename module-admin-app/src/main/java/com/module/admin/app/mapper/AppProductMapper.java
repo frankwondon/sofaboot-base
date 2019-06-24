@@ -1,10 +1,11 @@
 package com.module.admin.app.mapper;
 
+import com.baomidou.mybatisplus.core.mapper.BaseMapper;
 import com.baomidou.mybatisplus.core.metadata.IPage;
 import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
 import com.module.admin.app.entity.AppProduct;
-import com.baomidou.mybatisplus.core.mapper.BaseMapper;
 import com.module.admin.app.entity.AppProductAdditionOne;
+import com.module.admin.app.result.AppProductResult;
 import org.apache.ibatis.annotations.Param;
 
 import java.util.List;
@@ -30,7 +31,17 @@ public interface AppProductMapper extends BaseMapper<AppProduct> {
      * @param keyWord
      * @return
      */
-    IPage<AppProduct> list(Page page, @Param("status")Integer status,@Param("keyWord")String keyWord);
+    IPage<AppProductResult> listOfShelf(Page page, @Param("status") Integer status, @Param("keyWord") String keyWord);
+
+
+    IPage<AppProductResult> listOfBuyStatus(Page page, @Param("keyWord") String keyWord, @Param("reserve") Integer reserve);
+
+    /**
+     * 计数库存<指定数的
+     * @param reserve
+     * @return
+     */
+    Integer countOfBuyStatus(@Param("reserve") Integer reserve);
 
     /**
      * 调用商品编号生成存储过程
@@ -45,7 +56,7 @@ public interface AppProductMapper extends BaseMapper<AppProduct> {
      * @param status
      * @return
      */
-    int updateShelfAndObtained(@Param("productId") Integer productId,@Param("status") Integer status);
+    int updateShelfAndObtained(@Param("productId") Integer productId, @Param("status") Integer status);
 
     /**
      * 根据商品编号和商品名称模糊查询5条商品信息

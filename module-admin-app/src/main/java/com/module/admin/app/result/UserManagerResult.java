@@ -2,12 +2,16 @@ package com.module.admin.app.result;
 
 import lombok.Data;
 
+import java.io.Serializable;
+
 /**
  * @author wangdong
  * @date: 2019/6/21 15:30
  */
 @Data
-public class UserManagerResult {
+public class UserManagerResult implements Serializable {
+
+    private Integer id;
     /**
      * 用户名
      */

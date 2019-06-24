@@ -40,4 +40,9 @@ public class BeanConfigure {
         return new AppRecommendServiceImpl();
     }
 
+    @Bean
+    @SofaService
+    public AppUserService appUserService(){
+        return  new AppUserServiceImpl();
+    }
 }

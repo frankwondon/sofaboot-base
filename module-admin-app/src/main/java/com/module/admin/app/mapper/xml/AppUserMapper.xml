@@ -17,6 +17,6 @@
     </select>
 
     <update id="disable">
-        update  app_user u set u.locked=1 where u.id=#{id}
+        update  app_user u set u.locked=#{locked} where u.id=#{id}
     </update>
 </mapper>

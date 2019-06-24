@@ -21,6 +21,7 @@
         <module>api-cms</module>
         <module>api-app</module>
         <module>module-admin-app</module>
+        <module>module-api-app</module>
     </modules>
     <dependencies>
 

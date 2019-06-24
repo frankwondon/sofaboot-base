@@ -22,9 +22,8 @@ public class AppUserServiceImpl implements AppUserService {
     }
 
     @Override
-    public void disable(Integer id) {
+    public void disable(Integer id,Integer locked) {
         //todo 这里最好采用redis缓存 来降低APP端的请求
-        userMapper.disable(id);
-
+        userMapper.disable(id,locked);
     }
 }

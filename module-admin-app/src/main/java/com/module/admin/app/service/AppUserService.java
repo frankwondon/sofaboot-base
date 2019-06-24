@@ -20,7 +20,8 @@ public interface AppUserService {
     /**
      * 禁用用户
      * @param id
+     * @param locked
      */
-    void disable(Integer id);
+    void disable(Integer id,Integer locked);
 
 }

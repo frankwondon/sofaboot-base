@@ -4,6 +4,7 @@ import com.baomidou.mybatisplus.core.metadata.IPage;
 import com.module.admin.app.dto.AppProductDto;
 import com.module.admin.app.entity.AppProduct;
 import com.module.admin.app.query.AppProductQuery;
+import com.module.admin.app.result.AppProductResult;
 
 import java.util.List;
 
@@ -19,7 +20,7 @@ public interface AppProductService {
      * @param pageQuery
      * @return
      */
-     IPage<AppProduct> list(AppProductQuery pageQuery);
+     IPage<AppProductResult> list(AppProductQuery pageQuery);
 
     /**
      * 商品编号
@@ -62,4 +63,10 @@ public interface AppProductService {
      * @return
      */
     List<AppProduct> likeSearchProduct(String keyWord);
+
+    /**
+     * 已经售卖完即将售卖完的
+     * @return
+     */
+    Integer productCountDown();
 }

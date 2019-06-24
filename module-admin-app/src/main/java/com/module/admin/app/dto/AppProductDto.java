@@ -16,4 +16,8 @@ import java.util.List;
 @Data
 public class AppProductDto extends AppProduct {
     private List<AppProductSku> productSkus;
+    /**
+     * 自动上架的时间String类型
+     */
+    private String autoShelfTimeStr;
 }
