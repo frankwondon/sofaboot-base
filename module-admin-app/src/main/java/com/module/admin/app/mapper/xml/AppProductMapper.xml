@@ -103,10 +103,10 @@
             app_product p
         WHERE
         1=1
-        <if test="userName != null and userName != ''">
+        <if test="_parameter != null and _parameter != ''">
            AND(
-             p.`name` LIKE CONCAT({ keyWord }, '%')
-            OR p.num LIKE CONCAT({ keyWord }, '%')
+             p.`name` LIKE CONCAT(#{ keyWord }, '%')
+            OR p.num LIKE CONCAT(#{ keyWord }, '%')
             )
         </if>
         LIMIT 5

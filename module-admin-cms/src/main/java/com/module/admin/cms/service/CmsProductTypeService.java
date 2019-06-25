@@ -1,11 +1,10 @@
 package com.module.admin.cms.service;
 
 import com.baomidou.mybatisplus.core.metadata.IPage;
-import com.module.admin.cms.entity.CmsProduct;
 import com.module.admin.cms.entity.CmsProductType;
 import com.module.admin.cms.query.ProductQuery;
 import com.module.admin.cms.result.CmsProductTypeResult;
-import com.module.common.bean.CurrentUser;
+import com.module.common.bean.AdminCurrentUser;
 import com.module.common.bean.PageQuery;
 
 import java.util.List;
@@ -28,7 +27,7 @@ public interface CmsProductTypeService {
      */
     List<CmsProductType> listSelect();
 
-    void addOrUpdate(CmsProductType product, CurrentUser user);
+    void addOrUpdate(CmsProductType product, AdminCurrentUser user);
 
     void del(Integer id);
 
@@ -36,7 +35,7 @@ public interface CmsProductTypeService {
      * 禁用Banner
      * @param id
      */
-    void disable(Integer id, Boolean disable, CurrentUser user);
+    void disable(Integer id, Boolean disable, AdminCurrentUser user);
 
     /**
      * 前台-列表

@@ -1,9 +1,9 @@
 package com.module.base.common.dto;
 
+
 import lombok.Data;
 
 import java.io.Serializable;
-
 @Data
 public class SmsBaseDto implements Serializable {
     /**

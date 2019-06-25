@@ -7,7 +7,7 @@ import com.module.admin.back.query.BackUserQuery;
 import com.module.admin.back.result.BackUserResult;
 import com.module.admin.back.service.BackUserService;
 import com.module.common.Response;
-import com.module.common.bean.CurrentUser;
+import com.module.common.bean.AdminCurrentUser;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
 import org.apache.shiro.SecurityUtils;
@@ -38,7 +38,7 @@ public class MerchantUserController {
 
     @ApiOperation("添加用户")
     @PostMapping("/addUser")
-    public Response<Boolean> addBackUser(BackUser backUser,@ApiIgnore CurrentUser user) {
+    public Response<Boolean> addBackUser(BackUser backUser,@ApiIgnore AdminCurrentUser user) {
         if (backUser.getId()!=null){
             backUser.setCreateBy(user.getId());
             backUserService.updateUser(backUser);
@@ -67,7 +67,7 @@ public class MerchantUserController {
 
     @ApiOperation("修改密码")
     @PostMapping("updatePwd")
-    public Response<Boolean> updatePwd(@ApiIgnore CurrentUser currentUser, String newPwd, String oldPwd){
+    public Response<Boolean> updatePwd(@ApiIgnore AdminCurrentUser currentUser, String newPwd, String oldPwd){
         backUserService.updatePwd(currentUser.getId(),newPwd,oldPwd);
         //登出
         SecurityUtils.getSubject().logout();

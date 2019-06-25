@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.module.api.app.mapper.ProductMapper">
+    <select id="pageQuery" resultType="com.module.api.app.result.AppProductResult">
+         SELECT
+            p.id product_id,
+            p.`name` product_name,
+            p.main_img img_url
+        FROM
+            app_product p
+        WHERE
+            p.`status` = 0
+        AND	p.product_type =#{typeId}
+    </select>
+    <select id="listProductType" resultType="com.module.api.app.result.AppProductTypeResult">
+        SELECT
+            t.id type_id,
+            t.`name`
+        FROM
+            app_product_type t
+        WHERE
+            t.locked = 0
+        AND t.deleted = 0
+        ORDER BY t.sort
+    </select>
+</mapper>

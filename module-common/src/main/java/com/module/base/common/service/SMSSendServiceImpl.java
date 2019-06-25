@@ -1,6 +1,7 @@
 package com.module.base.common.service;
 
-import com.module.base.common.dto.SmsBaseDto;
+import com.module.base.common.dto.SmsVerifyCodeDto;
+import com.module.common.util.RandomUtil;
 
 /**
  * @author wangdong
@@ -8,8 +9,13 @@ import com.module.base.common.dto.SmsBaseDto;
  */
 public class SMSSendServiceImpl implements SMSSendService {
 
-    @Override
-    public <T extends SmsBaseDto> void sendLoginVerifyCode(T sendDto) {
 
+    @Override
+    public void sendLoginVerifyCode(String phone) {
+        SmsVerifyCodeDto smsBaseDto = new SmsVerifyCodeDto();
+        smsBaseDto.setSmsMsg(RandomUtil.fourVerifyCode());
+        smsBaseDto.setMobile(phone);
     }
+
+
 }

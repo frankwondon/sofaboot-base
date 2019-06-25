@@ -1,9 +1,8 @@
 package com.api.back.shiro;
 
-import com.module.admin.back.entity.BackUser;
 import com.module.admin.back.result.BackUserResult;
 import com.module.admin.back.service.BackUserService;
-import com.module.common.bean.CurrentUser;
+import com.module.common.bean.AdminCurrentUser;
 import org.apache.shiro.authc.*;
 import org.apache.shiro.authz.AuthorizationInfo;
 import org.apache.shiro.authz.SimpleAuthorizationInfo;
@@ -31,7 +30,7 @@ public class LoginRealm extends AuthorizingRealm {
         UsernamePasswordToken token= (UsernamePasswordToken) authenticationToken;
         String username = token.getUsername();
         BackUserResult user = backUserService.getByAccount(username);
-        CurrentUser currentUser=new CurrentUser();
+        AdminCurrentUser currentUser=new AdminCurrentUser();
         if (user!=null){
             if (user.getLocked()==1){
                 throw new AuthenticationException("该用户已经被锁定");

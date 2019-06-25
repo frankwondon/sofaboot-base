@@ -4,10 +4,9 @@ import cn.hutool.core.util.StrUtil;
 import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
 import com.module.admin.back.entity.BackMenu;
 import com.module.admin.back.mapper.BackMenuMapper;
-import com.module.admin.back.result.PermissionTreeResult;
 import com.module.admin.back.service.BackMenuService;
 import com.module.common.ResponseCode;
-import com.module.common.bean.CurrentUser;
+import com.module.common.bean.AdminCurrentUser;
 import com.module.common.constant.BackAdminConstant;
 import com.module.common.exception.DBOperationException;
 
@@ -48,7 +47,7 @@ public class BackMenuServiceImpl implements BackMenuService {
     }
 
     @Override
-    public List<BackMenu> loadSite(CurrentUser user) {
+    public List<BackMenu> loadSite(AdminCurrentUser user) {
         List<BackMenu> backMenus;
         //超管查询全部
         if (user.getRoleId().equals(BackAdminConstant.SUPER_USER_ROLE)) {
@@ -66,7 +65,7 @@ public class BackMenuServiceImpl implements BackMenuService {
     }
 
     @Override
-    public List<BackMenu> loadMenu(CurrentUser user, String site) {
+    public List<BackMenu> loadMenu(AdminCurrentUser user, String site) {
         if (StrUtil.isNotBlank(site)){
             QueryWrapper queryWrapperSite = new QueryWrapper();
             queryWrapperSite.eq("deleted",0);

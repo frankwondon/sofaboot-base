@@ -8,7 +8,7 @@ import com.module.admin.cms.mapper.CmsProductMapper;
 import com.module.admin.cms.query.ProductQuery;
 import com.module.admin.cms.result.CmsProductResult;
 import com.module.admin.cms.service.CmsProductService;
-import com.module.common.bean.CurrentUser;
+import com.module.common.bean.AdminCurrentUser;
 import com.module.common.bean.PageQuery;
 
 import javax.annotation.Resource;
@@ -32,7 +32,7 @@ public class CmsProductServiceImpl implements CmsProductService {
     }
 
     @Override
-    public void addOrUpdate(CmsProduct product, CurrentUser user) {
+    public void addOrUpdate(CmsProduct product, AdminCurrentUser user) {
         if (product.getId()!=null){
             product.setUpdateBy(user.getId());
             product.setUpdateTime(LocalDateTime.now());
@@ -50,7 +50,7 @@ public class CmsProductServiceImpl implements CmsProductService {
     }
 
     @Override
-    public void disable(Integer id,Boolean disable, CurrentUser user) {
+    public void disable(Integer id,Boolean disable, AdminCurrentUser user) {
         if (disable){
             productMapper.disable(id,0);
         }else {

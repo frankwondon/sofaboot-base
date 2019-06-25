@@ -5,7 +5,7 @@ import com.baomidou.mybatisplus.core.metadata.IPage;
 import com.module.admin.cms.entity.CmsBanner;
 import com.module.admin.cms.service.CmsBannerService;
 import com.module.common.Response;
-import com.module.common.bean.CurrentUser;
+import com.module.common.bean.AdminCurrentUser;
 import com.module.common.bean.PageQuery;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiImplicitParam;
@@ -42,7 +42,7 @@ public class CmsBannerController {
             @ApiImplicitParam(name = "sort"  ,paramType = "query",required = true,value = "顺序"),
     })
     @PostMapping("addOrUpdate")
-    public Response addOrUpdate(@ApiIgnore CmsBanner cmsBanner,@ApiIgnore CurrentUser currentUser){
+    public Response addOrUpdate(@ApiIgnore CmsBanner cmsBanner,@ApiIgnore AdminCurrentUser currentUser){
         cmsBannerService.addOrUpdate(cmsBanner,currentUser);
         return Response.success(true);
     }
@@ -59,7 +59,7 @@ public class CmsBannerController {
             @ApiImplicitParam(name = "disable"  ,paramType = "query",required = true,value = "true启用false禁用"),
     })
     @PostMapping("disable")
-    public Response disable(Integer id, Boolean disable,@ApiIgnore CurrentUser currentUser){
+    public Response disable(Integer id, Boolean disable,@ApiIgnore AdminCurrentUser currentUser){
         cmsBannerService.disable(id,disable,currentUser);
         return Response.success(true);
     }

@@ -7,7 +7,7 @@ import com.module.admin.app.query.AppProductQuery;
 import com.module.admin.app.result.AppProductResult;
 import com.module.admin.app.service.AppProductService;
 import com.module.common.Response;
-import com.module.common.bean.CurrentUser;
+import com.module.common.bean.AdminCurrentUser;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiImplicitParam;
 import io.swagger.annotations.ApiImplicitParams;
@@ -59,7 +59,7 @@ public class AppProductController {
             @ApiImplicitParam(name = "payType" ,paramType = "query" ,required = true,value = "支付方式0在线支付"),
             @ApiImplicitParam(name = "skus" ,paramType = "query" ,required = true,value = "定义的skus格式[{name:'克重',values:[{key:'0.5g',check:true}]}]"),
     })
-    public Response<Boolean> createProduct(AppProductDto dto, @ApiIgnore CurrentUser user){
+    public Response<Boolean> createProduct(AppProductDto dto, @ApiIgnore AdminCurrentUser user){
         appProductService.createProduct(dto,user.getId());
         return Response.success(true);
     }
@@ -87,7 +87,7 @@ public class AppProductController {
             @ApiImplicitParam(name = "skus" ,paramType = "query" ,required = true,value = "定义的skus格式[{name:'克重',values:[{key:'0.5g',check:true}]}]"),
             @ApiImplicitParam(name = "finalSkus" ,paramType = "query" ,required = true,value = "生成的格式类似[sku的结果]")
      })
-    public Response<Boolean> updateProduct(AppProductDto dto,@ApiIgnore CurrentUser user){
+    public Response<Boolean> updateProduct(AppProductDto dto,@ApiIgnore AdminCurrentUser user){
         appProductService.update(dto);
         return Response.success(true);
     }

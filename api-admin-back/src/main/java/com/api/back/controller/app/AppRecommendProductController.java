@@ -38,9 +38,8 @@ public class AppRecommendProductController {
             @ApiImplicitParam(name = "name"  ,paramType = "query",required = true,value = "名称"),
             @ApiImplicitParam(name = "link"  ,paramType = "query",required = true,value = "跳转链接"),
             @ApiImplicitParam(name = "imgUrl"  ,paramType = "query",required = true,value = "图片路径"),
-            @ApiImplicitParam(name = "belong"  ,paramType = "query",required = true,value = "0首页 1商城"),
+            @ApiImplicitParam(name = "belong"  ,paramType = "query",required = true,value = "0奢华享受 1精品小件"),
             @ApiImplicitParam(name = "productId"  ,paramType = "query",required = true,value = "关联的商品Id"),
-            @ApiImplicitParam(name = "type"  ,paramType = "query",required = true,value = "0商品banner1其他普通直接跳转H5"),
             @ApiImplicitParam(name = "sort"  ,paramType = "query",required = true,value = "排序"),
     })
     public Response add(AppRecommend recommend){
@@ -61,11 +60,10 @@ public class AppRecommendProductController {
             @ApiImplicitParam(name = "descTitle"  ,paramType = "query",required = true,value = "描述标题"),
             @ApiImplicitParam(name = "descText"  ,paramType = "query",required = true,value = "描述内容"),
             @ApiImplicitParam(name = "productId"  ,paramType = "query",required = true,value = "关联的商品Id"),
-            @ApiImplicitParam(name = "type"  ,paramType = "query",required = true,value = "0商品banner1其他普通直接跳转H5"),
             @ApiImplicitParam(name = "sort"  ,paramType = "query",required = true,value = "排序"),
     })
     public Response update(AppRecommend banner){
-        recommendService.add(banner);
+        recommendService.update(banner);
         return Response.success(true);
     }
 

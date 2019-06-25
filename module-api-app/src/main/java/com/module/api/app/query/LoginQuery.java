@@ -15,6 +15,4 @@ public class LoginQuery {
     private String mobile;
     @ApiModelProperty("验证码")
     private String verifyCode;
-    @ApiModelProperty("设备ID")
-    private String deviceId;
 }

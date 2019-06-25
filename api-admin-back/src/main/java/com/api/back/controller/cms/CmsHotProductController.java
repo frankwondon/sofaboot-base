@@ -3,12 +3,11 @@ package com.api.back.controller.cms;
 import com.alipay.sofa.runtime.api.annotation.SofaReference;
 import com.baomidou.mybatisplus.core.metadata.IPage;
 import com.module.admin.cms.entity.CmsProduct;
-import com.module.admin.cms.entity.CmsProductType;
 import com.module.admin.cms.result.CmsProductResult;
 import com.module.admin.cms.service.CmsProductService;
 import com.module.admin.cms.service.CmsProductTypeService;
 import com.module.common.Response;
-import com.module.common.bean.CurrentUser;
+import com.module.common.bean.AdminCurrentUser;
 import com.module.common.bean.PageQuery;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiImplicitParam;
@@ -19,8 +18,6 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 import springfox.documentation.annotations.ApiIgnore;
-
-import java.util.List;
 
 @Api(tags = "重点产品管理")
 @RestController
@@ -57,7 +54,7 @@ public class CmsHotProductController {
             @ApiImplicitParam(name = "locked",paramType = "query" ,value = "0启用,1禁用 默认禁用"),
     })
     @PostMapping("addOrUpdate")
-    public Response addOrUpdate(@ApiIgnore CmsProduct productType,@ApiIgnore CurrentUser currentUser){
+    public Response addOrUpdate(@ApiIgnore CmsProduct productType,@ApiIgnore AdminCurrentUser currentUser){
         productType.setShowType(1);
         productType.setTypeId(-1);
         productService.addOrUpdate(productType,currentUser);
@@ -79,7 +76,7 @@ public class CmsHotProductController {
             @ApiImplicitParam(name = "disable"  ,paramType = "query",required = true,value = "true启用false禁用"),
     })
     @PostMapping("disable")
-    public Response disable(Integer id, Boolean disable,@ApiIgnore CurrentUser currentUser){
+    public Response disable(Integer id, Boolean disable,@ApiIgnore AdminCurrentUser currentUser){
         productService.disable(id,disable,currentUser);
         return Response.success(true);
     }

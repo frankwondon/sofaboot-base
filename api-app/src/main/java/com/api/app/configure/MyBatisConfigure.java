@@ -6,7 +6,7 @@ import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 
 @Configuration
-@MapperScan(basePackages = {"com.module.admin.back.mapper","com.module.admin.cms.mapper"})
+@MapperScan(basePackages = {"com.module.api.app.mapper"})
 public class MyBatisConfigure {
     /**分页插件*/
     @Bean

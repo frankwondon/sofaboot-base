@@ -4,6 +4,7 @@ import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
 import com.baomidou.mybatisplus.core.metadata.IPage;
 import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
 import com.module.admin.app.entity.AppBanner;
+import com.module.admin.app.result.AppBannerResult;
 import com.module.common.bean.PageQuery;
 
 /**
@@ -16,7 +17,7 @@ public interface AppBannerService {
      * @param pageQuery
      * @return
      */
-    IPage<AppBanner> list(PageQuery pageQuery);
+    IPage<AppBannerResult> list(PageQuery pageQuery);
 
     /**
      * 添加

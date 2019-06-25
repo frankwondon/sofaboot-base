@@ -29,7 +29,7 @@ public class TokenFilter extends FormAuthenticationFilter {
         PrintWriter out = null;
         HttpServletResponse res = (HttpServletResponse) response;
         try {
-            res.setStatus(302);
+            res.setStatus(200);
             res.setCharacterEncoding("UTF-8");
             res.setContentType("application/json");
             out = response.getWriter();

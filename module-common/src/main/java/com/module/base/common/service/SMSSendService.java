@@ -11,7 +11,7 @@ public interface SMSSendService {
 
     /**
      * 发送手机号登陆验证码
-     * @param sendDto 要发送的实体类
+     * @param phone 手机号
      */
-   <T extends SmsBaseDto> void sendLoginVerifyCode(T sendDto);
+    public void sendLoginVerifyCode(String phone);
 }

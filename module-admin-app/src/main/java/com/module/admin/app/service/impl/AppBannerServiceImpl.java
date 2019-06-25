@@ -1,10 +1,12 @@
 package com.module.admin.app.service.impl;
 
+import cn.hutool.core.util.StrUtil;
 import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
 import com.baomidou.mybatisplus.core.metadata.IPage;
 import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
 import com.module.admin.app.entity.AppBanner;
 import com.module.admin.app.mapper.AppBannerMapper;
+import com.module.admin.app.result.AppBannerResult;
 import com.module.admin.app.service.AppBannerService;
 import com.module.common.bean.PageQuery;
 
@@ -20,13 +22,9 @@ public class AppBannerServiceImpl implements AppBannerService {
 
 
     @Override
-    public IPage<AppBanner> list(PageQuery pageQuery){
+    public IPage<AppBannerResult> list(PageQuery pageQuery){
         Page page=new Page<>(pageQuery.getPage(),pageQuery.getLimit());
-        QueryWrapper<AppBanner> queryWrapper = new QueryWrapper<>();
-        queryWrapper.eq("deleted",0);
-        queryWrapper.like("name",pageQuery.getKeyWord());
-        IPage<AppBanner> iPage = appBannerMapper.selectPage(page, queryWrapper);
-        return iPage;
+        return  appBannerMapper.pageQuery(page, pageQuery.getKeyWord());
     }
 
     @Override

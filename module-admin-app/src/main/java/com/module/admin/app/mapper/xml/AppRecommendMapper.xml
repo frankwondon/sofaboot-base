@@ -1,10 +1,23 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.module.admin.app.mapper.AppRecommendMapper">
+
+    <select id="pageQuery" resultType="com.module.admin.app.result.AppBannerResult">
+        SELECT
+        b.*, p.`name` product_name
+        FROM
+        app_recommend b
+        JOIN app_product p ON p.id = b.product_id
+        WHERE
+        b.deleted=0
+        <if test="keyWord != null and keyWord != ''">
+            AND b.`name` LIKE CONCAT(#{keyWord}, '%')
+        </if>
+    </select>
     <update id="disable">
         update app_recommend r set r.locked=#{locked} and r.id=#{id}
     </update>
-    <update id="del">
+    <update id="delLogic">
         update app_recommend r set r.deleted=1 and r.id=#{id}
     </update>
 </mapper>

@@ -8,7 +8,7 @@ import com.module.admin.cms.result.CmsProductResult;
 import com.module.admin.cms.service.CmsProductService;
 import com.module.admin.cms.service.CmsProductTypeService;
 import com.module.common.Response;
-import com.module.common.bean.CurrentUser;
+import com.module.common.bean.AdminCurrentUser;
 import com.module.common.bean.PageQuery;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiImplicitParam;
@@ -65,7 +65,7 @@ public class CmsProductController {
             @ApiImplicitParam(name = "locked",paramType = "query" ,required = true,value = "0启用,1禁用"),
     })
     @PostMapping("addOrUpdate")
-    public Response addOrUpdate(@ApiIgnore CmsProduct productType,@ApiIgnore CurrentUser currentUser){
+    public Response addOrUpdate(@ApiIgnore CmsProduct productType,@ApiIgnore AdminCurrentUser currentUser){
         productService.addOrUpdate(productType,currentUser);
         return Response.success(true);
     }
@@ -83,7 +83,7 @@ public class CmsProductController {
             @ApiImplicitParam(name = "disable"  ,paramType = "query",required = true,value = "true启用false禁用"),
     })
     @PostMapping("disable")
-    public Response disable(Integer id, Boolean disable,@ApiIgnore CurrentUser currentUser){
+    public Response disable(Integer id, Boolean disable,@ApiIgnore AdminCurrentUser currentUser){
         productService.disable(id,disable,currentUser);
         return Response.success(true);
     }

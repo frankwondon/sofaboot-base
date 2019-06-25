@@ -2,12 +2,10 @@ package com.api.back.controller.cms;
 
 import com.alipay.sofa.runtime.api.annotation.SofaReference;
 import com.baomidou.mybatisplus.core.metadata.IPage;
-import com.module.admin.cms.entity.CmsBanner;
-import com.module.admin.cms.entity.CmsProduct;
 import com.module.admin.cms.entity.CmsProductType;
 import com.module.admin.cms.service.CmsProductTypeService;
 import com.module.common.Response;
-import com.module.common.bean.CurrentUser;
+import com.module.common.bean.AdminCurrentUser;
 import com.module.common.bean.PageQuery;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiImplicitParam;
@@ -43,7 +41,7 @@ public class CmsProductTypeController {
             @ApiImplicitParam(name = "sort" ,type = "query",required = true,value = "排序:数字顺序")
     })
     @PostMapping("addOrUpdate")
-    public Response addOrUpdate(@ApiIgnore  CmsProductType productType,@ApiIgnore CurrentUser currentUser){
+    public Response addOrUpdate(@ApiIgnore  CmsProductType productType,@ApiIgnore AdminCurrentUser currentUser){
         productTypeService.addOrUpdate(productType,currentUser);
         return Response.success(true);
     }
@@ -61,7 +59,7 @@ public class CmsProductTypeController {
             @ApiImplicitParam(name = "id",required = true,value ="产品ID" ),
             @ApiImplicitParam(name = "disable",required = true,value ="0启用 1禁用" ),
     })
-    public Response disable(Integer id,Boolean disable, @ApiIgnore CurrentUser currentUser){
+    public Response disable(Integer id,Boolean disable, @ApiIgnore AdminCurrentUser currentUser){
         productTypeService.disable(id,disable,currentUser);
         return Response.success(true);
     }

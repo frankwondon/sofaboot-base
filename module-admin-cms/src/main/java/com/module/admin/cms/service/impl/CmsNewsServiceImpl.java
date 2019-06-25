@@ -4,10 +4,9 @@ import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
 import com.baomidou.mybatisplus.core.metadata.IPage;
 import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
 import com.module.admin.cms.entity.CmsNews;
-import com.module.admin.cms.entity.CmsProduct;
 import com.module.admin.cms.mapper.CmsNewsMapper;
 import com.module.admin.cms.service.CmsNewsService;
-import com.module.common.bean.CurrentUser;
+import com.module.common.bean.AdminCurrentUser;
 import com.module.common.bean.PageQuery;
 
 import javax.annotation.Resource;
@@ -25,7 +24,7 @@ public class CmsNewsServiceImpl implements CmsNewsService {
     }
 
     @Override
-    public void addOrUpdate(CmsNews news, CurrentUser user) {
+    public void addOrUpdate(CmsNews news, AdminCurrentUser user) {
         if (news.getId() != null) {
             news.setUpdateBy(user.getId());
             news.setUpdateTime(LocalDateTime.now());
@@ -45,7 +44,7 @@ public class CmsNewsServiceImpl implements CmsNewsService {
     }
 
     @Override
-    public void disable(Integer id, Boolean disable, CurrentUser user) {
+    public void disable(Integer id, Boolean disable, AdminCurrentUser user) {
         if (disable) {
             newsMapper.disable(id,0);
         } else {

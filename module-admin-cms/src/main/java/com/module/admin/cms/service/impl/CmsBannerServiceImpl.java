@@ -4,15 +4,13 @@ import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
 import com.baomidou.mybatisplus.core.metadata.IPage;
 import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
 import com.module.admin.cms.entity.CmsBanner;
-import com.module.admin.cms.entity.CmsProduct;
 import com.module.admin.cms.mapper.CmsBannerMapper;
 import com.module.admin.cms.service.CmsBannerService;
-import com.module.common.bean.CurrentUser;
+import com.module.common.bean.AdminCurrentUser;
 import com.module.common.bean.PageQuery;
 
 import javax.annotation.Resource;
 import java.time.LocalDateTime;
-import java.util.List;
 
 public class CmsBannerServiceImpl implements CmsBannerService {
 
@@ -38,7 +36,7 @@ public class CmsBannerServiceImpl implements CmsBannerService {
 
 
     @Override
-    public void addOrUpdate(CmsBanner banner, CurrentUser user) {
+    public void addOrUpdate(CmsBanner banner, AdminCurrentUser user) {
         if (banner.getId()!=null){
             banner.setUpdateBy(user.getId());
             banner.setUpdateTime(LocalDateTime.now());
@@ -56,7 +54,7 @@ public class CmsBannerServiceImpl implements CmsBannerService {
     }
 
     @Override
-    public void disable(Integer id, Boolean disable,CurrentUser user) {
+    public void disable(Integer id, Boolean disable, AdminCurrentUser user) {
         if (disable){
             bannerMapper.disable(id,0);
         }else {

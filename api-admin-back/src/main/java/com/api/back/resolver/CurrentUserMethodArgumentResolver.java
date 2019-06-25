@@ -1,6 +1,6 @@
 package com.api.back.resolver;
 
-import com.module.common.bean.CurrentUser;
+import com.module.common.bean.AdminCurrentUser;
 import org.apache.shiro.SecurityUtils;
 import org.springframework.core.MethodParameter;
 import org.springframework.web.bind.support.WebDataBinderFactory;
@@ -15,7 +15,7 @@ import org.springframework.web.method.support.ModelAndViewContainer;
 public class CurrentUserMethodArgumentResolver implements HandlerMethodArgumentResolver {
     @Override
     public boolean supportsParameter(MethodParameter methodParameter) {
-        if ( methodParameter.getParameterType().equals(CurrentUser.class)){
+        if ( methodParameter.getParameterType().equals(AdminCurrentUser.class)){
             return true;
         }
         return false;

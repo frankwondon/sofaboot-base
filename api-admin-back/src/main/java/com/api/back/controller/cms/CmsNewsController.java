@@ -5,7 +5,7 @@ import com.baomidou.mybatisplus.core.metadata.IPage;
 import com.module.admin.cms.entity.CmsNews;
 import com.module.admin.cms.service.CmsNewsService;
 import com.module.common.Response;
-import com.module.common.bean.CurrentUser;
+import com.module.common.bean.AdminCurrentUser;
 import com.module.common.bean.PageQuery;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiImplicitParam;
@@ -41,7 +41,7 @@ public class CmsNewsController {
             @ApiImplicitParam(name = "locked",paramType = "query" ,value = "0启用,1禁用 默认禁用"),
     })
     @PostMapping("addOrUpdate")
-    public Response addOrUpdate(@ApiIgnore CmsNews news,@ApiIgnore CurrentUser currentUser){
+    public Response addOrUpdate(@ApiIgnore CmsNews news,@ApiIgnore AdminCurrentUser currentUser){
         cmsNewsService.addOrUpdate(news,currentUser);
         return Response.success(true);
     }
@@ -58,7 +58,7 @@ public class CmsNewsController {
             @ApiImplicitParam(name = "disable"  ,paramType = "query",required = true,value = "true启用false禁用"),
     })
     @PostMapping("disable")
-    public Response disable(Integer id, Boolean disable,@ApiIgnore CurrentUser currentUser){
+    public Response disable(Integer id, Boolean disable,@ApiIgnore AdminCurrentUser currentUser){
         cmsNewsService.disable(id,disable,currentUser);
         return Response.success(true);
     }

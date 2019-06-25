@@ -9,7 +9,7 @@ import com.module.admin.back.service.BackRoleService;
 import com.module.admin.back.service.BackUserService;
 import com.module.common.Response;
 import com.module.common.ResponseCode;
-import com.module.common.bean.CurrentUser;
+import com.module.common.bean.AdminCurrentUser;
 import com.module.common.util.ShiroPasswordUtil;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiImplicitParam;
@@ -73,7 +73,7 @@ public class IndexController {
     }
 
     @GetMapping("/index")
-    public String toIndex(String site, HttpServletRequest request, CurrentUser user) {
+    public String toIndex(String site, HttpServletRequest request, AdminCurrentUser user) {
         List<BackMenu> backMenus = backMenuService.loadMenu(user, site);
         request.setAttribute("site", site);
         request.setAttribute("menus", backMenus);

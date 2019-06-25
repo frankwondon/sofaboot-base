@@ -2,10 +2,8 @@ package com.module.admin.cms.service;
 
 import com.baomidou.mybatisplus.core.metadata.IPage;
 import com.module.admin.cms.entity.CmsBanner;
-import com.module.common.bean.CurrentUser;
+import com.module.common.bean.AdminCurrentUser;
 import com.module.common.bean.PageQuery;
-
-import java.util.List;
 
 /**
  * Banner管理的
@@ -26,7 +24,7 @@ public interface CmsBannerService {
      */
     IPage<CmsBanner> showList(PageQuery pageQuery);
 
-    void addOrUpdate(CmsBanner banner, CurrentUser user);
+    void addOrUpdate(CmsBanner banner, AdminCurrentUser user);
 
     void del(Integer id);
 
@@ -34,7 +32,7 @@ public interface CmsBannerService {
      * 禁用Banner
      * @param id
      */
-    void disable(Integer id,Boolean disable,CurrentUser user);
+    void disable(Integer id, Boolean disable, AdminCurrentUser user);
 
 
 }

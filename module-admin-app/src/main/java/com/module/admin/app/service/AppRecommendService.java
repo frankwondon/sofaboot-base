@@ -3,6 +3,7 @@ package com.module.admin.app.service;
 import com.baomidou.mybatisplus.core.metadata.IPage;
 import com.module.admin.app.entity.AppBanner;
 import com.module.admin.app.entity.AppRecommend;
+import com.module.admin.app.result.AppRecommendResult;
 import com.module.common.bean.PageQuery;
 
 /**
@@ -15,7 +16,7 @@ public interface AppRecommendService {
      * @param pageQuery
      * @return
      */
-    IPage<AppRecommend> list(PageQuery pageQuery);
+    IPage<AppRecommendResult> list(PageQuery pageQuery);
 
     /**
      * 添加

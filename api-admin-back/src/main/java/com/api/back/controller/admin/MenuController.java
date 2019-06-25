@@ -2,8 +2,7 @@ package com.api.back.controller.admin;
 
 
 import com.alipay.sofa.runtime.api.annotation.SofaReference;
-import com.module.admin.back.result.PermissionTreeResult;
-import com.module.common.bean.CurrentUser;
+import com.module.common.bean.AdminCurrentUser;
 import com.module.admin.back.entity.BackMenu;
 import com.module.admin.back.service.BackMenuService;
 import com.module.common.Response;
@@ -31,14 +30,14 @@ public class MenuController {
             @ApiImplicitParam(name = "site",paramType = "query" ,required = true,value = "站点码/cmsadmin类似这种格式"),
     })
     @GetMapping("loadMenu")
-    public Response<List<BackMenu>> loadMenu(@ApiIgnore CurrentUser user,String site) {
+    public Response<List<BackMenu>> loadMenu(@ApiIgnore AdminCurrentUser user, String site) {
         List<BackMenu> backRoles = backMenuService.loadMenu(user,site);
         return Response.success(backRoles);
     }
 
     @ApiOperation(value="获取用户拥有的站点")
     @GetMapping("loadSite")
-    public Response<List<BackMenu>> loadSite(CurrentUser user) {
+    public Response<List<BackMenu>> loadSite(AdminCurrentUser user) {
         List<BackMenu> backRoles = backMenuService.loadSite(user);
         return Response.success(backRoles);
     }
@@ -52,14 +51,14 @@ public class MenuController {
     }
     @ApiOperation(value="添加菜单")
     @PostMapping("add")
-    public Response<Integer> add(BackMenu backMenu, @ApiIgnore CurrentUser user) {
+    public Response<Integer> add(BackMenu backMenu, @ApiIgnore AdminCurrentUser user) {
         backMenu.setCreateBy(user.getId());
         return Response.success(backMenuService.insertMenu(backMenu));
     }
 
     @ApiOperation(value="更新菜单")
     @PostMapping("update")
-    public Response<Boolean> update(BackMenu backMenu, CurrentUser user) {
+    public Response<Boolean> update(BackMenu backMenu, AdminCurrentUser user) {
         backMenu.setUpdateBy(user.getId());
         backMenuService.updateMenu(backMenu);
         return Response.success(true);
@@ -67,7 +66,7 @@ public class MenuController {
 
     @ApiOperation("删除菜单")
     @PostMapping("del")
-    public Response<Boolean> del(Integer id, CurrentUser user) {
+    public Response<Boolean> del(Integer id, AdminCurrentUser user) {
         backMenuService.delMenu(id);
         return Response.success(true);
     }

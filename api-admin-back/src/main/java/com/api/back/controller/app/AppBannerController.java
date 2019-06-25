@@ -38,7 +38,6 @@ public class AppBannerController {
             @ApiImplicitParam(name = "imgUrl"  ,paramType = "query",required = true,value = "图片路径"),
             @ApiImplicitParam(name = "belong"  ,paramType = "query",required = true,value = "0首页 1商城"),
             @ApiImplicitParam(name = "productId"  ,paramType = "query",required = true,value = "关联的商品Id"),
-            @ApiImplicitParam(name = "type"  ,paramType = "query",required = true,value = "0商品banner1其他普通直接跳转H5"),
             @ApiImplicitParam(name = "sort"  ,paramType = "query",required = true,value = "排序"),
     })
     public Response add(AppBanner banner){
@@ -57,11 +56,10 @@ public class AppBannerController {
             @ApiImplicitParam(name = "imgUrl"  ,paramType = "query",required = true,value = "图片路径"),
             @ApiImplicitParam(name = "belong"  ,paramType = "query",required = true,value = "0首页 1商城"),
             @ApiImplicitParam(name = "productId"  ,paramType = "query",required = true,value = "关联的商品Id"),
-            @ApiImplicitParam(name = "type"  ,paramType = "query",required = true,value = "0商品banner1其他普通直接跳转H5"),
             @ApiImplicitParam(name = "sort"  ,paramType = "query",required = true,value = "排序"),
     })
     public Response update(AppBanner banner){
-        bannerService.add(banner);
+        bannerService.update(banner);
         return Response.success(true);
     }
 

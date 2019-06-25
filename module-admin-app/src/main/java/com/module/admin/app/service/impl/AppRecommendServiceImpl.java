@@ -6,6 +6,7 @@ import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
 import com.module.admin.app.entity.AppBanner;
 import com.module.admin.app.entity.AppRecommend;
 import com.module.admin.app.mapper.AppRecommendMapper;
+import com.module.admin.app.result.AppRecommendResult;
 import com.module.admin.app.service.AppRecommendService;
 import com.module.common.bean.PageQuery;
 
@@ -19,12 +20,9 @@ public class AppRecommendServiceImpl implements AppRecommendService {
     @Resource
     private AppRecommendMapper appRecommendMapper;
     @Override
-    public IPage<AppRecommend> list(PageQuery pageQuery) {
+    public IPage<AppRecommendResult> list(PageQuery pageQuery) {
         Page page=new Page<>(pageQuery.getPage(),pageQuery.getLimit());
-        QueryWrapper<AppRecommend> queryWrapper = new QueryWrapper<>();
-        queryWrapper.eq("deleted",0);
-        queryWrapper.like("name",pageQuery.getKeyWord());
-        IPage<AppRecommend> iPage = appRecommendMapper.selectPage(page, queryWrapper);
+        IPage<AppRecommendResult> iPage =appRecommendMapper.pageQuery(page,pageQuery.getKeyWord());
         return iPage;
     }
 

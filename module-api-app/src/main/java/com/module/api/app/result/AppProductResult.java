@@ -1,22 +1,22 @@
 package com.module.api.app.result;
 
-import com.module.api.app.entity.AppProduct;
+import io.swagger.annotations.ApiModel;
+import io.swagger.annotations.ApiModelProperty;
 import lombok.Data;
-import lombok.EqualsAndHashCode;
-
 import java.io.Serializable;
-import java.math.BigDecimal;
 
 /**
  * 商品的返回结果
  * @author wangdong
  * @date: 2019/6/24 13:51
  */
-@EqualsAndHashCode(callSuper = true)
 @Data
-public class AppProductResult extends AppProduct implements Serializable {
-    /**
-     * 商品中最低价格的SKU
-     */
-    private BigDecimal productPrice;
+@ApiModel("商品")
+public class AppProductResult implements Serializable {
+    @ApiModelProperty("商品ID")
+    private Integer productId;
+    @ApiModelProperty("商品名称")
+    private String  productName;
+    @ApiModelProperty(value = "图片路径",notes = "注意是,分割的多个图片相对路径")
+    private String imgUrl;
 }
