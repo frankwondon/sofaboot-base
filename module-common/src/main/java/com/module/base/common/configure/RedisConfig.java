@@ -15,5 +15,7 @@ public class RedisConfig {
             // use "rediss://" for SSL connection
             .addNodeAddress("redis://127.0.0.1:7181");
     config.setThreads(20);
+    return config;
   }
+
 }
