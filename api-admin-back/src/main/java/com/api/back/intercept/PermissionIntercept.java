@@ -1,7 +1,10 @@
 package com.api.back.intercept;
 
-import org.springframework.stereotype.Component;
 import org.springframework.web.servlet.HandlerInterceptor;
-@Component
+/**
+ * 权限拦截器
+ *@author wangdong
+ *@date 2019/6/25
+ */
 public class PermissionIntercept implements HandlerInterceptor {
 }

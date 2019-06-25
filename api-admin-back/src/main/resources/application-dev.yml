@@ -10,6 +10,7 @@ upload:
     base: D:/upload
     img: /img
     video: /video
+
 logging:
   level:
     root: debug

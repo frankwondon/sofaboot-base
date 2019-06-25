@@ -27,12 +27,15 @@ public class WebConfigure implements WebMvcConfigurer {
 
     @Override
     public void addResourceHandlers(ResourceHandlerRegistry registry) {
-        registry.addResourceHandler("doc.html").addResourceLocations("classpath:/META-INF/resources/");
-        registry.addResourceHandler("/webjars/**").addResourceLocations("classpath:/META-INF/resources/webjars/");
     }
 
     @Override
     public void addInterceptors(InterceptorRegistry registry) {
-        registry.addInterceptor(new AuthIntercept());
+        registry.addInterceptor(new AuthIntercept())
+                .excludePathPatterns("/swagger-ui.html"
+                        ,"/swagger-resources/**"
+                        ,"/webjars/**"
+                        ,"/v2/api-docs"
+                        ,"/error");
     }
 }

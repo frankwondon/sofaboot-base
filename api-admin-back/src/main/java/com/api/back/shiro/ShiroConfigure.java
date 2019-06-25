@@ -29,9 +29,6 @@ public class ShiroConfigure {
         Map<String, String> filterChainDefinitionMap = new LinkedHashMap<>();
         //开放登陆接口
         filterChainDefinitionMap.put("/login", "anon");
-        //静态文件地址
-        filterChainDefinitionMap.put("/html/**", "anon");
-        filterChainDefinitionMap.put("/resource/**", "anon");
         //swagger相关
         filterChainDefinitionMap.put("/swagger-ui.html", "anon");
         filterChainDefinitionMap.put("/swagger-resources/**", "anon");
