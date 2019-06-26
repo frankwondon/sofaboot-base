@@ -29,7 +29,17 @@ public class SwaggerConfigure {
                 .modelRef(new ModelRef("string")).parameterType("header")
                 //header中的ticket参数非必填，传空也可以
                 .required(true).build();
+        Parameter versionName = ticketPar.name("version-name").description("版本号")
+                .modelRef(new ModelRef("string")).parameterType("header")
+                //header中的ticket参数非必填，传空也可以
+                .required(true).build();
+        Parameter versionCode = ticketPar.name("version-code").description("版本名称")
+                .modelRef(new ModelRef("string")).parameterType("header")
+                //header中的ticket参数非必填，传空也可以
+                .required(true).build();
         pars.add(token);
+        pars.add(versionName);
+        pars.add(versionCode);
         return new Docket(DocumentationType.SWAGGER_2)
                 .apiInfo(new ApiInfoBuilder()
                         .title("APP接口")
