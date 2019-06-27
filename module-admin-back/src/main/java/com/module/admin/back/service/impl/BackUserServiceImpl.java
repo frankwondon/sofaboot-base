@@ -13,7 +13,7 @@ import com.module.admin.back.query.BackUserQuery;
 import com.module.admin.back.service.BackUserService;
 import com.module.common.ResponseCode;
 import com.module.common.constant.BackAdminConstant;
-import com.module.common.exception.DBOperationException;
+import com.module.common.exception.DBException;
 import com.module.common.util.SaltPwdBean;
 import com.module.common.util.ShiroPasswordUtil;
 import org.springframework.transaction.annotation.Transactional;
@@ -47,7 +47,7 @@ public class BackUserServiceImpl implements BackUserService {
     @Override
     public void insertUser(BackUser backUser) {
         if (userMapper.countUserName(-1,backUser.getUsername()) > 0 || userMapper.countUserPhone(-1,backUser.getCellPhoneNum()) > 0) {
-            throw new DBOperationException(ResponseCode.C_500001);
+            throw new DBException(ResponseCode.C_500001);
         }
         //如果是商户 生成一个商户ID 否则用自己固定的商户号
         if (backUser.getUserType() == BackAdminConstant.USER_TYPE_MERCHANT) {
@@ -65,7 +65,7 @@ public class BackUserServiceImpl implements BackUserService {
     @Override
     public void updateUser(BackUser backUser) {
         if (userMapper.countUserName(backUser.getId(),backUser.getUsername()) > 0 || userMapper.countUserPhone(backUser.getId(),backUser.getCellPhoneNum()) > 0) {
-            throw new DBOperationException(ResponseCode.C_500006);
+            throw new DBException(ResponseCode.C_500006);
         }
         backUser.setUpdateTime(LocalDateTime.now());
         userMapper.updateById(backUser);
@@ -76,7 +76,7 @@ public class BackUserServiceImpl implements BackUserService {
     public void allotUserRole(Integer uid, Integer roleId) {
         BackRole backRole = roleMapper.selectById(roleId);
         if (backRole == null) {
-            throw new DBOperationException(ResponseCode.C_500003);
+            throw new DBException(ResponseCode.C_500003);
         }
         userMapper.updateUserRole(uid, backRole.getId());
     }
@@ -108,7 +108,7 @@ public class BackUserServiceImpl implements BackUserService {
         BackUser backUser = userMapper.selectById(uid);
         ShiroPasswordUtil.encpwd(oldPwd,backUser.getSalt());
         if (!backUser.getEncryptPwd().equals(ShiroPasswordUtil.encpwd(oldPwd,backUser.getSalt()))){
-            throw new DBOperationException(ResponseCode.C_500005);
+            throw new DBException(ResponseCode.C_500005);
         }
         updatePwd(uid,pwd);
     }

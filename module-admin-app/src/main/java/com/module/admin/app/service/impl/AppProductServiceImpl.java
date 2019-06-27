@@ -1,6 +1,5 @@
 package com.module.admin.app.service.impl;
 
-import cn.hutool.core.util.HashUtil;
 import cn.hutool.core.util.StrUtil;
 import cn.hutool.crypto.SecureUtil;
 import com.alibaba.fastjson.JSON;
@@ -20,7 +19,7 @@ import com.module.common.ResponseCode;
 import com.module.common.constant.BackAdminConstant;
 import com.module.common.constant.DateFormatConstant;
 import com.module.common.constant.ProductEnum;
-import com.module.common.exception.DBOperationException;
+import com.module.common.exception.DBException;
 import com.module.common.util.JDK8DateTimeUtil;
 import org.springframework.beans.BeanUtils;
 import org.springframework.transaction.annotation.Transactional;
@@ -63,7 +62,7 @@ public class AppProductServiceImpl implements AppProductService {
     public void createProduct(AppProductDto productDto, Integer createUser) {
         String num = productDto.getNum();
         if (ProductConstant.PRODUCT_CREATE_NUM.get(num) == null) {
-            throw new DBOperationException(ResponseCode.C_510002);
+            throw new DBException(ResponseCode.C_510002);
         }
         try {
             //立即上架的商品前台直接可以查询到
@@ -76,7 +75,7 @@ public class AppProductServiceImpl implements AppProductService {
             if (ProductEnum.ShelfType.SCHEDULE.key() == productDto.getShelfType()) {
                 //转换时间
                 if (StrUtil.isBlank(productDto.getAutoShelfTimeStr())) {
-                    throw new DBOperationException(ResponseCode.C_510005);
+                    throw new DBException(ResponseCode.C_510005);
                 }
                 productDto.setAutoShelfTime(JDK8DateTimeUtil.parseOfStr(productDto.getAutoShelfTimeStr(), DateFormatConstant.DATE_TIME));
             }
@@ -156,7 +155,7 @@ public class AppProductServiceImpl implements AppProductService {
         if (ProductEnum.ShelfStatus.SHELF.key() == status || ProductEnum.ShelfStatus.OBTAINED.key() == status) {
             productMapper.updateShelfAndObtained(productId, status);
         } else {
-            throw new DBOperationException(ResponseCode.C_500003);
+            throw new DBException(ResponseCode.C_500003);
         }
     }
 

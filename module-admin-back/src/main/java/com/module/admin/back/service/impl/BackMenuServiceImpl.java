@@ -8,7 +8,7 @@ import com.module.admin.back.service.BackMenuService;
 import com.module.common.ResponseCode;
 import com.module.common.bean.AdminCurrentUser;
 import com.module.common.constant.BackAdminConstant;
-import com.module.common.exception.DBOperationException;
+import com.module.common.exception.DBException;
 
 import javax.annotation.Resource;
 import java.time.LocalDateTime;
@@ -122,10 +122,10 @@ public class BackMenuServiceImpl implements BackMenuService {
         menu.setUpdateTime(LocalDateTime.now());
         BackMenu backMenu = backMenuMapper.selectById(menu.getId());
         if (backMenu.getDepth()==1){
-            throw  new DBOperationException(ResponseCode.C_500007);
+            throw  new DBException(ResponseCode.C_500007);
         }
         if (backMenuMapper.countMenuUrl(menu.getId(),menu.getUrl(),menu.getPId())>0){
-            throw  new DBOperationException(ResponseCode.C_500001);
+            throw  new DBException(ResponseCode.C_500001);
         }
         backMenuMapper.updateById(menu);
     }
@@ -135,7 +135,7 @@ public class BackMenuServiceImpl implements BackMenuService {
         menu.setCreateTime(LocalDateTime.now());
         BackMenu backMenu = backMenuMapper.selectById(menu.getPId());
         if (backMenuMapper.countMenuUrl(-1,menu.getUrl(),menu.getPId())>0){
-            throw  new DBOperationException(ResponseCode.C_500001);
+            throw  new DBException(ResponseCode.C_500001);
         }
         menu.setDepth(backMenu.getDepth()+1);
         menu.setDeleted(0);
@@ -147,7 +147,7 @@ public class BackMenuServiceImpl implements BackMenuService {
     @Override
     public void delMenu(Integer id) {
         if (backMenuMapper.countChild(id)>0){
-            throw  new DBOperationException(ResponseCode.C_500004);
+            throw  new DBException(ResponseCode.C_500004);
         }
         backMenuMapper.deleteById(id);
     }

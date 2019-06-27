@@ -3,17 +3,15 @@ package com.module.admin.back.service.impl;
 import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
 import com.baomidou.mybatisplus.core.metadata.IPage;
 import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
-import com.module.admin.back.entity.BackMenu;
 import com.module.admin.back.entity.BackRole;
 import com.module.admin.back.entity.BackRoleMenu;
 import com.module.admin.back.mapper.BackMenuMapper;
 import com.module.admin.back.mapper.BackRoleMapper;
 import com.module.admin.back.mapper.BackRoleMenuMapper;
-import com.module.admin.back.result.PermissionTreeResult;
 import com.module.admin.back.service.BackRoleService;
 import com.module.common.ResponseCode;
 import com.module.common.bean.PageQuery;
-import com.module.common.exception.DBOperationException;
+import com.module.common.exception.DBException;
 import org.springframework.transaction.annotation.Transactional;
 
 import javax.annotation.Resource;
@@ -39,7 +37,7 @@ public class BackRoleServiceImpl implements BackRoleService {
         backRole.setCreateTime(LocalDateTime.now());
         backRole.setDeleted(0);
         if (backRoleMapper.countCodeExist(backRole.getCode()) >0) {
-            throw new DBOperationException(ResponseCode.C_500001);
+            throw new DBException(ResponseCode.C_500001);
         }
         backRoleMapper.insert(backRole);
     }
@@ -75,7 +73,7 @@ public class BackRoleServiceImpl implements BackRoleService {
     @Transactional
     public void allotMenus(Integer roleId, List<String> menuIds) {
         if (roleId == 1) {
-            throw new DBOperationException(ResponseCode.C_500002);
+            throw new DBException(ResponseCode.C_500002);
         }else{
             List<BackRoleMenu> roleMenus=new ArrayList<>();
             for (String menuId : menuIds) {

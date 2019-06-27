@@ -8,7 +8,7 @@ import com.module.admin.app.mapper.AppExpressTemplateAreaMapper;
 import com.module.admin.app.mapper.AppExpressTemplateMapper;
 import com.module.admin.app.service.AppExpressTemplateService;
 import com.module.common.ResponseCode;
-import com.module.common.exception.DBOperationException;
+import com.module.common.exception.DBException;
 import org.springframework.beans.BeanUtils;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -53,7 +53,7 @@ public class AppExpressTemplateServiceImpl implements AppExpressTemplateService 
     @Transactional(rollbackFor = Exception.class)
     public void createTemplate(ExpressTemplateDto dto) {
         if (dto.getArea() == null) {
-            throw new DBOperationException(ResponseCode.C_500003);
+            throw new DBException(ResponseCode.C_500003);
         }
         //运费模板
         expressTemplateMapper.insert(dto);
@@ -78,10 +78,10 @@ public class AppExpressTemplateServiceImpl implements AppExpressTemplateService 
     @Transactional(rollbackFor = Exception.class)
     public void updateTemplate(ExpressTemplateDto dto) {
         if (dto.getArea() == null) {
-            throw new DBOperationException(ResponseCode.C_500003);
+            throw new DBException(ResponseCode.C_500003);
         }
         if (expressTemplateMapper.countShelfProductUseTemplate(dto.getId())>0){
-            throw new DBOperationException(ResponseCode.C_510003);
+            throw new DBException(ResponseCode.C_510003);
         }
         //更新运费模板
         expressTemplateMapper.updateById(dto);
@@ -96,7 +96,7 @@ public class AppExpressTemplateServiceImpl implements AppExpressTemplateService 
     @Override
     public void  delTemplate(Integer tempId){
         if (expressTemplateMapper.countShelfProductUseTemplate(tempId)>0){
-            throw new DBOperationException(ResponseCode.C_510004);
+            throw new DBException(ResponseCode.C_510004);
         }
         expressTemplateMapper.deleteById(tempId);
         //先删除地区配置
