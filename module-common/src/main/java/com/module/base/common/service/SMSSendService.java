@@ -1,6 +1,5 @@
 package com.module.base.common.service;
 
-import com.module.base.common.dto.SmsBaseDto;
 
 /**
  * 发短信的service
