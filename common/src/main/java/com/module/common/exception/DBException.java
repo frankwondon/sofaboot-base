@@ -12,7 +12,7 @@ public class DBException extends BaseException {
     private ResponseCode responseCode;
 
 
-    DBException(ResponseCode respontseCode) {
+    public DBException(ResponseCode respontseCode) {
         super(respontseCode);
     }
 }

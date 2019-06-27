@@ -1,6 +1,7 @@
 package com.module.base.common.util;
 
 import com.module.base.common.dto.SmsVerifyCodeDto;
+import com.module.common.ResponseCode;
 import com.module.common.exception.LimitException;
 import org.redisson.api.*;
 
@@ -32,7 +33,7 @@ public class HandlerSmsSender {
                     bucket.expireAt(Date.from(Instant.now().plus(EXPIRE_SECOND, ChronoUnit.SECONDS)));
                 }
             } else {
-                throw new LimitException();
+                throw new LimitException(ResponseCode.C_530001);
             }
         } else {
             rateLimiter.trySetRate(RateType.OVERALL, DAY_RATE_LIMITER, 1, RateIntervalUnit.DAYS);

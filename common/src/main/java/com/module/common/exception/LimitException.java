@@ -9,7 +9,7 @@ import com.module.common.ResponseCode;
  */
 public class LimitException extends BaseException {
 
-    LimitException(ResponseCode respontseCode) {
+    public LimitException(ResponseCode respontseCode) {
         super(respontseCode);
     }
 }
