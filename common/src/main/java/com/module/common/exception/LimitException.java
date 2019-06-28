@@ -10,6 +10,6 @@ import com.module.common.ResponseCode;
 public class LimitException extends BaseException {
 
     public LimitException(ResponseCode respontseCode) {
-        super(respontseCode);
+        super.setResponseCode(respontseCode);
     }
 }

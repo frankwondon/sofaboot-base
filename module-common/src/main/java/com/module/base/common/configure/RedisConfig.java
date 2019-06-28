@@ -5,6 +5,7 @@ import cn.hutool.core.util.StrUtil;
 import com.alipay.sofa.runtime.api.annotation.SofaService;
 import org.redisson.Redisson;
 import org.redisson.api.RedissonClient;
+import org.redisson.codec.JsonJacksonCodec;
 import org.redisson.config.Config;
 import org.redisson.config.SingleServerConfig;
 import org.springframework.boot.autoconfigure.condition.ConditionalOnProperty;
@@ -43,6 +44,7 @@ public class RedisConfig {
         } else {
             singleServerConfig.setTimeout(3000);
         }
+        config.setCodec(JsonJacksonCodec.INSTANCE);
         config.setThreads(20);
         return config;
     }

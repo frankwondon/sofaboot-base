@@ -12,8 +12,7 @@ public class BaseException extends RuntimeException {
 
     private ResponseCode responseCode;
 
-    BaseException (ResponseCode respontseCode){
-        this.responseCode=responseCode;
+    BaseException (){
     }
 
     public ResponseCode getResponseCode() {

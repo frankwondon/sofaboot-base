@@ -1,6 +1,9 @@
 package com.module.base.common.service;
 
 
+import com.module.base.common.constant.RedisPrefix;
+import com.module.base.common.dto.SmsVerifyCodeDto;
+
 /**
  * 发短信的service
  * @author wangdong
@@ -8,9 +11,14 @@ package com.module.base.common.service;
  */
 public interface SMSSendService {
 
+    void sendVerifyCode(RedisPrefix prefix, SmsVerifyCodeDto dto);
+
     /**
-     * 发送手机号登陆验证码
-     * @param phone 手机号
+     * 验证手机验证码
+     *
+     * @param prefix 验证码类型
+     * @param phone  手机号
+     * @param code   验证码
      */
-    public void sendLoginVerifyCode(String phone);
+    boolean validVerifyCode(RedisPrefix prefix, String phone, String code);
 }

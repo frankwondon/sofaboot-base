@@ -9,10 +9,14 @@ import lombok.EqualsAndHashCode;
  * @date: 2019/6/27 9:15
  */
 public class DBException extends BaseException {
-    private ResponseCode responseCode;
-
 
     public DBException(ResponseCode respontseCode) {
-        super(respontseCode);
+        super.setResponseCode(respontseCode);
+    }
+
+
+    public static void main(String[] args) {
+        LimitException limitException = new LimitException(ResponseCode.C_500001);
+        System.out.println(limitException.getResponseCode());
     }
 }

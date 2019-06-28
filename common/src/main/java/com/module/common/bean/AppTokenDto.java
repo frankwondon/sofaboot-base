@@ -16,6 +16,7 @@ public class AppTokenDto implements Serializable {
     private String subject;
     private AppUserType appUserType;
     private String userAgent;
+    private String ip;
     private String mobile;
 
 }

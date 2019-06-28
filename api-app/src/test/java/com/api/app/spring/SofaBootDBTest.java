@@ -1,6 +1,7 @@
 package com.api.app.spring;
 
 import com.alipay.sofa.runtime.api.annotation.SofaReference;
+import com.module.base.common.dto.SmsVerifyCodeDto;
 import com.module.base.common.service.SMSSendService;
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -17,7 +18,7 @@ import java.time.LocalDateTime;
 @ContextConfiguration
 @RunWith(SpringRunner.class)
 public class SofaBootDBTest {
-    @Resource
+    @SofaReference
     RedissonClient redissonClient;
     @SofaReference
     SMSSendService smsSendService;
@@ -43,7 +44,15 @@ public class SofaBootDBTest {
      */
     @Test
     public void tset(){
-        smsSendService.sendLoginVerifyCode("15001200836");
+        SmsVerifyCodeDto dto=new SmsVerifyCodeDto();
+        dto.setMobile("15001200836");
+        dto.setSmsMsg("15001200836");
+        RBucket<SmsVerifyCodeDto> test = redissonClient.getBucket("test");
+        if(!test.isExists()){
+            test.set(dto);
+        }
+        SmsVerifyCodeDto o = test.get();
+        System.out.println(o.getMobile());
     }
 
 
