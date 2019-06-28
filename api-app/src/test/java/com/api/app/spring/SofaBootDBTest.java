@@ -40,10 +40,10 @@ public class SofaBootDBTest {
     }
 
     /**
-     * 发短信测试
+     * 测试正常返回
      */
     @Test
-    public void tset(){
+    public void successMethod(){
         SmsVerifyCodeDto dto=new SmsVerifyCodeDto();
         dto.setMobile("15001200836");
         dto.setSmsMsg("15001200836");
@@ -54,6 +54,10 @@ public class SofaBootDBTest {
         SmsVerifyCodeDto o = test.get();
         System.out.println(o.getMobile());
     }
+
+
+
+
 
 
 }

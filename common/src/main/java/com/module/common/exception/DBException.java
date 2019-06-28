@@ -11,12 +11,10 @@ import lombok.EqualsAndHashCode;
 public class DBException extends BaseException {
 
     public DBException(ResponseCode respontseCode) {
-        super.setResponseCode(respontseCode);
+        super(respontseCode);
     }
 
-
-    public static void main(String[] args) {
-        LimitException limitException = new LimitException(ResponseCode.C_500001);
-        System.out.println(limitException.getResponseCode());
+    public DBException(ResponseCode responseCode, String msg) {
+        super(responseCode, msg);
     }
 }

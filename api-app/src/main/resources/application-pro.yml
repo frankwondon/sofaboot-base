@@ -17,3 +17,12 @@ server:
 logging:
   level:
     root: info
+
+
+unit:
+  redis:
+    address: redis://192.168.1.117:6379
+    enable: true
+  token:
+    user_expired_days: 30
+    visitor_expired_days: 7

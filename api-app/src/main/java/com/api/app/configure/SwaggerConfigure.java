@@ -37,9 +37,14 @@ public class SwaggerConfigure {
                 .modelRef(new ModelRef("string")).parameterType("header")
                 //header中的ticket参数非必填，传空也可以
                 .required(true).build();
+        Parameter deviceId = ticketPar.name("deviceId").description("设备名称")
+                .modelRef(new ModelRef("string")).parameterType("header")
+                //header中的ticket参数非必填，传空也可以
+                .required(true).build();
         pars.add(token);
         pars.add(versionName);
         pars.add(versionCode);
+        pars.add(deviceId);
         return new Docket(DocumentationType.SWAGGER_2)
                 .apiInfo(new ApiInfoBuilder()
                         .title("APP接口")

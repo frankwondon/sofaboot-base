@@ -16,6 +16,7 @@ public class BeanConfigure {
     public ProductService productService(){
         return new ProductServiceImpl();
     }
+
     @Bean
     @SofaService
     public UserService userService(){

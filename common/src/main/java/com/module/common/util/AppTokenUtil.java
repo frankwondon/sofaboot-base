@@ -58,9 +58,9 @@ public class AppTokenUtil {
                 .appUserType(AppUserType.valueOf(decode.getClaim(USER_TYPE_FILED).asString()))
                 .subject(decode.getSubject())
                 .userAgent(decode.getClaim(USER_AGENT_FILED).asString())
-                .ip(decode.getClaim(USER_AGENT_FILED).asString());
+                .ip(decode.getClaim(USER_IP_FILED).asString());
         if (appUserType == AppUserType.USER) {
-            appTokenDtoBuilder.mobile(decode.getClaim(USER_IP_FILED).asString());
+            appTokenDtoBuilder.mobile(decode.getClaim(USER_MOBILE_FILED).asString());
         }
         return appTokenDtoBuilder.build();
     }

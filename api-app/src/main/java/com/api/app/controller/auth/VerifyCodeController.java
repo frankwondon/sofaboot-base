@@ -21,7 +21,7 @@ public class VerifyCodeController {
 
     @GetMapping("loginVerifyCode")
     @ApiOperation("获取登陆验证码")
-    public Response loginVerifyCode(String mobile){
+    public Response<Boolean> loginVerifyCode(String mobile){
         userService.sendLoginVerifyCode(mobile);
         return Response.success(true);
     }

@@ -36,6 +36,8 @@ public class WebConfigure implements WebMvcConfigurer {
                         ,"/swagger-resources/**"
                         ,"/webjars/**"
                         ,"/v2/api-docs"
-                        ,"/error");
+                        ,"/error"
+                        ,"/auth/visitorLogin"
+                );
     }
 }

@@ -2,6 +2,7 @@ package com.module.api.app.service;
 
 import com.module.api.app.dto.UserDto;
 import com.module.api.app.query.LoginQuery;
+import com.module.api.app.result.LoginResult;
 import com.module.common.bean.AppTokenDto;
 
 /**
@@ -19,7 +20,7 @@ public interface UserService {
 
     void sendLoginVerifyCode(String phone);
 
-    void login(LoginQuery query);
+    LoginResult login(LoginQuery query);
 
     void loginOut(UserDto userDto);
 }

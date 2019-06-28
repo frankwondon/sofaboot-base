@@ -9,7 +9,11 @@ import com.module.common.ResponseCode;
  */
 public class LimitException extends BaseException {
 
-    public LimitException(ResponseCode respontseCode) {
-        super.setResponseCode(respontseCode);
+    public LimitException(ResponseCode responseCode) {
+        super(responseCode);
+    }
+
+    public LimitException(ResponseCode responseCode, String msg) {
+        super(responseCode, msg);
     }
 }

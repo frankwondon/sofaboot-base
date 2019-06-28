@@ -15,6 +15,7 @@ import org.springframework.context.annotation.Configuration;
 public class BeanConfigure {
 
     @Bean
+    @SofaService
     public SMSSendService smsSendService(){
         return new SMSSendServiceImpl();
     }

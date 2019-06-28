@@ -59,14 +59,9 @@ private static final long serialVersionUID=1L;
     private String cellPhoneNum;
 
     /**
-     * 加盐后的密码
+     * 头像
      */
-    private String encryptPwd;
-
-    /**
-     * 用户类型 0后台1商户
-     */
-    private Integer userType;
+    private String headImg;
 
     /**
      * 0男1女
