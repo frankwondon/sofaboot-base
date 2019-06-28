@@ -20,7 +20,7 @@ import java.util.Date;
 public class SMSSendServiceImpl implements SMSSendService {
 
     private static int EXPIRE_SECOND = 200;
-    private static int DAY_RATE_LIMITER = 10;
+    private static int DAY_RATE_LIMITER = 10000;
 
     @Resource
     private RedissonClient redissonClient;

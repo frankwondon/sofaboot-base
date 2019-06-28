@@ -1,5 +1,6 @@
 package com.api.app.controller.auth;
 
+import cn.hutool.core.util.ReUtil;
 import com.alipay.sofa.runtime.api.annotation.SofaReference;
 import com.api.app.util.RequestUtil;
 import com.module.api.app.query.LoginQuery;
@@ -9,6 +10,7 @@ import com.module.common.Response;
 import com.module.common.bean.AppTokenDto;
 import com.module.common.constant.AppUserType;
 import com.module.common.constant.HeaderConstant;
+import com.module.common.constant.RegexPattern;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiImplicitParam;
 import io.swagger.annotations.ApiOperation;
@@ -63,5 +65,7 @@ public class AuthController {
     public Response<Boolean> loginVerifyCode(){
         return Response.success(true);
     }
+
+
 
 }
