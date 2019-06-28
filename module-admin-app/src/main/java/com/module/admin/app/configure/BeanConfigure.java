@@ -45,4 +45,8 @@ public class BeanConfigure {
     public AppUserService appUserService(){
         return  new AppUserServiceImpl();
     }
+
+    @Bean
+    @SofaService
+    public AppOrderService appOrderService(){return new AppOrderServiceImpl();}
 }
