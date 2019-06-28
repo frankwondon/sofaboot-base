@@ -1,6 +1,10 @@
 package com.api.app.spring;
 
 import com.alipay.sofa.runtime.api.annotation.SofaReference;
+import com.module.api.app.query.LoginQuery;
+import com.module.api.app.service.ProductService;
+import com.module.api.app.service.UserService;
+import com.module.base.common.constant.RedisPrefix;
 import com.module.base.common.dto.SmsVerifyCodeDto;
 import com.module.base.common.service.SMSSendService;
 import org.junit.Test;
@@ -22,6 +26,10 @@ public class SofaBootDBTest {
     RedissonClient redissonClient;
     @SofaReference
     SMSSendService smsSendService;
+    @SofaReference
+    UserService userService;
+    @SofaReference
+    ProductService productService;
 
     /**
      * 限流测试
@@ -46,13 +54,20 @@ public class SofaBootDBTest {
     public void successMethod(){
         SmsVerifyCodeDto dto=new SmsVerifyCodeDto();
         dto.setMobile("15001200836");
-        dto.setSmsMsg("15001200836");
-        RBucket<SmsVerifyCodeDto> test = redissonClient.getBucket("test");
-        if(!test.isExists()){
-            test.set(dto);
-        }
-        SmsVerifyCodeDto o = test.get();
-        System.out.println(o.getMobile());
+        dto.setSmsMsg("1234");
+        smsSendService.sendVerifyCode(RedisPrefix.LOGIN_VERIFY_CODE,dto);
+        LoginQuery query=new LoginQuery();
+        query.setMobile("15001200836");
+        query.setVerifyCode("1234");
+        userService.login(query);
+//        smsSendService.validVerifyCode(RedisPrefix.LOGIN_VERIFY_CODE,"15001200836","1234");
+    }
+
+
+    @Test
+    public void test3(){
+        ;
+        System.out.println(productService.realTimeGoldPrice());
     }
 
 

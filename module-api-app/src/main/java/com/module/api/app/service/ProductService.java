@@ -12,6 +12,11 @@ import java.util.List;
  */
 public interface ProductService {
     /**
+     * 实时金价
+     * @return
+     */
+    String realTimeGoldPrice();
+    /**
      * 查询商品列表
      * @param query
      * @return

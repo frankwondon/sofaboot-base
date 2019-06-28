@@ -62,7 +62,7 @@ public class AuthController {
 
     @PostMapping("loginOut")
     @ApiOperation("用户登出(不包含游客)")
-    public Response<Boolean> loginVerifyCode(){
+    public Response<Boolean> loginOut(){
         return Response.success(true);
     }
 

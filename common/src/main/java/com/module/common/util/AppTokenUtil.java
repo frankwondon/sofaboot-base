@@ -25,7 +25,7 @@ public class AppTokenUtil {
     private static final String USER_AGENT_FILED = "userAgent";
     private static final String USER_TYPE_FILED = "userType";
     private static final String USER_MOBILE_FILED = "mobile";
-    private static final String USER_IP_FILED = "mobile";
+    private static final String USER_IP_FILED = "ip";
 
     private static final String HMAC256_SECRET = "JYWHSECRET2019";
     private static Algorithm algorithm = Algorithm.HMAC256(HMAC256_SECRET);

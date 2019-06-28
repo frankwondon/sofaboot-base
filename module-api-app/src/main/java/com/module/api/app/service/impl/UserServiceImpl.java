@@ -39,7 +39,7 @@ public class UserServiceImpl implements UserService {
 
     @Value("${unit.token.visitor_expired_days}")
     private Integer visitorExpiredDays;
-    @Resource
+    @SofaReference
     private SMSSendService smsSendService;
     @Resource
     private UserMapper userMapper;
@@ -59,7 +59,7 @@ public class UserServiceImpl implements UserService {
                 return token;
             } else {
                 token = AppTokenUtil.ecode(dto);
-                tokens.put(key, AppTokenUtil.ecode(dto),userExpiredDays, TimeUnit.DAYS);
+                tokens.put(key, token,userExpiredDays, TimeUnit.DAYS);
             }
         }
         if (dto.getAppUserType().equals(AppUserType.USER_VISITOR)) {
@@ -70,7 +70,7 @@ public class UserServiceImpl implements UserService {
                 return token;
             }else {
                 token = AppTokenUtil.ecode(dto);
-                tokens.put(key, AppTokenUtil.ecode(dto),visitorExpiredDays, TimeUnit.DAYS);
+                tokens.put(key,token,visitorExpiredDays, TimeUnit.DAYS);
             }
         }
         return token;
