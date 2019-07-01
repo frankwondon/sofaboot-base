@@ -15,7 +15,8 @@ public static final String REGEX_USERNAME = "^[a-zA-Z]\\w{5,20}$";
     /**
      * 正则： 验证订单号
      */
-    public static final String REGEX_ORDERID = "";
+    //todo   订单生成规则
+    public static final String REGEX_ORDERID = "^jy[0-9]{15,18}$";
 
     /**
      * 正则表达式：验证手机号

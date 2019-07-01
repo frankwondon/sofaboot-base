@@ -9,7 +9,7 @@
 
 
     <select id="orderList" resultType="com.module.admin.app.result.AppOrderResult">
-        SELECT * FROM app_order
+        SELECT * FROM app_order ap_ord
         <where>
             status=#{status}
             <if test="startTime!=null">
@@ -22,12 +22,10 @@
     </select>
 
     <select id="orderListByPhone" resultType="com.module.admin.app.result.AppOrderResult">
-        SELECT * FROM app_order ap_ord
+        SELECT * FROM app_order ap_ord LEFT JOIN
+        (SELECT order_num FROM app_order_detail where mobile = #{KeyWord}) ao_detail ON ap_ord.order_num=ao_detail.order_num
         <where>
             status=#{status}
-            <if test="KeyWord!=null and KeyWord != ''">
-                AND ap_ord.order_num in(SELECT order_num FROM app_order_detail where mobile = #{KeyWord})
-            </if>
             <if test="startTime!=null and startTime != ''">
                 AND ap_ord.create_time >= #{startTime}
             </if>
@@ -38,12 +36,11 @@
     </select>
 
     <select id="orderListByName" resultType="com.module.admin.app.result.AppOrderResult">
-        SELECT * FROM app_order ap_ord
+        SELECT * FROM app_order ap_ord RIGHT JOIN
+        (SELECT order_num FROM app_order_detail  where per_name like #{KeyWord} ) ao_detail
+        on ap_ord.order_num=ao_detail.order_num
         <where>
             status=#{status}
-            <if test="KeyWord!=null and KeyWord != ''">
-                AND ap_ord.product_id in(SELECT id FROM app_product ap_pro where ap_pro.name like #{KeyWord})
-            </if>
             <if test="startTime!=null and startTime != ''">
                 AND ap_ord.create_time >= #{startTime}
             </if>

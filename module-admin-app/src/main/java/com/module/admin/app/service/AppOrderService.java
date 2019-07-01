@@ -11,12 +11,11 @@ import com.module.admin.app.result.AppOrderResult;
  */
 public interface AppOrderService {
 
-    IPage<AppOrderResult> listOfOrder();
+    IPage<AppOrderResult> listOfOrder(AppOrderQuery query);
 
 
-    IPage<AppOrderResult> listOfOrderByName(AppOrderQuery query);
-    IPage<AppOrderResult> listOfOrderByMobile(AppOrderQuery query);
 
-    AppOrderResult queryByOrderId(String orderId);
     IPage<AppOrderResult> orderList(AppOrderQuery query);
+
+    IPage<AppOrderResult> queryByOrderId(String orderId);
 }

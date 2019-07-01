@@ -23,23 +23,23 @@ public class AppOrder extends BaseEntity {
     /**
      * 订单号
      */
-    private String order_num;
+    private String orderNum;
     /**
      * 商品编号
      */
-    private int product_id;
+    private int productId;
     /**
      * 物流地址
      */
-    private String express_address_id;
+    private String expressAddressId;
     /**
      * 原价
      */
-    private double express_price;
+    private double expressPrice;
     /**
      * 实付金额
      */
-    private double pay_price;
+    private double payPrice;
     /**
      * 订单状态
      */
@@ -47,11 +47,11 @@ public class AppOrder extends BaseEntity {
     /**
      * 支付通道
      */
-    private int pay_channel;
+    private int payChannel;
     /**
      * 商品数量
      */
-    private int product_size;
+    private int productSize;
 
 
 }

@@ -55,6 +55,6 @@ public interface AppOrderMapper extends BaseMapper<AppOrder>{
      * @param orderId       使用订单号查询
      * @return
      */
-    AppOrderResult orderListByOrderId(@Param("orderId") String orderId);
+    IPage<AppOrderResult> orderListByOrderId(@Param("orderId") String orderId);
 
 }
