@@ -1,5 +1,6 @@
 package com.module.api.app.service.impl;
 
+import cn.hutool.http.HttpException;
 import cn.hutool.http.HttpRequest;
 import cn.hutool.http.HttpResponse;
 import com.alibaba.fastjson.JSONArray;
@@ -11,8 +12,10 @@ import com.module.api.app.result.AppProductResult;
 import com.module.api.app.result.AppProductTypeResult;
 import com.module.api.app.service.ProductService;
 import com.module.base.common.constant.RedisPrefix;
+import lombok.extern.slf4j.Slf4j;
 import org.redisson.api.RBucket;
 import org.redisson.api.RedissonClient;
+import org.springframework.beans.factory.annotation.Autowired;
 
 import javax.annotation.Resource;
 import java.time.LocalDateTime;
@@ -23,6 +26,7 @@ import java.util.concurrent.TimeUnit;
  * @author wangdong
  * @date: 2019/6/25 10:20
  */
+@Slf4j
 public class ProductServiceImpl implements ProductService {
     @Resource
     private ProductMapper productMapper;
@@ -56,11 +60,16 @@ public class ProductServiceImpl implements ProductService {
     }
 
 
-    private String getGoldPrice(){
-        HttpResponse execute = HttpRequest.post("https://www.sge.com.cn/graph/quotations").form("instid", "Au99.99").execute();
-        JSONObject object = JSONObject.parseObject(execute.body());
-        JSONArray data = object.getJSONArray("data");
-        return data.getString(data.size() - 1);
+    private static String getGoldPrice(){
+        try {
+            HttpResponse execute = HttpRequest.post("https://www.sge.com.cn/graph/quotations").form("instid", "Au99.99").execute();
+            JSONObject object = JSONObject.parseObject(execute.body());
+            JSONArray data = object.getJSONArray("data");
+            return data.getString(data.size() - 1);
+        } catch (HttpException e) {
+            log.error("请求金价时发生异常",e);
+        }
+        return "0.00";
     }
 
     @Override

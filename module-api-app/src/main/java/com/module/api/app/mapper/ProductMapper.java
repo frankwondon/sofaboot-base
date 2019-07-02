@@ -4,6 +4,7 @@ import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
 import com.module.api.app.result.AppProductResult;
 import com.module.api.app.result.AppProductTypeResult;
 import org.apache.ibatis.annotations.Param;
+import org.springframework.stereotype.Repository;
 
 import java.util.List;
 
@@ -11,6 +12,7 @@ import java.util.List;
  * @author wangdong
  * @date: 2019/6/25 13:21
  */
+@Repository
 public interface ProductMapper {
     /**
      * 分页查询商品列表

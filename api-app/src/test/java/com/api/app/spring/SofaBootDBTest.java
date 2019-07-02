@@ -11,7 +11,6 @@ import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.redisson.api.*;
 import org.springframework.boot.test.context.SpringBootTest;
-import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit4.SpringRunner;
 
 import javax.annotation.Resource;
@@ -19,7 +18,6 @@ import java.time.LocalDateTime;
 
 
 @SpringBootTest
-@ContextConfiguration
 @RunWith(SpringRunner.class)
 public class SofaBootDBTest {
     @SofaReference
@@ -66,8 +64,11 @@ public class SofaBootDBTest {
 
     @Test
     public void test3(){
-        ;
-        System.out.println(productService.realTimeGoldPrice());
+        RBucket<Object> bucket = redissonClient.getBucket("1");
+        if (!bucket.isExists()){
+            bucket.set("abcd");
+        }
+
     }
 
 

@@ -26,7 +26,8 @@ public class RedisConfig {
     @Resource
     private RedisConfigProperties redisConfigProperties;
 
-    private Config config() {
+    @Bean
+    public Config config() {
         Config config = new Config();
         SingleServerConfig singleServerConfig = config.useSingleServer()
                 .setAddress(redisConfigProperties.getAddress())
@@ -49,11 +50,10 @@ public class RedisConfig {
         return config;
     }
 
-
-    @Bean
     @SofaService
-    public RedissonClient redisClient() {
-        return Redisson.create(config());
+    @Bean
+    public RedissonClient redisClient(Config config) {
+        return Redisson.create(config);
     }
 
 }
