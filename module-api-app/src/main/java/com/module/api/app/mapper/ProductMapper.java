@@ -1,5 +1,6 @@
 package com.module.api.app.mapper;
 
+import com.baomidou.mybatisplus.core.metadata.IPage;
 import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
 import com.module.api.app.result.AppProductResult;
 import com.module.api.app.result.AppProductTypeResult;
@@ -7,6 +8,7 @@ import org.apache.ibatis.annotations.Param;
 import org.springframework.stereotype.Repository;
 
 import java.util.List;
+import java.util.Map;
 
 /**
  * @author wangdong
@@ -27,4 +29,44 @@ public interface ProductMapper {
      * @return
      */
     List<AppProductTypeResult> listProductType();
+
+    /**
+     * 搜索
+     * @param keyWord
+     * @return
+     */
+    List<AppProductResult> searchKeyWord(@Param("keyWord") String keyWord);
+
+    /**
+     * todo  获取产品详情
+     * @param productId
+     * @return
+     */
+    AppProductResult getProductById(@Param("productId")Integer productId);
+
+    /**
+     * 精品小件
+     * @return
+     */
+    List<AppProductResult> competitiveList();
+
+
+
+    /**
+     * 奢华产品
+     * @return
+     */
+    List<AppProductResult> luxuriousList();
+
+
+
+    /**
+     * 随便看看
+     * @return
+     */
+    List<AppProductResult> casualList();
+
+
+
+
 }

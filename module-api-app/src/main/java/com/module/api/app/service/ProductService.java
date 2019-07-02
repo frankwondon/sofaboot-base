@@ -1,5 +1,6 @@
 package com.module.api.app.service;
 
+
 import com.module.api.app.query.ProductQuery;
 import com.module.api.app.result.AppProductResult;
 import com.module.api.app.result.AppProductTypeResult;
@@ -28,4 +29,35 @@ public interface ProductService {
      * @return
      */
     List<AppProductTypeResult> listType(Integer limit);
+
+    /**
+     * 搜索
+     * @param keyWord
+     * @return
+     */
+    List<AppProductResult> searchKeyWord(String keyWord);
+
+    /**
+     * todo 商品详情
+     * @param productId
+     * @return
+     */
+    AppProductResult getProductById(Integer productId);
+
+    /**
+     * 精品小件
+     * @return
+     */
+    List<AppProductResult> competitiveList();
+
+    /**
+     * 奢华产品
+     * @return
+     */
+    List<AppProductResult> luxuriousList();
+    /**
+     * 随便看看
+     * @return
+     */
+    List<AppProductResult> casualList();
 }

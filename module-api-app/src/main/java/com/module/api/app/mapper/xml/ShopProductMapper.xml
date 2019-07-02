@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.module.api.app.mapper.ShopProductMapper">
+   <select id="showPretermitDESC" resultType="com.module.api.app.result.AppProductResult">
+        select product_id,name product_name,num,main_img,desc_img,pv
+        from app_product app_pro
+        right join
+        app_product_addition_one app_pro_add on app_pro.id=app_pro_add.product_id
+        where app_pro.status =1
+        ORDER BY app_pro_add.pv desc
+   </select>
+    <select id="showPretermit" resultType="com.module.api.app.result.AppProductResult">
+        select product_id,name product_name,num,main_img,desc_img,pv
+        from app_product app_pro
+        right join
+        app_product_addition_one app_pro_add on app_pro.id=app_pro_add.product_id
+        where app_pro.status =1
+        ORDER BY app_pro_add.pv
+   </select>
+
+    <select id="showPrice" resultType="com.module.api.app.result.AppProductResult">
+        select a.id product_id,num product_num,main_img,desc_img from app_product a left join app_product_sku b on a.id=b.product_id
+        WHERE a.status =0 and locked =0 group by a.id order by b.marked_price
+   </select>
+    <select id="showPriceDESC" resultType="com.module.api.app.result.AppProductResult">
+        select a.id product_id,num product_num,main_img,desc_img from app_product a left join app_product_sku b on a.id=b.product_id
+        WHERE a.status =0 and locked =0 group by a.id order by b.marked_price DESC
+   </select>
+</mapper>

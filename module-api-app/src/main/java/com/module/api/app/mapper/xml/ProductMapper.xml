@@ -23,4 +23,52 @@
         AND t.deleted = 0
         ORDER BY t.sort
     </select>
+
+
+    <select id="searchKeyWord" resultType="com.module.api.app.result.AppSearchProductResult">
+        SELECT  * FROM
+        (app_recommend ap_re left JOIN app_product ap_pr ON ap_re.product_id = ap_pr.id)
+        left join app_product_sku ap_pr_sk on ap_re.product_id=ap_pr_sk.product_id
+        WHERE
+        ap_re.name like #{keyWord} or ap_re.desc_title like #{keyWord} or ap_re.desc_text like #{keyWord}
+        HAVING
+        ap_pr.status=0 and ap_pr_sk.deleted=0
+        ORDER BY  ap_re.sort
+    </select>
+
+
+    <!--<select id="getProductById" resultType="com.module.api.app.result.AppProductResult">
+        select * FROM
+    </select>
+
+    <resultMap type="com.module.api.app.result.AppProductResult" id="AppProductResult">
+        <result property="id" column="id"/>
+        <result property="productId" column="product_id"/>
+        <result property="productName" column="name"/>
+        <result property="imUrl" column="img_url"/>
+        <result property="descTitle" column="desc_title"/>
+        <result property="descText" column="desc_text"/>
+        <collection property="appProductSkuList" ofType="com.module.api.app.entity.AppProductSku">
+            <id property="productId" column="app_sku.product_id" />
+            <result property="sku" column="sku"/>
+            <result property="markedPrice" column="marked_price"/>
+            <result property="reserve" column="reserve"/>
+        </collection>
+    </resultMap>-->
+
+    <select id="competitiveList" resultType="com.module.api.app.result.AppProductResult">
+        select product_id,desc_title,name,link,img_url from app_recommend WHERE  locked=0 and belong =1
+    </select>
+
+
+    <select id="luxuriousList" resultType="com.module.api.app.result.AppProductResult">
+        select product_id,desc_title,name,link,img_url,desc_text from app_recommend WHERE  locked=0 and belong =0
+    </select>
+
+    <select id="casualList" resultType="com.module.api.app.result.AppProductResult">
+        select product_id,name product_name,num,main_img,desc_img,pv from app_product app_pro right join
+        app_product_addition_one app_pro_add on app_pro.id=app_pro_add.product_id where app_pro.status =1 ORDER BY app_pro_add.pv desc
+    </select>
+
+
 </mapper>

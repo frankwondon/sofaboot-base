@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.module.api.app.mapper.BannerListMapper">
+    <select id="bannerIndexList" resultType="com.module.api.app.result.BannerListResult">
+        select name,link,img_url,desc_title,desc_text,product_id from app_banner  where belong=0 and locked=0 and deleted=0 order by sort limit 5
+    </select>
+    <select id="bannerShopList" resultType="com.module.api.app.result.BannerListResult">
+        select name,link,img_url,desc_title,desc_text,product_id from app_banner  where belong=1 and locked=0 and deleted=0 order by sort limit 5
+    </select>
+
+
+</mapper>
