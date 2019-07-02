@@ -4,6 +4,7 @@ import io.swagger.annotations.ApiModel;
 import io.swagger.annotations.ApiModelProperty;
 import lombok.Builder;
 import lombok.Data;
+import springfox.documentation.annotations.ApiIgnore;
 
 import java.io.Serializable;
 
@@ -15,6 +16,8 @@ import java.io.Serializable;
 @Builder
 @ApiModel("登陆返回")
 public class LoginResult implements Serializable {
+
+    private Integer userId;
     @ApiModelProperty("手机号")
     private String cellPhoneNum;
     @ApiModelProperty("头像")

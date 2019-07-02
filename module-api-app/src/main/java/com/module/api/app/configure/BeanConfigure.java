@@ -1,10 +1,12 @@
 package com.module.api.app.configure;
 
 import com.alipay.sofa.runtime.api.annotation.SofaService;
+import com.module.api.app.service.AddressService;
 import com.module.api.app.service.BannerListService;
 import com.module.api.app.service.ProductService;
 import com.module.api.app.service.ShopProductService;
 import com.module.api.app.service.UserService;
+import com.module.api.app.service.impl.AddressServiceImpl;
 import com.module.api.app.service.impl.BannerListServiceImpl;
 import com.module.api.app.service.impl.ProductServiceImpl;
 import com.module.api.app.service.impl.ShopProductServiceImpl;
@@ -38,4 +40,10 @@ public class BeanConfigure {
         return new ShopProductServiceImpl();
     }
 
+
+    @Bean
+    @SofaService
+    public AddressService addressService(){
+        return new AddressServiceImpl();
+    }
 }

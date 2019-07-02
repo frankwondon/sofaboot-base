@@ -1,6 +1,7 @@
 package com.module.common.bean;
 
 import lombok.Data;
+import springfox.documentation.annotations.ApiIgnore;
 
 import java.io.Serializable;
 
@@ -10,25 +11,19 @@ import java.io.Serializable;
  */
 @Data
 public class AppCurrentUser implements Serializable {
+
     private Integer id;
     /**
      * 用户名
      */
     private String username;
+
     /**
      * 手机号
      */
     private String cellPhoneNum;
 
-    /**
-     * 用户类型 0后台1商户
-     */
-    private Integer userType;
 
-    /*用户角色*/
-    private Integer roleId;
-
-    private String  roleName;
 
 
 

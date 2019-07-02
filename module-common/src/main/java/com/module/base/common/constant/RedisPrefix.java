@@ -11,7 +11,8 @@ public enum RedisPrefix {
     CACHE_GOLD_PRICE("REAL_TIME_GOLD_PRICE","未开盘时的金价"),
     RPWD_CODE("RPWD_CODE:","修改密码验证码"),
     TOKEN_USER_S("TOKEN_USERS","用户token"),
-    TOKEN_USER_VISITOR_S("TOKEN_USERS","游客token");
+    TOKEN_USER_VISITOR_S("TOKEN_USERS","游客token"),
+    SESSION_USER_S("SESSION_USERS","用户对象");
     private String key;
     private String desc;
     RedisPrefix(String key, String desc){

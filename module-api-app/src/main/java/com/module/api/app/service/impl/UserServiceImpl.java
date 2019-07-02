@@ -12,6 +12,7 @@ import com.module.base.common.constant.RedisPrefix;
 import com.module.base.common.dto.SmsVerifyCodeDto;
 import com.module.base.common.service.SMSSendService;
 import com.module.common.ResponseCode;
+import com.module.common.bean.AppCurrentUser;
 import com.module.common.bean.AppTokenDto;
 import com.module.common.constant.AppUserType;
 import com.module.common.constant.RegexPattern;
@@ -19,14 +20,12 @@ import com.module.common.exception.DBException;
 import com.module.common.exception.ValidationException;
 import com.module.common.util.AppTokenUtil;
 import com.module.common.util.RandomUtil;
-import org.redisson.api.RMap;
 import org.redisson.api.RMapCache;
 import org.redisson.api.RedissonClient;
 import org.springframework.beans.factory.annotation.Value;
 
 import javax.annotation.Resource;
-import java.time.temporal.ChronoUnit;
-import java.time.temporal.TemporalUnit;
+import java.time.LocalDateTime;
 import java.util.concurrent.TimeUnit;
 
 /**
@@ -53,32 +52,42 @@ public class UserServiceImpl implements UserService {
         if (dto.getAppUserType().equals(AppUserType.USER)) {
             //用户token用手机号+设备ID组合
             RMapCache<String, String> tokens = redissonClient.getMapCache(RedisPrefix.TOKEN_USER_S.key());
-            String key=dto.getMobile() + "-" + dto.getSubject();
+            RMapCache<String, AppCurrentUser> users = redissonClient.getMapCache(RedisPrefix.SESSION_USER_S.key());
+            String key = dto.getMobile() + "-" + dto.getSubject();
             token = tokens.get(key);
             if (token != null) {
                 return token;
             } else {
                 token = AppTokenUtil.ecode(dto);
-                tokens.put(key, token,userExpiredDays, TimeUnit.DAYS);
+                tokens.put(key, token, userExpiredDays, TimeUnit.DAYS);
+                //用户对象
+                users.put(key,dto.getSessionUser(),userExpiredDays, TimeUnit.DAYS);
             }
         }
         if (dto.getAppUserType().equals(AppUserType.USER_VISITOR)) {
             RMapCache<String, String> tokens = redissonClient.getMapCache(RedisPrefix.TOKEN_USER_VISITOR_S.key());
-            String key=dto.getSubject();
+            String key = dto.getSubject();
             token = tokens.get(key);
             if (token != null) {
                 return token;
-            }else {
+            } else {
                 token = AppTokenUtil.ecode(dto);
-                tokens.put(key,token,visitorExpiredDays, TimeUnit.DAYS);
+                tokens.put(key, token, visitorExpiredDays, TimeUnit.DAYS);
             }
         }
         return token;
     }
 
     @Override
+    public AppCurrentUser getTokenUser(AppTokenDto dto) {
+        RMapCache<String, AppCurrentUser> users = redissonClient.getMapCache(RedisPrefix.SESSION_USER_S.key());
+        String key = dto.getMobile() + "-" + dto.getSubject();
+        return users.get(key);
+    }
+
+    @Override
     public void sendLoginVerifyCode(String phone) {
-        if (!ReUtil.isMatch(RegexPattern.MOBILE,phone)){
+        if (!ReUtil.isMatch(RegexPattern.MOBILE, phone)) {
             throw new ValidationException(ResponseCode.C_500003, "手机号格式错误");
         }
         SmsVerifyCodeDto smsBaseDto = new SmsVerifyCodeDto();
@@ -95,16 +104,16 @@ public class UserServiceImpl implements UserService {
         }
         AppUser user = userMapper.getUserByCellPhone(query.getMobile());
         //用户不存在 创建一个账号
-        LoginResult result;
-        if(user==null){
-            result=createUser(query.getMobile());
-        }else {
+        LoginResult result = null;
+        if (user == null) {
+            user = createUser(query.getMobile());
+        } else {
             //用户被锁后无法进行登陆
             if (user.getLocked() == 1) {
                 throw new DBException(ResponseCode.C_520001);
             }
-            result=LoginResult.builder().cellPhoneNum(user.getCellPhoneNum()).headImg("").username(user.getCellPhoneNum()).build();
         }
+        result = LoginResult.builder().userId(user.getId()).cellPhoneNum(user.getCellPhoneNum()).headImg("").username(user.getCellPhoneNum()).build();
         return result;
     }
 
@@ -113,13 +122,14 @@ public class UserServiceImpl implements UserService {
 
     }
 
-    private LoginResult createUser(String phone){
-        AppUser user=new AppUser();
+    private AppUser createUser(String phone) {
+        AppUser user = new AppUser();
         user.setCellPhoneNum(phone);
         user.setUsername(phone);
         user.setHeadImg("");
+        user.setCreateTime(LocalDateTime.now());
         userMapper.insert(user);
-        return LoginResult.builder().cellPhoneNum(phone).headImg("").username(phone).build();
+        return user;
     }
 
 

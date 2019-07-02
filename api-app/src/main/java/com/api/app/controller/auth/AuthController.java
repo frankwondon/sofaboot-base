@@ -7,6 +7,7 @@ import com.module.api.app.query.LoginQuery;
 import com.module.api.app.result.LoginResult;
 import com.module.api.app.service.UserService;
 import com.module.common.Response;
+import com.module.common.bean.AppCurrentUser;
 import com.module.common.bean.AppTokenDto;
 import com.module.common.constant.AppUserType;
 import com.module.common.constant.HeaderConstant;
@@ -50,12 +51,17 @@ public class AuthController {
                                        @RequestHeader(name = HeaderConstant.USERAGENT_NAME)String  userAgent ,
                                        @RequestBody LoginQuery query, HttpServletRequest request){
         LoginResult login = userService.login(query);
+        AppCurrentUser user=new AppCurrentUser();
+        user.setId(login.getUserId());
+        user.setCellPhoneNum(login.getCellPhoneNum());
+        user.setUsername(login.getUsername());
         login.setToken(userService.getToken(AppTokenDto.builder()
                 .ip(RequestUtil.getIpAddress(request))
                 .userAgent(userAgent)
                 .subject(deviceId)
                 .mobile(query.getMobile())
                 .appUserType(AppUserType.USER)
+                .sessionUser(user)
                 .build()));
         return Response.success(login);
     }
