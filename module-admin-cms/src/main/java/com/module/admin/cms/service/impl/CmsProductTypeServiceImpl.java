@@ -1,5 +1,6 @@
 package com.module.admin.cms.service.impl;
 
+import cn.hutool.core.collection.CollectionUtil;
 import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
 import com.baomidou.mybatisplus.core.metadata.IPage;
 import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
@@ -25,7 +26,7 @@ public class CmsProductTypeServiceImpl implements CmsProductTypeService {
     @Override
     public IPage<CmsProductType> list(PageQuery pageQuery) {
         Page page = new Page(pageQuery.getPage(), pageQuery.getLimit());
-        return productTypeMapper.listPage(page,pageQuery.getKeyWord());
+        return productTypeMapper.listPage(page, pageQuery.getKeyWord());
     }
 
     @Override
@@ -66,7 +67,7 @@ public class CmsProductTypeServiceImpl implements CmsProductTypeService {
     @Override
     public List<CmsProductTypeResult> showList(ProductQuery query) {
         List<CmsProductTypeResult> cmsProductTypeResults = productTypeMapper.showList();
-        if (cmsProductTypeResults != null){
+        if (CollectionUtil.isEmpty(cmsProductTypeResults) && cmsProductTypeResults.size() > 0) {
             //把tab1的产品列表查出来
             CmsProductTypeResult cmsProductTypeResult = cmsProductTypeResults.get(0);
             query.setProductId(cmsProductTypeResult.getId());

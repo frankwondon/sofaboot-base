@@ -7,7 +7,7 @@ import java.time.format.DateTimeFormatter;
  * @author wangdong
  * @date: 2019/6/24 11:20
  */
-public class Jdk8DateTimeUtil {
+public class Java8DateTimeUtil {
     public class DateFormatConstant {
         /**
          * 例如:2018-12-28

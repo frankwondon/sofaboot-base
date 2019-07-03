@@ -20,7 +20,7 @@ import com.module.common.constant.BackAdminConstant;
 import com.module.common.constant.DateFormatConstant;
 import com.module.common.constant.ProductEnum;
 import com.module.common.exception.DBException;
-import com.module.common.util.Jdk8DateTimeUtil;
+import com.module.common.util.Java8DateTimeUtil;
 import org.springframework.beans.BeanUtils;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -77,7 +77,7 @@ public class AppProductServiceImpl implements AppProductService {
                 if (StrUtil.isBlank(productDto.getAutoShelfTimeStr())) {
                     throw new DBException(ResponseCode.C_510005);
                 }
-                productDto.setAutoShelfTime(Jdk8DateTimeUtil.parseOfStr(productDto.getAutoShelfTimeStr(), DateFormatConstant.DATE_TIME));
+                productDto.setAutoShelfTime(Java8DateTimeUtil.parseOfStr(productDto.getAutoShelfTimeStr(), DateFormatConstant.DATE_TIME));
             }
             productDto.setCreateBy(createUser);
             productDto.setCreateTime(LocalDateTime.now());
