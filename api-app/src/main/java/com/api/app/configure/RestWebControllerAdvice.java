@@ -5,6 +5,9 @@ import com.module.common.Response;
 import com.module.common.ResponseCode;
 import com.module.common.exception.*;
 import org.apache.shiro.authc.AuthenticationException;
+import org.springframework.validation.BindingResult;
+import org.springframework.validation.FieldError;
+import org.springframework.web.bind.MethodArgumentNotValidException;
 import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.bind.annotation.RestControllerAdvice;
 
@@ -26,4 +29,9 @@ public class RestWebControllerAdvice {
         return Response.fail(exception.getResponseCode(),exception.getMsg());
     }
 
+    @ExceptionHandler({MethodArgumentNotValidException.class})
+    public Response authentication(MethodArgumentNotValidException exception){
+        FieldError error = exception.getBindingResult().getFieldError();
+        return Response.fail(ResponseCode.C_500003,error.getDefaultMessage());
+    }
 }

@@ -6,11 +6,6 @@ spring:
     username: jinyun
     password: jinyun2019
 
-upload:
-  file:
-    img: /home/work/upload/img
-    video: /home/work/upload/video
-
 logging:
   level:
     root: info

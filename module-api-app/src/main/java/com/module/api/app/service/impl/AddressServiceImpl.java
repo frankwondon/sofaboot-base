@@ -28,7 +28,6 @@ public class AddressServiceImpl implements AddressService {
             expressAddressMapper.updateById(addressEntity);
         }else {
             address.setId(null);
-            address.setAddrDefault(0);
             expressAddressMapper.insert(addressEntity);
         }
     }

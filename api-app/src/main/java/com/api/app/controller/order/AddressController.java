@@ -58,4 +58,14 @@ public class AddressController {
         addressService.defaultAddress(addressId,user.getId());
         return Response.success(true);
     }
+
+    @ApiOperation("删除地址")
+    @ApiImplicitParams({
+            @ApiImplicitParam(name = "addressId",required = true,value = "地址的ID")
+    })
+    @GetMapping("delAddress")
+    public Response delAddress(Integer addressId,@ApiIgnore AppCurrentUser user){
+        addressService.del(addressId,user.getId());
+        return Response.success(true);
+    }
 }

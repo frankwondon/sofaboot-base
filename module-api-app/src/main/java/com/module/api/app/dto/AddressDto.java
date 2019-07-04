@@ -22,14 +22,14 @@ public class AddressDto extends BaseDto implements Serializable {
     /**
      * 收货人名称
      */
-    @ApiModelProperty(value = "市Name")
+    @ApiModelProperty(value = "收货人")
     @NotBlank(message = "收货人不能为空")
     private String receiptUserName;
 
     /**
      * 收货人手机号
      */
-    @ApiModelProperty(value = "市Name")
+    @ApiModelProperty(value = "手机号")
     @Length(min = 11,max = 11,message = "手机号必须是11位手机号")
     private String receiptUserMobile;
 

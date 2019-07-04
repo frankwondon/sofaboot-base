@@ -9,8 +9,8 @@ spring:
 upload:
   file:
     base: /resource
-    img: /upload/img
-    video: /upload/video
+    img: /uploadfile/img
+    video: /uploadfile/video
 
 logging:
   level:

@@ -14,10 +14,11 @@
 
     <update id="logicDel">
         UPDATE app_express_address a
-        SET a.deleted = 0
+        SET a.deleted = 1
         WHERE
             a.user_id = #{userId}
         AND a.id = #{addrId}
+        AND a.deleted = 0
     </update>
 
     <update id="defaultAddress">
@@ -27,7 +28,7 @@
             a.user_id = #{userId}
         AND a.id = #{addrId}
     </update>
-    <update id="restoreDefaultAddress">restoreDefaultAddress
+    <update id="restoreDefaultAddress">
         UPDATE app_express_address a
         SET a.addr_default = 0
         WHERE
