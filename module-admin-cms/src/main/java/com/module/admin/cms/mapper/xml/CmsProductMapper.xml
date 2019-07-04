@@ -36,4 +36,11 @@
         and show_type=1
         ORDER BY p.sort LIMIT 1
     </select>
+
+    <select id="searchKeyWord" resultType="com.module.admin.cms.result.CmsProductResult">
+        SELECT  * FROM  cms_product cp WHERE
+        cp.name like #{keyWord} or cp.desc_title like #{keyWord} or cp.desc_desc like #{keyWord}
+        ORDER BY  cp.sort
+    </select>
+
 </mapper>

@@ -38,25 +38,13 @@ public interface ProductMapper {
     List<AppProductResult> searchKeyWord(@Param("keyWord") String keyWord);
 
     /**
-     * todo  获取产品详情
+     *
      * @param productId
      * @return
      */
     AppProductResult getProductById(@Param("productId")Integer productId);
 
-    /**
-     * 精品小件
-     * @return
-     */
-    List<AppProductResult> competitiveList();
 
-
-
-    /**
-     * 奢华产品
-     * @return
-     */
-    List<AppProductResult> luxuriousList();
 
 
 
@@ -64,7 +52,7 @@ public interface ProductMapper {
      * 随便看看
      * @return
      */
-    List<AppProductResult> casualList();
+    IPage<AppProductResult> casualList(Page page);
 
 
 

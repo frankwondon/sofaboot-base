@@ -1,6 +1,26 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.module.api.app.mapper.ProductMapper">
+
+<!--开始-->
+
+    <resultMap id="productResult" type="com.module.api.app.result.AppProductResult">
+        <id column="pro_id" jdbcType="INTEGER" property="productId" />
+        <result column="main_img" jdbcType="VARCHAR" property="mainImg" />
+        <result column="product_name" jdbcType="VARCHAR" property="productName"/>
+        <result column="desc_img" jdbcType="VARCHAR" property="descImg"/>
+        <collection property="appProductSkuList" ofType="com.module.api.app.entity.AppProductSku" javaType="java.util.List">
+            <id column="sku_id" jdbcType="INTEGER" property="skuId" />
+            <result column="sku" jdbcType="INTEGER" property="sku" />
+            <result column="marked_price" jdbcType="DECIMAL" property="markedPrice"/>
+            <result column="fixed_price" jdbcType="DECIMAL" property="fixedPrice"/>
+            <result column="reserve" jdbcType="INTEGER" property="reserve"/>
+        </collection>
+    </resultMap>
+
+
+    <!--结束-->
+
     <select id="pageQuery" resultType="com.module.api.app.result.AppProductResult">
          SELECT
             p.id product_id,
@@ -25,49 +45,39 @@
     </select>
 
 
-    <select id="searchKeyWord" resultType="com.module.api.app.result.AppSearchProductResult">
-        SELECT  * FROM
-        (app_recommend ap_re left JOIN app_product ap_pr ON ap_re.product_id = ap_pr.id)
-        left join app_product_sku ap_pr_sk on ap_re.product_id=ap_pr_sk.product_id
-        WHERE
-        ap_re.name like #{keyWord} or ap_re.desc_title like #{keyWord} or ap_re.desc_text like #{keyWord}
-        HAVING
-        ap_pr.status=0 and ap_pr_sk.deleted=0
-        ORDER BY  ap_re.sort
+    <select id="searchKeyWord" resultType="com.module.api.app.result.AppProductResult">
+        select id product_id,name product_name from app_product where name like #{keyWord}
     </select>
 
 
-    <!--<select id="getProductById" resultType="com.module.api.app.result.AppProductResult">
-        select * FROM
+    <select id="getProductById" resultMap="productResult">
+  SELECT
+	app_product.id pro_id,
+	main_img,
+	name product_name,
+	desc_img,
+	app_product_sku.product_id product_id,
+	app_product_sku.id sku_id,
+	sku,
+	marked_price,
+	fixed_price,
+	reserve
+FROM
+	app_product
+	LEFT JOIN app_product_sku ON app_product.id = product_id
+WHERE
+	app_product.id = 7
+	AND app_product.STATUS = 0
+	AND app_product_sku.deleted =0
+
     </select>
 
-    <resultMap type="com.module.api.app.result.AppProductResult" id="AppProductResult">
-        <result property="id" column="id"/>
-        <result property="productId" column="product_id"/>
-        <result property="productName" column="name"/>
-        <result property="imUrl" column="img_url"/>
-        <result property="descTitle" column="desc_title"/>
-        <result property="descText" column="desc_text"/>
-        <collection property="appProductSkuList" ofType="com.module.api.app.entity.AppProductSku">
-            <id property="productId" column="app_sku.product_id" />
-            <result property="sku" column="sku"/>
-            <result property="markedPrice" column="marked_price"/>
-            <result property="reserve" column="reserve"/>
-        </collection>
-    </resultMap>-->
-
-    <select id="competitiveList" resultType="com.module.api.app.result.AppProductResult">
-        select product_id,desc_title,name,link,img_url from app_recommend WHERE  locked=0 and belong =1
-    </select>
 
 
-    <select id="luxuriousList" resultType="com.module.api.app.result.AppProductResult">
-        select product_id,desc_title,name,link,img_url,desc_text from app_recommend WHERE  locked=0 and belong =0
-    </select>
 
     <select id="casualList" resultType="com.module.api.app.result.AppProductResult">
-        select product_id,name product_name,num,main_img,desc_img,pv from app_product app_pro right join
-        app_product_addition_one app_pro_add on app_pro.id=app_pro_add.product_id where app_pro.status =1 ORDER BY app_pro_add.pv desc
+        select product_id,name product_name,num product_num,main_img,desc_img,pv from app_product app_pro right join
+        app_product_addition_one app_pro_add on app_pro.id=app_pro_add.product_id where app_pro.status =0 ORDER BY app_pro_add.pv desc
     </select>
 
 

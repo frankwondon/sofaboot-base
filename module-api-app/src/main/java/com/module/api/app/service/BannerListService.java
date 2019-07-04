@@ -1,6 +1,7 @@
 package com.module.api.app.service;
 
-import com.module.api.app.result.BannerListResult;
+import com.module.api.app.result.AppBannerListResult;
+import com.module.api.app.result.AppProductResult;
 
 import java.util.List;
 
@@ -17,13 +18,25 @@ public interface BannerListService {
      * 首页轮播图
      * @return
      */
-    List<BannerListResult> bannerIndexList();
+    List<AppBannerListResult> bannerIndexList();
 
     /**
      * 商城轮播图
      * @return
      */
-    List<BannerListResult> bannerShopList();
+    List<AppBannerListResult> bannerShopList();
+
+    /**
+     * 精品小件
+     * @return
+     */
+    List<AppProductResult> competitiveList();
+
+    /**
+     * 奢华产品
+     * @return
+     */
+    List<AppProductResult> luxuriousList();
 
 
 }

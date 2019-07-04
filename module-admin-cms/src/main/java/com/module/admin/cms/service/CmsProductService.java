@@ -47,4 +47,6 @@ public interface CmsProductService {
     CmsProduct hotProduct();
 
     CmsProduct findById(Integer id);
+
+    IPage<CmsProductResult> searchKeyWord(PageQuery query);
 }

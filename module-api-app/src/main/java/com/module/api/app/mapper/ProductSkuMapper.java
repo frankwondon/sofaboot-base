@@ -1,6 +1,6 @@
 package com.module.api.app.mapper;
 
-import com.module.api.app.dto.AppProductSkuDto;
+import com.module.api.app.entity.AppProductSku;
 
 import java.util.List;
 
@@ -20,7 +20,7 @@ public interface ProductSkuMapper {
      * @param productId
      * @return
      */
-    List<AppProductSkuDto> productSkuById(Integer productId);
+    List<AppProductSku> productSkuById(Integer productId);
     /**
      *  查询id
      *  返回商品模板，标价，定价，库存量
@@ -28,5 +28,5 @@ public interface ProductSkuMapper {
      * @param productId
      * @return
      */
-    AppProductSkuDto productSkuByIdOne(Integer productId);
+    AppProductSku productSkuByIdOne(Integer productId);
 }

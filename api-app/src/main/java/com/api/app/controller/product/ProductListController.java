@@ -1,14 +1,13 @@
 package com.api.app.controller.product;
 
 import com.alipay.sofa.runtime.api.annotation.SofaReference;
+import com.baomidou.mybatisplus.core.metadata.IPage;
 import com.module.api.app.query.ProductQuery;
 import com.module.api.app.result.AppProductResult;
 import com.module.api.app.result.AppProductTypeResult;
-import com.module.api.app.result.BannerListResult;
 import com.module.api.app.service.ProductService;
 import com.module.common.Response;
 import com.module.common.bean.PageQuery;
-import com.sun.org.apache.bcel.internal.classfile.Code;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiImplicitParam;
 import io.swagger.annotations.ApiImplicitParams;
@@ -30,6 +29,8 @@ import java.util.List;
 public class ProductListController {
     @SofaReference
     private ProductService productService;
+
+
     @GetMapping("listType")
     @ApiOperation("产品类型列表")
     @ApiImplicitParams({
@@ -47,7 +48,7 @@ public class ProductListController {
     @ApiOperation(value = "搜索",notes = "搜索查询商品关键字")
     @GetMapping("searchKeyWord")
     @ApiImplicitParams({
-            @ApiImplicitParam(name = "keyWord",paramType = "query" ,required = true,value = "每页条数"),
+            @ApiImplicitParam(name = "keyWord",paramType = "query" ,required = true,value = "搜索关键字"),
     })
     public Response<AppProductResult> searchKeyWord(String keyWord){
         List<AppProductResult> appProductResultList = productService.searchKeyWord(keyWord);
@@ -62,28 +63,20 @@ public class ProductListController {
     @ApiImplicitParams({
             @ApiImplicitParam(name = "productId",paramType = "query",required = true,value = "商品id")
     })
-    public Response<List<BannerListResult>> getProductById(Integer productId){
-        //todo
+    public Response<AppProductResult> getProductById(Integer productId){
         return Response.success(productService.getProductById(productId));
     }
 
 
 
-    @ApiOperation("精品小件")
-    @GetMapping("competitiveList")
-    public Response<List<AppProductResult>> competitiveList( ){
-        return Response.success(productService.competitiveList()) ;
-    }
-    @ApiOperation("奢华享受")
-    @GetMapping("luxuriousList")
-    public Response<List<AppProductResult>> luxuriousList( ){
-        return Response.success(productService.luxuriousList()) ;
-    }
-
-    @ApiOperation("随便看看  todo 分页")
+    @ApiOperation("随便看看  分页")
     @GetMapping("casualList")
-    public Response<List<AppProductResult>> casualList( ){
-        return Response.success(productService.casualList()) ;
+    @ApiImplicitParams({
+            @ApiImplicitParam(name = "page",paramType = "query",required = true,value = "起始页"),
+            @ApiImplicitParam(name = "limit",paramType = "query",required = true,value = "每页个数")
+    })
+    public Response<IPage<AppProductResult>> casualList(PageQuery query ){
+        return Response.success(productService.casualList(query)) ;
     }
 
 

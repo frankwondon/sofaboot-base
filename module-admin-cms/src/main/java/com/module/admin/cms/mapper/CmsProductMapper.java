@@ -23,4 +23,7 @@ public interface CmsProductMapper extends BaseMapper<CmsProduct> {
         void disable(@Param("id") Integer id,@Param("disable") Integer disable);
 
         CmsProduct hotProduct();
+
+
+        IPage<CmsProductResult> searchKeyWord(Page page,@Param("keyWord") String keyWord);
 }

@@ -7,8 +7,8 @@ import com.alibaba.fastjson.JSONArray;
 import com.alibaba.fastjson.JSONObject;
 import com.baomidou.mybatisplus.core.metadata.IPage;
 import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
-import com.module.api.app.dto.AppProductSkuDto;
 import com.module.api.app.entity.AppProductSku;
+import com.module.api.app.mapper.AppOrderMapper;
 import com.module.api.app.mapper.ProductMapper;
 import com.module.api.app.mapper.ProductSkuMapper;
 import com.module.api.app.query.ProductQuery;
@@ -20,14 +20,10 @@ import lombok.extern.slf4j.Slf4j;
 import com.module.common.bean.PageQuery;
 import org.redisson.api.RBucket;
 import org.redisson.api.RedissonClient;
-import org.springframework.beans.factory.annotation.Autowired;
 
 import javax.annotation.Resource;
 import java.time.LocalDateTime;
-import java.util.ArrayList;
-import java.util.Collection;
 import java.util.List;
-import java.util.Map;
 import java.util.concurrent.TimeUnit;
 
 /**
@@ -42,6 +38,9 @@ public class ProductServiceImpl implements ProductService {
     private RedissonClient redissonClient;
     @Resource
     private ProductSkuMapper productSkuMapper;
+
+    @Resource
+    private AppOrderMapper appOrderMapper;
 
     @Override
     public String realTimeGoldPrice() {
@@ -110,44 +109,35 @@ public class ProductServiceImpl implements ProductService {
 
     @Override
     public AppProductResult getProductById(Integer productId) {
-        return productMapper.getProductById(productId);
+        AppProductResult result = productMapper.getProductById(productId);
+        List<AppProductSku> appProductSkuList = result.getAppProductSkuList();
+        result.setPurchases(appOrderMapper.countOrderById(productId));
+        return result;
     }
 
 
+
+
     /**
-     * 精美
+     * 随便看看
+     * @param query
      * @return
      */
     @Override
-    public List<AppProductResult> competitiveList() {
-        List<AppProductResult> appProductResultList = productMapper.competitiveList();
-        for (AppProductResult appProductResult : appProductResultList) {
+    public IPage<AppProductResult> casualList(PageQuery query) {
+        Page page = new Page<>(query.getPage(), query.getLimit());
+        IPage<AppProductResult> appProductResultIPage = productMapper.casualList(page);
+        for (AppProductResult appProductResult : appProductResultIPage.getRecords()) {
             Integer productId = appProductResult.getProductId();
             appProductResult.setAppProductSku(productSkuMapper.productSkuByIdOne(productId));
+            appProductResult.setPurchases(appOrderMapper.countOrderById(productId));
         }
-        return appProductResultList;
+        return appProductResultIPage;
     }
 
 
-    /**
-     * 奢华
-     * @return
-     */
-    @Override
-    public List<AppProductResult> luxuriousList() {
-        return productMapper.luxuriousList();
-    }
 
-    @Override
-    public List<AppProductResult> casualList() {
-        List<AppProductResult> appProductResultList = productMapper.casualList();
-        for (AppProductResult appProductResult : appProductResultList) {
-            Integer productId = appProductResult.getProductId();
-            List<AppProductSkuDto> skuByProductId = getSkuByProductId(productId);
-            appProductResult.setAppProductSkuList(skuByProductId);
-        }
-        return appProductResultList;
-    }
+
 
 
 
@@ -158,8 +148,8 @@ public class ProductServiceImpl implements ProductService {
      * @param productId
      * @return
      */
-    private List<AppProductSkuDto> getSkuByProductId(Integer productId){
-        List<AppProductSkuDto> appProductSkuDtoList = productSkuMapper.productSkuById(productId);
+    private List<AppProductSku> getSkuByProductId(Integer productId){
+        List<AppProductSku> appProductSkuDtoList = productSkuMapper.productSkuById(productId);
         if (appProductSkuDtoList!=null&&appProductSkuDtoList.size()>0){
             return appProductSkuDtoList;
         }

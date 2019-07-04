@@ -1,9 +1,11 @@
 package com.module.api.app.service;
 
 
+import com.baomidou.mybatisplus.core.metadata.IPage;
 import com.module.api.app.query.ProductQuery;
 import com.module.api.app.result.AppProductResult;
 import com.module.api.app.result.AppProductTypeResult;
+import com.module.common.bean.PageQuery;
 
 import java.util.List;
 
@@ -38,26 +40,16 @@ public interface ProductService {
     List<AppProductResult> searchKeyWord(String keyWord);
 
     /**
-     * todo 商品详情
+     *
      * @param productId
      * @return
      */
     AppProductResult getProductById(Integer productId);
 
-    /**
-     * 精品小件
-     * @return
-     */
-    List<AppProductResult> competitiveList();
 
-    /**
-     * 奢华产品
-     * @return
-     */
-    List<AppProductResult> luxuriousList();
     /**
      * 随便看看
      * @return
      */
-    List<AppProductResult> casualList();
+    IPage<AppProductResult> casualList(PageQuery query);
 }

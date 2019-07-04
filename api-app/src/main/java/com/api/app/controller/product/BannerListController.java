@@ -1,13 +1,14 @@
 package com.api.app.controller.product;
 
 
+import com.alibaba.fastjson.JSONObject;
 import com.alipay.sofa.runtime.api.annotation.SofaReference;
-import com.module.api.app.result.BannerListResult;
+import com.module.api.app.result.AppProductResult;
+import com.module.api.app.result.AppBannerListResult;
 import com.module.api.app.service.BannerListService;
+import com.module.api.app.service.ProductService;
 import com.module.common.Response;
 import io.swagger.annotations.Api;
-import io.swagger.annotations.ApiImplicitParam;
-import io.swagger.annotations.ApiImplicitParams;
 import io.swagger.annotations.ApiOperation;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -27,15 +28,31 @@ public class BannerListController {
     @SofaReference
     private BannerListService bannerService;
 
-    @ApiOperation(value = "首页轮播图", notes = "5张")
+    @SofaReference
+    private ProductService productService;
+
+
+    @ApiOperation(value = "首页数据", notes = "bannerList轮播图5张competitiveList精美小件luxuriousList奢华产品")
     @GetMapping("/bannerIndexList")
-    public Response<List<BannerListResult>> bannerList(){
-        return Response.success(bannerService.bannerIndexList());
+    public Response<JSONObject> bannerList(){
+        //轮播图
+        List<AppBannerListResult> bannerList = bannerService.bannerIndexList();
+        //精品小件
+        List<AppProductResult> competitiveList = bannerService.competitiveList();
+        //奢华产品
+        List<AppProductResult> luxuriousList = bannerService.luxuriousList();
+        JSONObject jsonObject=new JSONObject();
+        jsonObject.put("bannerList",bannerList);
+        jsonObject.put("competitiveList",competitiveList);
+        jsonObject.put("luxuriousList",luxuriousList);
+        return Response.success(jsonObject);
     }
+
+
 
     @ApiOperation(value = "商城轮播图", notes = "5张")
     @GetMapping("/bannerShopList")
-    public Response<List<BannerListResult>> bannerShopList(){
+    public Response<List<AppBannerListResult>> bannerShopList(){
         return Response.success(bannerService.bannerShopList());
     }
 

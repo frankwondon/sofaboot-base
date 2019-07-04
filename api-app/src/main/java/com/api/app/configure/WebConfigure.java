@@ -20,9 +20,9 @@ import java.util.List;
  */
 @Configuration
 public class WebConfigure implements WebMvcConfigurer {
+
     @SofaReference
     private UserService userService;
-
     /**
      * 添加参数注入
      * @param resolvers
@@ -38,13 +38,13 @@ public class WebConfigure implements WebMvcConfigurer {
 
     @Override
     public void addInterceptors(InterceptorRegistry registry) {
-        registry.addInterceptor(new AuthIntercept(userService))
+        /*registry.addInterceptor(new AuthIntercept(userService))
                 .excludePathPatterns("/swagger-ui.html"
                         ,"/swagger-resources/**"
                         ,"/webjars/**"
                         ,"/v2/api-docs"
                         ,"/error"
                         ,"/auth/visitorLogin"
-                );
+                );*/
     }
 }

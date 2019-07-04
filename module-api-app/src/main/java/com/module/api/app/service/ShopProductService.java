@@ -12,10 +12,10 @@ import com.module.api.app.result.AppProductResult;
  * @Version 1.0
  **/
 public interface ShopProductService {
-   IPage<AppProductResult> showPretermit(ShopProductQuery query);
+   IPage<AppProductResult> showSortList(ShopProductQuery query);
 
 
-   IPage<AppProductResult> showPrice(ShopProductQuery query);
+
 
 
 }

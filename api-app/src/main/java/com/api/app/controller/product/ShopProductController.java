@@ -2,12 +2,9 @@ package com.api.app.controller.product;
 
 import com.alipay.sofa.runtime.api.annotation.SofaReference;
 import com.module.api.app.query.ShopProductQuery;
-import com.module.api.app.result.BannerListResult;
-import com.module.api.app.service.BannerListService;
+import com.module.api.app.result.AppBannerListResult;
 import com.module.api.app.service.ShopProductService;
 import com.module.common.Response;
-import com.module.common.bean.PageQuery;
-import com.sun.org.apache.regexp.internal.RE;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiImplicitParam;
 import io.swagger.annotations.ApiImplicitParams;
@@ -32,31 +29,18 @@ import java.util.List;
 public class ShopProductController {
 
 
-
-    //参数 2. 点击加载   请求参数 默认的0或1
-    //参数 3. 点击加载   请求参数 价格0或1
-    //参数 4. 点击加载   请求参数 销量0或1
     @SofaReference
     private ShopProductService shopProductService;
 
-    @ApiOperation(value = "默认排序  完成")
-    @PostMapping("/showPretermit")
+    @ApiOperation(value = "默认排序  0默认初始加载 1价格升2价格降 3销量降4销量降")
+    @GetMapping("/showSortList")
     @ApiImplicitParams({
-            @ApiImplicitParam(name = "sortId"  ,paramType = "query",required = true,value = "默认0----点击加载0，1"),
+            @ApiImplicitParam(name = "sortId"  ,paramType = "query",required = true,value = "0默认初始加载 1价格升2价格降 3销量降4销量升"),
             @ApiImplicitParam(name = "page"  ,paramType = "query",required = true,value = "当前页"),
             @ApiImplicitParam(name = "limit" ,paramType = "query" ,required = true,value = "每页条数")
     })
-    public Response<List<BannerListResult>> bannerShopList(ShopProductQuery query){
-        return Response.success(shopProductService.showPretermit(query));
+    public Response<List<AppBannerListResult>> showSortList(ShopProductQuery query){
+        return Response.success(shopProductService.showSortList(query));
     }
-    @ApiOperation(value = "价格排序  开发")
-    @PostMapping("/showPrice")
-    @ApiImplicitParams({
-            @ApiImplicitParam(name = "sortId"  ,paramType = "query",required = true,value = "价格-  点击加载，1"),
-            @ApiImplicitParam(name = "page"  ,paramType = "query",required = true,value = "当前页"),
-            @ApiImplicitParam(name = "limit" ,paramType = "query" ,required = true,value = "每页条数")
-    })
-    public Response<List<BannerListResult>> showPrice(ShopProductQuery query){
-        return Response.success(shopProductService.showPrice(query));
-    }
+
 }

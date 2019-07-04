@@ -87,4 +87,16 @@ public class CmsProductServiceImpl implements CmsProductService {
         queryWrapper.eq("locked",0);
         return productMapper.selectOne(queryWrapper);
     }
+
+    @Override
+    public IPage<CmsProductResult> searchKeyWord(PageQuery query) {
+        Page page= new Page(query.getPage(),query.getLimit());
+        if (query.getKeyWord()!=null&&!"".equals(query.getKeyWord().trim())) {
+            return productMapper.searchKeyWord(page,"%"+query.getKeyWord()+"%");
+
+        }
+        return null;
+
+
+    }
 }

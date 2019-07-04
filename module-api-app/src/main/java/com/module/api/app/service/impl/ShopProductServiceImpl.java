@@ -2,13 +2,12 @@ package com.module.api.app.service.impl;
 
 import com.baomidou.mybatisplus.core.metadata.IPage;
 import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
-import com.module.api.app.dto.AppProductSkuDto;
+import com.module.api.app.entity.AppProductSku;
 import com.module.api.app.mapper.ProductSkuMapper;
 import com.module.api.app.mapper.ShopProductMapper;
 import com.module.api.app.query.ShopProductQuery;
 import com.module.api.app.result.AppProductResult;
 import com.module.api.app.service.ShopProductService;
-import net.bytebuddy.asm.Advice;
 
 import javax.annotation.Resource;
 import java.util.List;
@@ -27,37 +26,31 @@ public class ShopProductServiceImpl implements ShopProductService {
     private ProductSkuMapper productSkuMapper;
 
     @Override
-    public IPage<AppProductResult> showPretermit(ShopProductQuery query) {
+    public IPage<AppProductResult> showSortList(ShopProductQuery query) {
         Page page = new Page<>(query.getPage(), query.getLimit());
+        //0默认初始加载 1价格升2价格降 3销量降4销量升
         IPage<AppProductResult> appProductResultIPage=null;
         if (query.getSortId()==0){
            appProductResultIPage = shopProductMapper.showPretermitDESC(page);
         }
         if (query.getSortId()==1){
-            appProductResultIPage = shopProductMapper.showPretermit(page);
-        }
-        for (AppProductResult appProductResult : appProductResultIPage.getRecords()) {
-            appProductResult.setAppProductSku(productSkuMapper.productSkuByIdOne(appProductResult.getProductId()));
-        }
-        return appProductResultIPage;
-    }
-
-    @Override
-    public IPage<AppProductResult> showPrice(ShopProductQuery query) {
-        Page page = new Page<>(query.getPage(), query.getLimit());
-        IPage<AppProductResult> appProductResultIPage=null;
-        if (query.getSortId()==0){
-            appProductResultIPage = shopProductMapper.showPriceDESC(page);
-        }
-        if (query.getSortId()==1){
             appProductResultIPage = shopProductMapper.showPrice(page);
         }
+        if (query.getSortId()==2){
+            appProductResultIPage = shopProductMapper.showPriceDESC(page);
+        }
+        if (query.getSortId()==3){
+            appProductResultIPage = shopProductMapper.showPurchasesDESC(page);
+        }
+        if (query.getSortId()==4){
+            appProductResultIPage = shopProductMapper.showPurchases(page);
+        }
         for (AppProductResult appProductResult : appProductResultIPage.getRecords()) {
             appProductResult.setAppProductSku(productSkuMapper.productSkuByIdOne(appProductResult.getProductId()));
         }
         return appProductResultIPage;
-
     }
+
 
 
 
@@ -67,8 +60,8 @@ public class ShopProductServiceImpl implements ShopProductService {
      * @param productId
      * @return
      */
-    private List<AppProductSkuDto> getSkuByProductId(Integer productId){
-        List<AppProductSkuDto> appProductSkuDtoList = productSkuMapper.productSkuById(productId);
+    private List<AppProductSku> getSkuByProductId(Integer productId){
+        List<AppProductSku> appProductSkuDtoList = productSkuMapper.productSkuById(productId);
         if (appProductSkuDtoList!=null&&appProductSkuDtoList.size()>0){
             return appProductSkuDtoList;
         }

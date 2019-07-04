@@ -1,7 +1,6 @@
 package com.module.api.app.result;
 
-import com.module.api.app.dto.AppProductSkuDto;
-
+import com.module.api.app.entity.AppProductSku;
 import io.swagger.annotations.ApiModel;
 import io.swagger.annotations.ApiModelProperty;
 import lombok.Data;
@@ -20,14 +19,17 @@ public class AppProductResult implements Serializable {
     private Integer productId;
     @ApiModelProperty("商品名称")
     private String  productName;
-    @ApiModelProperty(value = "图片路径",notes = "注意是,分割的多个图片相对路径")
+    @ApiModelProperty(value = "精美，奢华图片路径",notes = "注意是,分割的多个图片相对路径")
     private String imgUrl;
     @ApiModelProperty("产品编号")
     private String productNum;
+    @ApiModelProperty("产品编号")
+    private String mainImg;
+    @ApiModelProperty("产品编号")
+    private String descImg;
+
+
     
-
-
-
 
     @ApiModelProperty("商品标题")
     private String  descTitle;
@@ -35,12 +37,14 @@ public class AppProductResult implements Serializable {
     private String  descText;
 
 
-    @ApiModelProperty("一个商品获得最低价格")
-    private AppProductSkuDto appProductSku;
+    @ApiModelProperty("多商品列表 商品的最低价格模板（商品最低价格）")
+    private AppProductSku appProductSku;
 
-    @ApiModelProperty("商品id 对应多个模板")
-    private List<AppProductSkuDto> appProductSkuList;
+    @ApiModelProperty("产品详情 对应多个模板")
+    private List<AppProductSku> appProductSkuList;
 
 
+    @ApiModelProperty("订单完成的销量")
+    private Integer  purchases;
 
 }
