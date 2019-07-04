@@ -10,3 +10,9 @@ upload:
   file:
     img: /home/work/upload/img
     video: /home/work/upload/video
+
+
+logging:
+  level:
+    root: info
+  path: /home/work/logs/spring

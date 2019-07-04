@@ -6,10 +6,12 @@ spring:
     username: base
     password: base
 
-
-
-
 upload:
   file:
     img: D:/upload/img
     video: D:/upload/video
+
+logging:
+  level:
+    root: debug
+    path: C:\logs\spring

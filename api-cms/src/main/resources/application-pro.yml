@@ -2,11 +2,16 @@
 spring:
   datasource:
     driver-class-name: com.mysql.jdbc.Driver
-    url: jdbc:mysql://192.168.1.117:3306/base?useUnicode=true&useSSL=false&characterEncoding=utf8
-    username: root
-    password: root
+    url: jdbc:mysql://172.17.156.180:3306/base?useUnicode=true&useSSL=false&characterEncoding=utf8
+    username: jinyun
+    password: jinyun2019
 
 upload:
   file:
     img: /home/work/upload/img
     video: /home/work/upload/video
+
+logging:
+  level:
+    root: info
+  path: /home/work/logs/spring

@@ -15,3 +15,4 @@ upload:
 logging:
   level:
     root: info
+  path: /home/work/logs/spring

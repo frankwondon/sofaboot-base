@@ -12,7 +12,7 @@ import lombok.experimental.Accessors;
  * </p>
  *
  * @author wangdong
- * @since 2019-07-02
+ * @since 2019-07-03
  */
 @Data
 @EqualsAndHashCode(callSuper = true)
@@ -27,14 +27,39 @@ private static final long serialVersionUID=1L;
     private Integer userId;
 
     /**
+     * 收货人名称
+     */
+    private String receiptUserName;
+
+    /**
+     * 收货人手机号
+     */
+    private String receiptUserMobile;
+
+    /**
+     * 省名字
+     */
+    private String provinceName;
+
+    /**
      * 省
      */
     private Integer provinceCode;
 
     /**
+     * 市名字
+     */
+    private String cityName;
+
+    /**
      * 市
      */
     private Integer cityCode;
+
+    /**
+     * 地区名字
+     */
+    private String zoneName;
 
     /**
      * 区县街道
@@ -56,30 +81,6 @@ private static final long serialVersionUID=1L;
      */
     private Integer addrDefault;
 
-    /**
-     * 乐观锁
-     */
-    private Integer version;
-
-    /**
-     * 创建人
-     */
-    private Integer createBy;
-
-    /**
-     * 创建时间
-     */
-    private LocalDateTime createTime;
-
-    /**
-     * 更新人
-     */
-    private Integer updateBy;
-
-    /**
-     * 更新时间
-     */
-    private LocalDateTime updateTime;
 
 
 }
