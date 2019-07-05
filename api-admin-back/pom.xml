@@ -13,12 +13,15 @@
     <version>1.0.0-SNAPSHOT</version>
     <properties>
         <version.swagger>2.9.2</version.swagger>
-        <docker.image.prefix>mistra</docker.image.prefix>
     </properties>
     <dependencies>
         <dependency>
             <groupId>com.alipay.sofa</groupId>
             <artifactId>healthcheck-sofa-boot-starter</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>com.alipay.sofa</groupId>
+            <artifactId>isle-sofa-boot-starter</artifactId>
         </dependency>
         <dependency>
             <groupId>org.springframework.boot</groupId>
@@ -34,11 +37,6 @@
             <groupId>com.alipay.sofa</groupId>
             <artifactId>test-sofa-boot-starter</artifactId>
         </dependency>
-<!--        <dependency>-->
-<!--            <groupId>org.springframework.boot</groupId>-->
-<!--            <artifactId>spring-boot-devtools</artifactId>-->
-<!--            <optional>true</optional>-->
-<!--        </dependency>-->
         <dependency>
             <groupId>org.springframework.boot</groupId>
             <artifactId>spring-boot-starter-test</artifactId>
@@ -50,20 +48,14 @@
             </exclusions>
         </dependency>
         <dependency>
-            <groupId>sofaboot-module</groupId>
-            <artifactId>module-admin-back</artifactId>
-            <version>1.0.0-SNAPSHOT</version>
+            <groupId>io.springfox</groupId>
+            <artifactId>springfox-swagger-ui</artifactId>
+            <version>${version.swagger}</version>
         </dependency>
         <dependency>
-            <groupId>sofaboot-module</groupId>
-            <artifactId>module-admin-cms</artifactId>
-            <version>1.0.0-SNAPSHOT</version>
-        </dependency>
-
-        <dependency>
-            <groupId>sofaboot-module</groupId>
-            <artifactId>module-admin-app</artifactId>
-            <version>1.0.0-SNAPSHOT</version>
+            <groupId>io.springfox</groupId>
+            <artifactId>springfox-swagger2</artifactId>
+            <version>${version.swagger}</version>
         </dependency>
 
         <!-- shiro config -->
@@ -77,10 +69,21 @@
             <artifactId>guava</artifactId>
             <version>20.0</version>
         </dependency>
+
         <dependency>
-            <groupId>io.springfox</groupId>
-            <artifactId>springfox-swagger-ui</artifactId>
-            <version>${version.swagger}</version>
+            <groupId>sofaboot-module</groupId>
+            <artifactId>module-admin-back</artifactId>
+            <version>1.0.0-SNAPSHOT</version>
+        </dependency>
+        <dependency>
+            <groupId>sofaboot-module</groupId>
+            <artifactId>module-admin-cms</artifactId>
+            <version>1.0.0-SNAPSHOT</version>
+        </dependency>
+        <dependency>
+            <groupId>sofaboot-module</groupId>
+            <artifactId>module-admin-app</artifactId>
+            <version>1.0.0-SNAPSHOT</version>
         </dependency>
     </dependencies>
     <build>
@@ -99,22 +102,12 @@
                     <mainClass>
                         com.api.back.Application
                     </mainClass>
+                    <!-- executable fat jar -->
+                    <outputDirectory>../target/boot</outputDirectory>
+                    <!-- 后缀 fat jar -->
+                    <!--<classifier>executable</classifier>-->
                 </configuration>
             </plugin>
-
-            <plugin>
-                <groupId>com.spotify</groupId>
-                <artifactId>dockerfile-maven-plugin</artifactId>
-                <version>1.4.0</version>
-                <configuration>
-                    <repository>${docker.image.prefix}/${project.artifactId}</repository>
-                        <buildArgs>
-                            <JAR_FILE>target/${project.build.finalName}.jar</JAR_FILE>
-                        </buildArgs>
-                </configuration>
-            </plugin>
-
-
         </plugins>
     </build>
 </project>

@@ -32,7 +32,7 @@ public class CmsBannerController {
     }
     @ApiOperation(value = "新增或修改Banner",notes = "有ID就是修改")
     @ApiImplicitParams({
-            @ApiImplicitParam(name = "id"  ,paramType = "query",required = false,value = "有ID就是修改"),
+            @ApiImplicitParam(name = "addressId"  ,paramType = "query",required = false,value = "有ID就是修改"),
             @ApiImplicitParam(name = "name"  ,paramType = "query",required = true,value = "名称"),
             @ApiImplicitParam(name = "link"  ,paramType = "query",required = true,value = "跳转"),
             @ApiImplicitParam(name = "imgUrl" ,paramType = "query" ,required = true,value = "图片地址"),
@@ -55,7 +55,7 @@ public class CmsBannerController {
     }
     @ApiOperation("启用/禁用")
     @ApiImplicitParams({
-            @ApiImplicitParam(name = "id"  ,paramType = "query",required = true,value = "要操作的ID"),
+            @ApiImplicitParam(name = "addressId"  ,paramType = "query",required = true,value = "要操作的ID"),
             @ApiImplicitParam(name = "disable"  ,paramType = "query",required = true,value = "true启用false禁用"),
     })
     @PostMapping("disable")

@@ -31,7 +31,6 @@ public class SwaggerConfigure {
     }
 
     @Bean(value = "cmsAdmin")
-    @Order(value = 1)
     public Docket cmsAdmin() {
         return new Docket(DocumentationType.SWAGGER_2)
                 .apiInfo( new ApiInfoBuilder()
@@ -48,7 +47,6 @@ public class SwaggerConfigure {
 
 
     @Bean(value = "common")
-    @Order(value = 1)
     public Docket common() {
         return new Docket(DocumentationType.SWAGGER_2)
                 .apiInfo( new ApiInfoBuilder()
@@ -65,7 +63,6 @@ public class SwaggerConfigure {
 
 
     @Bean(value = "app")
-    @Order(value = 1)
     public Docket app() {
         return new Docket(DocumentationType.SWAGGER_2)
                 .apiInfo( new ApiInfoBuilder()

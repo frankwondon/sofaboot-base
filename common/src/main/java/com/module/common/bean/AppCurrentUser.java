@@ -1,7 +1,6 @@
 package com.module.common.bean;
 
 import lombok.Data;
-import springfox.documentation.annotations.ApiIgnore;
 
 import java.io.Serializable;
 

@@ -24,10 +24,10 @@ public class AddressServiceImpl implements AddressService {
         AppExpressAddress addressEntity=new AppExpressAddress();
         addressEntity.setUserId(userId);
         BeanUtils.copyProperties(address,addressEntity);
-        if (address.getId()!=null){
+        if (address.getAddressId()!=null){
             expressAddressMapper.updateById(addressEntity);
         }else {
-            address.setId(null);
+            address.setAddressId(null);
             expressAddressMapper.insert(addressEntity);
         }
     }

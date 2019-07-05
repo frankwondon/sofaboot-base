@@ -2,7 +2,7 @@
 spring:
   datasource:
     driver-class-name: com.mysql.jdbc.Driver
-    url: jdbc:mysql://192.168.1.117:3306/base?useUnicode=true&useSSL=false&characterEncoding=utf8
+    url: jdbc:mysql://172.16.100.23:3306/base?useUnicode=true&useSSL=false&characterEncoding=utf8
     username: base
     password: base
 
@@ -13,15 +13,15 @@ upload:
 
 
 server:
-  imgserver: http://192.168.1.80/
+  imgserver: http://172.16.100.23/
 
 logging:
   level:
     root: debug
-  path: /home/work/logs/spring
+  path: C:/logs/spring
 unit:
   redis:
-    address: redis://192.168.1.117:6379
+    address: redis://172.16.100.23:6379
     enable: true
   token:
     user_expired_days: 30

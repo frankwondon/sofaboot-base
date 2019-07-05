@@ -33,7 +33,7 @@ public class CmsNewsController {
 
     @ApiOperation(value = "新增或修改咨询",notes = "有ID就是修改")
     @ApiImplicitParams({
-            @ApiImplicitParam(name = "id" ,paramType = "query",value = "有ID就是修改"),
+            @ApiImplicitParam(name = "addressId" ,paramType = "query",value = "有ID就是修改"),
             @ApiImplicitParam(name = "name",paramType = "query" ,required = true,value = "产品名称"),
             @ApiImplicitParam(name = "imgUrl" ,paramType = "query",required = true,value = "图片地址"),
             @ApiImplicitParam(name = "descText",paramType = "query" ,required = true,value = "详细描述"),
@@ -54,7 +54,7 @@ public class CmsNewsController {
     }
     @ApiOperation("启用/禁用")
     @ApiImplicitParams({
-            @ApiImplicitParam(name = "id"  ,paramType = "query",required = true,value = "要操作的ID"),
+            @ApiImplicitParam(name = "addressId"  ,paramType = "query",required = true,value = "要操作的ID"),
             @ApiImplicitParam(name = "disable"  ,paramType = "query",required = true,value = "true启用false禁用"),
     })
     @PostMapping("disable")

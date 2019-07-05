@@ -26,18 +26,13 @@
         <dependency>
             <groupId>org.springframework.boot</groupId>
             <artifactId>spring-boot-starter-web</artifactId>
+            <exclusions>
+                <exclusion>
+                    <artifactId>hibernate-validator</artifactId>
+                    <groupId>org.hibernate.validator</groupId>
+                </exclusion>
+            </exclusions>
         </dependency>
-
-        <dependency>
-            <groupId>com.alipay.sofa</groupId>
-            <artifactId>test-sofa-boot-starter</artifactId>
-        </dependency>
-<!--加上这个影响sofa模块化调用，已经提交给阿里解决-->
-<!--        <dependency>-->
-<!--            <groupId>org.springframework.boot</groupId>-->
-<!--            <artifactId>spring-boot-devtools</artifactId>-->
-<!--            <optional>true</optional>-->
-<!--        </dependency>-->
         <dependency>
             <groupId>org.springframework.boot</groupId>
             <artifactId>spring-boot-starter-test</artifactId>
@@ -49,22 +44,27 @@
             </exclusions>
         </dependency>
         <dependency>
+            <groupId>com.alipay.sofa</groupId>
+            <artifactId>test-sofa-boot-starter</artifactId>
+        </dependency>
+
+        <dependency>
             <groupId>com.google.guava</groupId>
             <artifactId>guava</artifactId>
             <version>20.0</version>
         </dependency>
-        <dependency>
-            <groupId>io.springfox</groupId>
-            <artifactId>springfox-swagger-ui</artifactId>
-            <version>${version.swagger}</version>
-        </dependency>
+
         <dependency>
             <groupId>sofaboot-module</groupId>
             <artifactId>module-api-app</artifactId>
             <version>1.0.0-SNAPSHOT</version>
         </dependency>
 
-
+        <dependency>
+            <groupId>io.springfox</groupId>
+            <artifactId>springfox-swagger2</artifactId>
+            <version>${version.swagger}</version>
+        </dependency>
     </dependencies>
     <build>
         <plugins>
@@ -82,6 +82,10 @@
                     <mainClass>
                         com.api.app.Application
                     </mainClass>
+                    <!-- executable fat jar -->
+                    <outputDirectory>../target/boot</outputDirectory>
+                    <!-- 后缀 fat jar -->
+                    <!--<classifier>executable</classifier>-->
                 </configuration>
             </plugin>
         </plugins>

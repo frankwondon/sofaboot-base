@@ -66,7 +66,7 @@ public class CmsNewsServiceImpl implements CmsNewsService {
     @Override
     public CmsNews findById(Integer id) {
         QueryWrapper queryWrapper=new QueryWrapper();
-        queryWrapper.eq("id",id);
+        queryWrapper.eq("addressId",id);
         queryWrapper.eq("locked",0);
         queryWrapper.eq("deleted",0);
         return newsMapper.selectOne(queryWrapper);

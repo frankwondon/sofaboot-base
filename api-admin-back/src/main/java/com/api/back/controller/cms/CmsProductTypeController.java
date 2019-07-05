@@ -36,7 +36,7 @@ public class CmsProductTypeController {
 
     @ApiOperation(value = "新增或修改产品类型",notes = "有ID就是修改,新增默认为禁用")
     @ApiImplicitParams({
-            @ApiImplicitParam(name = "id",type = "query",required = true,value = "id主键"),
+            @ApiImplicitParam(name = "addressId",type = "query",required = true,value = "id主键"),
             @ApiImplicitParam(name = "name",type = "query" ,required = true,value = "名称"),
             @ApiImplicitParam(name = "sort" ,type = "query",required = true,value = "排序:数字顺序")
     })
@@ -56,7 +56,7 @@ public class CmsProductTypeController {
     @ApiOperation("禁用产品类型")
     @PostMapping("disable")
     @ApiImplicitParams({
-            @ApiImplicitParam(name = "id",required = true,value ="产品ID" ),
+            @ApiImplicitParam(name = "addressId",required = true,value ="产品ID" ),
             @ApiImplicitParam(name = "disable",required = true,value ="0启用 1禁用" ),
     })
     public Response disable(Integer id,Boolean disable, @ApiIgnore AdminCurrentUser currentUser){

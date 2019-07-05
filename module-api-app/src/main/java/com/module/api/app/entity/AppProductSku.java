@@ -3,11 +3,8 @@ package com.module.api.app.entity;
 import java.math.BigDecimal;
 
 import com.module.api.app.entity.base.BaseEntity;
-import java.time.LocalDateTime;
-
 import io.swagger.annotations.ApiModel;
 import io.swagger.annotations.ApiModelProperty;
-import io.swagger.models.auth.In;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
 import lombok.experimental.Accessors;
