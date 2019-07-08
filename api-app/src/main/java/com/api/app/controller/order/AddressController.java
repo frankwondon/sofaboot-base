@@ -28,7 +28,6 @@ public class AddressController {
 
     @ApiOperation("收获地址列表")
     @GetMapping("addressList")
-
     public Response addressList(@ApiIgnore AppCurrentUser user){
         return Response.success(addressService.addressList(user.getId()));
     }

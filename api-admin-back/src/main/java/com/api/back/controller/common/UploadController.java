@@ -7,6 +7,7 @@ import com.module.common.Response;
 import com.module.common.ResponseCode;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -21,6 +22,7 @@ import java.time.LocalDate;
 @Api(tags = "上传接口")
 @RestController
 @RequestMapping("/upload")
+@Slf4j
 public class UploadController {
     @Value("${upload.file.base}")
     private String base;
@@ -69,13 +71,11 @@ public class UploadController {
             String filePath=dir+ fileName;
             localFile=new File(filePath);
             if (!localFile.exists()){
-                boolean newFile = localFile.createNewFile();
-                if (newFile){
-                    file.transferTo(localFile);
-                    return Response.success(returnPath);
-                }
+                file.transferTo(localFile);
+                return Response.success(returnPath);
             }
         } catch (IOException e) {
+            log.error("上传图片发生异常",e);
             return Response.fail(ResponseCode.C_500100);
         }
         return Response.fail(ResponseCode.C_500100);

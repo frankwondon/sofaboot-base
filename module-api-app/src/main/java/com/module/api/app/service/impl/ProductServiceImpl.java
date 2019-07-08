@@ -53,7 +53,7 @@ public class ProductServiceImpl implements ProductService {
             }else {
                 String goldPrice = getGoldPrice();
                 bucket.set(goldPrice);
-                bucket.expire(5, TimeUnit.MINUTES);
+                bucket.expire(30, TimeUnit.MINUTES);
                 return goldPrice;
             }
         } else {
@@ -71,7 +71,7 @@ public class ProductServiceImpl implements ProductService {
 
     private static String getGoldPrice(){
         try {
-            HttpResponse execute = HttpRequest.post("https://www.sge.com.cn/graph/quotations").form("instid", "Au99.99").execute();
+            HttpResponse execute = HttpRequest.post("https://www.sge.com.cn/graph/quotations").form("instid", "Au99.99").timeout(2000).execute();
             JSONObject object = JSONObject.parseObject(execute.body());
             JSONArray data = object.getJSONArray("data");
             return data.getString(data.size() - 1);

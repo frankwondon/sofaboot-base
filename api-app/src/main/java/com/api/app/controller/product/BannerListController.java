@@ -57,4 +57,9 @@ public class BannerListController {
     }
 
 
+    @ApiOperation(value = "实时金价", notes = "xx.xx格式")
+    @GetMapping("/realTimeGoldPrice")
+    public Response<String> realTimeGoldPrice(){
+        return Response.success(    productService.realTimeGoldPrice());
+    }
 }
