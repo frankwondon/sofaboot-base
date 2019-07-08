@@ -41,9 +41,10 @@ public class AuthIntercept implements HandlerInterceptor {
         log.info("ip:{},userAgent:{},deviceId:{},token:{}", ip, userAgent, deviceId, token);
         AppTokenUtil.verifier(token);
         AppTokenDto decode = AppTokenUtil.decode(token);
-        if (!StrUtil.equals(ip, decode.getIp())) {
-            throw new AuthException(ResponseCode.C_302);
-        }
+        //限制IP 需要考虑 移动端 频繁切换IP的情况
+//        if (!StrUtil.equals(ip, decode.getIp())) {
+//            throw new AuthException(ResponseCode.C_302);
+//        }
         if (!StrUtil.equals(deviceId, decode.getSubject())) {
             throw new AuthException(ResponseCode.C_302);
         }

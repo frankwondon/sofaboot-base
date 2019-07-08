@@ -1,5 +1,7 @@
 package com.module.api.app.dto;
 
+import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
+import com.module.api.app.configure.GloblKeyDeserializer;
 import io.swagger.annotations.ApiModel;
 import io.swagger.annotations.ApiModelProperty;
 import lombok.Data;
@@ -17,6 +19,7 @@ import java.io.Serializable;
 @EqualsAndHashCode(callSuper = true)
 @ApiModel("收货地址")
 @Data
+@JsonDeserialize(keyUsing = GloblKeyDeserializer.class)
 public class AddressDto extends BaseDto implements Serializable {
 
     /**

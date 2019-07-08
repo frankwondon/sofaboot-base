@@ -12,5 +12,5 @@ import java.io.Serializable;
 @Data
 public class BaseDto implements Serializable {
     @ApiModelProperty(value = "id一般修改时用到",example = "1")
-    private Integer addressId;
+    private Integer id;
 }
