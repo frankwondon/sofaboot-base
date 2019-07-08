@@ -5,7 +5,6 @@ import com.module.api.app.configure.GloblKeyDeserializer;
 import io.swagger.annotations.ApiModel;
 import io.swagger.annotations.ApiModelProperty;
 import lombok.Data;
-import lombok.EqualsAndHashCode;
 import org.hibernate.validator.constraints.Length;
 
 import javax.validation.constraints.Min;
@@ -16,11 +15,13 @@ import java.io.Serializable;
  * @author wangdong
  * @date: 2019/7/2 10:52
  */
-@EqualsAndHashCode(callSuper = true)
 @ApiModel("收货地址")
 @Data
 @JsonDeserialize(keyUsing = GloblKeyDeserializer.class)
-public class AddressDto extends BaseDto implements Serializable {
+public class AddressDto implements Serializable {
+
+    @ApiModelProperty(value = "id一般修改时用到",example = "1")
+    private Integer addressId;
 
     /**
      * 收货人名称

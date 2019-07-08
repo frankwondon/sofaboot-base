@@ -7,7 +7,6 @@ import com.module.common.constant.DateFormatConstant;
 import org.springframework.boot.jackson.JsonComponent;
 
 import java.io.IOException;
-import java.math.BigDecimal;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 
@@ -18,6 +17,7 @@ import java.time.format.DateTimeFormatter;
  */
 @JsonComponent
 public class JsonSerialConfigure {
+
     private static  DateTimeFormatter formatter = DateTimeFormatter.ofPattern(DateFormatConstant.DATE_TIME);
 
     /**

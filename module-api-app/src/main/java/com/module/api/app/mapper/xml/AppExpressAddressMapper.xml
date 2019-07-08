@@ -3,7 +3,17 @@
 <mapper namespace="com.module.api.app.mapper.AppExpressAddressMapper">
     <select id="listAddress" resultType="com.module.api.app.dto.AddressDto">
         SELECT
-            *
+            a.id as addressId,
+            a.receipt_user_name,
+            a.receipt_user_mobile,
+            a.province_name,
+            a.province_code,
+            a.city_name,
+            a.city_code,
+            a.zone_name,
+            a.zone_code,
+            a.detail,
+            a.addr_default
         FROM
             app_express_address a
         WHERE
