@@ -33,8 +33,8 @@ public class AppCartController {
     @ApiOperation(value = "购物车列表")
     @GetMapping("cartList")
     @ApiImplicitParams({
-            @ApiImplicitParam(name = "page",paramType = "query",required = false,value = "起始页"),
-            @ApiImplicitParam(name = "limit",paramType = "query",required = false,value = "每页个数")
+            @ApiImplicitParam(name = "page",paramType = "query",required = true,value = "起始页"),
+            @ApiImplicitParam(name = "limit",paramType = "query",required = true,value = "每页个数")
     })
     public Response<IPage<AppCartResult>> cartList(PageQuery query, @ApiIgnore AppCurrentUser user){
       return Response.success(appCartService.appCartList(query,user.getId()));
@@ -57,7 +57,6 @@ public class AppCartController {
     @ApiOperation(value = "编辑删除 开发中")
     @DeleteMapping(value = "delCartList")
     public Response delCartList(@ApiParam("商品skuId数组") @RequestParam Integer[] skuIds, @ApiIgnore AppCurrentUser user){
-
         appCartService.delCartList(skuIds,user.getId() );
         return Response.success("");
     }
