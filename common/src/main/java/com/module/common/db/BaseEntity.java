@@ -1,4 +1,4 @@
-package com.module.admin.back.entity.base;
+package com.module.common.db;
 
 import com.baomidou.mybatisplus.annotation.IdType;
 import com.baomidou.mybatisplus.annotation.TableId;

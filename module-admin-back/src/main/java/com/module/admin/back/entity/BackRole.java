@@ -1,5 +1,5 @@
 package com.module.admin.back.entity;
-import com.module.admin.back.entity.base.BaseEntity;
+import com.module.common.db.BaseEntity;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
 import lombok.experimental.Accessors;

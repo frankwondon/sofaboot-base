@@ -1,12 +1,11 @@
 package com.module.admin.app.entity;
 
-import com.baomidou.mybatisplus.annotation.IdType;
-import com.module.admin.app.entity.base.BaseEntity;
-import java.time.LocalDateTime;
-import com.baomidou.mybatisplus.annotation.TableId;
+import com.module.common.db.BaseEntity;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
 import lombok.experimental.Accessors;
+
+import java.time.LocalDateTime;
 
 /**
  * <p>

@@ -22,7 +22,10 @@ public class LoginResult implements Serializable {
     private String headImg;
     @ApiModelProperty("用户名")
     private String username;
+    @ApiModelProperty("购物车总数")
+    private Long cartCount;
     @ApiModelProperty("x-token")
     private String token;
+
 
 }

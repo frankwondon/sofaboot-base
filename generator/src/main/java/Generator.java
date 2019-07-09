@@ -47,7 +47,7 @@ public class Generator {
         // 数据源配置
         DataSourceConfig dsc = new DataSourceConfig();
         //dsc.setUrl("jdbc:mysql://192.168.1.117:3306/base?useUnicode=true&useSSL=false&characterEncoding=utf8");
-        dsc.setUrl("jdbc:mysql://localhost:3306/base?useUnicode=true&useSSL=false&characterEncoding=utf8&serverTimezone=GMT");
+        dsc.setUrl("jdbc:mysql://172.16.100.51:3306/base?useUnicode=true&useSSL=false&characterEncoding=utf8&serverTimezone=GMT");
         // dsc.setSchemaName("public");
         dsc.setDriverName("com.mysql.jdbc.Driver");
         dsc.setUsername("root");
@@ -113,7 +113,7 @@ public class Generator {
         StrategyConfig strategy = new StrategyConfig();
         strategy.setNaming(NamingStrategy.underline_to_camel);
         strategy.setColumnNaming(NamingStrategy.underline_to_camel);
-        strategy.setSuperEntityClass("com.module.admin.app.entity.BaseEntity");
+        strategy.setSuperEntityClass("com.module.api.app.entity.base.BaseEntity");
         strategy.setSuperEntityColumns("id");
         strategy.setEntityLombokModel(true);
 //        strategy.setRestControllerStyle(true);

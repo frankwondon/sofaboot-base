@@ -1,6 +1,6 @@
 package com.module.admin.app.entity;
 
-import com.module.admin.app.entity.base.BaseEntity;
+import com.module.common.db.BaseEntity;
 import java.time.LocalDateTime;
 import lombok.Data;
 import lombok.EqualsAndHashCode;

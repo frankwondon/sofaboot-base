@@ -2,7 +2,7 @@ package com.module.admin.app.entity;
 
 import java.math.BigDecimal;
 import com.baomidou.mybatisplus.annotation.IdType;
-import com.module.admin.app.entity.base.BaseEntity;
+import com.module.common.db.BaseEntity;
 import java.time.LocalDateTime;
 import com.baomidou.mybatisplus.annotation.TableId;
 import lombok.Data;

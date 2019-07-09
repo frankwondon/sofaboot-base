@@ -1,13 +1,9 @@
 package com.module.admin.app.entity;
 
-import com.module.admin.app.entity.base.BaseEntity;
-import com.module.admin.app.query.AppOrderQuery;
+import com.module.common.db.BaseEntity;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
 import lombok.experimental.Accessors;
-
-import java.math.BigInteger;
-import java.util.List;
 
 
 /**

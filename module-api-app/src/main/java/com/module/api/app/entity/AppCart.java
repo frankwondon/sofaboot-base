@@ -1,6 +1,6 @@
 package com.module.api.app.entity;
 
-import com.module.api.app.entity.base.BaseEntity;
+import com.module.common.db.BaseEntity;
 import io.swagger.annotations.ApiModel;
 import io.swagger.annotations.ApiModelProperty;
 import lombok.Data;

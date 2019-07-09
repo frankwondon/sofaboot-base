@@ -1,6 +1,6 @@
 package com.module.api.app.entity;
 
-import com.module.api.app.entity.base.BaseEntity;
+import com.module.common.db.BaseEntity;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
 import lombok.experimental.Accessors;

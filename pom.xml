@@ -23,6 +23,7 @@
         <module>module-admin-app</module>
         <module>module-api-app</module>
         <module>module-common</module>
+        <module>lib-order</module>
     </modules>
     <dependencies>
 
@@ -42,7 +43,7 @@
         <dependency>
             <groupId>org.hibernate.validator</groupId>
             <artifactId>hibernate-validator</artifactId>
-            <version>6.0.16.Final</version>
+            <version>6.0.13.Final</version>
         </dependency>
     </dependencies>
     <build>

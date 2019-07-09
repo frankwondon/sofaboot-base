@@ -71,15 +71,12 @@
     </select>
 
 
-
-
-
-
-
     <select id="casualList" resultType="com.module.api.app.result.AppProductResult">
         select product_id,name product_name,num product_num,main_img,desc_img,pv from app_product app_pro right join
         app_product_addition_one app_pro_add on app_pro.id=app_pro_add.product_id where app_pro.status =0 ORDER BY app_pro_add.pv desc
     </select>
 
-
+    <update id="cutSkuReserve" parameterType="com.module.api.app.query.CreateOrderQuery">
+        update app_product_sku sku set sku.reserve=sku.reserve-#{number} where sku.id=#{skuId} and sku.product_id=#{productId} and sku.reserve>0
+    </update>
 </mapper>

@@ -1,5 +1,6 @@
 package com.module.admin.cms.entity;
 
+import com.module.common.db.BaseEntity;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
 import lombok.experimental.Accessors;

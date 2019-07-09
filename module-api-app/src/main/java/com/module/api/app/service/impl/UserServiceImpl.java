@@ -113,6 +113,8 @@ public class UserServiceImpl implements UserService {
                 throw new DBException(ResponseCode.C_520001);
             }
         }
+        //查询购物车数量（总数）
+
         result = LoginResult.builder().userId(user.getId()).cellPhoneNum(user.getCellPhoneNum()).headImg("").username(user.getCellPhoneNum()).build();
         return result;
     }

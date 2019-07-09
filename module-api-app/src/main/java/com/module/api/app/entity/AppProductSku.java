@@ -2,7 +2,7 @@ package com.module.api.app.entity;
 
 import java.math.BigDecimal;
 
-import com.module.api.app.entity.base.BaseEntity;
+import com.module.common.db.BaseEntity;
 import java.time.LocalDateTime;
 import java.util.List;
 import java.util.Map;
