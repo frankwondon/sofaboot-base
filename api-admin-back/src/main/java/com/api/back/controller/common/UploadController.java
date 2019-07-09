@@ -1,6 +1,5 @@
 package com.api.back.controller.common;
 
-import cn.hutool.core.io.IoUtil;
 import cn.hutool.core.util.IdUtil;
 import cn.hutool.core.util.ReUtil;
 import cn.hutool.core.util.StrUtil;
@@ -73,6 +72,8 @@ public class UploadController {
             localFile=new File(filePath);
             if (!localFile.exists()){
                 file.transferTo(localFile);
+                //设置可读权限
+                localFile.setReadable(true);
                 return Response.success(returnPath);
             }
         } catch (IOException e) {
