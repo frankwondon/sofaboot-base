@@ -9,6 +9,7 @@ import lombok.experimental.Accessors;
 
 import javax.validation.constraints.Min;
 import java.math.BigDecimal;
+import java.util.Date;
 
 /**
  * @ClassName AppCart
@@ -44,4 +45,5 @@ public class AppCart extends BaseEntity{
      */
     @ApiModelProperty("用户id")
     private Integer userId;
+
 }

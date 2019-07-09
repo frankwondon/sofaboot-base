@@ -3,7 +3,7 @@
 <mapper namespace="com.module.api.app.mapper.AppCartMapper">
 
     <insert id="newAddToCart" parameterType="com.module.api.app.entity.AppCart">
-        insert into app_cart (product_id,sku_id,number,user_id) VALUES (#{productId},#{skuId},#{number},#{userId})
+        insert into app_cart (product_id,sku_id,number,user_id,create_time) VALUES (#{productId},#{skuId},#{number},#{userId},#{createTime})
     </insert>
 
     <select id="getOldCartByParam" parameterType="java.lang.Integer" resultType="com.module.api.app.entity.AppCart">
@@ -23,17 +23,20 @@
     </update>
 
     <select id="appCartList" resultType="com.module.api.app.result.AppCartResult">
-       select app_cart.product_id,sku_id,number,main_img,name,sku,marked_price,
-       CAST(app_product_sku.marked_price * number AS DECIMAL(10,0)) total_price from
+       select app_cart.product_id,sku_id,number,main_img,name,sku,fixed_price,reserve,
+       CAST(app_product_sku.fixed_price * number AS DECIMAL(10,0)) total_price from
         (app_cart left join app_product on app_cart.product_id=app_product.id)
        left join app_product_sku on app_product_sku.id=app_cart.sku_id
-       where user_id=#{userId}
+       where user_id=#{userId} order BY    app_cart.create_time desc
     </select>
 
-    <delete id="delCartBySkuIds" parameterType="int">
-        DELETE FROM  app_cart  WHERE user_id=#{userId} and sku_id IN
-        <foreach collection="array" item="skuId" open="(" separator="," close=")">
-            #{skuId}
+    <delete id="delCartBySkuIds" parameterType="map">
+        DELETE FROM  app_cart  WHERE user_id=#{delMap.userId} and sku_id IN
+        <foreach collection="delMap.skuIds" item="item" open="(" separator="," close=")" index="index">
+            #{item}
         </foreach>
     </delete>
+    <select id="getCartCount" resultType="long">
+        select IFNULL(cc.cou,0) from (SELECT  sum(number) as cou FROM app_cart where user_id=#{userId}) as cc;
+    </select>
 </mapper>

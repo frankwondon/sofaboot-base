@@ -1,6 +1,8 @@
 package com.module.api.app.service;
 
+import com.alibaba.fastjson.JSONArray;
 import com.baomidou.mybatisplus.core.metadata.IPage;
+import com.module.api.app.dto.DelCartDto;
 import com.module.api.app.entity.AppCart;
 import com.module.api.app.result.AppCartResult;
 import com.module.common.bean.PageQuery;
@@ -24,11 +26,23 @@ public interface AppCartService {
 
 
     /**
-     * 添加购物车
+     * 详情   添加购物车
      * @param appCart
      */
-   void addToCart(AppCart appCart);
+    long addToCart(AppCart appCart);
 
-    void delCartList(Integer[] skuIds,Integer userId);
+    /**
+     * 推荐  加入购物车
+     * @param appCart
+     * @return
+     */
+    long putToCart(AppCart appCart);
+
+    /**
+     * 删除购物车 返回剩余购物车数量
+     * @param delCartDto
+     * @return
+     */
+    long delCartList(DelCartDto delCartDto);
 
 }

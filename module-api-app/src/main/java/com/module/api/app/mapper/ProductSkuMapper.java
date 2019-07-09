@@ -14,16 +14,16 @@ import java.util.List;
 public interface ProductSkuMapper {
 
     /**
-     *  查询id
-     *  返回商品模板，标价，定价，库存量
+     *  查询商品id
+     *  返回商品模板，标价，定价，库存量   多个模板
      * @Rule 正常商品 标价倒序 库存>0  标价>0
      * @param productId
      * @return
      */
     List<AppProductSku> productSkuById(Integer productId);
     /**
-     *  查询id
-     *  返回商品模板，标价，定价，库存量
+     *  查询商品id
+     *  返回商品模板，标价，定价，库存量  单个模板
      * @Rule 正常商品 标价倒序 库存>0  标价>0
      * @param productId
      * @return

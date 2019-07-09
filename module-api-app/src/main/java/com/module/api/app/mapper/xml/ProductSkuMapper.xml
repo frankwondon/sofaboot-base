@@ -2,7 +2,7 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.module.api.app.mapper.ProductSkuMapper">
     <select id="productSkuById" resultType="com.module.api.app.entity.AppProductSku">
-        select id,sku,marked_price,fixed_price,reserve
+        select id sku_id,sku,marked_price,fixed_price,reserve
         from app_product_sku
         where product_id= #{productId} and deleted=0 and reserve>0
         HAVING marked_price>0
@@ -10,7 +10,7 @@
     </select>
 
     <select id="productSkuByIdOne" resultType="com.module.api.app.entity.AppProductSku">
-        select id,sku,marked_price,fixed_price,reserve
+        select id sku_id,sku,marked_price,fixed_price,reserve
         from app_product_sku
         where product_id= #{productId} and deleted=0 and reserve>0
         HAVING marked_price>0

@@ -1,10 +1,15 @@
 package com.module.api.app.mapper;
 
+import com.alibaba.fastjson.JSONArray;
 import com.baomidou.mybatisplus.core.metadata.IPage;
 import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
+import com.module.api.app.dto.DelCartDto;
 import com.module.api.app.entity.AppCart;
 import com.module.api.app.result.AppCartResult;
 import org.apache.ibatis.annotations.Param;
+
+import java.util.List;
+import java.util.Map;
 
 /**
  * @ClassName AppCartMapper
@@ -49,6 +54,18 @@ public interface AppCartMapper {
     IPage<AppCartResult> appCartList(Page page, @Param("userId") Integer userId);
 
 
-    void  delCartBySkuIds(@Param("skuIds") Integer[] skuIds,@Param("userId") Integer userId);
+    /**
+     * 购物车批量编辑  删除
+     * @param delMap
+     * @return rows
+     */
+    int delCartBySkuIds(@Param("delMap") Map delMap);
 
+
+    /**
+     * 根据用户信息查询购物车数量
+     * @param userId
+     * @return
+     */
+    long getCartCount(@Param("userId") Integer userId);
 }

@@ -39,8 +39,12 @@ public class AppCartResult implements Serializable {
     @ApiModelProperty("模板信息")
     private List skuList;
     @ApiModelProperty("单件标价")
-    private BigInteger markedPrice;
+    private BigInteger fixedPrice;
     @ApiModelProperty("总价格")
     private BigDecimal totalPrice;
+    @ApiModelProperty("店铺名")
+    private String shopName;
+    @ApiModelProperty("库存量")
+    private String reserve;
 
 }
