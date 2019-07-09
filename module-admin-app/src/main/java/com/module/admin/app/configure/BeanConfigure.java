@@ -7,7 +7,7 @@ import com.module.admin.app.service.impl.*;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 
-@Configuration
+@Configuration(value = "module-admin-app")
 public class BeanConfigure {
 
     @Bean

@@ -4,7 +4,7 @@ import lombok.extern.slf4j.Slf4j;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 
-@SpringBootApplication
+@SpringBootApplication(scanBasePackages={"com.module.api.app","com.module.base.common","com.api.app"} )
 @Slf4j
 public class Application {
     public static void main(String[] args) {
