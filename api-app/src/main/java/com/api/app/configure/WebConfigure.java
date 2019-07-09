@@ -38,13 +38,13 @@ public class WebConfigure implements WebMvcConfigurer {
     
     @Override
     public void addInterceptors(InterceptorRegistry registry) {
-        registry.addInterceptor(new AuthIntercept(userService))
+        /*registry.addInterceptor(new AuthIntercept(userService))
                 .excludePathPatterns("/swagger-ui.html"
                         ,"/swagger-resources/**"
                         ,"/webjars/**"
                         ,"/v2/api-docs"
                         ,"/error"
                         ,"/auth/visitorLogin"
-                );
+                );*/
     }
 }

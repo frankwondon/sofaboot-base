@@ -27,6 +27,8 @@ public class AppProductResult implements Serializable {
     private String mainImg;
     @ApiModelProperty("产品编号")
     private String descImg;
+    @ApiModelProperty("缩略图")
+    private String thumbImg;
 
 
     

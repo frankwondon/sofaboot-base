@@ -3,6 +3,10 @@ package com.module.api.app.entity;
 import java.math.BigDecimal;
 
 import com.module.api.app.entity.base.BaseEntity;
+import java.time.LocalDateTime;
+import java.util.List;
+import java.util.Map;
+
 import io.swagger.annotations.ApiModel;
 import io.swagger.annotations.ApiModelProperty;
 import lombok.Data;
@@ -58,7 +62,10 @@ private static final long serialVersionUID=1L;
 
     private Integer reserve;
 
-
+    /**
+     * sku模板list
+     */
+    private List skuList;
 
 
 

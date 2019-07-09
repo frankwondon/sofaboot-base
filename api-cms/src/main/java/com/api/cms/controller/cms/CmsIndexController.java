@@ -7,16 +7,22 @@ import com.module.admin.cms.entity.CmsBanner;
 import com.module.admin.cms.entity.CmsNews;
 import com.module.admin.cms.entity.CmsProduct;
 import com.module.admin.cms.query.ProductQuery;
+import com.module.admin.cms.result.CmsProductResult;
 import com.module.admin.cms.service.CmsBannerService;
 import com.module.admin.cms.service.CmsNewsService;
 import com.module.admin.cms.service.CmsProductService;
 import com.module.common.Response;
 import com.module.common.bean.PageQuery;
 import io.swagger.annotations.Api;
+import io.swagger.annotations.ApiImplicitParam;
+import io.swagger.annotations.ApiImplicitParams;
 import io.swagger.annotations.ApiOperation;
+import org.springframework.dao.QueryTimeoutException;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
+
+import java.util.Queue;
 
 @Api(tags = "首页")
 @RestController
@@ -46,6 +52,17 @@ public class CmsIndexController {
         jsonObject.put("hotProduct",hotProduct);
         jsonObject.put("news",cmsNews.getRecords());
         return Response.success(jsonObject);
+    }
+
+    @ApiOperation(value = "搜索",notes = "搜索查询商品关键字")
+    @GetMapping("/searchKeyWord")
+    @ApiImplicitParams({
+            @ApiImplicitParam(name = "keyWord",paramType = "query" ,required = true,value = "每页条数"),
+            @ApiImplicitParam(name = "limit",paramType = "query" ,required = true,value = "每页条数"),
+            @ApiImplicitParam(name = "page",paramType = "query" ,required = true,value = "当前页数")
+    })
+    public Response<CmsProductResult> searchKeyWord(PageQuery query){
+        return Response.success(productService.searchKeyWord(query));
     }
 
 

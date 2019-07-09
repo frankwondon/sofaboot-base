@@ -2,9 +2,9 @@
 spring:
   datasource:
     driver-class-name: com.mysql.jdbc.Driver
-    url: jdbc:mysql://192.168.1.117:3306/base?useUnicode=true&useSSL=false&characterEncoding=utf8
-    username: root
-    password: root
+    url: jdbc:mysql://172.17.156.180:3306/base?useUnicode=true&useSSL=false&characterEncoding=utf8
+    username: jinyun
+    password: jinyun2019
 
 upload:
   file:
@@ -12,7 +12,7 @@ upload:
     video: /home/work/upload/video
 
 server:
-  imgserver: http://192.168.1.80/
+  imgserver: http://172.16.100.23/
 
 logging:
   level:

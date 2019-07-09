@@ -5,6 +5,8 @@ import io.swagger.annotations.ApiModel;
 import io.swagger.annotations.ApiModelProperty;
 import lombok.Data;
 
+import javax.swing.text.DefaultFormatter;
+
 @Data
 @ApiModel("分页")
 public class PageQuery {

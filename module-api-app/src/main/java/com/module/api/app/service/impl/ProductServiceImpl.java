@@ -3,6 +3,7 @@ package com.module.api.app.service.impl;
 import cn.hutool.http.HttpException;
 import cn.hutool.http.HttpRequest;
 import cn.hutool.http.HttpResponse;
+import com.alibaba.fastjson.JSON;
 import com.alibaba.fastjson.JSONArray;
 import com.alibaba.fastjson.JSONObject;
 import com.baomidou.mybatisplus.core.metadata.IPage;
@@ -23,7 +24,9 @@ import org.redisson.api.RedissonClient;
 
 import javax.annotation.Resource;
 import java.time.LocalDateTime;
+import java.util.ArrayList;
 import java.util.List;
+import java.util.Map;
 import java.util.concurrent.TimeUnit;
 
 /**
@@ -111,6 +114,11 @@ public class ProductServiceImpl implements ProductService {
     public AppProductResult getProductById(Integer productId) {
         AppProductResult result = productMapper.getProductById(productId);
         List<AppProductSku> appProductSkuList = result.getAppProductSkuList();
+        for (AppProductSku appProductSku : appProductSkuList) {
+            String sku = appProductSku.getSku();
+            JSONArray skuList = JSON.parseArray(sku);
+            appProductSku.setSkuList(skuList);
+        }
         result.setPurchases(appOrderMapper.countOrderById(productId));
         return result;
     }
@@ -131,6 +139,8 @@ public class ProductServiceImpl implements ProductService {
             Integer productId = appProductResult.getProductId();
             appProductResult.setAppProductSku(productSkuMapper.productSkuByIdOne(productId));
             appProductResult.setPurchases(appOrderMapper.countOrderById(productId));
+            String[] split = appProductResult.getMainImg().split(",");
+            appProductResult.setThumbImg(split[0]);
         }
         return appProductResultIPage;
     }
