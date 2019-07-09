@@ -51,10 +51,11 @@
             <groupId>com.alipay.sofa</groupId>
             <artifactId>test-sofa-boot-starter</artifactId>
         </dependency>
+        <!--https://doc.xiaominfo.com/guide/useful.html#maven%E4%B8%AD%E5%BC%95%E5%85%A5jar%E5%8C%85-->
         <dependency>
-            <groupId>io.springfox</groupId>
-            <artifactId>springfox-swagger-ui</artifactId>
-            <version>${version.swagger}</version>
+            <groupId>com.github.xiaoymin</groupId>
+            <artifactId>swagger-bootstrap-ui</artifactId>
+            <version>1.9.4</version>
         </dependency>
         <dependency>
             <groupId>io.springfox</groupId>
