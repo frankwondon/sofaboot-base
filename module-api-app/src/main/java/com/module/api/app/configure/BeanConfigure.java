@@ -14,7 +14,7 @@ import com.module.api.app.service.impl.UserServiceImpl;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 
-@Configuration
+@Configuration("module-api-app")
 public class BeanConfigure {
 
     @Bean

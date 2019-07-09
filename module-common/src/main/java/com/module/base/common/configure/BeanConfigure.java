@@ -11,7 +11,7 @@ import org.springframework.context.annotation.Configuration;
  *@author wangdong
  *@date 2019/6/27
  */
-@Configuration
+@Configuration("module-common")
 public class BeanConfigure {
 
     @Bean

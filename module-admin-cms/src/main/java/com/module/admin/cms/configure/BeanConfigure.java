@@ -13,7 +13,7 @@ import com.module.admin.cms.service.impl.CmsProductTypeServiceImpl;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 
-@Configuration
+@Configuration(value = "module-admin-cms")
 public class BeanConfigure {
 
 
