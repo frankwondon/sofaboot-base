@@ -10,7 +10,7 @@ import com.module.admin.back.service.impl.BackUserServiceImpl;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 
-@Configuration
+@Configuration(value = "module-admin-back")
 public class BeanConfigure {
 
 
