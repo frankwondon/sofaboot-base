@@ -18,6 +18,27 @@
         </collection>
     </resultMap>
 
+    <select id="getProductById" resultMap="productResult">
+        SELECT
+        app_product.id pro_id,
+        main_img,
+        name product_name,
+        desc_img,
+        app_product_sku.product_id product_id,
+        app_product_sku.id sku_id,
+        sku,
+        marked_price,
+        fixed_price,
+        reserve
+        FROM
+        app_product
+        LEFT JOIN app_product_sku ON app_product.id = product_id
+        WHERE
+        app_product.id = #{productId}
+        AND app_product.STATUS = 0
+        AND app_product_sku.deleted =0
+        order by marked_price
+    </select>
 
     <!--结束-->
 
@@ -50,27 +71,7 @@
     </select>
 
 
-    <select id="getProductById" resultMap="productResult">
-  SELECT
-	app_product.id pro_id,
-	main_img,
-	name product_name,
-	desc_img,
-	app_product_sku.product_id product_id,
-	app_product_sku.id sku_id,
-	sku,
-	marked_price,
-	fixed_price,
-	reserve
-FROM
-	app_product
-	LEFT JOIN app_product_sku ON app_product.id = product_id
-WHERE
-	app_product.id = 7
-	AND app_product.STATUS = 0
-	AND app_product_sku.deleted =0
 
-    </select>
 
 
 

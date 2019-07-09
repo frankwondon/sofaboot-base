@@ -3,6 +3,7 @@ package com.module.api.app.service.impl;
 import com.baomidou.mybatisplus.core.metadata.IPage;
 import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
 import com.module.api.app.entity.AppProductSku;
+import com.module.api.app.mapper.AppOrderMapper;
 import com.module.api.app.mapper.ProductSkuMapper;
 import com.module.api.app.mapper.ShopProductMapper;
 import com.module.api.app.query.ShopProductQuery;
@@ -24,6 +25,8 @@ public class ShopProductServiceImpl implements ShopProductService {
     private ShopProductMapper shopProductMapper;
     @Resource
     private ProductSkuMapper productSkuMapper;
+    @Resource
+    private AppOrderMapper appOrderMapper;
 
     @Override
     public IPage<AppProductResult> showSortList(ShopProductQuery query) {
@@ -47,6 +50,12 @@ public class ShopProductServiceImpl implements ShopProductService {
         }
         for (AppProductResult appProductResult : appProductResultIPage.getRecords()) {
             appProductResult.setAppProductSku(productSkuMapper.productSkuByIdOne(appProductResult.getProductId()));
+            appProductResult.setPurchases(appOrderMapper.countOrderById(appProductResult.getProductId()));
+            if (appProductResult.getMainImg()!=null){
+                String[] split = appProductResult.getMainImg().split(",");
+                appProductResult.setThumbImg(split[0]);
+            }
+
         }
         return appProductResultIPage;
     }

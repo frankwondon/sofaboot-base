@@ -46,7 +46,8 @@ public class Generator {
 
         // 数据源配置
         DataSourceConfig dsc = new DataSourceConfig();
-        dsc.setUrl("jdbc:mysql://192.168.1.117:3306/base?useUnicode=true&useSSL=false&characterEncoding=utf8");
+        //dsc.setUrl("jdbc:mysql://192.168.1.117:3306/base?useUnicode=true&useSSL=false&characterEncoding=utf8");
+        dsc.setUrl("jdbc:mysql://localhost:3306/base?useUnicode=true&useSSL=false&characterEncoding=utf8&serverTimezone=GMT");
         // dsc.setSchemaName("public");
         dsc.setDriverName("com.mysql.jdbc.Driver");
         dsc.setUsername("root");

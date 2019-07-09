@@ -1,10 +1,13 @@
 package com.api.app.controller.product;
 
 import com.alipay.sofa.runtime.api.annotation.SofaReference;
+import com.baomidou.mybatisplus.core.metadata.IPage;
 import com.module.api.app.query.ShopProductQuery;
 import com.module.api.app.result.AppBannerListResult;
+import com.module.api.app.result.AppProductResult;
 import com.module.api.app.service.ShopProductService;
 import com.module.common.Response;
+import com.module.common.bean.PageQuery;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiImplicitParam;
 import io.swagger.annotations.ApiImplicitParams;
@@ -25,7 +28,7 @@ import java.util.List;
  **/
 @RestController
 @RequestMapping("shopProduct")
-@Api(tags = "商城排序列表接口 开发中")
+@Api(tags = "商城排序列表接口")
 public class ShopProductController {
 
 
