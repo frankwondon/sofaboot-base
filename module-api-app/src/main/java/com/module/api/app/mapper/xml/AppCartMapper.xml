@@ -10,16 +10,12 @@
         select id,product_id,sku_id,user_id,number from app_cart where product_id=#{productId} and sku_id=#{skuId} and user_id=#{userId}
     </select>
 
-    <update id="updateCart" parameterType="com.module.api.app.entity.AppCart">
+    <update id="updateCart"  parameterType="com.module.api.app.entity.AppCart">
         update app_cart
-        <set>
-            <if test="appCart.number!=null and appCart.number!=''">
-                app_cart.number=#{appCart.number}
-            </if>
-        </set>
-        <where>
-            app_cart.id=#{appCart.id}
-        </where>
+        set
+          app_cart.number=#{appCart.number}
+        WHERE
+          app_cart.id=#{appCart.id}
     </update>
 
     <select id="appCartList" resultType="com.module.api.app.result.AppCartResult">

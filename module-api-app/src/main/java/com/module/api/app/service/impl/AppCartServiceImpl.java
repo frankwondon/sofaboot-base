@@ -62,7 +62,7 @@ public class AppCartServiceImpl implements AppCartService {
         int successCount=0;
         if (oldCartPro!=null){
             oldCartPro.setNumber(appCart.getNumber());
-            successCount=appCartMapper.updateCart(appCart);
+            successCount=appCartMapper.updateCart(oldCartPro);
         }
         if (oldCartPro==null){
             appCart.setCreateTime(LocalDateTime.now());
