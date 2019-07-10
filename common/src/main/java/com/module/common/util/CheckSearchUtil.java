@@ -5,7 +5,7 @@ import java.util.regex.Pattern;
 public class CheckSearchUtil {/**
  * 正则表达式：验证用户名
  */
-public static final String REGEX_USERNAME = "^[a-zA-Z]\\w{5,20}$";
+public static final String REGEX_USERNAME = "[\\u4e00-\\u9fa5]*|\\w*|\\d*|_* {1,12}";
 
     /**
      * 正则表达式：验证密码
@@ -36,7 +36,7 @@ public static final String REGEX_USERNAME = "^[a-zA-Z]\\w{5,20}$";
     /**
      * 正则表达式：验证身份证
      */
-    public static final String REGEX_ID_CARD = "(^\\d{18}$)|(^\\d{15}$)";
+    public static final String REGEX_ID_CARD = "(^\\d{18}$)|(^\\d{15}$)|(^\\d{17}+[X]{1}$)";
 
     /**
      * 正则表达式：验证URL

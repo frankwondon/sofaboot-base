@@ -39,10 +39,14 @@ public class AppCartServiceImpl implements AppCartService {
     @Override
     public IPage<AppCartResult> appCartList(PageQuery query, Integer userId) {
         Page page = new Page<>(query.getPage(), query.getLimit());
+        //获得购物车分页list
         IPage<AppCartResult> appCartResultIPage = appCartMapper.appCartList(page, userId);
+
         if (appCartResultIPage.getRecords()!=null&&appCartResultIPage.getRecords().size()>0){
             for (AppCartResult appCartResult : appCartResultIPage.getRecords()) {
+                //设置缩略图
                 appCartResult.setThumbImg(appCartResult.getMainImg().split(",")[0]);
+                //获取模板信息并设置
                 String sku = appCartResult.getSku();
                 JSONArray skuList = JSON.parseArray(sku);
                 appCartResult.setSkuList(skuList);
@@ -58,12 +62,15 @@ public class AppCartServiceImpl implements AppCartService {
     @Override
     @Transactional(rollbackFor = RuntimeException.class)
     public long addToCart(AppCart appCart) {
+        //通过模板id 商品id 用户id 判断是否存在相同的购物车订单
         AppCart oldCartPro = appCartMapper.getOldCartByParam(appCart.getProductId(),appCart.getSkuId(),appCart.getUserId());
         int successCount=0;
+        //如果已经存在某SKU的购物车则修改
         if (oldCartPro!=null){
             oldCartPro.setNumber(appCart.getNumber());
             successCount=appCartMapper.updateCart(oldCartPro);
         }
+        //不存在  就新添加一件新商品
         if (oldCartPro==null){
             appCart.setCreateTime(LocalDateTime.now());
             successCount=appCartMapper.newAddToCart(appCart);
@@ -104,7 +111,7 @@ public class AppCartServiceImpl implements AppCartService {
     public long delCartList(DelCartDto delCartDto) {
         int successCount=0;
         if (delCartDto.getSkuIds()!=null&&delCartDto.getSkuIds().size()>0){
-            Map<String, Object> map = new HashMap<>(5);
+            Map<String, Object> map = new HashMap<>(16);
             map.put("skuIds",delCartDto.getSkuIds());
             map.put("userId", delCartDto.getUserId());
             successCount=appCartMapper.delCartBySkuIds(map);
@@ -118,7 +125,7 @@ public class AppCartServiceImpl implements AppCartService {
 
 
     /**
-     * 获取购物车中的数量
+     * 获取购物车中的所有商品总数量
      * @param userId
      * @return
      */

@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.module.api.app.mapper.AppPersonalMapper">
+    <select id="getPersonalMsg" resultType="com.module.api.app.result.UserManagerResult">
+         select app_user.id userId,username,real_name,id_card,cell_phone_num phone_num,head_Img,sex,bank_confirm,bank_id,ifnull(app_user.wx_number_salt,0) wx,ifnull(app_user.qq_number_salt,0) qq ,
+          ifnull(app_user.salt,0) pay_word,
+          sum( case when app_order.status &lt; 2 then 1 else 0 end) dfk,
+          sum( case when app_order.status= 2 then 1 else 0 end) dfh,
+          sum( case when app_order.status= 3 then 1 else 0 end) dsh,
+          sum( case when app_order.status= 4 then 1 else 0 end) ywc
+        from app_user left join app_order on app_user.id = app_order.user_id
+        where deleted=0 and locked= 0 and app_user.id= #{userId}
+    </select>
+
+    <update id="updateUserName" parameterType="com.module.common.bean.AppCurrentUser">
+        update app_user set username=#{user.username} where id=#{user.id}
+    </update>
+
+
+    <update id="updateHeadImg" >
+        update app_user set head_Img=#{path} where id=#{userId}
+    </update>
+
+</mapper>

@@ -74,7 +74,7 @@ private static final long serialVersionUID=1L;
     private Integer bankConfirm;
 
     /**
-     * f
+     * 银行卡号
      */
     private String bankId;
 
