@@ -40,7 +40,7 @@ public interface UserService {
 
     /**
      * 登出
-     * @param userDto
+     * @param dto
      */
-    void loginOut(UserDto userDto);
+    void loginOut(AppTokenDto dto);
 }

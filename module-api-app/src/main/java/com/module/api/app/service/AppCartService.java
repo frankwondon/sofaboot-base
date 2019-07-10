@@ -45,4 +45,11 @@ public interface AppCartService {
      */
     long delCartList(DelCartDto delCartDto);
 
+    /**
+     * 查询购物车商品总数
+     * @param userId
+     * @return
+     */
+    long getCartSize(Integer userId);
+
 }

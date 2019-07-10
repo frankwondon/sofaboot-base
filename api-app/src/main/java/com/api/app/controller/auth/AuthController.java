@@ -1,7 +1,7 @@
 package com.api.app.controller.auth;
 
-import cn.hutool.core.util.ReUtil;
 import com.alipay.sofa.runtime.api.annotation.SofaReference;
+import com.api.app.intercept.AuthLogin;
 import com.api.app.util.RequestUtil;
 import com.module.api.app.query.LoginQuery;
 import com.module.api.app.result.LoginResult;
@@ -11,11 +11,13 @@ import com.module.common.bean.AppCurrentUser;
 import com.module.common.bean.AppTokenDto;
 import com.module.common.constant.AppUserType;
 import com.module.common.constant.HeaderConstant;
-import com.module.common.constant.RegexPattern;
+import com.module.common.util.AppTokenUtil;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiImplicitParam;
 import io.swagger.annotations.ApiOperation;
 import org.springframework.web.bind.annotation.*;
+import springfox.documentation.annotations.ApiIgnore;
+
 import javax.servlet.http.HttpServletRequest;
 
 /**
@@ -68,7 +70,10 @@ public class AuthController {
 
     @PostMapping("loginOut")
     @ApiOperation("用户登出(不包含游客)")
-    public Response<Boolean> loginOut(){
+    @AuthLogin
+    public Response<Boolean> loginOut(@ApiIgnore AppCurrentUser user,@RequestHeader(name = HeaderConstant.TOKEN_NAME) String token){
+        AppTokenDto decode = AppTokenUtil.decode(token);
+        userService.loginOut(decode);
         return Response.success(true);
     }
 

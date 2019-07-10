@@ -122,7 +122,8 @@ public class AppCartServiceImpl implements AppCartService {
      * @param userId
      * @return
      */
-    private long getCartSize(Integer userId){
+    @Override
+    public long getCartSize(Integer userId){
         long cartCount = appCartMapper.getCartCount(userId);
         if (cartCount==0){
             return 0L;

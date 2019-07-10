@@ -2,11 +2,11 @@ package com.module.api.app.service.impl;
 
 import cn.hutool.core.util.ReUtil;
 import com.alipay.sofa.runtime.api.annotation.SofaReference;
-import com.module.api.app.dto.UserDto;
 import com.module.api.app.entity.AppUser;
 import com.module.api.app.mapper.UserMapper;
 import com.module.api.app.query.LoginQuery;
 import com.module.api.app.result.LoginResult;
+import com.module.api.app.service.AppCartService;
 import com.module.api.app.service.UserService;
 import com.module.base.common.constant.RedisPrefix;
 import com.module.base.common.dto.SmsVerifyCodeDto;
@@ -42,6 +42,8 @@ public class UserServiceImpl implements UserService {
     private SMSSendService smsSendService;
     @Resource
     private UserMapper userMapper;
+    @Resource
+    private AppCartService cartService;
 
     @Resource
     private RedissonClient redissonClient;
@@ -61,7 +63,7 @@ public class UserServiceImpl implements UserService {
                 token = AppTokenUtil.ecode(dto);
                 tokens.put(key, token, userExpiredDays, TimeUnit.DAYS);
                 //用户对象
-                users.put(key,dto.getSessionUser(),userExpiredDays, TimeUnit.DAYS);
+                users.put(key, dto.getSessionUser(), userExpiredDays, TimeUnit.DAYS);
             }
         }
         if (dto.getAppUserType().equals(AppUserType.USER_VISITOR)) {
@@ -105,6 +107,7 @@ public class UserServiceImpl implements UserService {
         AppUser user = userMapper.getUserByCellPhone(query.getMobile());
         //用户不存在 创建一个账号
         LoginResult result = null;
+        long cartCount = 0;
         if (user == null) {
             user = createUser(query.getMobile());
         } else {
@@ -112,16 +115,24 @@ public class UserServiceImpl implements UserService {
             if (user.getLocked() == 1) {
                 throw new DBException(ResponseCode.C_520001);
             }
+            //查询购物车数量（总数）
+            cartCount = cartService.getCartSize(user.getId());
         }
-        //查询购物车数量（总数）
-
-        result = LoginResult.builder().userId(user.getId()).cellPhoneNum(user.getCellPhoneNum()).headImg("").username(user.getCellPhoneNum()).build();
+        result = LoginResult.builder().userId(user.getId()).cartCount(cartCount).cellPhoneNum(user.getCellPhoneNum()).headImg("").username(user.getCellPhoneNum()).build();
         return result;
     }
 
     @Override
-    public void loginOut(UserDto userDto) {
-
+    public void loginOut(AppTokenDto dto) {
+        RMapCache<String, String> tokens = redissonClient.getMapCache(RedisPrefix.TOKEN_USER_S.key());
+        RMapCache<String, AppCurrentUser> users = redissonClient.getMapCache(RedisPrefix.SESSION_USER_S.key());
+        String key = dto.getMobile() + "-" + dto.getSubject();
+        if (tokens.isExists()) {
+            tokens.remove(key);
+        }
+        if (users.isExists()) {
+            users.remove(key);
+        }
     }
 
     private AppUser createUser(String phone) {
