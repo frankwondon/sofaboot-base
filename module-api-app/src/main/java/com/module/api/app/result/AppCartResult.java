@@ -22,6 +22,8 @@ import java.util.List;
 @Data
 @ApiModel("商品")
 public class AppCartResult implements Serializable {
+    @ApiModelProperty
+    private Integer cartId;
     @ApiModelProperty("商品id")
     private Integer productId;
     @ApiModelProperty("模板id")

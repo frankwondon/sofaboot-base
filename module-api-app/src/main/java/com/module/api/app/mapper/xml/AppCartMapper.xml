@@ -19,7 +19,7 @@
     </update>
 
     <select id="appCartList" resultType="com.module.api.app.result.AppCartResult">
-       select app_cart.product_id,sku_id,number,main_img,name,sku,fixed_price,reserve,
+       select app_cart.id cart_id,app_cart.product_id,sku_id,number,main_img,name,sku,fixed_price,reserve,
        CAST(app_product_sku.fixed_price * number AS DECIMAL(10,0)) total_price from
         (app_cart left join app_product on app_cart.product_id=app_product.id)
        left join app_product_sku on app_product_sku.id=app_cart.sku_id
