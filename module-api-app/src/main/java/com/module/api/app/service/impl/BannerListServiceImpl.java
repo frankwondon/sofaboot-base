@@ -1,6 +1,5 @@
 package com.module.api.app.service.impl;
 
-import com.module.api.app.entity.AppProductSku;
 import com.module.api.app.mapper.BannerListMapper;
 import com.module.api.app.mapper.ProductSkuMapper;
 import com.module.api.app.result.AppBannerListResult;

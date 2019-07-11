@@ -4,12 +4,12 @@
 
 <!--开始-->
 
-    <resultMap id="productResult" type="com.module.api.app.result.AppProductResult">
+    <resultMap id="productResult" type="com.module.api.app.result.AppProductSkuResult">
         <id column="pro_id" jdbcType="INTEGER" property="productId" />
         <result column="main_img" jdbcType="VARCHAR" property="mainImg" />
         <result column="product_name" jdbcType="VARCHAR" property="productName"/>
         <result column="desc_img" jdbcType="VARCHAR" property="descImg"/>
-        <collection property="appProductSkuList" ofType="com.module.api.app.entity.AppProductSku" javaType="java.util.List">
+        <collection property="appProductSkuList" ofType="com.module.api.app.result.AppProductSkuResult" javaType="java.util.List">
             <id column="sku_id" jdbcType="INTEGER" property="skuId" />
             <result column="sku" jdbcType="INTEGER" property="sku" />
             <result column="marked_price" jdbcType="DECIMAL" property="markedPrice"/>

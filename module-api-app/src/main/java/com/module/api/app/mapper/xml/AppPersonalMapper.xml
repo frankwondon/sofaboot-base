@@ -21,4 +21,8 @@
         update app_user set head_Img=#{path} where id=#{userId}
     </update>
 
+    <update id="updateUserPayPwd" >
+        update app_user set pay_word=#{payWord} where cell_phone_num=#{cellPhoneNum}
+    </update>
+
 </mapper>

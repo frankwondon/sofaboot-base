@@ -1,6 +1,5 @@
 package com.module.api.app.result;
 
-import com.module.api.app.entity.AppProductSku;
 import io.swagger.annotations.ApiModel;
 import io.swagger.annotations.ApiModelProperty;
 import lombok.Data;
@@ -40,10 +39,10 @@ public class AppProductResult implements Serializable {
 
 
     @ApiModelProperty("多商品列表 商品的最低价格模板（商品最低价格）")
-    private AppProductSku appProductSku;
+    private AppProductSkuResult appProductSku;
 
     @ApiModelProperty("产品详情 对应多个模板")
-    private List<AppProductSku> appProductSkuList;
+    private List<AppProductSkuResult> appProductSkuList;
 
 
     @ApiModelProperty("订单完成的销量")

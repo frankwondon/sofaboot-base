@@ -35,4 +35,16 @@ public interface AppPersonalMapper {
     * @param userId
     */
    void updateHeadImg(@Param("path") String path,@Param("userId") Integer userId);
+
+
+   /**
+    * 修改支付密码
+    * @param cellPhoneNum
+    * @param payWord
+    * @return
+    */
+   int updateUserPayPwd(@Param("cellPhoneNum") String cellPhoneNum,@Param("payWord") String payWord);
+
+
+
 }

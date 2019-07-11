@@ -2,7 +2,6 @@ package com.module.api.app.service.impl;
 
 import com.baomidou.mybatisplus.core.metadata.IPage;
 import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
-import com.module.api.app.entity.AppProductSku;
 import com.module.api.app.mapper.AppOrderMapper;
 import com.module.api.app.mapper.ProductSkuMapper;
 import com.module.api.app.mapper.ShopProductMapper;
@@ -48,14 +47,16 @@ public class ShopProductServiceImpl implements ShopProductService {
         if (query.getSortId()==4){
             appProductResultIPage = shopProductMapper.showPurchases(page);
         }
-        for (AppProductResult appProductResult : appProductResultIPage.getRecords()) {
-            appProductResult.setAppProductSku(productSkuMapper.productSkuByIdOne(appProductResult.getProductId()));
-            appProductResult.setPurchases(appOrderMapper.countOrderById(appProductResult.getProductId()));
-            if (appProductResult.getMainImg()!=null){
-                String[] split = appProductResult.getMainImg().split(",");
-                appProductResult.setThumbImg(split[0]);
-            }
+        if (appProductResultIPage.getRecords()!=null){
+            for (AppProductResult appProductResult : appProductResultIPage.getRecords()) {
+                appProductResult.setAppProductSku(productSkuMapper.productSkuByIdOne(appProductResult.getProductId()));
+                appProductResult.setPurchases(appOrderMapper.countOrderById(appProductResult.getProductId()));
+                if (appProductResult.getMainImg()!=null){
+                    String[] split = appProductResult.getMainImg().split(",");
+                    appProductResult.setThumbImg(split[0]);
+                }
 
+            }
         }
         return appProductResultIPage;
     }
@@ -64,16 +65,17 @@ public class ShopProductServiceImpl implements ShopProductService {
 
 
 
-    /**
-     *  通过id 返回该商品库存信息
-     * @param productId
-     * @return
-     */
-    private List<AppProductSku> getSkuByProductId(Integer productId){
-        List<AppProductSku> appProductSkuDtoList = productSkuMapper.productSkuById(productId);
-        if (appProductSkuDtoList!=null&&appProductSkuDtoList.size()>0){
-            return appProductSkuDtoList;
-        }
-        return null;
-    }
+ //    /**
+//    *  通过id 返回该商品库存信息
+//    * @param productId
+//    * @return
+//    */
+//    private List<AppProductSkuResult> getSkuByProductId(Integer productId){
+//
+//        List<AppProductSkuResult> appProductSkuDtoList = productSkuMapper.productSkuById(productId);
+//        if (appProductSkuDtoList!=null&&appProductSkuDtoList.size()>0){
+//            return appProductSkuDtoList;
+//        }
+//        return null;
+//    }
 }

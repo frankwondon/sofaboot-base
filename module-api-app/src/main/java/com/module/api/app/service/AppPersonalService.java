@@ -1,6 +1,8 @@
 package com.module.api.app.service;
 
+import com.module.api.app.query.UpdatePayPwdQuery;
 import com.module.api.app.result.UserManagerResult;
+import com.module.common.Response;
 import com.module.common.ResponseCode;
 import com.module.common.bean.AppCurrentUser;
 
@@ -27,5 +29,22 @@ public interface AppPersonalService {
      */
     boolean updateUserName(String username, AppCurrentUser user);
 
+    /**
+     * 修改头像
+     * @param path
+     * @param user
+     */
     void updateHeadImg(String path, AppCurrentUser user);
+
+    /**
+     * 修改用户名
+     * @param mobile
+     */
+     void  sendPayCode(String mobile);
+
+    /**
+     * 修改支付密码
+     * @param query
+     */
+     Response updateUserPayPwd(UpdatePayPwdQuery query);
 }

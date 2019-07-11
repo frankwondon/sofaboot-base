@@ -4,20 +4,13 @@ import cn.hutool.core.util.IdUtil;
 import cn.hutool.core.util.ReUtil;
 import cn.hutool.core.util.StrUtil;
 import com.alipay.sofa.runtime.api.annotation.SofaReference;
-import com.api.app.util.RequestUtil;
-import com.module.api.app.entity.AppUser;
-import com.module.api.app.query.CheckCodeQuery;
-import com.module.api.app.query.LoginQuery;
-import com.module.api.app.result.LoginResult;
+import com.module.api.app.query.UpdatePayPwdQuery;
 import com.module.api.app.result.UserManagerResult;
 import com.module.api.app.service.AppPersonalService;
 import com.module.api.app.service.UserService;
 import com.module.common.Response;
 import com.module.common.ResponseCode;
 import com.module.common.bean.AppCurrentUser;
-import com.module.common.bean.AppTokenDto;
-import com.module.common.constant.AppUserType;
-import com.module.common.constant.HeaderConstant;
 import io.swagger.annotations.*;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Value;
@@ -25,11 +18,8 @@ import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
 import springfox.documentation.annotations.ApiIgnore;
 
-import javax.servlet.http.HttpServletRequest;
 import java.io.File;
-import java.io.IOException;
 import java.time.LocalDate;
-import java.time.temporal.TemporalAccessor;
 
 /**
  * @ClassName AppPersonalController
@@ -70,9 +60,8 @@ public class AppPersonalController {
 
     @GetMapping("updateUserName")
     @ApiOperation(value = "昵称修改")
-    @ApiImplicitParams({
-            @ApiImplicitParam(name = "userName",required = true,value = "新昵称")
-    })
+    @ApiImplicitParam(name = "userName",required = true,value = "新昵称")
+
     public Response updateUserName(String userName, @ApiIgnore AppCurrentUser user){
         return Response.success( appPersonalService.updateUserName(userName,user));
     }
@@ -89,23 +78,36 @@ public class AppPersonalController {
         return getResponse(file,sub,uploadImgFile,user);
     }
 
-    @PostMapping("setPayWord")
+    @PostMapping("updateUserPayPwd")
     @ApiOperation("设置支付密码")
-    @ApiImplicitParam(dataType = "String",paramType="header",name = "x-token")
-    public Response setPayWord(@RequestBody CheckCodeQuery query, HttpServletRequest request){
-        //LoginResult login = userService.login(query);
-
-        return Response.success(null);
+    @ApiImplicitParams({
+            @ApiImplicitParam(name = "verifyCode",required = true,value = "验证码"),
+            @ApiImplicitParam(name = "payWord",required = true,value = "新支付密码")
+     })
+    public Response updateUserPayPwd(@RequestBody UpdatePayPwdQuery query,@ApiIgnore AppCurrentUser user){
+        query.setCellPhoneNum(user.getCellPhoneNum());
+        return Response.success(appPersonalService.updateUserPayPwd(query));
     }
 
 
 
-    @GetMapping("checkCode")
+    @GetMapping("sendPayCode")
     @ApiOperation("获取验证码")
-    public Response<Boolean> checkCode(String mobile){
-        userService.sendLoginVerifyCode(mobile);
+    public Response<Boolean> sendPayCode(String mobile,@ApiIgnore AppCurrentUser user){
+        appPersonalService.sendPayCode(user.getCellPhoneNum());
         return Response.success(true);
     }
+
+
+
+
+
+
+
+
+
+
+
 
 
 

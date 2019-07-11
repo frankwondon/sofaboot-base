@@ -1,6 +1,6 @@
 package com.module.api.app.mapper;
 
-import com.module.api.app.entity.AppProductSku;
+import com.module.api.app.result.AppProductSkuResult;
 
 import java.util.List;
 
@@ -20,7 +20,9 @@ public interface ProductSkuMapper {
      * @param productId
      * @return
      */
-    List<AppProductSku> productSkuById(Integer productId);
+    List<AppProductSkuResult> productSkuById(Integer productId);
+
+
     /**
      *  查询商品id
      *  返回商品模板，标价，定价，库存量  单个模板
@@ -28,5 +30,5 @@ public interface ProductSkuMapper {
      * @param productId
      * @return
      */
-    AppProductSku productSkuByIdOne(Integer productId);
+    AppProductSkuResult productSkuByIdOne(Integer productId);
 }

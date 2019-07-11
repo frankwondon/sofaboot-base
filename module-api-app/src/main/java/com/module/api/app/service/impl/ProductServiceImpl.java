@@ -14,6 +14,7 @@ import com.module.api.app.mapper.ProductMapper;
 import com.module.api.app.mapper.ProductSkuMapper;
 import com.module.api.app.query.ProductQuery;
 import com.module.api.app.result.AppProductResult;
+import com.module.api.app.result.AppProductSkuResult;
 import com.module.api.app.result.AppProductTypeResult;
 import com.module.api.app.service.ProductService;
 import com.module.base.common.constant.RedisPrefix;
@@ -24,7 +25,6 @@ import org.redisson.api.RedissonClient;
 
 import javax.annotation.Resource;
 import java.time.LocalDateTime;
-import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 import java.util.concurrent.TimeUnit;
@@ -41,7 +41,6 @@ public class ProductServiceImpl implements ProductService {
     private RedissonClient redissonClient;
     @Resource
     private ProductSkuMapper productSkuMapper;
-
     @Resource
     private AppOrderMapper appOrderMapper;
 
@@ -112,12 +111,13 @@ public class ProductServiceImpl implements ProductService {
 
     @Override
     public AppProductResult getProductById(Integer productId) {
+        //通过id 获取商品
         AppProductResult result = productMapper.getProductById(productId);
-        List<AppProductSku> appProductSkuList = result.getAppProductSkuList();
-        for (AppProductSku appProductSku : appProductSkuList) {
-            String sku = appProductSku.getSku();
+        List<AppProductSkuResult> appProductSkuList = result.getAppProductSkuList();
+        for (AppProductSkuResult appProductSkuResult : appProductSkuList) {
+            String sku = appProductSkuResult.getSku();
             JSONArray skuList = JSON.parseArray(sku);
-            appProductSku.setSkuList(skuList);
+            appProductSkuResult.setSkuList(skuList);
         }
         result.setPurchases(appOrderMapper.countOrderById(productId));
         return result;
@@ -135,6 +135,8 @@ public class ProductServiceImpl implements ProductService {
     public IPage<AppProductResult> casualList(PageQuery query) {
         Page page = new Page<>(query.getPage(), query.getLimit());
         IPage<AppProductResult> appProductResultIPage = productMapper.casualList(page);
+
+
         for (AppProductResult appProductResult : appProductResultIPage.getRecords()) {
             Integer productId = appProductResult.getProductId();
             appProductResult.setAppProductSku(productSkuMapper.productSkuByIdOne(productId));
@@ -158,10 +160,10 @@ public class ProductServiceImpl implements ProductService {
      * @param productId
      * @return
      */
-    private List<AppProductSku> getSkuByProductId(Integer productId){
-        List<AppProductSku> appProductSkuDtoList = productSkuMapper.productSkuById(productId);
-        if (appProductSkuDtoList!=null&&appProductSkuDtoList.size()>0){
-            return appProductSkuDtoList;
+    private List<AppProductSkuResult> getSkuByProductId(Integer productId){
+        List<AppProductSkuResult> appProductSkuResults = productSkuMapper.productSkuById(productId);
+        if (appProductSkuResults!=null&&appProductSkuResults.size()>0){
+            return appProductSkuResults;
         }
         return null;
     }

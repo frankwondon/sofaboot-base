@@ -29,8 +29,7 @@ public class AppProductSku extends BaseEntity {
 
 private static final long serialVersionUID=1L;
 
-    @ApiModelProperty("模板id")
-    private Integer skuId;
+
     /**
      * 定义的单项格式类似[{name:'克重',value:0.5},{name:'材质',value:‘Au999’}]
      */
@@ -59,13 +58,9 @@ private static final long serialVersionUID=1L;
      * 库存
      */
     @ApiModelProperty("库存量")
-
     private Integer reserve;
 
-    /**
-     * sku模板list
-     */
-    private List skuList;
+
 
 
 
