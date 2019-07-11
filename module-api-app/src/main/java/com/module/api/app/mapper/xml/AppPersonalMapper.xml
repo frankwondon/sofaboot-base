@@ -3,7 +3,7 @@
 <mapper namespace="com.module.api.app.mapper.AppPersonalMapper">
     <select id="getPersonalMsg" resultType="com.module.api.app.result.UserManagerResult">
          select app_user.id userId,username,real_name,id_card,cell_phone_num phone_num,head_Img,sex,bank_confirm,bank_id,ifnull(app_user.wx_number_salt,0) wx,ifnull(app_user.qq_number_salt,0) qq ,
-          ifnull(app_user.salt,0) pay_word,
+          ifnull(app_user.pay_word,0) pay_word,
           sum( case when app_order.status &lt; 2 then 1 else 0 end) dfk,
           sum( case when app_order.status= 2 then 1 else 0 end) dfh,
           sum( case when app_order.status= 3 then 1 else 0 end) dsh,

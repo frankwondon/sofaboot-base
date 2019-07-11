@@ -4,7 +4,7 @@
 
 <!--开始-->
 
-    <resultMap id="productResult" type="com.module.api.app.result.AppProductSkuResult">
+    <resultMap id="productResult" type="com.module.api.app.result.AppProductResult">
         <id column="pro_id" jdbcType="INTEGER" property="productId" />
         <result column="main_img" jdbcType="VARCHAR" property="mainImg" />
         <result column="product_name" jdbcType="VARCHAR" property="productName"/>

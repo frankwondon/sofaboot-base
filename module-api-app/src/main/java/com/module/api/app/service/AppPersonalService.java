@@ -45,6 +45,7 @@ public interface AppPersonalService {
     /**
      * 修改支付密码
      * @param query
+     * @return
      */
-     Response updateUserPayPwd(UpdatePayPwdQuery query);
+     boolean updateUserPayPwd(UpdatePayPwdQuery query);
 }

@@ -1,5 +1,8 @@
 package com.module.api.app.service;
 
+import com.module.api.app.query.SendAdviceQuery;
+import com.module.common.Response;
+
 /**
  * @ClassName AppMineService
  * @Description 我的界面 接口
@@ -8,4 +11,6 @@ package com.module.api.app.service;
  * @Version 1.0
  **/
 public interface AppMineService {
+
+   boolean sendAdvice(SendAdviceQuery query);
 }

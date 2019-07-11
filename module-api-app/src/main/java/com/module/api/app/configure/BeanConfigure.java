@@ -2,6 +2,7 @@ package com.module.api.app.configure;
 
 import com.alipay.sofa.runtime.api.annotation.SofaReference;
 import com.alipay.sofa.runtime.api.annotation.SofaService;
+import com.module.api.app.mapper.AppMineMapper;
 import com.module.api.app.service.*;
 import com.module.api.app.service.impl.*;
 import org.springframework.context.annotation.Bean;
@@ -53,5 +54,11 @@ public class BeanConfigure {
     @SofaService
     public AppPersonalService appPersonalService(){
         return new AppPersonalServiceImpl();
+    }
+
+    @Bean
+    @SofaService
+    public AppMineService appMineService(){
+        return new AppMineServiceImpl();
     }
 }

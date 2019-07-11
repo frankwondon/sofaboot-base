@@ -113,6 +113,7 @@ public class ProductServiceImpl implements ProductService {
     public AppProductResult getProductById(Integer productId) {
         //通过id 获取商品
         AppProductResult result = productMapper.getProductById(productId);
+        //获取商品所有模板
         List<AppProductSkuResult> appProductSkuList = result.getAppProductSkuList();
         for (AppProductSkuResult appProductSkuResult : appProductSkuList) {
             String sku = appProductSkuResult.getSku();

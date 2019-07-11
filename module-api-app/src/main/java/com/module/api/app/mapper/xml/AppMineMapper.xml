@@ -1,0 +1,8 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.module.api.app.mapper.AppMineMapper">
+    <insert id="sendAdvice" parameterType="com.module.api.app.query.SendAdviceQuery">
+          insert into app_opinion (type,text,cell_phone) VALUES (#{text},#{cellPhone},#{type})
+    </insert>
+
+</mapper>

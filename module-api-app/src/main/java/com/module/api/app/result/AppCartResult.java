@@ -47,6 +47,6 @@ public class AppCartResult implements Serializable {
     @ApiModelProperty("店铺名")
     private String shopName;
     @ApiModelProperty("库存量")
-    private String reserve;
+    private Integer reserve;
 
 }

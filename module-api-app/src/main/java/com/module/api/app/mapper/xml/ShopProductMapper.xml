@@ -50,15 +50,27 @@ ORDER BY
 				DESC
    </select>
     <select id="showPurchasesDESC" resultType="com.module.api.app.result.AppProductResult">
-        select b.product_id,name product_name,main_img,num product_num,count(b.product_id) purchases
-        from app_product a right join app_order b on a.id=b.product_id
-        WHERE a.status=0 AND b.status=2 GROUP BY b.product_id
-				ORDER BY count(product_id) DESC
+        SELECT
+	a.id product_id, name product_name,main_img,num product_num,
+	(select count(1) mm from app_order o where o.product_id=a.id and o.status=2) as purchases
+FROM
+	app_product a
+WHERE
+	1=1
+	and a.status = 0
+ORDER BY
+	purchases desc
     </select>
     <select id="showPurchases" resultType="com.module.api.app.result.AppProductResult">
-        select b.product_id,name product_name,main_img,num product_num,count(b.product_id) purchases
-        from app_product a right join app_order b on a.id=b.product_id
-        WHERE a.status=0 AND b.status=2 GROUP BY b.product_id
-		ORDER BY count(product_id) ASC
+        SELECT
+	a.id product_id, name product_name,main_img,num product_num,
+	(select count(1) mm from app_order o where o.product_id=a.id and o.status=2) as purchases
+FROM
+	app_product a
+WHERE
+	1=1
+	and a.status = 0
+ORDER BY
+	purchases asc
     </select>
 </mapper>

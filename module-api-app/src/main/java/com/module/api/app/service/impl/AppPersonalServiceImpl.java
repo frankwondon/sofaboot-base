@@ -80,7 +80,7 @@ public class AppPersonalServiceImpl implements AppPersonalService {
     }
 
     @Override
-    public Response updateUserPayPwd(UpdatePayPwdQuery query) {
+    public boolean updateUserPayPwd(UpdatePayPwdQuery query) {
         //校验 验证码
         if (!smsSendService.validVerifyCode(RedisPrefix.RPWD_CODE, query.getCellPhoneNum(), query.getVerifyCode())) {
             throw new ValidationException(ResponseCode.C_520002);
@@ -88,7 +88,7 @@ public class AppPersonalServiceImpl implements AppPersonalService {
         int row=0;
         row= appPersonalMapper.updateUserPayPwd(query.getCellPhoneNum(), ShiroPasswordUtil.encpwd(query.getPayWord()).getPwd());
        if (row>0){
-           return Response.success(true);
+           return true;
        }else{
            throw new DBException(ResponseCode.C_520007);
        }
