@@ -50,6 +50,12 @@ public interface AppProductMapper extends BaseMapper<AppProduct> {
      */
     int countOfBuyStatus(@Param("reserve") Integer reserve);
 
+
+    /**
+     * 查询指定商品最小的库存数
+     * @return
+     */
+    int countProductMinSkuReserve(Integer productId);
     /**
      * 调用商品编号生成存储过程
      * @param id 模板的ID 1是商品的

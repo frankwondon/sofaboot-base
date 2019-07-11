@@ -37,4 +37,10 @@ public interface AddressService {
      * @return
      */
     List<AddressDto> addressList(Integer userId);
+
+    /**
+     * 获取用户默认收货地址
+     * @return
+     */
+    AddressDto findDefaultAddress(Integer userId);
 }

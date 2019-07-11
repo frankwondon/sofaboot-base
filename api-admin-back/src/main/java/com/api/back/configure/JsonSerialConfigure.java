@@ -9,6 +9,7 @@ import com.fasterxml.jackson.databind.SerializerProvider;
 import com.module.common.constant.DateFormatConstant;
 import org.springframework.boot.jackson.JsonComponent;
 import java.io.IOException;
+import java.math.BigDecimal;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 /**
@@ -38,6 +39,27 @@ public class JsonSerialConfigure {
         public LocalDateTime deserialize(JsonParser jsonParser, DeserializationContext deserializationContext) throws IOException {
             LocalDateTime date=LocalDateTime.parse(jsonParser.getText(),formatter);
             return date;
+        }
+    }
+
+    /**
+     * 解析钱的
+     */
+    public static class decimalJsonSerializer extends JsonSerializer<BigDecimal> {
+        @Override
+        public void serialize(BigDecimal date, JsonGenerator jsonGenerator, SerializerProvider serializerProvider) throws IOException {
+            jsonGenerator.writeString(""+ date.divide(BigDecimal.valueOf(100),2));
+        }
+    }
+
+
+    /**
+     * 解析钱的
+     */
+    public static class decimalJsonDeserializer extends JsonDeserializer<BigDecimal> {
+        @Override
+        public BigDecimal deserialize(JsonParser jsonParser, DeserializationContext deserializationContext) throws IOException {
+            return new BigDecimal(jsonParser.getText()).multiply(BigDecimal.valueOf(100));
         }
     }
 }

@@ -8,8 +8,9 @@ spring:
 
 upload:
   file:
-    img: /home/work/upload/img
-    video: /home/work/upload/video
+    base: /resource
+    img: /uploadfile/img
+    video: /uploadfile/video
 
 server:
   imgserver: http://172.16.100.23/

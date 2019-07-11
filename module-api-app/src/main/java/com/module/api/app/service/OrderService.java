@@ -1,6 +1,8 @@
 package com.module.api.app.service;
 
+import com.module.api.app.dto.ExpressPriceResult;
 import com.module.api.app.query.CreateOrderQuery;
+import com.module.api.app.query.ExpressPriceQuery;
 import com.module.api.app.result.OrderResult;
 
 import java.util.List;
@@ -16,7 +18,12 @@ public interface OrderService {
      * @param query
      * @return
      */
-    OrderResult createOrder(List<CreateOrderQuery> query);
+    List<OrderResult> createOrder(List<CreateOrderQuery> query,Integer userId);
 
-
+    /**
+     * 计算运费价格
+     * @param query
+     * @return
+     */
+    List<ExpressPriceResult> computeExpressPrice(ExpressPriceQuery query);
 }

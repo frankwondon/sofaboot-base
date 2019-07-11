@@ -111,6 +111,15 @@
         </if>
         LIMIT 5
     </select>
+    <select id="countProductMinSkuReserve" resultType="_int">
+        SELECT
+            IFNULL(min(sku.reserve), 0) as minReserve
+        FROM
+            app_product_sku sku
+        WHERE
+            sku.product_id = #{productId}
+        AND sku.deleted = 0
+    </select>
 
     <insert id="insertAppProductAdditionOne" parameterType="com.module.admin.app.entity.AppProductAdditionOne">
         insert into app_product_addition_one VALUES (#{productId},#{pv},1)

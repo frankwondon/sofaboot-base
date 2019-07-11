@@ -25,6 +25,7 @@ import org.springframework.beans.BeanUtils;
 import org.springframework.transaction.annotation.Transactional;
 
 import javax.annotation.Resource;
+import java.math.BigDecimal;
 import java.time.LocalDateTime;
 import java.util.List;
 
@@ -43,9 +44,9 @@ public class AppProductServiceImpl implements AppProductService {
     public IPage<AppProductResult> list(AppProductQuery pageQuery) {
         Page page = new Page<>(pageQuery.getPage(), pageQuery.getLimit());
         if (pageQuery.getStatus() == ProductEnum.SearchShelfStatus.COUNTDOWN.key()) {
-            return productMapper.listOfBuyStatus(page, pageQuery.getKeyWord(), BackAdminConstant.PRODUCT_COUNT_DOWN);
+          return  productMapper.listOfBuyStatus(page, pageQuery.getKeyWord(), BackAdminConstant.PRODUCT_COUNT_DOWN);
         } else {
-            return productMapper.listOfShelf(page, pageQuery.getStatus(), pageQuery.getKeyWord());
+           return productMapper.listOfShelf(page, pageQuery.getStatus(), pageQuery.getKeyWord());
         }
     }
 
@@ -121,6 +122,10 @@ public class AppProductServiceImpl implements AppProductService {
     @Override
     public AppProductDto findUpdateDetail(Integer productId) {
         AppProduct appProduct = productMapper.selectById(productId);
+        //上架中的商品不允许修改
+        if (appProduct.getStatus()==ProductEnum.ShelfStatus.SHELF.key()){
+            throw new DBException(ResponseCode.C_510003);
+        }
         AppProductDto detailResult = new AppProductDto();
         BeanUtils.copyProperties(appProduct, detailResult);
         List<AppProductSku> appProductSkus = productSkuMapper.listProductSku(productId);
@@ -131,6 +136,11 @@ public class AppProductServiceImpl implements AppProductService {
     @Override
     @Transactional(rollbackFor = Exception.class)
     public void update(AppProductDto productDto) {
+        AppProduct appProduct = productMapper.selectById(productDto.getId());
+        //上架中的商品不允许修改
+        if (appProduct.getStatus()==ProductEnum.ShelfStatus.SHELF.key()){
+            throw new DBException(ResponseCode.C_510003);
+        }
         //立即上架的商品前台直接可以查询到
         if (ProductEnum.ShelfType.ATONCE.key() == productDto.getShelfType()) {
             productDto.setStatus(0);
@@ -138,7 +148,6 @@ public class AppProductServiceImpl implements AppProductService {
             productDto.setStatus(1);
         }
         //查看修改之前的SKU有没有变动
-        AppProduct appProduct = productMapper.selectById(productDto.getId());
         String md5Sku = finalSkuCreate(productDto.getProductSkus());
         if (!appProduct.getSkuMd5().equals(md5Sku)) {
             //删除之前的sku

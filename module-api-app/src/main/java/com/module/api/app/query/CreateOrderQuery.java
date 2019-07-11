@@ -29,4 +29,6 @@ public class CreateOrderQuery implements Serializable {
     @Min(value = 1, message = "购买数量必须大于0")
     @Max(value = 10000, message = "购买数量必须小于10000")
     private Integer number;
+    @ApiModelProperty(value = "购物车ID,可为空")
+    private Integer cartId;
 }

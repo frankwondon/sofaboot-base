@@ -1,6 +1,8 @@
 package com.module.api.app.mapper;
 
 import com.module.api.app.result.AppProductSkuResult;
+import com.baomidou.mybatisplus.core.mapper.BaseMapper;
+import com.module.api.app.entity.AppProductSku;
 
 import java.util.List;
 
@@ -11,7 +13,7 @@ import java.util.List;
  * @Date 2019/7/2 0002 9:50
  * @Version 1.0
  **/
-public interface ProductSkuMapper {
+public interface ProductSkuMapper extends BaseMapper<AppProductSku> {
 
     /**
      *  查询商品id

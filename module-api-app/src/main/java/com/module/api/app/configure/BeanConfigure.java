@@ -61,4 +61,10 @@ public class BeanConfigure {
     public AppMineService appMineService(){
         return new AppMineServiceImpl();
     }
+
+    @Bean
+    @SofaService
+    public OrderService orderService(){
+        return new OrderServiceImpl();
+    }
 }

@@ -1,6 +1,7 @@
 package com.module.api.app.mapper;
 
 import com.alibaba.fastjson.JSONArray;
+import com.baomidou.mybatisplus.core.mapper.BaseMapper;
 import com.baomidou.mybatisplus.core.metadata.IPage;
 import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
 import com.module.api.app.dto.DelCartDto;
@@ -18,7 +19,7 @@ import java.util.Map;
  * @Date 2019/7/4 0004 17:28
  * @Version 1.0
  **/
-public interface AppCartMapper {
+public interface AppCartMapper extends BaseMapper<AppCart> {
 
     /**
      * 添加购物车

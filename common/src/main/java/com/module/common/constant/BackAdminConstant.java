@@ -25,6 +25,6 @@ public class BackAdminConstant {
     /**
      * 将要售完的阈值
      */
-    public static final int PRODUCT_COUNT_DOWN=20;
+    public static final int PRODUCT_COUNT_DOWN=10;
 
 }

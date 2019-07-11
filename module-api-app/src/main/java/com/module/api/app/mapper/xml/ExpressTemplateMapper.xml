@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.module.api.app.mapper.ExpressTemplateMapper">
+    <select id="templateAreas" resultType="com.module.api.app.entity.AppExpressTemplateArea">
+        select * from app_express_template_area area where area.temp_id=#{tempId} and default_temp=0
+    </select>
+
+    <select id="defaultTemplateAreas" resultType="com.module.api.app.entity.AppExpressTemplateArea">
+        select * from app_express_template_area area where area.temp_id=#{tempId} and area.default_temp=1
+    </select>
+</mapper>

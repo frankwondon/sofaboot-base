@@ -6,4 +6,7 @@
         select count(1) from app_order where product_id=#{productId} AND status=2
     </select>
 
+    <select id="callOrderNum" statementType="CALLABLE" resultType="String">
+        {call generator(2)}
+    </select>
 </mapper>

@@ -48,4 +48,9 @@ public class AddressServiceImpl implements AddressService {
     public List<AddressDto> addressList(Integer userId) {
         return expressAddressMapper.listAddress(userId);
     }
+
+    @Override
+    public AddressDto findDefaultAddress(Integer userId) {
+        return expressAddressMapper.findDefaultAddress(userId);
+    }
 }

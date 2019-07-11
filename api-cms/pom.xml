@@ -62,11 +62,7 @@
             <artifactId>springfox-swagger2</artifactId>
             <version>${version.swagger}</version>
         </dependency>
-        <dependency>
-            <groupId>com.google.guava</groupId>
-            <artifactId>guava</artifactId>
-            <version>20.0</version>
-        </dependency>
+
         <dependency>
             <groupId>sofaboot-module</groupId>
             <artifactId>module-admin-back</artifactId>

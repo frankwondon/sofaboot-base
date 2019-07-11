@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.module.api.app.mapper.AppExpressAddressMapper">
-    <select id="listAddress" resultType="com.module.api.app.dto.AddressDto">
-        SELECT
+    <sql id="addressDtoSelect">
+         SELECT
             a.id as addressId,
             a.receipt_user_name,
             a.receipt_user_mobile,
@@ -16,10 +16,21 @@
             a.addr_default
         FROM
             app_express_address a
+    </sql>
+    <select id="listAddress" resultType="com.module.api.app.dto.AddressDto">
+        <include refid="addressDtoSelect"></include>
         WHERE
             a.deleted = 0
         AND a.user_id = #{userId}
         ORDER BY a.create_time
+    </select>
+
+    <select id="findDefaultAddress" resultType="com.module.api.app.dto.AddressDto">
+        <include refid="addressDtoSelect"></include>
+        WHERE
+            a.deleted = 0
+        AND a.user_id = #{userId}
+        AND a.addr_default=1
     </select>
 
     <update id="logicDel">

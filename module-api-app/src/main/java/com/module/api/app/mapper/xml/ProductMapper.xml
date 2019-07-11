@@ -77,6 +77,6 @@
     </select>
 
     <update id="cutSkuReserve" parameterType="com.module.api.app.query.CreateOrderQuery">
-        update app_product_sku sku set sku.reserve=sku.reserve-#{number} where sku.id=#{skuId} and sku.product_id=#{productId} and sku.reserve>0
+        update app_product_sku sku set sku.reserve=sku.reserve-#{number},sku.version=sku.version+1 where sku.id=#{skuId} and sku.product_id=#{productId} and sku.reserve>=#{number}
     </update>
 </mapper>

@@ -4,8 +4,10 @@ import java.math.BigDecimal;
 import java.time.LocalDateTime;
 
 import com.module.common.db.BaseEntity;
+import lombok.Builder;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
+import lombok.NoArgsConstructor;
 import lombok.experimental.Accessors;
 
 /**
@@ -14,7 +16,7 @@ import lombok.experimental.Accessors;
  * </p>
  *
  * @author wangdong
- * @since 2019-07-09
+ * @since 2019-07-10
  */
 @Data
 @EqualsAndHashCode(callSuper = true)
@@ -25,7 +27,9 @@ private static final long serialVersionUID=1L;
 
     private String orderNum;
 
-    private Integer productId;
+    private Integer userId;
+
+    private String sku;
 
     private Integer skuId;
 
@@ -34,10 +38,29 @@ private static final long serialVersionUID=1L;
      */
     private Integer expressAddressId;
 
+    private Integer productId;
+
+    private String productName;
+
+    /**
+     * 商品总价
+     */
+    private BigDecimal productSumPrice;
+
+    /**
+     * 商品的单价
+     */
+    private BigDecimal productPrice;
+
     /**
      * 物流价格
      */
     private BigDecimal expressPrice;
+
+    /**
+     * 所购买的商品数量
+     */
+    private Integer productSize;
 
     /**
      * 付款时的价格
@@ -55,21 +78,44 @@ private static final long serialVersionUID=1L;
     private Integer payChannel;
 
     /**
-     * 所购买的商品数量
-     */
-    private Integer productSize;
-
-    /**
      * 订单状态0创建1付款中2付款完成3已发货4已收货5关闭订单
      */
     private Integer status;
 
     /**
-     * 订单的sku也是JSON格式
+     * 订单备注
      */
-    private String sku;
+    private String remark;
 
+    /**
+     * 0个人发票,1公司发票
+     */
+    private Integer invoiceType;
 
+    /**
+     * 乐观锁
+     */
+    private Integer version;
+
+    /**
+     * 创建人
+     */
+    private Integer createBy;
+
+    /**
+     * 订单创建时间
+     */
+    private LocalDateTime createTime;
+
+    /**
+     * 更新人
+     */
+    private Integer updateBy;
+
+    /**
+     * 更新时间
+     */
+    private LocalDateTime updateTime;
 
 
 }
