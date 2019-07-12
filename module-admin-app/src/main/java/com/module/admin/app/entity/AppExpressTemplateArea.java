@@ -2,6 +2,7 @@ package com.module.admin.app.entity;
 
 import java.math.BigDecimal;
 import com.baomidou.mybatisplus.annotation.IdType;
+import com.baomidou.mybatisplus.annotation.TableField;
 import com.module.common.db.BaseEntity;
 import java.time.LocalDateTime;
 import com.baomidou.mybatisplus.annotation.TableId;
@@ -58,6 +59,7 @@ private static final long serialVersionUID=1L;
     /**
      * 是否是基础运费
      */
+    @TableField("default_area")
     private Integer defaultTemp;
 
 }

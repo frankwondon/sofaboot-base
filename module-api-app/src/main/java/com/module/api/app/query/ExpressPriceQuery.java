@@ -4,6 +4,7 @@ import io.swagger.annotations.ApiModel;
 import io.swagger.annotations.ApiModelProperty;
 import lombok.Data;
 
+import javax.validation.Valid;
 import javax.validation.constraints.NotBlank;
 import java.io.Serializable;
 import java.util.List;
@@ -20,7 +21,7 @@ public class ExpressPriceQuery implements Serializable {
     private Integer addressId;
 
     @ApiModelProperty("订单的ID")
-    @NotBlank(message = "订单ID不能为空")
+    @Valid
     private List<Integer> orderIds;
 
 }

@@ -2,12 +2,12 @@ package com.api.back.configure;
 
 import com.fasterxml.jackson.core.JsonGenerator;
 import com.fasterxml.jackson.core.JsonParser;
-import com.fasterxml.jackson.databind.DeserializationContext;
-import com.fasterxml.jackson.databind.JsonDeserializer;
-import com.fasterxml.jackson.databind.JsonSerializer;
-import com.fasterxml.jackson.databind.SerializerProvider;
+import com.fasterxml.jackson.core.ObjectCodec;
+import com.fasterxml.jackson.databind.*;
 import com.module.common.constant.DateFormatConstant;
 import org.springframework.boot.jackson.JsonComponent;
+import org.springframework.boot.jackson.JsonObjectDeserializer;
+
 import java.io.IOException;
 import java.math.BigDecimal;
 import java.time.LocalDateTime;
@@ -56,9 +56,10 @@ public class JsonSerialConfigure {
     /**
      * 解析钱的
      */
-    public static class decimalJsonDeserializer extends JsonDeserializer<BigDecimal> {
+    public static class decimalJsonDeserializer extends JsonObjectDeserializer<BigDecimal> {
+
         @Override
-        public BigDecimal deserialize(JsonParser jsonParser, DeserializationContext deserializationContext) throws IOException {
+        protected BigDecimal deserializeObject(JsonParser jsonParser, DeserializationContext context, ObjectCodec codec, JsonNode tree) throws IOException {
             return new BigDecimal(jsonParser.getText()).multiply(BigDecimal.valueOf(100));
         }
     }

@@ -141,6 +141,8 @@ public class AppProductServiceImpl implements AppProductService {
         if (appProduct.getStatus()==ProductEnum.ShelfStatus.SHELF.key()){
             throw new DBException(ResponseCode.C_510003);
         }
+        //不能直接上架
+        productDto.setStatus(ProductEnum.ShelfStatus.OBTAINED.key());
         //立即上架的商品前台直接可以查询到
         if (ProductEnum.ShelfType.ATONCE.key() == productDto.getShelfType()) {
             productDto.setStatus(0);

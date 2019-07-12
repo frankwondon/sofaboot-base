@@ -48,6 +48,7 @@ public class OrderServiceImpl implements OrderService {
     public List<OrderResult> createOrder(List<CreateOrderQuery> query,Integer userId) {
         List<OrderResult> orderResults = Lists.newArrayList();
         for (CreateOrderQuery createOrderQuery : query) {
+            //创建多个订单
             orderResults.add(this.createDBOrder(createOrderQuery,userId));
             //删除购物车
             if (createOrderQuery.getCartId() != null) {
@@ -74,7 +75,6 @@ public class OrderServiceImpl implements OrderService {
         AppOrder order = orderMapper.selectById(orderId);
         AppProduct product = productMapper.selectById(order.getProductId());
         ExpressPriceResult priceResult = new ExpressPriceResult();
-
         BigDecimal expressPrice = BigDecimal.valueOf(0);
         if (product.getShipType() == ProductEnum.ShipType.NEED.key()) {
             AppExpressTemplate appExpressTemplate = expressTemplateMapper.selectById(product.getExpressTemplateId());
@@ -141,7 +141,9 @@ public class OrderServiceImpl implements OrderService {
             baseNum = productNum * product.getProductGram();
         }
         //大于首件计费
-        if (baseNum >= eArea.getFirstNum()) {
+        if (baseNum > eArea.getFirstNum()) {
+            //减去首件的价格
+            baseNum=baseNum- eArea.getFirstNum();
             Integer continueNum = eArea.getContinueNum();
             int cCount;
             //除不尽则 再加一次基础计算
@@ -168,12 +170,13 @@ public class OrderServiceImpl implements OrderService {
         AppProductSku sku = skuMapper.selectById(createOrderQuery.getSkuId());
         AppProduct product = productMapper.selectById(createOrderQuery.getProductId());
         if (sku != null && product != null) {
+            //下架商品
+            if (product.getStatus() == ProductEnum.ShelfStatus.OBTAINED.key()) {
+                throw new DBException(ResponseCode.C_520011);
+            }
             //减库存
             if (productMapper.cutSkuReserve(createOrderQuery) <= 0) {
                 throw new DBException(ResponseCode.C_520012);
-            }
-            if (product.getStatus() == ProductEnum.ShelfStatus.OBTAINED.key()) {
-                throw new DBException(ResponseCode.C_520011);
             }
             //计算总价
             BigDecimal sumPrice = sku.getFixedPrice().multiply(new BigDecimal(createOrderQuery.getNumber()));
