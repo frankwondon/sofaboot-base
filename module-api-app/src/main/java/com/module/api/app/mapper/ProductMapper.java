@@ -64,4 +64,18 @@ public interface ProductMapper extends BaseMapper<AppProduct> {
      */
     int cutSkuReserve(CreateOrderQuery orderQuery);
 
+    /**
+     * 查询SKU库存
+     * @param skuId
+     * @return
+     */
+    int findSkuReserve(Integer skuId);
+
+    /**
+     * 查询有效的SKU
+     * @param skuId
+     * @return
+     */
+    int countSkuEffective(Integer skuId);
+
 }

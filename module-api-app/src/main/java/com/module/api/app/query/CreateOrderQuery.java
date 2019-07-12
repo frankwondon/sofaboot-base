@@ -17,6 +17,9 @@ import java.io.Serializable;
 @ApiModel("创建订单商品信息")
 public class CreateOrderQuery implements Serializable {
 
+    private Integer payType;
+    private Integer addressId;
+
     @ApiModelProperty(value = "商品ID")
     @NotBlank(message = "商品ID不能为空")
     private Integer productId;

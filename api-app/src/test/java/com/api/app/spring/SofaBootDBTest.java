@@ -1,6 +1,8 @@
 package com.api.app.spring;
 
 import com.alipay.sofa.runtime.api.annotation.SofaReference;
+import com.module.api.app.entity.AppCart;
+import com.module.api.app.mapper.AppCartMapper;
 import com.module.api.app.mapper.ProductMapper;
 import com.module.api.app.query.LoginQuery;
 import com.module.api.app.query.ProductQuery;
@@ -29,8 +31,8 @@ public class SofaBootDBTest {
     SMSSendService smsSendService;
     @SofaReference
     UserService userService;
-    @SofaReference
-    ProductService productService;
+    @Resource
+    private AppCartMapper cartMapper;
 
     /**
      * 限流测试
@@ -72,6 +74,13 @@ public class SofaBootDBTest {
             bucket.set("abcd");
         }
 
+    }
+
+    @Test
+    public void instert(){
+        AppCart cart=new AppCart();
+        cart.setCreateTime(LocalDateTime.now());
+        cartMapper.insert(cart);
     }
 
 

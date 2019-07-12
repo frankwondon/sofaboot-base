@@ -9,6 +9,7 @@ import com.module.api.app.entity.*;
 import com.module.api.app.mapper.*;
 import com.module.api.app.query.CreateOrderQuery;
 import com.module.api.app.query.ExpressPriceQuery;
+import com.module.api.app.result.ComputerOrderResult;
 import com.module.api.app.result.OrderResult;
 import com.module.api.app.service.OrderService;
 import com.module.common.ResponseCode;
@@ -44,12 +45,23 @@ public class OrderServiceImpl implements OrderService {
     private AppExpressAddressMapper addressMapper;
 
     @Override
+    public List<ComputerOrderResult> computerOrderResults(List<CreateOrderQuery> query) {
+        List<ComputerOrderResult> orderResults = Lists.newArrayList();
+        for (CreateOrderQuery createOrderQuery : query) {
+            //创建多个订单
+            orderResults.add(this.computerOrderPrice(createOrderQuery));
+        }
+        return orderResults;
+    }
+
+
+    @Override
     @Transactional(rollbackFor = Exception.class)
-    public List<OrderResult> createOrder(List<CreateOrderQuery> query,Integer userId) {
+    public List<OrderResult> createOrder(List<CreateOrderQuery> query, Integer userId) {
         List<OrderResult> orderResults = Lists.newArrayList();
         for (CreateOrderQuery createOrderQuery : query) {
             //创建多个订单
-            orderResults.add(this.createDBOrder(createOrderQuery,userId));
+            orderResults.add(this.createDBOrder(createOrderQuery, userId));
             //删除购物车
             if (createOrderQuery.getCartId() != null) {
                 appCartMapper.deleteById(createOrderQuery.getCartId());
@@ -60,11 +72,18 @@ public class OrderServiceImpl implements OrderService {
 
     @Override
     public List<ExpressPriceResult> computeExpressPrice(ExpressPriceQuery query) {
-        List<ExpressPriceResult> list=Lists.newArrayList();
+        List<ExpressPriceResult> list = Lists.newArrayList();
         for (Integer orderId : query.getOrderIds()) {
             list.add(createDBExpressPrice(orderId, query.getAddressId()));
         }
         return list;
+    }
+
+    @Override
+    public void cancelOrder(Integer orderId, Integer userId) {
+        if (orderMapper.cancelOrder(orderId, userId) == 0) {
+            throw new DBException(ResponseCode.C_520016);
+        }
     }
 
     private ExpressPriceResult createDBExpressPrice(Integer orderId, Integer addressId) {
@@ -143,7 +162,7 @@ public class OrderServiceImpl implements OrderService {
         //大于首件计费
         if (baseNum > eArea.getFirstNum()) {
             //减去首件的价格
-            baseNum=baseNum- eArea.getFirstNum();
+            baseNum = baseNum - eArea.getFirstNum();
             Integer continueNum = eArea.getContinueNum();
             int cCount;
             //除不尽则 再加一次基础计算
@@ -166,7 +185,7 @@ public class OrderServiceImpl implements OrderService {
      * @param createOrderQuery
      * @return
      */
-    private OrderResult createDBOrder(CreateOrderQuery createOrderQuery,Integer userId) {
+    private OrderResult createDBOrder(CreateOrderQuery createOrderQuery, Integer userId) {
         AppProductSku sku = skuMapper.selectById(createOrderQuery.getSkuId());
         AppProduct product = productMapper.selectById(createOrderQuery.getProductId());
         if (sku != null && product != null) {
@@ -196,30 +215,82 @@ public class OrderServiceImpl implements OrderService {
             order.setProductName(product.getName());
             orderMapper.insert(order);
             OrderResult result = new OrderResult();
-            //生成返回结果
-            int expressType = ExpressEnum.DisplayType.MERCHANT.key();
-            if (product.getShipType() == ProductEnum.ShipType.NO.key()) {
-                expressType = ExpressEnum.DisplayType.NO.key();
-            } else {
-                AppExpressTemplate appExpressTemplate = expressTemplateMapper.selectById(product.getExpressTemplateId());
-                if (appExpressTemplate.getType() == ExpressEnum.Type.USER.key()) {
-                    expressType = ExpressEnum.DisplayType.USER.key();
-                }
-            }
-
-            return result.convertToResult(order, product, sku, expressType);
+            return result.convertToResult(order, product, sku, getExpressType(product).key());
         } else {
             throw new DBException(ResponseCode.C_520010);
         }
     }
 
 
-    public static void main(String[] args) {
-        String json = "[{\"code\":120000,\"name\":\"天津\"},{\"code\":130000,\"name\":\"河北省\"},{\"code\":140000,\"name\":\"山西省\"}]";
-        JSONArray array = JSONArray.parseArray(json);
-        System.out.println(JSONPath.containsValue(array, "$.code", 120000));
-        System.out.println(JSONPath.contains(array, "$.code"));
-        ;
+    /**
+     * 计算每一个商品的价格
+     *
+     * @param createOrderQuery
+     * @return
+     */
+    private ComputerOrderResult computerOrderPrice(CreateOrderQuery createOrderQuery) {
+        AppProductSku sku = skuMapper.selectById(createOrderQuery.getSkuId());
+        AppProduct product = productMapper.selectById(createOrderQuery.getProductId());
+        if (sku != null && product != null) {
+            int skuReserve = productMapper.findSkuReserve(createOrderQuery.getSkuId());
+            int skuEffective = productMapper.countSkuEffective(createOrderQuery.getSkuId());
+            //计算总价
+            BigDecimal sumPrice = sku.getFixedPrice().multiply(new BigDecimal(createOrderQuery.getNumber()));
+            ComputerOrderResult result = ComputerOrderResult.builder()
+                    .number(createOrderQuery.getNumber())
+                    .productId(createOrderQuery.getProductId())
+                    .productImg(product.getMainImg())
+                    .productName(product.getName())
+                    .productPrice(sku.getFixedPrice().longValue())
+                    .productSumPrice(sumPrice.longValue())
+                    .sku(sku.getSku())
+                    .skuId(sku.getId())
+                    .build();
+            //下架商品
+            if (product.getStatus() == ProductEnum.ShelfStatus.OBTAINED.key()) {
+                result.setProductSkuStatus(ProductEnum.AppDisplayType.PRODUCT_OBTAINED.key());
+                //SKU失效
+            } else if (skuEffective == 0) {
+                result.setProductSkuStatus(ProductEnum.AppDisplayType.SKU_INVALID.key());
+                //库存为0
+            } else if (skuReserve == 0) {
+                result.setProductSkuStatus(ProductEnum.AppDisplayType.NO_RESERVE.key());
+                //不足抵扣
+            } else if (skuReserve < createOrderQuery.getNumber()) {
+                result.setProductSkuStatus(ProductEnum.AppDisplayType.SHORT_RESERVE.key());
+                //正常
+            } else {
+                result.setProductSkuStatus(ProductEnum.AppDisplayType.OK.key());
+            }
+            //运费模式
+            result.setExpressType(this.getExpressType(product).key());
+            return result;
+        } else {
+            throw new DBException(ResponseCode.C_520010);
+        }
+
     }
+
+    /**
+     * 获取邮寄类型
+     *
+     * @param product
+     * @return 邮寄类型参考美剧
+     */
+    private ExpressEnum.DisplayType getExpressType(AppProduct product) {
+        ExpressEnum.DisplayType expressType = ExpressEnum.DisplayType.MERCHANT;
+        if (product.getShipType() == ProductEnum.ShipType.NO.key()) {
+            expressType = ExpressEnum.DisplayType.NO;
+        } else {
+            AppExpressTemplate appExpressTemplate = expressTemplateMapper.selectById(product.getExpressTemplateId());
+            if (appExpressTemplate.getType() == ExpressEnum.Type.USER.key()) {
+                expressType = ExpressEnum.DisplayType.USER;
+            }
+        }
+        return expressType;
+    }
+
+
+
 
 }

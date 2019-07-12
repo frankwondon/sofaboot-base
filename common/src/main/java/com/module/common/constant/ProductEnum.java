@@ -75,4 +75,22 @@ public class ProductEnum {
         }
     }
 
+
+    public  enum AppDisplayType {
+        OK(0,"正常"),
+        NO_RESERVE(1,"库存为0"),
+        SHORT_RESERVE(2,"库存不足抵扣"),
+        SKU_INVALID(3,"SKU失效"),
+        PRODUCT_OBTAINED(4,"商品下架");
+        private int key;
+        private String desc;
+        AppDisplayType(int key, String desc){
+            this.key=key;
+            this.desc=desc;
+        }
+        public int key(){
+            return key;
+        }
+    }
+
 }

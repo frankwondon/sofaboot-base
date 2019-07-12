@@ -1,6 +1,7 @@
 package com.api.app.intercept;
 
 import cn.hutool.core.util.StrUtil;
+import cn.hutool.json.JSONUtil;
 import com.api.app.util.RequestUtil;
 import com.module.api.app.service.UserService;
 import com.module.common.ResponseCode;
@@ -39,6 +40,9 @@ public class AuthIntercept implements HandlerInterceptor {
         String token = request.getHeader(HeaderConstant.TOKEN_NAME);
         String ip = RequestUtil.getIpAddress(request);
         log.info("ip:{},userAgent:{},deviceId:{},token:{}", ip, userAgent, deviceId, token);
+        if (StrUtil.isBlank(token)){
+            throw new AuthException(ResponseCode.C_302);
+        }
         AppTokenUtil.verifier(token);
         AppTokenDto decode = AppTokenUtil.decode(token);
         //限制IP 需要考虑 移动端 频繁切换IP的情况

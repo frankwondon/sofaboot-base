@@ -5,14 +5,13 @@ import com.api.app.intercept.AuthLogin;
 import com.module.api.app.dto.ExpressPriceResult;
 import com.module.api.app.query.CreateOrderQuery;
 import com.module.api.app.query.ExpressPriceQuery;
-import com.module.api.app.result.CreateOrderResult;
-import com.module.api.app.result.OrderResult;
+import com.module.api.app.result.ComputerOrderResult;
+import com.module.api.app.result.ComputerProductPrice;
 import com.module.api.app.service.AddressService;
 import com.module.api.app.service.OrderService;
 import com.module.common.Response;
 import com.module.common.bean.AppCurrentUser;
 import com.module.common.bean.BaseQuery;
-import com.module.common.bean.PageQuery;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
 import org.springframework.web.bind.annotation.*;
@@ -33,17 +32,33 @@ public class OrderController {
     private OrderService orderService;
     @SofaReference
     private AddressService addressService;
-    @PostMapping("createOrder")
-    @ApiOperation("创建订单")
-    public Response<CreateOrderResult> createOrder(@RequestBody BaseQuery<List<CreateOrderQuery>> query,@ApiIgnore AppCurrentUser user){
-        CreateOrderResult orderResult=new CreateOrderResult();
-        List<OrderResult> order = orderService.createOrder(query.getData(),user.getId());
-        orderResult.setOrders(order);
+//    @PostMapping("createOrder")
+//    @ApiOperation("创建订单 ")
+//    public Response<CreateOrderResult> createOrder(@RequestBody BaseQuery<List<CreateOrderQuery>> query,@ApiIgnore AppCurrentUser user){
+//        CreateOrderResult orderResult=new CreateOrderResult();
+//        List<OrderResult> order = orderService.createOrder(query.getData(),user.getId());
+//        orderResult.setOrders(order);
+//        orderResult.setDefaultAddress(addressService.findDefaultAddress(user.getId()));
+//        return Response.success(orderResult);
+//    }
+
+
+    @PostMapping("computerProductPrice")
+    @ApiOperation("计算商品价格 ")
+    public Response<ComputerProductPrice> createOrder(@RequestBody BaseQuery<List<CreateOrderQuery>> query, @ApiIgnore AppCurrentUser user){
+        ComputerProductPrice orderResult=new ComputerProductPrice();
+        List<ComputerOrderResult> computerOrderResults = orderService.computerOrderResults(query.getData());
+        orderResult.setProductResults(computerOrderResults);
         orderResult.setDefaultAddress(addressService.findDefaultAddress(user.getId()));
         return Response.success(orderResult);
     }
 
-
+    @PostMapping("cancelOrder")
+    @ApiOperation("取消订单")
+    public Response<List<ExpressPriceResult>> cancelOrder(@RequestBody BaseQuery<Integer> orderId,@ApiIgnore AppCurrentUser user){
+        orderService.cancelOrder(orderId.getData(),user.getId());
+        return Response.success(true);
+    }
 
     @PostMapping("computeExpressPrice")
     @ApiOperation("计算运费价格")

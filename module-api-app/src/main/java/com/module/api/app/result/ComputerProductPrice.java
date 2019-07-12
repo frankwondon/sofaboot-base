@@ -14,11 +14,11 @@ import java.util.List;
  */
 @ApiModel("创建订单结果")
 @Data
-public class CreateOrderResult implements Serializable {
+public class ComputerProductPrice implements Serializable {
     @ApiModelProperty("默认收货地址")
     private AddressDto defaultAddress;
-    @ApiModelProperty("创建成功后的订单列表")
-    List<OrderResult> orders;
+    @ApiModelProperty("计算好的商品价格")
+    List<ComputerOrderResult> productResults;
 
 
 }

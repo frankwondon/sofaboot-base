@@ -76,7 +76,16 @@
         app_product_addition_one app_pro_add on app_pro.id=app_pro_add.product_id where app_pro.status =0 ORDER BY app_pro_add.pv desc
     </select>
 
+
+    <select id="findSkuReserve" resultType="java.lang.Integer">
+        select IFNULL(sku.reserve,0)  from app_product_sku sku where sku.id=#{skuId}
+    </select>
+
+    <select id="countSkuEffective" resultType="java.lang.Integer">
+        select count(1)  from app_product_sku sku where sku.id=#{skuId} and sku.deleted=0
+    </select>
+
     <update id="cutSkuReserve" parameterType="com.module.api.app.query.CreateOrderQuery">
-        update app_product_sku sku set sku.reserve=sku.reserve-#{number},sku.version=sku.version+1 where sku.id=#{skuId} and sku.product_id=#{productId} and sku.reserve>=#{number}
+        update app_product_sku sku set sku.reserve=sku.reserve-#{number},sku.version=sku.version+1 where sku.id=#{skuId} and sku.product_id=#{productId} and sku.reserve>=#{number} and sku.deleted=0
     </update>
 </mapper>

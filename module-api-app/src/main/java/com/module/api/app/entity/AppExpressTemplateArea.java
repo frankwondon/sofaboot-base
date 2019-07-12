@@ -2,6 +2,7 @@ package com.module.api.app.entity;
 
 import java.math.BigDecimal;
 
+import com.baomidou.mybatisplus.annotation.TableField;
 import com.module.common.db.BaseEntity;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
@@ -56,6 +57,7 @@ private static final long serialVersionUID=1L;
     /**
      * 是否是基础运费
      */
+    @TableField("default_area")
     private Integer defaultTemp;
 
 }

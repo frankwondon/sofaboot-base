@@ -8,12 +8,18 @@ import com.module.admin.app.service.AppBannerService;
 import com.module.admin.back.entity.BackUser;
 import com.module.admin.back.query.BackUserQuery;
 import com.module.admin.back.service.BackUserService;
+import com.module.admin.cms.entity.CmsNews;
+import com.module.admin.cms.mapper.CmsNewsMapper;
+import com.module.admin.cms.service.CmsNewsService;
 import com.module.common.bean.PageQuery;
 import com.module.common.constant.BackAdminConstant;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.test.context.junit4.SpringRunner;
+
+import javax.annotation.Resource;
+import java.time.LocalDateTime;
 
 
 @SpringBootTest
@@ -24,8 +30,15 @@ public class SofaBootDBTest {
 
     @SofaReference
     AppBannerService bannerService;
+
+    @Resource
+    private CmsNewsMapper newsMapper;
+
     @Test
     public void list(){
+        CmsNews cmsNews=new CmsNews();
+        cmsNews.setCreateTime(LocalDateTime.now());
+        newsMapper.insert(cmsNews);
     }
 
 
@@ -37,6 +50,7 @@ public class SofaBootDBTest {
         backUser.setUserType(BackAdminConstant.USER_TYPE_NORMAL);
         backUser.setLocked(0);
         backUser.setCreateBy(-1);
+        backUser.setCreateTime(LocalDateTime.now());
         backUserService.insertUser(backUser);
     }
 

@@ -2,6 +2,7 @@ package com.module.api.app.mapper;
 
 import com.baomidou.mybatisplus.core.mapper.BaseMapper;
 import com.lib.db.entity.AppOrder;
+import org.apache.ibatis.annotations.Param;
 
 /**
  * @ClassName AppOrderMapper
@@ -24,4 +25,13 @@ public interface AppOrderMapper extends BaseMapper<AppOrder> {
     * @return
     */
    String callOrderNum();
+
+   /**
+    * 取消订单
+    * 只有刚创建的订单可以被取消
+    * @param userId
+    * @param orderId
+    * @return
+    */
+   int cancelOrder(@Param("userId") Integer userId, @Param("orderId")Integer orderId);
 }

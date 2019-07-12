@@ -2,6 +2,7 @@ package com.api.back.configure;
 
 import com.fasterxml.jackson.core.JsonGenerator;
 import com.fasterxml.jackson.core.JsonParser;
+import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.core.ObjectCodec;
 import com.fasterxml.jackson.databind.*;
 import com.module.common.constant.DateFormatConstant;
@@ -42,25 +43,5 @@ public class JsonSerialConfigure {
         }
     }
 
-    /**
-     * 解析钱的
-     */
-    public static class decimalJsonSerializer extends JsonSerializer<BigDecimal> {
-        @Override
-        public void serialize(BigDecimal date, JsonGenerator jsonGenerator, SerializerProvider serializerProvider) throws IOException {
-            jsonGenerator.writeString(""+ date.divide(BigDecimal.valueOf(100),2));
-        }
-    }
 
-
-    /**
-     * 解析钱的
-     */
-    public static class decimalJsonDeserializer extends JsonObjectDeserializer<BigDecimal> {
-
-        @Override
-        protected BigDecimal deserializeObject(JsonParser jsonParser, DeserializationContext context, ObjectCodec codec, JsonNode tree) throws IOException {
-            return new BigDecimal(jsonParser.getText()).multiply(BigDecimal.valueOf(100));
-        }
-    }
 }

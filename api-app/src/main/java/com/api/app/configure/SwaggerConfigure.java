@@ -1,5 +1,6 @@
 package com.api.app.configure;
 
+import com.module.common.constant.HeaderConstant;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.context.annotation.Profile;
@@ -18,7 +19,7 @@ import java.util.List;
 
 @Configuration
 @EnableSwagger2
-@Profile("dev")
+@Profile({"dev","test"})
 public class SwaggerConfigure {
     @Bean(value = "cms")
     public Docket backAdmin() {
@@ -41,10 +42,15 @@ public class SwaggerConfigure {
                 .modelRef(new ModelRef("string")).parameterType("header")
                 //header中的ticket参数非必填，传空也可以
                 .required(true).build();
+        Parameter userAgent = ticketPar.name(HeaderConstant.USERAGENT_NAME).description("设备类型")
+                .modelRef(new ModelRef("string")).parameterType("header")
+                //header中的ticket参数非必填，传空也可以
+                .required(true).build();
         pars.add(token);
         pars.add(versionName);
         pars.add(versionCode);
         pars.add(deviceId);
+        pars.add(userAgent);
         return new Docket(DocumentationType.SWAGGER_2)
                 .apiInfo(new ApiInfoBuilder()
                         .title("APP接口")

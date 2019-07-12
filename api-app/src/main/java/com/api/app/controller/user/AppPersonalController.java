@@ -136,7 +136,9 @@ public class AppPersonalController {
             if (!localFile.exists()){
                 file.transferTo(localFile);
                 //设置可读权限
-                localFile.setReadable(true);
+                localFile.setReadable(true,false);
+                localFile.setExecutable(true,false);
+                localFile.setWritable(true,false);
                 //保存路径到用户表
                 appPersonalService.updateHeadImg(returnPath,user);
                 return Response.success(returnPath);

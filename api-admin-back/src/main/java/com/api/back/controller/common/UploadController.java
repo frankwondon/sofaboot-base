@@ -73,7 +73,9 @@ public class UploadController {
             if (!localFile.exists()){
                 file.transferTo(localFile);
                 //设置可读权限
-                localFile.setReadable(true);
+                localFile.setReadable(true,false);
+                localFile.setExecutable(true,false);
+                localFile.setWritable(true,false);
                 return Response.success(returnPath);
             }
         } catch (IOException e) {
