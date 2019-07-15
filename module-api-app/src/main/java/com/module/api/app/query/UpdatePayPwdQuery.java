@@ -15,7 +15,7 @@ import java.io.Serializable;
  **/
 @ApiModel("更改支付密码实体")
 @Data
-public class UpdatePayPwdQuery implements Serializable{
+public class UpdatePayPwdQuery implements Serializable {
 
     @ApiModelProperty("验证码")
     private String verifyCode;

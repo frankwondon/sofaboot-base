@@ -15,7 +15,6 @@ import com.module.api.app.query.CreateOrderQuery;
 import com.module.api.app.query.ExpressPriceQuery;
 import com.module.api.app.result.ComputerOrderResult;
 import com.module.api.app.result.CreateOrderResult;
-import com.module.api.app.result.OrderResult;
 import com.module.api.app.service.OrderService;
 import com.module.common.ResponseCode;
 import com.module.common.constant.ExpressEnum;

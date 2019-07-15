@@ -12,4 +12,17 @@
     <select id="callOrderNum" statementType="CALLABLE" resultType="String">
         {call generator(2)}
     </select>
+
+
+    <select id="getPayDto" resultType="com.module.api.app.dto.PayDto">
+        SELECT
+	parent_order_number order_num,
+	product_name product_title,
+	CAST( product_sum_price / 10000 AS DECIMAL ( 8, 2 ) ) total_amount,
+	( SELECT app_product.num FROM app_product LEFT JOIN app_order ON app_order.product_id = app_product.id WHERE app_order.parent_order_number = #{orderNum} ) product_num
+FROM
+	app_order
+WHERE
+	parent_order_number = #{orderNum}
+    </select>
 </mapper>
