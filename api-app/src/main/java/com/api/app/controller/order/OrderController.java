@@ -3,10 +3,12 @@ package com.api.app.controller.order;
 import com.alipay.sofa.runtime.api.annotation.SofaReference;
 import com.api.app.intercept.AuthLogin;
 import com.module.api.app.dto.ExpressPriceResult;
+import com.module.api.app.query.ComputerProductPriceQuery;
 import com.module.api.app.query.CreateOrderQuery;
 import com.module.api.app.query.ExpressPriceQuery;
 import com.module.api.app.result.ComputerOrderResult;
 import com.module.api.app.result.ComputerProductPrice;
+import com.module.api.app.result.CreateOrderResult;
 import com.module.api.app.service.AddressService;
 import com.module.api.app.service.OrderService;
 import com.module.common.Response;
@@ -32,20 +34,17 @@ public class OrderController {
     private OrderService orderService;
     @SofaReference
     private AddressService addressService;
-//    @PostMapping("createOrder")
-//    @ApiOperation("创建订单 ")
-//    public Response<CreateOrderResult> createOrder(@RequestBody BaseQuery<List<CreateOrderQuery>> query,@ApiIgnore AppCurrentUser user){
-//        CreateOrderResult orderResult=new CreateOrderResult();
-//        List<OrderResult> order = orderService.createOrder(query.getData(),user.getId());
-//        orderResult.setOrders(order);
-//        orderResult.setDefaultAddress(addressService.findDefaultAddress(user.getId()));
-//        return Response.success(orderResult);
-//    }
+    @PostMapping("createOrder")
+    @ApiOperation("创建订单 ")
+    public Response<CreateOrderResult> createOrder(@RequestBody BaseQuery<CreateOrderQuery> query, @ApiIgnore AppCurrentUser user){
+        CreateOrderResult orderResult= orderService.createOrder(query.getData(),user.getId());
+        return Response.success(orderResult);
+    }
 
 
     @PostMapping("computerProductPrice")
     @ApiOperation("计算商品价格 ")
-    public Response<ComputerProductPrice> createOrder(@RequestBody BaseQuery<List<CreateOrderQuery>> query, @ApiIgnore AppCurrentUser user){
+    public Response<ComputerProductPrice> computerProductPrice(@RequestBody BaseQuery<List<ComputerProductPriceQuery>> query, @ApiIgnore AppCurrentUser user){
         ComputerProductPrice orderResult=new ComputerProductPrice();
         List<ComputerOrderResult> computerOrderResults = orderService.computerOrderResults(query.getData());
         orderResult.setProductResults(computerOrderResults);

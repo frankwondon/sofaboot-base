@@ -20,8 +20,8 @@ public class ExpressPriceQuery implements Serializable {
     @ApiModelProperty(value = "收货地址ID",example = "1")
     private Integer addressId;
 
-    @ApiModelProperty("订单的ID")
+    @ApiModelProperty("需要计算运费的商品信息")
     @Valid
-    private List<Integer> orderIds;
+    private List<ComputerProductPriceQuery> products;
 
 }

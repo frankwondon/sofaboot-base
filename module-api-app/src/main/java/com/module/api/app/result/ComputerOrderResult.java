@@ -35,6 +35,8 @@ public class ComputerOrderResult implements Serializable {
     private Integer skuId;
     @ApiModelProperty(value = "商品SKU详细信息")
     private String sku;
+    @ApiModelProperty("购物车ID,没有就是-1")
+    private Integer cartId;
     @ApiModelProperty(value = "SKU的数量")
     private Integer number;
     @ApiModelProperty("0包邮1自付运费2无需物流")

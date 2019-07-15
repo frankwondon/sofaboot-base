@@ -85,7 +85,7 @@
         select count(1)  from app_product_sku sku where sku.id=#{skuId} and sku.deleted=0
     </select>
 
-    <update id="cutSkuReserve" parameterType="com.module.api.app.query.CreateOrderQuery">
+    <update id="cutSkuReserve" parameterType="com.module.api.app.query.ComputerProductPriceQuery">
         update app_product_sku sku set sku.reserve=sku.reserve-#{number},sku.version=sku.version+1 where sku.id=#{skuId} and sku.product_id=#{productId} and sku.reserve>=#{number} and sku.deleted=0
     </update>
 </mapper>

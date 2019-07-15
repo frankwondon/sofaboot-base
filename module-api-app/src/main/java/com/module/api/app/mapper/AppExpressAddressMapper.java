@@ -29,6 +29,14 @@ public interface AppExpressAddressMapper extends BaseMapper<AppExpressAddress> {
      * @return
      */
     AddressDto findDefaultAddress(Integer userId);
+
+    /**
+     * 查询指定收货地址
+     * @param userId
+     * @param addrId
+     * @return
+     */
+    AddressDto findPointAddress(@Param("userId") Integer userId,@Param("addrId") Integer addrId);
     /**
      * 逻辑删除
      * @param userId 用户ID

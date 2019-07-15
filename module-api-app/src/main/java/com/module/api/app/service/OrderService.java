@@ -1,9 +1,11 @@
 package com.module.api.app.service;
 
 import com.module.api.app.dto.ExpressPriceResult;
+import com.module.api.app.query.ComputerProductPriceQuery;
 import com.module.api.app.query.CreateOrderQuery;
 import com.module.api.app.query.ExpressPriceQuery;
 import com.module.api.app.result.ComputerOrderResult;
+import com.module.api.app.result.CreateOrderResult;
 import com.module.api.app.result.OrderResult;
 
 import java.util.List;
@@ -20,13 +22,13 @@ public interface OrderService {
      * @param query
      * @return
      */
-    List<ComputerOrderResult> computerOrderResults(List<CreateOrderQuery> query);
+    List<ComputerOrderResult> computerOrderResults(List<ComputerProductPriceQuery> query);
     /**
      * 创建订单
      * @param query
      * @return
      */
-    List<OrderResult> createOrder(List<CreateOrderQuery> query,Integer userId);
+    CreateOrderResult createOrder(CreateOrderQuery query, Integer userId);
 
     /**
      * 计算运费价格

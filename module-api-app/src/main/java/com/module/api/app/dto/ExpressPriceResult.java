@@ -11,10 +11,10 @@ import lombok.Data;
 @Data
 @ApiModel("计算运费结果")
 public class ExpressPriceResult {
-    @ApiModelProperty("订单Id")
-    private Integer orderId;
     @ApiModelProperty("产品ID")
     private Integer productId;
+    @ApiModelProperty("SKUID")
+    private Integer skuId;
     @ApiModelProperty("运费价格")
     private Long expressPrice;
     @ApiModelProperty("可以配送true否则false")

@@ -8,6 +8,7 @@ import lombok.EqualsAndHashCode;
 import lombok.experimental.Accessors;
 
 import java.io.Serializable;
+import java.time.LocalDateTime;
 
 /**
  * <p>
@@ -22,12 +23,16 @@ import java.io.Serializable;
 public class AppOrderDetail implements Serializable {
 
 private static final long serialVersionUID=1L;
-
     /**
      * 订单ID
      */
     @TableId(value = "order_id", type = IdType.INPUT)
     private Integer orderId;
+
+    /**
+     * 0父订单一键发货1子订单发货
+     */
+    private Integer shipType;
 
     /**
      * 省
@@ -52,12 +57,19 @@ private static final long serialVersionUID=1L;
     /**
      * 收件人电话
      */
-    private Long mobile;
+    private String mobile;
 
     /**
      * 收件人姓名
      */
     private String perName;
+
+    /**
+     * 乐观锁
+     */
+    private Integer version;
+
+
 
 
 }

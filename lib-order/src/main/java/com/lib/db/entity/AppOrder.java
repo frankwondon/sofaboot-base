@@ -25,6 +25,15 @@ public class AppOrder extends BaseEntity {
 
 private static final long serialVersionUID=1L;
 
+    /**
+     * 0子订单1父订单
+     */
+    private Integer parentOrder;
+    /**
+     * 父订单号
+     */
+    private String parentOrderNumber;
+
     private String orderNum;
 
     private Integer userId;

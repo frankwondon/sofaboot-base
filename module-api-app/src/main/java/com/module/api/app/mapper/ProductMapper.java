@@ -4,7 +4,7 @@ import com.baomidou.mybatisplus.core.mapper.BaseMapper;
 import com.baomidou.mybatisplus.core.metadata.IPage;
 import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
 import com.module.api.app.entity.AppProduct;
-import com.module.api.app.query.CreateOrderQuery;
+import com.module.api.app.query.ComputerProductPriceQuery;
 import com.module.api.app.result.AppProductResult;
 import com.module.api.app.result.AppProductTypeResult;
 import org.apache.ibatis.annotations.Param;
@@ -62,7 +62,7 @@ public interface ProductMapper extends BaseMapper<AppProduct> {
      * @param orderQuery
      * @return
      */
-    int cutSkuReserve(CreateOrderQuery orderQuery);
+    int cutSkuReserve(ComputerProductPriceQuery orderQuery);
 
     /**
      * 查询SKU库存
