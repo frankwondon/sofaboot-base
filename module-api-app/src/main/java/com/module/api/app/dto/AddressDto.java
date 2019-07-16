@@ -1,12 +1,9 @@
 package com.module.api.app.dto;
 
-import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
-import com.module.api.app.configure.GloblKeyDeserializer;
 import io.swagger.annotations.ApiModel;
 import io.swagger.annotations.ApiModelProperty;
 import lombok.Data;
 import org.hibernate.validator.constraints.Length;
-
 import javax.validation.constraints.Min;
 import javax.validation.constraints.NotBlank;
 import java.io.Serializable;
@@ -17,7 +14,6 @@ import java.io.Serializable;
  */
 @ApiModel("收货地址")
 @Data
-@JsonDeserialize(keyUsing = GloblKeyDeserializer.class)
 public class AddressDto implements Serializable {
 
     @ApiModelProperty(value = "id一般修改时用到",example = "1")

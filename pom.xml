@@ -24,6 +24,7 @@
         <module>module-api-app</module>
         <module>module-common</module>
         <module>lib-order</module>
+        <module>module-schedule-task</module>
     </modules>
     <dependencies>
 
