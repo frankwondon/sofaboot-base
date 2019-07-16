@@ -19,8 +19,10 @@ public class BackAdminConstant {
      */
     public static final int USER_TYPE_MERCHANT = 1;
 
-    /**超级管理员*/
+    /**超级管理员角色*/
     public static final int SUPER_USER_ROLE=1;
+    /**超级管理员*/
+    public static final int SUPER_USER_ID=1;
 
     /**
      * 将要售完的阈值

@@ -19,9 +19,6 @@ public class CreateOrderQuery implements Serializable {
     @ApiModelProperty("收货地址ID")
     @NotBlank(message = "收货地址不能为空")
     private Integer addressId;
-    @ApiModelProperty("支付方式1支付宝2微信")
-    @NotBlank(message = "支付方式不能为空")
-    private Integer payType;
     @ApiModelProperty("下单时的备注信息")
     private String remark;
     @ApiModelProperty("需要下单SKU及数量集合")

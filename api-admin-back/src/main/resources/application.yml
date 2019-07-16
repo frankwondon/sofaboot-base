@@ -5,8 +5,8 @@ spring:
     name: api.admin.back
   servlet:
     multipart:
-      max-file-size: 20MB
-      max-request-size: 20MB
+      max-file-size: 200MB
+      max-request-size: 200MB
   devtools:
     livereload:
       enabled: true

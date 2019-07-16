@@ -10,3 +10,7 @@ logging:
   level:
     root: info
   path: /home/work/logs/spring
+
+server:
+  imgserver: https://www.jinyungold.cn/
+  port: 8080

@@ -12,6 +12,10 @@ upload:
     img: /uploadfile/img
     video: /uploadfile/video
 
+server:
+  imgserver: https://www.jinyungold.cn/
+  port: 8090
+
 logging:
   level:
     root: info

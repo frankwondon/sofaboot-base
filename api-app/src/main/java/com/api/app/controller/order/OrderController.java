@@ -2,6 +2,7 @@ package com.api.app.controller.order;
 
 import com.alipay.sofa.runtime.api.annotation.SofaReference;
 import com.api.app.intercept.AuthLogin;
+import com.api.app.intercept.RateLimiter;
 import com.module.api.app.dto.ExpressPriceResult;
 import com.module.api.app.query.ComputerProductPriceQuery;
 import com.module.api.app.query.CreateOrderQuery;
@@ -36,6 +37,7 @@ public class OrderController {
     private AddressService addressService;
     @PostMapping("createOrder")
     @ApiOperation("创建订单 ")
+    @RateLimiter(limit = 0.1)
     public Response<CreateOrderResult> createOrder(@RequestBody BaseQuery<CreateOrderQuery> query, @ApiIgnore AppCurrentUser user){
         CreateOrderResult orderResult= orderService.createOrder(query.getData(),user.getId());
         return Response.success(orderResult);

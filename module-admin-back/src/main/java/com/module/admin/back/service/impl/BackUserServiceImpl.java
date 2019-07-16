@@ -64,6 +64,9 @@ public class BackUserServiceImpl implements BackUserService {
 
     @Override
     public void updateUser(BackUser backUser) {
+        if (backUser.getId()==BackAdminConstant.SUPER_USER_ID){
+            throw new DBException(ResponseCode.C_500002);
+        }
         if (userMapper.countUserName(backUser.getId(),backUser.getUsername()) > 0 || userMapper.countUserPhone(backUser.getId(),backUser.getCellPhoneNum()) > 0) {
             throw new DBException(ResponseCode.C_500006);
         }
@@ -72,8 +75,11 @@ public class BackUserServiceImpl implements BackUserService {
     }
 
     @Override
-    @Transactional
+    @Transactional(rollbackFor = Exception.class)
     public void allotUserRole(Integer uid, Integer roleId) {
+        if (uid==BackAdminConstant.SUPER_USER_ID){
+            throw new DBException(ResponseCode.C_500002);
+        }
         BackRole backRole = roleMapper.selectById(roleId);
         if (backRole == null) {
             throw new DBException(ResponseCode.C_500003);
@@ -100,6 +106,9 @@ public class BackUserServiceImpl implements BackUserService {
 
     @Override
     public void lockedUser(Integer uid,Integer locked) {
+        if (uid==BackAdminConstant.SUPER_USER_ID){
+            throw new DBException(ResponseCode.C_500002);
+        }
         userMapper.updateLockedUser(uid,locked);
     }
 
@@ -115,11 +124,17 @@ public class BackUserServiceImpl implements BackUserService {
 
     @Override
     public void resetPwd(Integer uid) {
+        if (uid==BackAdminConstant.SUPER_USER_ID){
+            throw new DBException(ResponseCode.C_500002);
+        }
         updatePwd(uid,defaultPwd);
     }
 
     //需要更新密码
     private void updatePwd(Integer uid,String pwd){
+        if (uid==BackAdminConstant.SUPER_USER_ID){
+            throw new DBException(ResponseCode.C_500002);
+        }
         SaltPwdBean enpwd = ShiroPasswordUtil.encpwd(pwd);
         BackUser user=new BackUser();
         user.setId(uid);

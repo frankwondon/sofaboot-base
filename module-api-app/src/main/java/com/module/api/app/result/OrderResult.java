@@ -17,7 +17,7 @@ import java.time.LocalDateTime;
  * @author wangdong
  * @date: 2019/7/8 13:50
  */
-@ApiModel("创建订单结果")
+@ApiModel("订单详情")
 @Data
 public class OrderResult implements Serializable {
 

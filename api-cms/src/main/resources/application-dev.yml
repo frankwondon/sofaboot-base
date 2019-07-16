@@ -5,14 +5,12 @@ spring:
     url: jdbc:mysql://172.16.100.51:3306/base?useUnicode=true&useSSL=false&characterEncoding=utf8
     username: base
     password: base
-    #url: jdbc:mysql://192.168.1.117:3306/base?useUnicode=true&useSSL=false&characterEncoding=utf8
-    url: jdbc:mysql://localhost:3306/base?useUnicode=true&useSSL=false&characterEncoding=utf8&serverTimezone=GMT
-    username: root
-    password: root
-
-
 
 logging:
   level:
     root: debug
     path: C:/logs/spring
+
+server:
+  imgserver: http://39.97.243.124/
+  port: 8080

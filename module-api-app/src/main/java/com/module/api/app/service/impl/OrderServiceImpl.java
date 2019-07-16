@@ -274,10 +274,14 @@ public class OrderServiceImpl implements OrderService {
             if (productMapper.cutSkuReserve(createOrderQuery) <= 0) {
                 throw new DBException(ResponseCode.C_520012);
             }
-            //计算总价
-            BigDecimal sumPrice = sku.getFixedPrice().multiply(new BigDecimal(createOrderQuery.getNumber()));
             //计算运费
             ExpressPriceResult dbExpressPrice = createDBExpressPrice(createOrderQuery, addressId);
+            //无法配送报错
+            if (!dbExpressPrice.getCanDelivery()){
+                throw new DBException(ResponseCode.C_520014);
+            }
+            //计算总价
+            BigDecimal sumPrice = sku.getFixedPrice().multiply(new BigDecimal(createOrderQuery.getNumber()));
             //创建订单
             AppOrder order = new AppOrder();
             order.setParentOrder(OrderEnum.OrderType.CHILD.key());

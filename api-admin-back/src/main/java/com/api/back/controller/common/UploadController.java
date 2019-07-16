@@ -5,6 +5,7 @@ import cn.hutool.core.util.ReUtil;
 import cn.hutool.core.util.StrUtil;
 import com.module.common.Response;
 import com.module.common.ResponseCode;
+import com.module.common.exception.LimitException;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
 import lombok.extern.slf4j.Slf4j;
@@ -30,9 +31,15 @@ public class UploadController {
     private String uploadImgFile;
     @Value("${upload.file.video}")
     private String uploadVideoFile;
+
+    private long maxImgSize=20971520;
+
     @ApiOperation("上传图片限制大小20M 限制PNG JPG")
     @PostMapping("uploadImg")
     public Response uploadImg(@RequestParam("file") MultipartFile file) {
+        if (file.getSize()>maxImgSize){
+            throw new LimitException(ResponseCode.C_500102);
+        }
         String originalFilename = file.getOriginalFilename();
         String sub = StrUtil.subAfter(originalFilename, '.', true);
         if ( !ReUtil.isMatch("(jpg|png)",sub)){

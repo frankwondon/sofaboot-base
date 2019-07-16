@@ -14,8 +14,8 @@ upload:
     video: /uploadfile/video
 
 server:
-  imgserver: http://39.97.243.124/
-
+  imgserver: http://test.jinyungold.cn
+  port: 9000
 
 logging:
   level:

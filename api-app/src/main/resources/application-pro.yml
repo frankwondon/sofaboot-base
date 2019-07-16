@@ -13,7 +13,7 @@ upload:
     video: /uploadfile/video
 
 server:
-  imgserver: http://172.16.100.23/
+  imgserver: https://www.jinyungold.cn/
 
 logging:
   level:

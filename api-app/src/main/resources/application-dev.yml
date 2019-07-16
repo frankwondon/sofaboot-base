@@ -2,32 +2,27 @@
 spring:
   datasource:
     driver-class-name: com.mysql.jdbc.Driver
-    #url: jdbc:mysql://172.16.100.51:3306/base?useUnicode=true&useSSL=false&characterEncoding=utf8
-    url: jdbc:mysql://localhost:3306/base?useUnicode=true&useSSL=false&characterEncoding=utf8&serverTimezone=GMT
-    #username: base
-    #password: base
+    url: jdbc:mysql://172.16.100.51:3306/base?useUnicode=true&useSSL=false&characterEncoding=utf8
     username: root
     password: root
 
 upload:
   file:
-    img: D:/upload/img
-    video: D:/upload/video
-
+    base: D:/upload
+    img: /img
+    video: /video
 
 server:
   imgserver: http://172.16.100.17/
+  port: 9000
 
 logging:
   level:
-    #root: debug
-    root: info
-
+    root: debug
   path: C:/logs/spring
 unit:
   redis:
-    #address: redis://172.16.100.51:6379
-    address: redis://127.0.0.1:6379
+    address: redis://172.16.100.51:6379
     enable: true
   token:
     user_expired_days: 30

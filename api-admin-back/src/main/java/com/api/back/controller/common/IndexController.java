@@ -17,6 +17,7 @@ import org.apache.shiro.SecurityUtils;
 import org.apache.shiro.authc.UsernamePasswordToken;
 import org.apache.shiro.subject.Subject;
 
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.web.bind.annotation.*;
 
 @Api(tags = "三大后台公共接口")
@@ -28,6 +29,8 @@ public class IndexController {
     private BackUserService backUserService;
     @SofaReference
     private BackRoleService backRoleService;
+    @Value("${server.imgserver}")
+    private String fileServer;
 
     @PostMapping("/login")
     @ApiOperation("登陆接口")
@@ -51,6 +54,7 @@ public class IndexController {
         jsonObject.put("userName",byAccount.getUsername());
         jsonObject.put("roleName",byAccount.getRoleName());
         jsonObject.put("userType",byAccount.getUserType());
+        jsonObject.put("fileServer",fileServer);
         return jsonObject;
     }
 

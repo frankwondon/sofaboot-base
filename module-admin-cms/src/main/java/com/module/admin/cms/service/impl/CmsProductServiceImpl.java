@@ -82,7 +82,7 @@ public class CmsProductServiceImpl implements CmsProductService {
     @Override
     public CmsProduct findById(Integer id) {
         QueryWrapper queryWrapper=new QueryWrapper();
-        queryWrapper.eq("addressId",id);
+        queryWrapper.eq("id",id);
         queryWrapper.eq("deleted",0);
         queryWrapper.eq("locked",0);
         return productMapper.selectOne(queryWrapper);

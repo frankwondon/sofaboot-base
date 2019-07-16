@@ -12,7 +12,7 @@ import java.util.List;
  * @author wangdong
  * @date: 2019/7/8 13:50
  */
-@ApiModel("创建订单结果")
+@ApiModel("计算商品价格")
 @Data
 public class ComputerProductPrice implements Serializable {
     @ApiModelProperty("默认收货地址")

@@ -20,28 +20,27 @@ public class CmsBannerServiceImpl implements CmsBannerService {
     @Override
     public IPage<CmsBanner> list(PageQuery pageQuery) {
         Page page = new Page(pageQuery.getPage(), pageQuery.getLimit());
-        return bannerMapper.listPage(page,pageQuery.getKeyWord());
+        return bannerMapper.listPage(page, pageQuery.getKeyWord());
     }
 
     @Override
     public IPage<CmsBanner> showList(PageQuery pageQuery) {
-        QueryWrapper queryWrapper=new QueryWrapper();
-        queryWrapper.eq("deleted",0);
-        queryWrapper.eq("locked",0);
+        QueryWrapper queryWrapper = new QueryWrapper();
+        queryWrapper.eq("deleted", 0);
+        queryWrapper.eq("locked", 0);
         queryWrapper.orderByAsc("sort");
-        Page<CmsBanner> page=new Page(pageQuery.getPage(),pageQuery.getLimit());
-        return bannerMapper.selectPage(page,queryWrapper);
+        Page<CmsBanner> page = new Page(pageQuery.getPage(), pageQuery.getLimit());
+        return bannerMapper.selectPage(page, queryWrapper);
     }
-
 
 
     @Override
     public void addOrUpdate(CmsBanner banner, AdminCurrentUser user) {
-        if (banner.getId()!=null){
+        if (banner.getId() != null) {
             banner.setUpdateBy(user.getId());
             banner.setUpdateTime(LocalDateTime.now());
             bannerMapper.updateById(banner);
-        }else {
+        } else {
             banner.setCreateBy(user.getId());
             banner.setCreateTime(LocalDateTime.now());
             bannerMapper.insert(banner);
@@ -55,10 +54,10 @@ public class CmsBannerServiceImpl implements CmsBannerService {
 
     @Override
     public void disable(Integer id, Boolean disable, AdminCurrentUser user) {
-        if (disable){
-            bannerMapper.disable(id,0);
-        }else {
-            bannerMapper.disable(id,1);
+        if (disable) {
+            bannerMapper.disable(id, 0);
+        } else {
+            bannerMapper.disable(id, 1);
         }
     }
 

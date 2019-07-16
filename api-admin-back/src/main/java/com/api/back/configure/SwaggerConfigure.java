@@ -13,7 +13,7 @@ import springfox.documentation.swagger2.annotations.EnableSwagger2;
 
 @Configuration
 @EnableSwagger2
-@Profile("dev")
+@Profile({"dev","test"})
 public class SwaggerConfigure {
     @Bean(value = "backAdmin")
     public Docket backAdmin() {
