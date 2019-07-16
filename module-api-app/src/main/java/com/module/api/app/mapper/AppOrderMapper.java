@@ -2,6 +2,7 @@ package com.module.api.app.mapper;
 
 import com.baomidou.mybatisplus.core.mapper.BaseMapper;
 import com.lib.db.entity.AppOrder;
+import com.module.api.app.dto.PayDto;
 import org.apache.ibatis.annotations.Param;
 
 /**
@@ -34,4 +35,11 @@ public interface AppOrderMapper extends BaseMapper<AppOrder> {
     * @return
     */
    int cancelOrder(@Param("userId") Integer userId, @Param("orderId")Integer orderId);
+
+   /**
+    * 获取支付实体
+    * @param orderNum
+    * @return
+    */
+   PayDto getPayDto(@Param("orderNum") String orderNum);
 }

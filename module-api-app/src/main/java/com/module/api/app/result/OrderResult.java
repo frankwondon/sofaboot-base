@@ -11,6 +11,8 @@ import io.swagger.annotations.ApiModelProperty;
 import lombok.Data;
 
 import java.io.Serializable;
+import java.math.BigDecimal;
+import java.math.BigInteger;
 import java.time.LocalDateTime;
 
 /**
@@ -46,6 +48,23 @@ public class OrderResult implements Serializable {
     @ApiModelProperty(value = "订单创建时间")
     private LocalDateTime createTime;
 
+
+    @ApiModelProperty("产品图片   ，分割")
+    private String mainImg;
+    @ApiModelProperty(value = "订单状态   0,1为待付款，2为待发货，3为待收货，4为已完成")
+    private Integer orderStatus;
+    @ApiModelProperty("支付价格")
+    private BigDecimal payPrice;
+    @ApiModelProperty("订单对应商品状态   0上架1下架状态")
+    private Integer productStatus;
+    @ApiModelProperty("订单对应商品模板状态   0正常1删除")
+    private Integer skuStatus;
+    @ApiModelProperty("商品类型")
+    private String typeName;
+    @ApiModelProperty("商家名称")
+    private String shopName;
+    @ApiModelProperty("剩余时间  秒")
+    private BigInteger remainTime;
 
     public OrderResult convertToResult(AppOrder order, AppProduct product, AppProductSku sku,Integer expressType){
         this.orderId=order.getId();

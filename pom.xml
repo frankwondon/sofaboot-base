@@ -50,6 +50,13 @@
             <artifactId>guava</artifactId>
             <version>20.0</version>
         </dependency>
+
+        <dependency>
+            <groupId>com.alipay.sdk</groupId>
+            <artifactId>alipay-sdk-java</artifactId>
+            <version>3.7.110.ALL</version>
+        </dependency>
+
     </dependencies>
     <build>
         <finalName>${artifactId}</finalName>

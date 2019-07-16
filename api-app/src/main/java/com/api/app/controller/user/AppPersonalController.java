@@ -11,7 +11,10 @@ import com.module.api.app.service.UserService;
 import com.module.common.Response;
 import com.module.common.ResponseCode;
 import com.module.common.bean.AppCurrentUser;
-import io.swagger.annotations.*;
+import io.swagger.annotations.Api;
+import io.swagger.annotations.ApiImplicitParam;
+import io.swagger.annotations.ApiImplicitParams;
+import io.swagger.annotations.ApiOperation;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.web.bind.annotation.*;
@@ -61,7 +64,6 @@ public class AppPersonalController {
     @GetMapping("updateUserName")
     @ApiOperation(value = "昵称修改")
     @ApiImplicitParam(name = "userName",required = true,value = "新昵称")
-
     public Response updateUserName(String userName, @ApiIgnore AppCurrentUser user){
         return Response.success( appPersonalService.updateUserName(userName,user));
     }

@@ -7,6 +7,7 @@ import com.module.api.app.query.ExpressPriceQuery;
 import com.module.api.app.result.ComputerOrderResult;
 import com.module.api.app.result.CreateOrderResult;
 import com.module.api.app.result.OrderResult;
+import com.module.common.Response;
 
 import java.util.List;
 
@@ -43,4 +44,11 @@ public interface OrderService {
      * @param userId
      */
     void cancelOrder(Integer orderId, Integer userId);
+/*
+    *//**
+     * 支付订单
+     * @param orderNum
+     * @return
+     *//*
+    String payOrder(String orderNum,Integer payType);*/
 }

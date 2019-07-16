@@ -2,7 +2,49 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.module.api.app.mapper.AppMineMapper">
     <insert id="sendAdvice" parameterType="com.module.api.app.query.SendAdviceQuery">
-          insert into app_opinion (type,text,cell_phone) VALUES (#{text},#{cellPhone},#{type})
+          insert into app_opinion (type,text,status,cell_phone) VALUES (#{advice.type},#{advice.text},0,#{advice.cellPhone})
     </insert>
+
+
+    <select id="myOrderList" resultType="com.module.api.app.result.OrderResult">
+        SELECT
+        order_num,
+        pay_price,
+        app_order.status order_status,
+        product_size number,
+        sku_id,
+        app_order.sku,
+        product_name,
+        main_img,
+        app_order.create_time as  create_time,
+        NOW()- app_order.create_time as  remain_time,
+        app_order.product_id product_id,
+        ifnull(app_product.status ,0) product_status,
+        ifnull(app_product_sku.deleted ,0)sku_status,
+        app_product_type.name type_name
+        FROM
+        ( ( app_order LEFT JOIN app_product ON app_order.product_id = app_product.id )
+            LEFT JOIN app_product_sku ON app_order.sku_id = app_product_sku.id )
+        LEFT JOIN app_product_type ON app_product.product_type = app_product_type.id
+        <where>
+             <if test=" type !=null  and   type ==0 ">
+                 (app_order.status ='0' or  app_order.status='1')
+             </if>
+             <if test="type !=null  and type ==1">
+                 app_order.status ='2'
+             </if>
+             <if test="type !=null  and type ==2">
+                 app_order.status ='3'
+             </if>
+             <if test="type !=null  and type ==3">
+                 app_order.status ='4'
+             </if>
+            <if test="type !=null  and type ==4">
+                 app_order.status &lt;5
+             </if>
+             and  user_id=#{userId}
+         </where>
+        ORDER BY app_order.create_time desc
+    </select>
 
 </mapper>
