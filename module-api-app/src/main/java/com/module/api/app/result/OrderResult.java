@@ -6,6 +6,7 @@ import com.module.api.app.dto.AddressDto;
 import com.module.api.app.entity.AppProduct;
 import com.module.api.app.entity.AppProductSku;
 import com.module.common.constant.ProductEnum;
+import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiModel;
 import io.swagger.annotations.ApiModelProperty;
 import lombok.Data;
@@ -49,10 +50,10 @@ public class OrderResult implements Serializable {
     private LocalDateTime createTime;
 
 
+    @ApiModelProperty("父订单")
+    private String parentOrderNum;
     @ApiModelProperty("产品图片   ，分割")
     private String mainImg;
-    @ApiModelProperty(value = "订单状态   0,1为待付款，2为待发货，3为待收货，4为已完成")
-    private Integer orderStatus;
     @ApiModelProperty("支付价格")
     private BigDecimal payPrice;
     @ApiModelProperty("订单对应商品状态   0上架1下架状态")
@@ -61,10 +62,7 @@ public class OrderResult implements Serializable {
     private Integer skuStatus;
     @ApiModelProperty("商品类型")
     private String typeName;
-    @ApiModelProperty("商家名称")
-    private String shopName;
-    @ApiModelProperty("剩余时间  秒")
-    private BigInteger remainTime;
+
 
     public OrderResult convertToResult(AppOrder order, AppProduct product, AppProductSku sku,Integer expressType){
         this.orderId=order.getId();

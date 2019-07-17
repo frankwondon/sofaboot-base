@@ -6,7 +6,7 @@
     </insert>
 
 
-    <select id="myOrderList" resultType="com.module.api.app.result.OrderResult">
+    <select id="myOrderList" resultType="com.module.api.app.result.OrderListResult">
         SELECT
         order_num,
         pay_price,
@@ -20,13 +20,100 @@
         NOW()- app_order.create_time as  remain_time,
         app_order.product_id product_id,
         ifnull(app_product.status ,0) product_status,
-        ifnull(app_product_sku.deleted ,0)sku_status,
+        ifnull(app_product_sku.deleted ,0) sku_status,
         app_product_type.name type_name
         FROM
         ( ( app_order LEFT JOIN app_product ON app_order.product_id = app_product.id )
             LEFT JOIN app_product_sku ON app_order.sku_id = app_product_sku.id )
         LEFT JOIN app_product_type ON app_product.product_type = app_product_type.id
-        <where>
+        WHERE app_order.parent_order_number IN
+        <foreach collection="orderNum" item="item" open="(" separator="," close=")" index="index">
+        #{item}
+        </foreach>
+        ORDER BY app_order.create_time desc
+    </select>
+
+
+    <select id="getDfkOrderList" resultMap="OrderMap" >
+        SELECT
+        parent_order_number parent_orderNum,
+        order_num,
+        pay_price,
+        app_order.status order_status,
+        product_size number,
+        sku_id,
+        app_order.sku app_orderSKU,
+        product_name,
+        main_img,
+        product_sum_price,
+        app_order.create_time as  create_time,
+        NOW()- app_order.create_time as  remain_time,
+        app_order.product_id product_id,
+        ifnull(app_product.status ,0) product_status,
+        ifnull(app_product_sku.deleted ,0) sku_status,
+        app_product_type.name type_name
+        FROM
+        ( ( app_order LEFT JOIN app_product ON app_order.product_id = app_product.id )
+        LEFT JOIN app_product_sku ON app_order.sku_id = app_product_sku.id )
+        LEFT JOIN app_product_type ON app_product.product_type = app_product_type.id
+        WHERE app_order.parent_order_number IN ( SELECT order_num FROM app_order WHERE app_order.STATUS &lt; 2 AND parent_order = 1 AND user_id = #{userId} )
+        ORDER BY app_order.create_time desc
+    </select>
+
+    <select id="getDfhOrderList" resultMap="OrderMap" parameterType="java.util.List">
+        SELECT
+        parent_order_number parent_orderNum,
+        order_num,
+        pay_price,
+        app_order.status order_status,
+        product_size number,
+        sku_id,
+        app_order.sku app_orderSKU,
+        product_name,
+        main_img,
+        product_sum_price,
+        app_order.create_time as  create_time,
+        NOW()- app_order.create_time as  remain_time,
+        app_order.product_id product_id,
+        ifnull(app_product.status ,0) product_status,
+        ifnull(app_product_sku.deleted ,0) sku_status,
+        app_product_type.name type_name
+        FROM
+        ( ( app_order LEFT JOIN app_product ON app_order.product_id = app_product.id )
+        LEFT JOIN app_product_sku ON app_order.sku_id = app_product_sku.id )
+        LEFT JOIN app_product_type ON app_product.product_type = app_product_type.id
+        WHERE app_order.parent_order_number IN
+         ( SELECT order_num FROM app_order WHERE app_order.STATUS =2 AND parent_order = 1 AND user_id = #{userId} )
+        ORDER BY app_order.create_time desc
+    </select>
+
+<resultMap id="OrderMap" type="com.module.api.app.result.OrderListResult">
+    <id column="parent_orderNum" jdbcType="VARCHAR" property="parentOrderNum"/>
+    <result column="product_sum_price" jdbcType="DECIMAL" property="productSumPrice"/>
+    <result column="create_time" jdbcType="DATE" property="createTime"/>
+    <result column="remain_time" jdbcType="DECIMAL" property="remainTime"/>
+    <result column="order_status" jdbcType="INTEGER" property="orderStatus"/>
+    <collection property="orderResultList" ofType="com.module.api.app.result.OrderResult">
+        <id column="order_num" jdbcType="VARCHAR" property="orderNum"/>
+        <result column="pay_price" jdbcType="DECIMAL" property="payPrice"/>
+        <result column="number" jdbcType="INTEGER" property="number"/>
+        <result column="sku_id" jdbcType="INTEGER" property="skuId"/>
+        <result column="app_orderSKU" jdbcType="DECIMAL" property="sku"/>
+        <result column="product_name" jdbcType="VARCHAR" property="productName"/>
+        <result column="main_img" jdbcType="VARCHAR" property="mainImg"/>
+        <result column="product_id" jdbcType="INTEGER" property="productId"/>
+        <result column="product_status" jdbcType="INTEGER" property="productStatus"/>
+        <result column="sku_status" jdbcType="INTEGER" property="skuStatus"/>
+        <result column="type_name" jdbcType="VARCHAR" property="typeName"/>
+    </collection>
+</resultMap>
+
+
+
+
+    <select id="getParentOrderNum" resultType="java.lang.String">
+        select order_num from app_order
+         <where>
              <if test=" type !=null  and   type ==0 ">
                  (app_order.status ='0' or  app_order.status='1')
              </if>
@@ -39,12 +126,12 @@
              <if test="type !=null  and type ==3">
                  app_order.status ='4'
              </if>
-            <if test="type !=null  and type ==4">
+             <if test="type !=null  and type ==4">
                  app_order.status &lt;5
              </if>
-             and  user_id=#{userId}
+            and parent_order = 1 AND user_id = #{userId}
          </where>
         ORDER BY app_order.create_time desc
-    </select>
 
+    </select>
 </mapper>

@@ -65,10 +65,5 @@ public class BeanConfigure {
     public OrderService orderService(){
         return new OrderServiceImpl();
     }
-
-    @Bean
-    @SofaService
-    public AliService aliService(){
-        return new AliServiceImpl();
-    }
+    
 }

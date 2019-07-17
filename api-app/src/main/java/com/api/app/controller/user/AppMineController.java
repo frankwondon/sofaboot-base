@@ -4,6 +4,7 @@ import com.alipay.sofa.runtime.api.annotation.SofaReference;
 import com.baomidou.mybatisplus.core.metadata.IPage;
 import com.module.api.app.query.GetOrderListQuery;
 import com.module.api.app.query.SendAdviceQuery;
+import com.module.api.app.result.OrderListResult;
 import com.module.api.app.result.OrderResult;
 import com.module.api.app.service.AppMineService;
 import com.module.common.Response;
@@ -14,6 +15,8 @@ import io.swagger.annotations.ApiImplicitParams;
 import io.swagger.annotations.ApiOperation;
 import org.springframework.web.bind.annotation.*;
 import springfox.documentation.annotations.ApiIgnore;
+
+import java.util.List;
 
 /**
  * @ClassName AppMineController
@@ -48,7 +51,7 @@ public class AppMineController {
             @ApiImplicitParam(name = "page",required = true,value = "初始页"),
             @ApiImplicitParam(name = "limit",required = true,value = "每页数量")
     })
-    public Response<IPage<OrderResult>> myOrderList(GetOrderListQuery query, @ApiIgnore  AppCurrentUser user){
+    public Response<IPage<OrderListResult>> myOrderList(GetOrderListQuery query, @ApiIgnore  AppCurrentUser user){
         return Response.success(appMineService.myOrderList(query,user.getId()));
     }
 }

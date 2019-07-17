@@ -1,5 +1,6 @@
 package com.api.app.controller.order;
 
+import com.alipay.api.AlipayApiException;
 import com.alipay.sofa.runtime.api.annotation.SofaReference;
 import com.api.app.intercept.AuthLogin;
 import com.api.app.intercept.RateLimiter;
@@ -16,6 +17,8 @@ import com.module.common.Response;
 import com.module.common.bean.AppCurrentUser;
 import com.module.common.bean.BaseQuery;
 import io.swagger.annotations.Api;
+import io.swagger.annotations.ApiImplicitParam;
+import io.swagger.annotations.ApiImplicitParams;
 import io.swagger.annotations.ApiOperation;
 import org.springframework.web.bind.annotation.*;
 import springfox.documentation.annotations.ApiIgnore;
@@ -66,4 +69,17 @@ public class OrderController {
     public Response<List<ExpressPriceResult>> computeExpressPrice(@RequestBody BaseQuery<ExpressPriceQuery> query){
         return Response.success(orderService.computeExpressPrice(query.getData()));
     }
+
+
+
+    @ResponseBody
+    @GetMapping("/ali")
+    @ApiOperation("订单支付")
+    @ApiImplicitParams({
+            @ApiImplicitParam(name = "orderNum"  ,paramType = "query",required = true,value = "父订单号 生成的唯一商戶订单号")
+    })
+    public Response ali(String orderNum)  {
+        return Response.success(orderService.ali(orderNum));
+    }
+
 }

@@ -5,7 +5,10 @@ package com.module.api.app.service;
 import com.baomidou.mybatisplus.core.metadata.IPage;
 import com.module.api.app.query.GetOrderListQuery;
 import com.module.api.app.query.SendAdviceQuery;
+import com.module.api.app.result.OrderListResult;
 import com.module.api.app.result.OrderResult;
+
+import java.util.List;
 
 /**
  * @ClassName AppMineService
@@ -30,5 +33,5 @@ public interface AppMineService {
     * @param userId
     * @return
     */
-   IPage<OrderResult> myOrderList(GetOrderListQuery query , Integer userId);
+   IPage<OrderListResult> myOrderList(GetOrderListQuery query , Integer userId);
 }

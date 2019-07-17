@@ -1,5 +1,6 @@
 package com.module.api.app.service;
 
+import com.alipay.api.AlipayApiException;
 import com.module.api.app.dto.ExpressPriceResult;
 import com.module.api.app.query.ComputerProductPriceQuery;
 import com.module.api.app.query.CreateOrderQuery;
@@ -44,11 +45,11 @@ public interface OrderService {
      * @param userId
      */
     void cancelOrder(Integer orderId, Integer userId);
-/*
-    *//**
+
+    /**
      * 支付订单
      * @param orderNum
      * @return
-     *//*
-    String payOrder(String orderNum,Integer payType);*/
+     */
+     String ali(String orderNum) ;
 }
